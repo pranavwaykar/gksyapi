@@ -95,9 +95,7 @@ function AboutUs() {
         <div className="mission-statement">
           <h2>Crafting Natural Living Spaces</h2>
           <p>
-            At Woodland, we believe in creating homes that harmoniously blend with nature. 
-            For over two decades, we've been pioneering sustainable architecture that 
-            brings the serenity of the forest into modern living spaces.
+          Our company was established in 1994. GKS Yapı has many years of experience with its experienced and dynamic staff. Since its establishment, our company has been operating in the Automobile, Education, Food, Durable Consumer Goods, Contracting and Construction sectors. GKS Yapı, which has signed hundreds of houses in the construction sector, continues to produce durable houses in new projects with the excitement of the first day. Our biggest goal is to continue to sign successful works by reflecting our talent and experience in every job we undertake.
           </p>
         </div>
 
@@ -210,10 +208,7 @@ function AboutUs() {
           <div className="vision-content">
             <h2>Our Vision</h2>
             <p>
-              We envision a future where sustainable architecture becomes the standard, 
-              not the exception. Our commitment is to continue pioneering innovative 
-              designs that respect both nature and human needs, creating spaces that 
-              inspire and nurture for generations to come.
+            OUR VISION is to produce living spaces for the people of our country, to ensure their continuity, to be a company above the standards in the sector in terms of efficiency, quality, aesthetics and security. OUR MISSION is to produce structures in accordance with the developing construction technologies in world standards, to contribute to social life by producing exemplary projects, to be an innovative company in our country's construction sector. To be a meticulous company in quality and work safety with its experienced and educated personnel, and to be an exemplary company with the customer satisfaction it creates.
             </p>
           </div>
         </div>

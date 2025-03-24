@@ -77,9 +77,9 @@ const ContactUs = () => {
           <div className="info-header">
             <h2>Get in Touch</h2>
             <p>
-              We'd love to hear from you. Whether you're interested in our woodland homes,
-              have questions about our services, or want to discuss your project,
-              our team is here to help.
+              We'd love to hear from you. Whether you're interested in purchasing a property,
+              have questions about our real estate offerings, or want to discuss your buying needs,
+              our team is here to assist you.
             </p>
           </div>
 

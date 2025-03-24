@@ -1,0 +1,13 @@
+@use '../../partials/variables' as *;
+
+.form-field {
+  margin-bottom: $spacing-md;
+  width: 100%;
+
+  .helper-text {
+    display: block;
+    margin-top: $spacing-xs;
+    font-size: 0.875rem;
+    color: $text-muted;
+  }
+} 

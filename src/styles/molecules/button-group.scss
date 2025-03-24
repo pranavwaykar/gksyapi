@@ -1,0 +1,15 @@
+@use '../../partials/variables' as *;
+
+.button-group {
+  display: flex;
+  gap: $spacing-sm;
+  align-items: center;
+
+  &-full-width {
+    width: 100%;
+
+    .btn {
+      flex: 1;
+    }
+  }
+} 

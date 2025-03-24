@@ -1,0 +1,85 @@
+@use '../../partials/variables' as *;
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  vertical-align: middle;
+
+  // Sizes
+  &-sm {
+    font-size: 1rem;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  &-md {
+    font-size: 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  &-lg {
+    font-size: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  // Common icon styles
+  &-search::before {
+    content: "🔍";
+  }
+
+  &-menu::before {
+    content: "☰";
+  }
+
+  &-close::before {
+    content: "×";
+  }
+
+  &-chevron-down::before {
+    content: "▼";
+  }
+
+  &-chevron-up::before {
+    content: "▲";
+  }
+
+  &-chevron-left::before {
+    content: "◀";
+  }
+
+  &-chevron-right::before {
+    content: "▶";
+  }
+
+  &-user::before {
+    content: "👤";
+  }
+
+  &-settings::before {
+    content: "⚙";
+  }
+
+  &-notification::before {
+    content: "🔔";
+  }
+
+  &-facebook::before {
+    content: "f";
+  }
+
+  &-twitter::before {
+    content: "𝕏";
+  }
+
+  &-instagram::before {
+    content: "📸";
+  }
+
+  &-linkedin::before {
+    content: "in";
+  }
+} 

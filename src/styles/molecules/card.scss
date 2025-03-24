@@ -1,0 +1,51 @@
+@use '../../partials/variables' as *;
+
+.card {
+  background-color: $background-color;
+  border-radius: $border-radius-md;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all $transition-base;
+  overflow: hidden;
+
+  &-title {
+    margin: 0;
+    padding: $spacing-md;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $text-color;
+    border-bottom: 1px solid $border-color;
+  }
+
+  &-content {
+    padding: $spacing-md;
+  }
+
+  // Variants
+  &-default {
+    border: 1px solid $border-color;
+  }
+
+  &-elevated {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  &-bordered {
+    border: 1px solid $border-color;
+    box-shadow: none;
+  }
+
+  // Interactive states
+  &[role="button"] {
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba($primary-color, 0.25);
+    }
+  }
+} 

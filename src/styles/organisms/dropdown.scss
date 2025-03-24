@@ -1,0 +1,86 @@
+@use '../../partials/variables' as *;
+
+.dropdown-container {
+  position: relative;
+}
+
+.form-dropdown {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+
+  .dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-sm $spacing-md;
+    background-color: $background-color;
+    border: 1px solid $border-color;
+    border-radius: $border-radius-sm;
+
+    .dropdown-value {
+      color: $text-color;
+    }
+
+    .dropdown-arrow {
+      font-size: 0.75rem;
+      transition: transform 0.2s ease;
+    }
+  }
+
+  &.open {
+    .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+      display: block;
+    }
+  }
+
+  &.error {
+    .dropdown-header {
+      border-color: $error-color;
+    }
+  }
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: $spacing-xs;
+  background-color: $background-color;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-sm;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: $z-index-dropdown;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.dropdown-search {
+  padding: $spacing-sm;
+  border-bottom: 1px solid $border-color;
+}
+
+.dropdown-options {
+  padding: $spacing-xs 0;
+}
+
+.dropdown-option {
+  padding: $spacing-sm $spacing-md;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: rgba($primary-color, 0.1);
+  }
+
+  &.selected {
+    background-color: rgba($primary-color, 0.2);
+    color: $primary-color;
+  }
+} 

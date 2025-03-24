@@ -1,0 +1,26 @@
+@use '../../partials/variables' as *;
+
+.form-label {
+  display: block;
+  margin-bottom: $spacing-sm;
+  font-weight: 500;
+  color: $text-color;
+  line-height: $line-height-base;
+
+  .required {
+    color: $error-color;
+    margin-left: $spacing-xs;
+  }
+}
+
+.label-sm {
+  font-size: 0.875rem;
+}
+
+.label-md {
+  font-size: $font-size-base;
+}
+
+.label-lg {
+  font-size: 1.125rem;
+} 

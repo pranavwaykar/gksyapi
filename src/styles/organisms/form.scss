@@ -1,0 +1,46 @@
+@use '../../partials/variables' as *;
+@use '../molecules/form-field' as *;
+
+.form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: $spacing-lg;
+  background-color: $background-color;
+  border-radius: $border-radius-lg;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  // Form sections
+  &-section {
+    margin-bottom: $spacing-xl;
+    padding-bottom: $spacing-lg;
+    border-bottom: 1px solid $border-color;
+
+    &:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+  }
+
+  // Form title
+  &-title {
+    margin-bottom: $spacing-lg;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $text-color;
+  }
+
+  // Form description
+  &-description {
+    margin-bottom: $spacing-lg;
+    color: $text-muted;
+  }
+
+  // Form actions
+  &-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-sm;
+    margin-top: $spacing-xl;
+  }
+} 

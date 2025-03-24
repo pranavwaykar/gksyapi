@@ -1,0 +1,179 @@
+@use '../partials/variables' as *;
+
+.about-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 4rem 1rem;
+}
+
+.mission-statement {
+  text-align: center;
+  max-width: 48rem;
+  margin: 0 auto 5rem;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    color: $gray-800;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    color: $gray-600;
+    line-height: 1.7;
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-bottom: 5rem;
+
+  @media (max-width: $mobile) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stat-item {
+  text-align: center;
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: $primary-color;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    color: $gray-600;
+  }
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  margin-bottom: 5rem;
+
+  @media (max-width: $mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-item {
+  display: flex;
+  gap: 1rem;
+
+  .feature-icon {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    color: $primary-color;
+
+    svg.icon {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: $gray-800;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: $gray-600;
+  }
+}
+
+.team-section {
+  text-align: center;
+  margin-bottom: 3rem;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    color: $gray-800;
+    margin-bottom: 4rem;
+  }
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+
+  @media (max-width: $mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.team-member {
+  text-align: center;
+
+  .member-image {
+    width: 12rem;
+    height: 12rem;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: $gray-800;
+  }
+
+  p {
+    color: $gray-600;
+  }
+}
+
+.vision-section {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  height: 400px;
+  margin-top: 5rem;
+  z-index: 1;
+  background-size: cover;
+  background-position: center;
+
+  .vision-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0 1rem;
+    z-index: 2;
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 300;
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      color: $gray-200;
+      max-width: 32rem;
+      text-align: center;
+      line-height: 1.7;
+    }
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  vertical-align: middle;
+} 

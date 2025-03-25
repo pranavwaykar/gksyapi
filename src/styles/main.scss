@@ -1,6 +1,7 @@
 @use './partials/variables' as *;
 @use './pages/contact';
 @use './pages/about';
+@use './pages/projects';
 
 // Global styles
 * {
@@ -25,20 +26,142 @@ body {
 // Navigation styles
 .nav {
   background-color: $primary-color;
-  padding: $spacing-md;
+  padding: $spacing-sm;
   width: 100%;
-
-  ul {
+  
+  &-list {
     list-style: none;
     display: flex;
     justify-content: center;
     gap: $spacing-lg;
+    margin: 0;
+    padding: 0;
+  }
 
-    a {
+  &-item {
+    position: relative;
+
+    a, .dropdown-trigger {
       color: white;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      display: block;
+      position: relative;
+      height: 100%;
 
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: white;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+
+      &.active::after,
+      &:hover::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+
+  .dropdown {
+    .dropdown-trigger {
+      &.active {
+        &::after {
+          transform: scaleX(1);
+        }
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: white;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+    }
+  }
+}
+
+// Dropdown styles
+.dropdown {
+  &-trigger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: inherit;
+    font-family: inherit;
+    padding: 0.5rem 0;
+    
+    // Remove default focus outline
+    &:focus {
+      outline: none;
+    }
+    
+    // Optional: Add a subtle background change on focus for accessibility
+    &:focus-visible {
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+    }
+  }
+
+  &-arrow {
+    font-size: 0.7em;
+    transition: transform 0.3s ease;
+
+    &.open {
+      transform: rotate(180deg);
+    }
+  }
+
+  &-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border-radius: 4px;
+    padding: 0.5rem 0;
+    min-width: 200px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    list-style: none;
+  }
+
+  &-item {
+    a {
+      color: $gray-800;
+      padding: 0.75rem 1.5rem;
+      display: block;
+      transition: all 0.3s ease;
+      text-align: left;
+
+      &:hover {
+        background-color: rgba($primary-color, 0.1);
+        color: $primary-color;
+      }
+
+      &.active {
+        color: $primary-color;
+        background-color: rgba($primary-color, 0.1);
+      }
+
+      &::after {
+        display: none;
+      }
     }
   }
 }

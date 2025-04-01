@@ -1,7 +1,8 @@
 @use './partials/variables' as *;
 @use './pages/contact';
 @use './pages/about';
-@use './pages/projects';
+// @use './pages/projects';
+@use './pages/home';
 
 // Global styles
 * {

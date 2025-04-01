@@ -326,7 +326,7 @@ const Projects = () => {
                   <path d="M8 12h8"/>
                   <path d="M12 8l4 4-4 4"/>
                 </svg>
-                Show more
+                View All Projects
               </button>
             </motion.div>
           </motion.div>

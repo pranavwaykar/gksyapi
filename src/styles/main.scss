@@ -1,8 +1,12 @@
 @use './partials/variables' as *;
 @use './pages/contact';
 @use './pages/about';
-// @use './pages/projects';
+@use './pages/projects';
 @use './pages/home';
+
+:root {
+  --navbar-height: 64px;
+}
 
 // Global styles
 * {
@@ -29,6 +33,13 @@ body {
   background-color: $primary-color;
   padding: $spacing-sm;
   width: 100%;
+  height: var(--navbar-height);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
   
   &-list {
     list-style: none;
@@ -37,12 +48,13 @@ body {
     gap: $spacing-lg;
     margin: 0;
     padding: 0;
+    width: 100%;
   }
 
   &-item {
     position: relative;
 
-    a, .dropdown-trigger {
+    a {
       color: white;
       text-decoration: none;
       font-weight: 500;
@@ -69,102 +81,6 @@ body {
       }
     }
   }
-
-  .dropdown {
-    .dropdown-trigger {
-      &.active {
-        &::after {
-          transform: scaleX(1);
-        }
-      }
-
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background-color: white;
-        transform: scaleX(0);
-        transition: transform 0.3s ease;
-      }
-    }
-  }
-}
-
-// Dropdown styles
-.dropdown {
-  &-trigger {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: inherit;
-    font-family: inherit;
-    padding: 0.5rem 0;
-    
-    // Remove default focus outline
-    &:focus {
-      outline: none;
-    }
-    
-    // Optional: Add a subtle background change on focus for accessibility
-    &:focus-visible {
-      outline: none;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
-    }
-  }
-
-  &-arrow {
-    font-size: 0.7em;
-    transition: transform 0.3s ease;
-
-    &.open {
-      transform: rotate(180deg);
-    }
-  }
-
-  &-menu {
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: white;
-    border-radius: 4px;
-    padding: 0.5rem 0;
-    min-width: 200px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    list-style: none;
-  }
-
-  &-item {
-    a {
-      color: $gray-800;
-      padding: 0.75rem 1.5rem;
-      display: block;
-      transition: all 0.3s ease;
-      text-align: left;
-
-      &:hover {
-        background-color: rgba($primary-color, 0.1);
-        color: $primary-color;
-      }
-
-      &.active {
-        color: $primary-color;
-        background-color: rgba($primary-color, 0.1);
-      }
-
-      &::after {
-        display: none;
-      }
-    }
-  }
 }
 
 // Container styles
@@ -187,7 +103,6 @@ body {
 // Page styles
 .page {
   min-height: calc(100vh - 64px); // Subtract nav height
-  // padding: $spacing-lg 0;
   width: 100%;
   display: flex;
   flex-direction: column;

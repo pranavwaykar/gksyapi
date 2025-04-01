@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 // Icon components
@@ -146,7 +146,15 @@ const Projects = () => {
   const [[currentIndex, direction], setPage] = useState([0, 0]);
   const [isDragging, setIsDragging] = useState(false);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const controls = useAnimation();
+  const dragStartX = useRef(0);
+  
+  // Apply animations when currentIndex changes
+  useEffect(() => {
+    controls.start("center");
+  }, [currentIndex, controls]);
 
+  // Auto-play timer
   useEffect(() => {
     let interval;
     if (isAutoPlaying) {
@@ -164,49 +172,63 @@ const Projects = () => {
     });
   };
 
-  const dragEndHandler = (event, { offset, velocity }) => {
-    const swipe = swipePower(offset.x, velocity.x);
-
-    if (swipe < -swipeConfidenceThreshold) {
-      paginate(1);
-    } else if (swipe > swipeConfidenceThreshold) {
-      paginate(-1);
-    }
-    setIsDragging(false);
-    setTimeout(() => setIsAutoPlaying(true), 5000);
+  const handleDragStart = (event, info) => {
+    dragStartX.current = info.point.x;
+    setIsDragging(true);
+    setIsAutoPlaying(false);
   };
 
-  const swipeConfidenceThreshold = 5000;
-  const swipePower = (offset, velocity) => {
-    return Math.abs(offset) * velocity;
+  const handleDragEnd = (event, info) => {
+    const dragDistance = info.point.x - dragStartX.current;
+    const threshold = 80; // Lower threshold to make dragging more responsive
+    
+    if (Math.abs(dragDistance) > threshold) {
+      if (dragDistance > 0) {
+        paginate(-1);
+      } else {
+        paginate(1);
+      }
+    }
+    
+    setIsDragging(false);
+    setTimeout(() => setIsAutoPlaying(true), 500);
   };
 
   const slideVariants = {
     enter: (direction) => ({
-      x: direction > 0 ? 1000 : -1000,
+      x: direction > 0 ? "100%" : "-100%",
       opacity: 0
     }),
     center: {
-      zIndex: 1,
       x: 0,
-      opacity: 1
+      opacity: 1,
+      transition: {
+        x: { 
+          type: "tween", 
+          duration: 0.3, 
+          ease: "easeOut" 
+        },
+        opacity: { duration: 0.2 }
+      }
     },
     exit: (direction) => ({
-      zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0
+      x: direction < 0 ? "100%" : "-100%",
+      opacity: 0,
+      transition: {
+        x: { 
+          type: "tween", 
+          duration: 0.3, 
+          ease: "easeIn" 
+        },
+        opacity: { duration: 0.2 }
+      }
     })
-  };
-
-  const handleDragStart = () => {
-    setIsDragging(true);
-    setIsAutoPlaying(false);
   };
 
   const handleButtonClick = (newDirection) => {
     setIsAutoPlaying(false);
     paginate(newDirection);
-    setTimeout(() => setIsAutoPlaying(true), 5000);
+    setTimeout(() => setIsAutoPlaying(true), 500);
   };
 
   return (
@@ -215,7 +237,11 @@ const Projects = () => {
         className="background-blur" 
         animate={{ opacity: 0.3 }}
         initial={{ opacity: 0 }}
-        style={{ backgroundImage: `url(${projects[currentIndex].image})` }} 
+        style={{ 
+          backgroundImage: `url(${projects[currentIndex].image})`,
+          willChange: "transform, opacity"
+        }} 
+        transition={{ duration: 0.5 }}
       />
       
       <div className="project-card">
@@ -247,17 +273,15 @@ const Projects = () => {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 }
-            }}
             drag="x"
-            dragConstraints={{ left: -100, right: 100 }}
-            dragElastic={0.3}
-            dragMomentum={true}
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.4}
             onDragStart={handleDragStart}
-            onDragEnd={dragEndHandler}
-            style={{ backgroundImage: `url(${projects[currentIndex].image})` }}
+            onDragEnd={handleDragEnd}
+            style={{ 
+              backgroundImage: `url(${projects[currentIndex].image})`,
+              touchAction: "none"
+            }}
           >
             <div className="project-content">
               <div className="project-type">S/O HOMES</div>

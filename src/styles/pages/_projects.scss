@@ -4,11 +4,12 @@
 .project-showcase {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 64px);
   background: linear-gradient(120deg, #1a3c72 0%, #0c2d62 100%);
   color: white;
   overflow: hidden;
   user-select: none;
+  top: 64px;
 
   // Project counter (4/8 HOMES)
   .project-counter {
@@ -117,11 +118,11 @@
       }
       
       .show-more-button {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        background: white;
-        color: #1a3c72;
+        width: 130px;
+        height: 50px;
+        border-radius: 25px;
+        background: transparent;
+        color: white;
         border: none;
         display: flex;
         align-items: center;
@@ -129,27 +130,32 @@
         cursor: pointer;
         position: relative;
         transition: all 0.2s ease;
+        padding: 0 5px;
         
         span {
-          font-size: 0.8rem;
+          font-size: 0.9rem;
           font-weight: 500;
-          line-height: 1.2;
-          text-align: center;
           display: flex;
-          flex-direction: column;
           align-items: center;
+          justify-content: flex-start;
+          gap: 15px;
+          width: 100%;
           
-          .arrow-icon {
-            margin-top: 4px;
+          svg {
+            width: 24px;
+            height: 24px;
             transition: transform 0.2s ease;
+            background: white;
+            color: blue;
+            border-radius: 50%;
           }
         }
         
         &:hover {
           transform: scale(1.05);
           
-          .arrow-icon {
-            transform: translateX(3px);
+          svg {
+            transform: translateX(2px);
           }
         }
       }

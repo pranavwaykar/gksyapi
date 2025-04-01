@@ -357,7 +357,6 @@ const Projects = () => {
     setDragX(0);
   };
 
-  // Handlers for property list
   const handleViewAllProjects = () => {
     setShowAllProjects(true);
     setCurrentPropertyIndex(0);
@@ -520,45 +519,25 @@ const Projects = () => {
             
             <button className="show-more-button" onClick={handleViewAllProjects}>
               <span>
-                Show<br/>more
                 <svg 
-                  className="arrow-icon" 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
+                  width="20" 
+                  height="20" 
+                  viewBox="0 0 22 24" 
                   fill="none" 
                   stroke="currentColor" 
                   strokeWidth="2" 
                   strokeLinecap="round" 
                   strokeLinejoin="round"
-                  style={{ marginLeft: '4px', marginTop: '4px' }}
                 >
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
+                  <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
+                Show more
               </span>
             </button>
           </div>
         </motion.div>
       </AnimatePresence>
       
-      <button className="view-all-button" onClick={handleViewAllProjects}>
-        View All Projects 
-        <svg 
-          width="18" 
-          height="18" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="2" 
-          strokeLinecap="round" 
-          strokeLinejoin="round"
-          style={{ marginLeft: '6px', verticalAlign: 'middle' }}
-        >
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-          <polyline points="12 5 19 12 12 19"></polyline>
-        </svg>
-      </button>
     </div>
   );
 };

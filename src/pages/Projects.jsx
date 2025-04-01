@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 // Icon components
@@ -115,35 +116,65 @@ const ProjectCard = ({ project }) => {
 };
 
 const Projects = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const projects = [
     {
-      name: 'Альбатрос',
-      description: 'Жилой дом из клееного бруса',
-      image: '/path/to/project-image.jpg',
-      area: '584',
-      floors: '3',
-      material: 'Сибирский кедр от 380 мм в вершине',
-      technology: 'Усадочная технология, Post&Beam',
-      jointType: 'Бриллиантовая канадская чаша (Diamond notch)',
-      turnkeyPrice: '17 500 000',
-      framePrice: '2 250 000',
-      features: [
-        { name: 'Витражные окна', icon: '/icons/window.svg' },
-        { name: 'Большой балкон', icon: '/icons/balcony.svg' },
-        { name: 'Большая терраса', icon: '/icons/terrace.svg' },
-        { name: 'Каминный зал', icon: '/icons/fireplace.svg' },
-        { name: 'Сауна и баня', icon: '/icons/sauna.svg' },
-      ]
+      id: 1,
+      title: 'Kvartet',
+      subtitle: 'Where Alp view meet urban vibe',
+      image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
-    // Add more projects here
+    {
+      id: 2,
+      title: 'Dúbravka',
+      subtitle: 'Nature-inspired living spaces',
+      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2940&auto=format&fit=crop'
+    }
   ];
 
+  const handlePrevClick = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
+  };
+
+  const handleNextClick = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+  };
+
   return (
-    <div className="projects-page">
-      <div className="projects-grid">
-        {projects.map((project, index) => (
-          <ProjectCard key={index} project={project} />
-        ))}
+    <div className="projects-container">
+      <div className="background-blur" style={{ backgroundImage: `url(${projects[currentIndex].image})` }} />
+      
+      <div className="project-card" style={{ backgroundImage: `url(${projects[currentIndex].image})` }}>
+        <div className="navigation">
+          <button className="nav-button prev" onClick={handlePrevClick}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <button className="nav-button next" onClick={handleNextClick}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="project-content">
+          <div className="project-type">S/O HOMES</div>
+          <h1 className="project-title">{projects[currentIndex].title}</h1>
+          <p className="project-subtitle">{projects[currentIndex].subtitle}</p>
+        </div>
+
+        <div className="show-more">
+          <button className="show-more-button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 12h8"/>
+              <path d="M12 8l4 4-4 4"/>
+            </svg>
+            Show more
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -44,15 +44,39 @@ body {
   &-list {
     list-style: none;
     display: flex;
-    justify-content: center;
-    gap: $spacing-lg;
+    justify-content: flex-end;
     margin: 0;
     padding: 0;
     width: 100%;
+    gap: 5rem; // Default gap for large monitors
+    position: relative;
+  }
+
+  // Media query for laptop screens
+  @media screen and (max-width: 1440px) {
+    &-list {
+      gap: 3rem;
+      // background-color: red;
+    }
+  }
+
+  // Media query for smaller laptops
+  @media screen and (max-width: 1024px) {
+    &-list {
+      gap: 2rem;
+    }
+  }
+
+  // Media query for tablets and mobile
+  @media screen and (max-width: 768px) {
+    &-list {
+      gap: 1rem;
+    }
   }
 
   &-item {
     position: relative;
+    right: 10rem;
 
     a {
       color: white;

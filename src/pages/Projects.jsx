@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -115,66 +115,198 @@ const ProjectCard = ({ project }) => {
   );
 };
 
+const projects = [
+  {
+    id: 1,
+    title: 'Kvartet',
+    subtitle: 'Where Alp view meet urban vibe',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  },
+  {
+    id: 2,
+    title: 'Dúbravka',
+    subtitle: 'Nature-inspired living spaces',
+    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2940&auto=format&fit=crop'
+  },
+  {
+    id: 3,
+    title: 'Forest Retreat',
+    subtitle: 'Escape into the wild',
+    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  },
+  {
+    id: 4,
+    title: 'Mountain Haven',
+    subtitle: 'Serenity in the peaks',
+    image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  }
+];
+
 const Projects = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [[currentIndex, direction], setPage] = useState([0, 0]);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-  const projects = [
-    {
-      id: 1,
-      title: 'Kvartet',
-      subtitle: 'Where Alp view meet urban vibe',
-      image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-    },
-    {
-      id: 2,
-      title: 'Dúbravka',
-      subtitle: 'Nature-inspired living spaces',
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2940&auto=format&fit=crop'
+  useEffect(() => {
+    let interval;
+    if (isAutoPlaying) {
+      interval = setInterval(() => {
+        paginate(1);
+      }, 5000);
     }
-  ];
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, currentIndex]);
 
-  const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
+  const paginate = (newDirection) => {
+    setPage(([current]) => {
+      const newIndex = (current + newDirection + projects.length) % projects.length;
+      return [newIndex, newDirection];
+    });
   };
 
-  const handleNextClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+  const dragEndHandler = (event, { offset, velocity }) => {
+    const swipe = swipePower(offset.x, velocity.x);
+
+    if (swipe < -swipeConfidenceThreshold) {
+      paginate(1);
+    } else if (swipe > swipeConfidenceThreshold) {
+      paginate(-1);
+    }
+    setIsDragging(false);
+    setTimeout(() => setIsAutoPlaying(true), 5000);
+  };
+
+  const swipeConfidenceThreshold = 5000;
+  const swipePower = (offset, velocity) => {
+    return Math.abs(offset) * velocity;
+  };
+
+  const slideVariants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction) => ({
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0
+    })
+  };
+
+  const handleDragStart = () => {
+    setIsDragging(true);
+    setIsAutoPlaying(false);
+  };
+
+  const handleButtonClick = (newDirection) => {
+    setIsAutoPlaying(false);
+    paginate(newDirection);
+    setTimeout(() => setIsAutoPlaying(true), 5000);
   };
 
   return (
     <div className="projects-container">
-      <div className="background-blur" style={{ backgroundImage: `url(${projects[currentIndex].image})` }} />
+      <motion.div 
+        className="background-blur" 
+        animate={{ opacity: 0.3 }}
+        initial={{ opacity: 0 }}
+        style={{ backgroundImage: `url(${projects[currentIndex].image})` }} 
+      />
       
-      <div className="project-card" style={{ backgroundImage: `url(${projects[currentIndex].image})` }}>
+      <div className="project-card">
         <div className="navigation">
-          <button className="nav-button prev" onClick={handlePrevClick}>
+          <button 
+            className="nav-button prev" 
+            onClick={() => handleButtonClick(-1)}
+          >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
-          <button className="nav-button next" onClick={handleNextClick}>
+          <button 
+            className="nav-button next" 
+            onClick={() => handleButtonClick(1)}
+          >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M9 18l6-6-6-6" />
             </svg>
           </button>
         </div>
 
-        <div className="project-content">
-          <div className="project-type">S/O HOMES</div>
-          <h1 className="project-title">{projects[currentIndex].title}</h1>
-          <p className="project-subtitle">{projects[currentIndex].subtitle}</p>
-        </div>
+        <AnimatePresence initial={false} custom={direction} mode="wait">
+          <motion.div
+            key={currentIndex}
+            className="project-content-wrapper"
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 }
+            }}
+            drag="x"
+            dragConstraints={{ left: -100, right: 100 }}
+            dragElastic={0.3}
+            dragMomentum={true}
+            onDragStart={handleDragStart}
+            onDragEnd={dragEndHandler}
+            style={{ backgroundImage: `url(${projects[currentIndex].image})` }}
+          >
+            <div className="project-content">
+              <div className="project-type">S/O HOMES</div>
+              <motion.h1 
+                className="project-title"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                {projects[currentIndex].title}
+              </motion.h1>
+              <motion.p 
+                className="project-subtitle"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                {projects[currentIndex].subtitle}
+              </motion.p>
+            </div>
 
-        <div className="show-more">
-          <button className="show-more-button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M8 12h8"/>
-              <path d="M12 8l4 4-4 4"/>
-            </svg>
-            Show more
-          </button>
-        </div>
+            {isDragging && (
+              <motion.div 
+                className="drag-indicator"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                Slide to navigate
+              </motion.div>
+            )}
+
+            <motion.div 
+              className="show-more"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              <button className="show-more-button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M8 12h8"/>
+                  <path d="M12 8l4 4-4 4"/>
+                </svg>
+                Show more
+              </button>
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

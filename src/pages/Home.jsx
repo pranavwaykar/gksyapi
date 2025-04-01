@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -23,13 +23,9 @@ const Home = () => {
         {/* Left Title Section */}
         <div className="title-section">
           <h1>
-            THE<br />
-            PALMS<br />
-            MOST<br />
-            LUXURIOUS<br />
-            VILLA<br />
-            TO<br />
-            RENT
+            Dünya fikirler üzerine inşa edilir Dünyayı,
+            <br />
+            her seferinde bir fikirle şekillendiriyoruz
           </h1>
           <p className="copyright">COPYRIGHT © 2022. ALL RIGHTS RESERVED.</p>
         </div>
@@ -52,4 +48,4 @@ const Home = () => {
   );
 };
 
-export default Home; 
+export default Home;

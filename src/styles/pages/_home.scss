@@ -86,22 +86,30 @@ body, #root {
   // Left Title Section
   .title-section {
     position: absolute;
-    bottom: 0px;
     left: 80px;
+    height: calc(100vh - 64px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     
     h1 {
-      font-size: 5rem;
+      font-size: 2.5rem;
       font-weight: 300;
       line-height: 1;
       letter-spacing: -1px;
       margin-bottom: 2rem;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      position: relative;
+      top: 25px;
+  
     }
 
     .copyright {
       font-size: 0.8rem;
       opacity: 0.7;
       font-weight: 300;
+      position: absolute;
+      bottom: 25px;
     }
   }
 
@@ -114,7 +122,7 @@ body, #root {
     justify-content: center;
     
     &.center {
-      left: 50%;
+      left: 60%;
       transform: translateX(-50%);
     }
     
@@ -190,7 +198,7 @@ body, #root {
 @media (max-width: 1200px) {
   .home-container {
     .title-section h1 {
-      font-size: 4rem;
+      font-size: 2rem;
     }
   }
 }
@@ -201,7 +209,7 @@ body, #root {
       left: 40px;
       
       h1 {
-        font-size: 3rem;
+        font-size: 1rem;
       }
     }
 

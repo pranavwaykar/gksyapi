@@ -12,6 +12,9 @@
   user-select: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  will-change: transform;
 
   .background-blur {
     position: absolute;
@@ -23,9 +26,11 @@
     background-position: center;
     filter: blur(20px);
     opacity: 0.3;
-    transform: scale(1.1);
+    transform: scale(1.1) translateZ(0);
     pointer-events: none;
-    will-change: transform, opacity;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   .project-card {
@@ -37,6 +42,15 @@
     overflow: hidden;
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    touch-action: pan-x pinch-zoom;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
 
     &::before {
       content: '';
@@ -49,6 +63,7 @@
       border-radius: 12px;
       z-index: 2;
       pointer-events: none;
+      transform: translateZ(0);
     }
 
     .project-content-wrapper {
@@ -59,16 +74,11 @@
       height: 100%;
       background-size: cover;
       background-position: center;
-      cursor: grab;
-      touch-action: pan-x;
       transform: translateZ(0);
       will-change: transform;
+      -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
-      perspective: 1000;
-
-      &:active {
-        cursor: grabbing;
-      }
+      transition: none;
 
       &:active::after {
         content: '';
@@ -79,6 +89,7 @@
         height: 100%;
         background: rgba(255, 255, 255, 0.05);
         pointer-events: none;
+        transform: translateZ(0);
       }
     }
 

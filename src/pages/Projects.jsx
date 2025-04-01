@@ -145,16 +145,11 @@ const projects = [
 const Projects = () => {
   const [[currentIndex, direction], setPage] = useState([0, 0]);
   const [isDragging, setIsDragging] = useState(false);
+  const [dragX, setDragX] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const controls = useAnimation();
-  const dragStartX = useRef(0);
-  
-  // Apply animations when currentIndex changes
-  useEffect(() => {
-    controls.start("center");
-  }, [currentIndex, controls]);
+  const startX = useRef(0);
+  const currentX = useRef(0);
 
-  // Auto-play timer
   useEffect(() => {
     let interval;
     if (isAutoPlaying) {
@@ -172,25 +167,33 @@ const Projects = () => {
     });
   };
 
-  const handleDragStart = (event, info) => {
-    dragStartX.current = info.point.x;
+  const handleMouseDown = (e) => {
     setIsDragging(true);
     setIsAutoPlaying(false);
+    startX.current = e.clientX || e.touches[0].clientX;
+    currentX.current = 0;
+    setDragX(0);
   };
 
-  const handleDragEnd = (event, info) => {
-    const dragDistance = info.point.x - dragStartX.current;
-    const threshold = 80; // Lower threshold to make dragging more responsive
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
     
-    if (Math.abs(dragDistance) > threshold) {
-      if (dragDistance > 0) {
-        paginate(-1);
-      } else {
-        paginate(1);
-      }
+    const clientX = e.clientX || e.touches[0].clientX;
+    const diff = clientX - startX.current;
+    currentX.current = diff;
+    setDragX(diff);
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging) return;
+    
+    const threshold = window.innerWidth * 0.15; // 15% of screen width
+    if (Math.abs(currentX.current) > threshold) {
+      paginate(currentX.current > 0 ? -1 : 1);
     }
     
     setIsDragging(false);
+    setDragX(0);
     setTimeout(() => setIsAutoPlaying(true), 500);
   };
 
@@ -203,85 +206,48 @@ const Projects = () => {
       x: 0,
       opacity: 1,
       transition: {
-        x: { 
-          type: "tween", 
-          duration: 0.3, 
-          ease: "easeOut" 
-        },
-        opacity: { duration: 0.2 }
+        duration: 0.3,
+        ease: "easeOut"
       }
     },
     exit: (direction) => ({
       x: direction < 0 ? "100%" : "-100%",
       opacity: 0,
       transition: {
-        x: { 
-          type: "tween", 
-          duration: 0.3, 
-          ease: "easeIn" 
-        },
-        opacity: { duration: 0.2 }
+        duration: 0.3,
+        ease: "easeIn"
       }
     })
   };
 
-  const handleButtonClick = (newDirection) => {
-    setIsAutoPlaying(false);
-    paginate(newDirection);
-    setTimeout(() => setIsAutoPlaying(true), 500);
-  };
-
   return (
     <div className="projects-container">
-      <motion.div 
-        className="background-blur" 
-        animate={{ opacity: 0.3 }}
-        initial={{ opacity: 0 }}
-        style={{ 
-          backgroundImage: `url(${projects[currentIndex].image})`,
-          willChange: "transform, opacity"
-        }} 
-        transition={{ duration: 0.5 }}
-      />
-      
-      <div className="project-card">
-        <div className="navigation">
-          <button 
-            className="nav-button prev" 
-            onClick={() => handleButtonClick(-1)}
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <button 
-            className="nav-button next" 
-            onClick={() => handleButtonClick(1)}
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
-        </div>
-
-        <AnimatePresence initial={false} custom={direction} mode="wait">
-          <motion.div
-            key={currentIndex}
-            className="project-content-wrapper"
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.4}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-            style={{ 
-              backgroundImage: `url(${projects[currentIndex].image})`,
-              touchAction: "none"
-            }}
+      <div className="background-blur" style={{ backgroundImage: `url(${projects[currentIndex].image})` }} />
+      <AnimatePresence initial={false} custom={direction}>
+        <motion.div
+          key={currentIndex}
+          className="project-card"
+          custom={direction}
+          variants={slideVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          style={{ 
+            x: dragX,
+            cursor: isDragging ? 'grabbing' : 'grab',
+            touchAction: 'none'
+          }}
+          onMouseDown={handleMouseDown}
+          onTouchStart={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onTouchMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onTouchEnd={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+        >
+          <div 
+            className="project-content-wrapper" 
+            style={{ backgroundImage: `url(${projects[currentIndex].image})` }}
           >
             <div className="project-content">
               <div className="project-type">S/O HOMES</div>
@@ -329,9 +295,9 @@ const Projects = () => {
                 View All Projects
               </button>
             </motion.div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };

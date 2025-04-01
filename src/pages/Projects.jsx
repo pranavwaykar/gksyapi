@@ -1,303 +1,564 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useAnimation } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
-// Icon components
-const GalleryIcon = () => (
-  <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-    <circle cx="8.5" cy="8.5" r="1.5"/>
-    <polyline points="21 15 16 10 5 21"/>
-  </svg>
-);
+// Demo projects data
+const projects = [
+  {
+    id: 1,
+    title: 'Blumental Residence',
+    subtitle: 'The city life on your doorstep',
+    type: 'HOMES',
+    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1400&auto=format&fit=crop'
+  },
+  {
+    id: 2,
+    title: 'Azure Heights',
+    subtitle: 'Luxury redefined above the skyline',
+    type: 'HOMES',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&auto=format&fit=crop'
+  },
+  {
+    id: 3,
+    title: 'Park Avenue',
+    subtitle: 'Modern living in the heart of nature',
+    type: 'HOMES',
+    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1400&auto=format&fit=crop'
+  },
+  {
+    id: 4,
+    title: 'Marina Bay',
+    subtitle: 'Waterfront luxury apartments',
+    type: 'HOMES',
+    image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1400&auto=format&fit=crop'
+  },
+  {
+    id: 5,
+    title: 'Sunset Tower',
+    subtitle: 'Where elegance meets the horizon',
+    type: 'HOMES',
+    image: 'https://images.unsplash.com/photo-1577495508326-19a1a3cf65b7?w=1400&auto=format&fit=crop'
+  },
+  {
+    id: 6,
+    title: 'Golden Gate Residences',
+    subtitle: 'Premium living with breathtaking views',
+    type: 'HOMES',
+    image: 'https://images.unsplash.com/photo-1594484208280-efa00f96fc21?w=1400&auto=format&fit=crop'
+  },
+  {
+    id: 7,
+    title: 'Urban Oasis',
+    subtitle: 'A sanctuary in the urban jungle',
+    type: 'HOMES',
+    image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1400&auto=format&fit=crop'
+  },
+  {
+    id: 8,
+    title: 'Pinnacle Heights',
+    subtitle: 'Living at the peak of excellence',
+    type: 'HOMES',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1400&auto=format&fit=crop'
+  }
+];
 
-const PlanIcon = () => (
-  <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-    <polyline points="14 2 14 8 20 8"/>
-    <line x1="12" y1="18" x2="12" y2="12"/>
-    <line x1="9" y1="15" x2="15" y2="15"/>
-  </svg>
-);
+// Detailed project data for filters
+const propertyData = [
+  {
+    id: 1,
+    title: "The Projects",
+    location: "Eyup Sultan",
+    status: "Completed",
+    type: "Residential",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+    startDate: "Mar 2020",
+    endDate: "Apr 2023",
+    price: "690,000",
+    amenities: [
+      "Swimming pools",
+      "Gyms",
+      "Play areas",
+      "Landscaped gardens",
+      "Concierge services",
+      "Parking"
+    ],
+    details: {
+      floors: 20,
+      bhkTypes: ["2 BHK", "3 BHK"],
+      totalUnits: 120
+    }
+  },
+  {
+    id: 2,
+    title: "Urban Heights",
+    location: "Sisli",
+    status: "In-Progress",
+    type: "Commercial",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab",
+    startDate: "Jan 2023",
+    endDate: "Dec 2024",
+    price: "890,000",
+    amenities: [
+      "Office spaces",
+      "Meeting rooms",
+      "Parking",
+      "Security"
+    ],
+    details: {
+      floors: 15,
+      officeTypes: ["Small", "Medium", "Large"],
+      totalUnits: 80
+    }
+  },
+  {
+    id: 3,
+    title: "Garden Residences",
+    location: "Kadikoy",
+    status: "Completed",
+    type: "Residential",
+    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750",
+    startDate: "Jun 2021",
+    endDate: "Jul 2023",
+    price: "550,000",
+    amenities: [
+      "Gardens",
+      "Gym",
+      "Pool",
+      "Parking"
+    ],
+    details: {
+      floors: 12,
+      bhkTypes: ["1 BHK", "2 BHK"],
+      totalUnits: 60
+    }
+  }
+];
 
-const ThreeDIcon = () => (
-  <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M12 3L2 12l10 9 10-9-10-9z"/>
-    <path d="M12 21V12"/>
-    <path d="M12 12L2 3"/>
-    <path d="M12 12l10-9"/>
-  </svg>
-);
+// Filter dropdown component
+const FilterDropdown = ({ label, options, value, onChange }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const labelRef = useRef(null);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
 
-const VideoIcon = () => (
-  <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <circle cx="12" cy="12" r="10"/>
-    <polygon points="10 8 16 12 10 16 10 8"/>
-  </svg>
-);
+  // Update position when dropdown opens
+  useEffect(() => {
+    if (isOpen && labelRef.current) {
+      const rect = labelRef.current.getBoundingClientRect();
+      setPosition({
+        top: rect.bottom + window.scrollY,
+        left: rect.left + window.scrollX
+      });
+    }
+  }, [isOpen]);
 
-const ProjectCard = ({ project }) => {
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isOpen &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        labelRef.current &&
+        !labelRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
-    <div className="project-card">
-      <div className="project-image">
-        <img src={project.image} alt={project.name} />
-        
-        {/* Quick action buttons */}
-        <div className="quick-actions">
-          <button title="Gallery"><GalleryIcon /></button>
-          <button title="Floor Plans"><PlanIcon /></button>
-          <button title="3D Tour"><ThreeDIcon /></button>
-          <button title="Video"><VideoIcon /></button>
-        </div>
+    <div className="filter-dropdown">
+      <div 
+        ref={labelRef}
+        className="filter-label" 
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {label}
       </div>
-
-      <div className="project-info">
-        <h2>{project.name}</h2>
-        <p className="project-type">{project.description}</p>
-
-        <div className="project-details">
-          <div className="detail-item">
-            <span className="label">Площадь строения</span>
-            <span className="value">{project.area} м2</span>
+      
+      {isOpen && (
+        <div 
+          ref={dropdownRef}
+          className="dropdown-content"
+          style={{
+            position: 'absolute',
+            top: `${position.top}px`,
+            left: `${position.left}px`,
+            zIndex: 100000
+          }}
+        >
+          <div 
+            className={`dropdown-item ${!value ? 'selected' : ''}`}
+            onClick={() => {
+              onChange('');
+              setIsOpen(false);
+            }}
+          >
+            All
           </div>
-          <div className="detail-item">
-            <span className="label">Этажей</span>
-            <span className="value">{project.floors}</span>
-          </div>
-          <div className="detail-item">
-            <span className="label">Стеновой материал</span>
-            <span className="value">{project.material}</span>
-          </div>
-          <div className="detail-item">
-            <span className="label">Технология</span>
-            <span className="value">{project.technology}</span>
-          </div>
-          <div className="detail-item">
-            <span className="label">Угловое соединение</span>
-            <span className="value">{project.jointType}</span>
-          </div>
-        </div>
-
-        <div className="project-features">
-          {project.features.map((feature, index) => (
-            <div key={index} className="feature">
-              <img src={feature.icon} alt={feature.name} />
-              <span>{feature.name}</span>
+          {options.map((option) => (
+            <div
+              key={option}
+              className={`dropdown-item ${value === option ? 'selected' : ''}`}
+              onClick={() => {
+                onChange(option);
+                setIsOpen(false);
+              }}
+            >
+              {option}
             </div>
           ))}
         </div>
+      )}
+    </div>
+  );
+};
 
-        <div className="project-pricing">
-          <div className="price-item">
-            <span className="price">{project.turnkeyPrice} ₽</span>
-            <span className="label">Под ключ</span>
-            <button className="info-button">Что входит в цену?</button>
-          </div>
-          <div className="price-item">
-            <span className="price">{project.framePrice} ₽</span>
-            <span className="label">Сруб</span>
-            <button className="info-button">Что входит в цену?</button>
+const PropertyCard = ({ property }) => {
+  return (
+    <div className="property-card">
+      <div className="property-image">
+        <img src={property.image} alt={property.title} />
+        <button className="fullscreen-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+          </svg>
+        </button>
+      </div>
+      <div className="property-details">
+        <img src="/gksyyapi-logo.png" alt="GKS YAPI" className="company-logo" />
+        
+        <div className="detail-row">
+          <span className="label">Status</span>
+          <span className="value completed">{property.status}</span>
+        </div>
+
+        <div className="detail-row">
+          <span className="label">Project Start Date/End Date</span>
+          <span className="value">{property.startDate}-{property.endDate}</span>
+        </div>
+
+        <div className="detail-row">
+          <span className="label">Price</span>
+          <span className="value">€{property.price}</span>
+        </div>
+
+        <div className="detail-row">
+          <span className="label">Amenities</span>
+          <span className="value">{property.amenities.join(' | ')}</span>
+        </div>
+
+        <div className="detail-row">
+          <span className="label">Details</span>
+          <div className="value">
+            <p>No of Floors: {property.details.floors}</p>
+            {property.details.bhkTypes && (
+              <>
+                <p>No of 2BHK Flats</p>
+                <p>No of 3BHK Flats</p>
+              </>
+            )}
           </div>
         </div>
 
-        <div className="project-actions">
-          <button className="primary-button">Оставить заявку</button>
-          <button className="share-button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
-              <polyline points="16 6 12 2 8 6"/>
-              <line x1="12" y1="2" x2="12" y2="15"/>
+        <div className="action-buttons">
+          <button className="primary-btn">
+            Watch Video
+            <svg 
+              width="20" 
+              height="20" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              style={{ marginLeft: '8px' }}
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
           </button>
+          <div className="secondary-buttons">
+            <button className="secondary-btn">View Catalog</button>
+            <button className="secondary-btn">Enquire Now</button>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-const projects = [
-  {
-    id: 1,
-    title: 'Kvartet',
-    subtitle: 'Where Alp view meet urban vibe',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-  },
-  {
-    id: 2,
-    title: 'Dúbravka',
-    subtitle: 'Nature-inspired living spaces',
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2940&auto=format&fit=crop'
-  },
-  {
-    id: 3,
-    title: 'Forest Retreat',
-    subtitle: 'Escape into the wild',
-    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-  },
-  {
-    id: 4,
-    title: 'Mountain Haven',
-    subtitle: 'Serenity in the peaks',
-    image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-  }
-];
-
 const Projects = () => {
-  const [[currentIndex, direction], setPage] = useState([0, 0]);
+  const [currentIndex, setCurrentIndex] = useState(0); // Start with the 1st item for better demo
   const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState(0);
   const [dragX, setDragX] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const startX = useRef(0);
-  const currentX = useRef(0);
+  const projectRef = useRef(null);
+  
+  // State for filtered view
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [currentPropertyIndex, setCurrentPropertyIndex] = useState(0);
+  const [filters, setFilters] = useState({
+    status: '',
+    location: '',
+    type: ''
+  });
 
-  useEffect(() => {
-    let interval;
-    if (isAutoPlaying) {
-      interval = setInterval(() => {
-        paginate(1);
-      }, 5000);
-    }
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, currentIndex]);
-
-  const paginate = (newDirection) => {
-    setPage(([current]) => {
-      const newIndex = (current + newDirection + projects.length) % projects.length;
-      return [newIndex, newDirection];
-    });
+  // Get unique options for each filter
+  const filterOptions = {
+    status: [...new Set(propertyData.map(p => p.status))],
+    location: [...new Set(propertyData.map(p => p.location))],
+    type: [...new Set(propertyData.map(p => p.type))]
   };
 
-  const handleMouseDown = (e) => {
+  const filteredProperties = propertyData.filter(property => {
+    return (!filters.status || property.status === filters.status) &&
+           (!filters.location || property.location === filters.location) &&
+           (!filters.type || property.type === filters.type);
+  });
+
+  const nextProject = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+  };
+
+  const prevProject = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
+  };
+
+  const handleDragStart = (e) => {
     setIsDragging(true);
-    setIsAutoPlaying(false);
-    startX.current = e.clientX || e.touches[0].clientX;
-    currentX.current = 0;
-    setDragX(0);
+    setDragStart(e.clientX || e.touches?.[0].clientX || 0);
   };
 
-  const handleMouseMove = (e) => {
+  const handleDragMove = (e) => {
     if (!isDragging) return;
     
-    const clientX = e.clientX || e.touches[0].clientX;
-    const diff = clientX - startX.current;
-    currentX.current = diff;
-    setDragX(diff);
+    const clientX = e.clientX || e.touches?.[0].clientX || 0;
+    const delta = clientX - dragStart;
+    setDragX(delta);
   };
 
-  const handleMouseUp = () => {
+  const handleDragEnd = () => {
     if (!isDragging) return;
     
-    const threshold = window.innerWidth * 0.15; // 15% of screen width
-    if (Math.abs(currentX.current) > threshold) {
-      paginate(currentX.current > 0 ? -1 : 1);
+    if (dragX > 100) {
+      prevProject();
+    } else if (dragX < -100) {
+      nextProject();
     }
     
     setIsDragging(false);
     setDragX(0);
-    setTimeout(() => setIsAutoPlaying(true), 500);
   };
 
-  const slideVariants = {
-    enter: (direction) => ({
-      x: direction > 0 ? "100%" : "-100%",
-      opacity: 0
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
-    },
-    exit: (direction) => ({
-      x: direction < 0 ? "100%" : "-100%",
-      opacity: 0,
-      transition: {
-        duration: 0.3,
-        ease: "easeIn"
-      }
-    })
+  // Handlers for property list
+  const handleViewAllProjects = () => {
+    setShowAllProjects(true);
+    setCurrentPropertyIndex(0);
   };
 
-  return (
-    <div className="projects-container">
-      <div className="background-blur" style={{ backgroundImage: `url(${projects[currentIndex].image})` }} />
-      <AnimatePresence initial={false} custom={direction}>
-        <motion.div
-          key={currentIndex}
-          className="project-card"
-          custom={direction}
-          variants={slideVariants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          style={{ 
-            x: dragX,
-            cursor: isDragging ? 'grabbing' : 'grab',
-            touchAction: 'none'
-          }}
-          onMouseDown={handleMouseDown}
-          onTouchStart={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onTouchMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onTouchEnd={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-        >
-          <div 
-            className="project-content-wrapper" 
-            style={{ backgroundImage: `url(${projects[currentIndex].image})` }}
-          >
-            <div className="project-content">
-              <div className="project-type">S/O HOMES</div>
-              <motion.h1 
-                className="project-title"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                {projects[currentIndex].title}
-              </motion.h1>
-              <motion.p 
-                className="project-subtitle"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-              >
-                {projects[currentIndex].subtitle}
-              </motion.p>
-            </div>
+  const handleNextProperty = () => {
+    setCurrentPropertyIndex((prev) => 
+      prev === filteredProperties.length - 1 ? 0 : prev + 1
+    );
+  };
 
-            {isDragging && (
-              <motion.div 
-                className="drag-indicator"
+  const handlePrevProperty = () => {
+    setCurrentPropertyIndex((prev) => 
+      prev === 0 ? filteredProperties.length - 1 : prev - 1
+    );
+  };
+
+  // Reset currentIndex when filters change
+  useEffect(() => {
+    setCurrentPropertyIndex(0);
+  }, [filters]);
+
+  if (showAllProjects) {
+    return (
+      <div className="project-list-page">
+        <div className="filters-bar">
+          <div className="filter-group">
+            <FilterDropdown
+              label="Property Status"
+              options={filterOptions.status}
+              value={filters.status}
+              onChange={(value) => setFilters(prev => ({ ...prev, status: value }))}
+            />
+            <span className="dot">•</span>
+            <FilterDropdown
+              label="Location"
+              options={filterOptions.location}
+              value={filters.location}
+              onChange={(value) => setFilters(prev => ({ ...prev, location: value }))}
+            />
+            <span className="dot">•</span>
+            <FilterDropdown
+              label="Type"
+              options={filterOptions.type}
+              value={filters.type}
+              onChange={(value) => setFilters(prev => ({ ...prev, type: value }))}
+            />
+          </div>
+        </div>
+
+        <div className="project-viewer">
+          <AnimatePresence mode="wait">
+            {filteredProperties.length > 0 ? (
+              <motion.div
+                key={currentPropertyIndex}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.3 }}
+                className="card-container"
+              >
+                <PropertyCard property={filteredProperties[currentPropertyIndex]} />
+              </motion.div>
+            ) : (
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                className="no-results"
               >
-                Slide to navigate
+                No properties match the selected filters
               </motion.div>
             )}
+          </AnimatePresence>
 
-            <motion.div 
-              className="show-more"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <button className="show-more-button">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M8 12h8"/>
-                  <path d="M12 8l4 4-4 4"/>
+          {filteredProperties.length > 1 && (
+            <>
+              <button className="nav-btn prev" onClick={handlePrevProperty}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
-                View All Projects
               </button>
-            </motion.div>
+              <button className="nav-btn next" onClick={handleNextProperty}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </>
+          )}
+          
+          <button 
+            className="back-button"
+            onClick={() => setShowAllProjects(false)}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '6px', verticalAlign: 'middle', transform: 'rotate(180deg)' }}>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+            Back to Projects
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div 
+      className="project-showcase"
+      ref={projectRef}
+      onMouseDown={handleDragStart}
+      onTouchStart={handleDragStart}
+      onMouseMove={handleDragMove}
+      onTouchMove={handleDragMove}
+      onMouseUp={handleDragEnd}
+      onTouchEnd={handleDragEnd}
+      onMouseLeave={handleDragEnd}
+    >
+      <div className="project-counter">
+        {currentIndex + 1}/{projects.length} {projects[currentIndex].type}
+      </div>
+      
+      <div className="navigation-arrows">
+        <button className="nav-arrow prev" onClick={prevProject}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button className="nav-arrow next" onClick={nextProject}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+      
+      
+      <AnimatePresence mode="wait">
+        <motion.div 
+          key={currentIndex}
+          className="project-content"
+          initial={{ opacity: 0 }}
+          animate={{ 
+            opacity: 1,
+            x: isDragging ? dragX : 0 
+          }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          style={{
+            backgroundImage: `linear-gradient(to right, 
+              rgba(26, 60, 114, 1) 0%, 
+              rgba(26, 60, 114, 0.95) 20%,
+              rgba(26, 60, 114, 0.85) 40%, 
+              rgba(26, 60, 114, 0.6) 60%, 
+              rgba(26, 60, 114, 0.4) 80%, 
+              rgba(26, 60, 114, 0.2) 100%), 
+              url(${projects[currentIndex].image})`
+          }}
+        >
+          <div className="content-wrapper">
+            <h1 className="project-title">{projects[currentIndex].title}</h1>
+            <p className="project-subtitle">{projects[currentIndex].subtitle}</p>
+            
+            <button className="show-more-button" onClick={handleViewAllProjects}>
+              <span>
+                Show<br/>more
+                <svg 
+                  className="arrow-icon" 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  style={{ marginLeft: '4px', marginTop: '4px' }}
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </button>
           </div>
         </motion.div>
       </AnimatePresence>
+      
+      <button className="view-all-button" onClick={handleViewAllProjects}>
+        View All Projects 
+        <svg 
+          width="18" 
+          height="18" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          strokeWidth="2" 
+          strokeLinecap="round" 
+          strokeLinejoin="round"
+          style={{ marginLeft: '6px', verticalAlign: 'middle' }}
+        >
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
     </div>
   );
 };

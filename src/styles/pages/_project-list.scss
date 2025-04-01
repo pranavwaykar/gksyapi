@@ -1,179 +1,3 @@
-@use './partials/variables' as *;
-@use './pages/contact';
-@use './pages/about';
-@use './pages/projects';
-@use './pages/home';
-@use './pages/project-list';
-
-:root {
-  --navbar-height: 64px;
-}
-
-// Global styles
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: $font-family-base;
-  line-height: $line-height-base;
-  color: $text-color;
-  background-color: $background-color;
-  overflow-x: hidden;
-}
-
-#root {
-  width: 100%;
-  min-height: 100vh;
-}
-
-// Navigation styles
-.nav {
-  background-color: $primary-color;
-  padding: $spacing-sm;
-  width: 100%;
-  height: var(--navbar-height);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  
-  &-list {
-    list-style: none;
-    display: flex;
-    justify-content: flex-end;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    gap: 5rem; // Default gap for large monitors
-    position: relative;
-  }
-
-  // Media query for laptop screens
-  @media screen and (max-width: 1440px) {
-    &-list {
-      gap: 3rem;
-      // background-color: red;
-    }
-  }
-
-  // Media query for smaller laptops
-  @media screen and (max-width: 1024px) {
-    &-list {
-      gap: 2rem;
-    }
-  }
-
-  // Media query for tablets and mobile
-  @media screen and (max-width: 768px) {
-    &-list {
-      gap: 1rem;
-    }
-  }
-
-  &-item {
-    position: relative;
-    right: 10rem;
-
-    a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      padding: 0.5rem 0;
-      display: block;
-      position: relative;
-      height: 100%;
-
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background-color: white;
-        transform: scaleX(0);
-        transition: transform 0.3s ease;
-      }
-
-      &.active::after,
-      &:hover::after {
-        transform: scaleX(1);
-      }
-    }
-  }
-}
-
-// Container styles
-.container {
-  width: 100%;
-  max-width: $desktop;
-  margin: 0 auto;
-  padding: $spacing-lg $spacing-md;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-
-  @media (max-width: $mobile) {
-    padding: $spacing-md;
-  }
-}
-
-// Page styles
-.page {
-  min-height: calc(100vh - 64px); // Subtract nav height
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-// Hero section styles
-.hero-section {
-  position: relative;
-  height: 50vh;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: 1;
-
-  .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 2;
-  }
-
-  .hero-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 3;
-    
-    h1 {
-      color: white;
-      font-size: 3rem;
-      font-weight: 300;
-    }
-  }
-}
-
-// Dropdown styles for filters in Projects page
 .project-list-page {
   width: 100%;
   min-height: 100vh;
@@ -219,23 +43,6 @@ body {
         opacity: 0.4;
         font-size: 0.8rem;
       }
-    }
-  }
-
-  .back-button {
-    position: absolute;
-    top: 1rem;
-    right: 2rem;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.2);
     }
   }
 
@@ -426,8 +233,9 @@ body {
   }
 }
 
-// Dropdown content styles (these need to be global since they can appear anywhere in the DOM)
+// Global styles for dropdown that's rendered in the portal
 .dropdown-content {
+  margin-top: 0.5rem;
   background: rgba(0, 0, 0, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
@@ -469,4 +277,4 @@ body {
       }
     }
   }
-}
+} 

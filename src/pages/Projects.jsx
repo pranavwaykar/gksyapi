@@ -138,18 +138,6 @@ const FilterDropdown = ({ label, options, value, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const labelRef = useRef(null);
-  const [position, setPosition] = useState({ top: 0, left: 0 });
-
-  // Update position when dropdown opens
-  useEffect(() => {
-    if (isOpen && labelRef.current) {
-      const rect = labelRef.current.getBoundingClientRect();
-      setPosition({
-        top: rect.bottom + window.scrollY,
-        left: rect.left + window.scrollX
-      });
-    }
-  }, [isOpen]);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -179,18 +167,30 @@ const FilterDropdown = ({ label, options, value, onChange }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         {label}
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="16" 
+          height="16" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="white" 
+          strokeWidth="2" 
+          strokeLinecap="round" 
+          strokeLinejoin="round"
+          style={{ 
+            marginLeft: '8px',
+            transform: isOpen ? 'rotate(180deg)' : 'none',
+            transition: 'transform 0.2s ease'
+          }}
+        >
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
       </div>
       
       {isOpen && (
         <div 
           ref={dropdownRef}
           className="dropdown-content"
-          style={{
-            position: 'absolute',
-            top: `${position.top}px`,
-            left: `${position.left}px`,
-            zIndex: 100000
-          }}
         >
           <div 
             className={`dropdown-item ${!value ? 'selected' : ''}`}
@@ -390,14 +390,12 @@ const Projects = () => {
               value={filters.status}
               onChange={(value) => setFilters(prev => ({ ...prev, status: value }))}
             />
-            <span className="dot">•</span>
             <FilterDropdown
               label="Location"
               options={filterOptions.location}
               value={filters.location}
               onChange={(value) => setFilters(prev => ({ ...prev, location: value }))}
             />
-            <span className="dot">•</span>
             <FilterDropdown
               label="Type"
               options={filterOptions.type}
@@ -418,7 +416,62 @@ const Projects = () => {
                 transition={{ duration: 0.3 }}
                 className="card-container"
               >
-                <PropertyCard property={filteredProperties[currentPropertyIndex]} />
+                <div className="property-card">
+                  <div className="property-image">
+                    <img src={filteredProperties[currentPropertyIndex].image} alt={filteredProperties[currentPropertyIndex].title} />
+                    <button className="fullscreen-btn">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div className="property-details">
+                    <img src="/gksyyapi-logo.png" alt="GKS YAPI" className="company-logo" />
+                    
+                    <div className="detail-row">
+                      <span className="label">Status</span>
+                      <span className="value completed">{filteredProperties[currentPropertyIndex].status}</span>
+                    </div>
+
+                    <div className="detail-row">
+                      <span className="label">Project Start Date/ End Date</span>
+                      <span className="value">{filteredProperties[currentPropertyIndex].startDate}-{filteredProperties[currentPropertyIndex].endDate}</span>
+                    </div>
+
+                    <div className="detail-row">
+                      <span className="label">Price</span>
+                      <span className="value">€{filteredProperties[currentPropertyIndex].price}</span>
+                    </div>
+
+                    <div className="detail-row">
+                      <span className="label">Amenities</span>
+                      <span className="value">{filteredProperties[currentPropertyIndex].amenities.join(' | ')}</span>
+                    </div>
+
+                    <div className="detail-row">
+                      <span className="label">Details</span>
+                      <div className="value">
+                        <p>No of Floors: {filteredProperties[currentPropertyIndex].details.floors}</p>
+                        {filteredProperties[currentPropertyIndex].details.bhkTypes && (
+                          <>
+                            <p>No of 2BHK Flats</p>
+                            <p>No of 3 BHK Flats</p>
+                          </>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="action-buttons">
+                      <button className="primary-btn">
+                        Watch Video
+                      </button>
+                      <div className="secondary-buttons">
+                        <button className="secondary-btn">View Catalog</button>
+                        <button className="secondary-btn">Enquire Now</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             ) : (
               <motion.div

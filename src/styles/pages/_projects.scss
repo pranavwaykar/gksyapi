@@ -198,7 +198,7 @@
   width: 100%;
   min-height: 100vh;
   padding: 2rem;
-  background: #000;
+  background: #1A3C72; // Royal blue background
   color: white;
   overflow: hidden;
   position: relative;
@@ -206,38 +206,73 @@
 
   .filters-bar {
     width: 100%;
-    padding: 1rem 2rem;
-    margin-bottom: 2rem;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    padding: 0;
     position: relative;
-    z-index: 9999;
+    z-index: 10;
 
     .filter-group {
       display: flex;
-      gap: 1rem;
+      gap: 3rem;
       align-items: center;
 
       .filter-dropdown {
         cursor: pointer;
+        position: relative;
 
         .filter-label {
           color: white;
-          font-size: 1rem;
-          opacity: 0.8;
-          transition: opacity 0.2s ease;
+          font-size: 1.1rem;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          
+          &:after {
+            display: none;
+          }
+
+          svg {
+            margin-left: 8px;
+            transition: transform 0.2s ease;
+          }
 
           &:hover {
-            opacity: 1;
+            opacity: 0.9;
+            
+            svg {
+              transform: translateY(2px);
+            }
           }
         }
-      }
 
-      .dot {
-        color: white;
-        opacity: 0.4;
-        font-size: 0.8rem;
+        .dropdown-content {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          margin-top: 0.5rem;
+          background: white;
+          border-radius: 4px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          padding: 0.5rem 0;
+          min-width: 150px;
+          z-index: 1000;
+          
+          .dropdown-item {
+            padding: 0.5rem 1rem;
+            color: #333;
+            
+            &:hover {
+              background: #f8f8f8;
+            }
+            
+            &.selected {
+              background: #e6f2ff;
+              color: #1A3C72;
+              font-weight: 500;
+            }
+          }
+        }
       }
     }
   }
@@ -270,7 +305,7 @@
   }
 
   .no-results {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.8);
     text-align: center;
     padding: 2rem;
     font-size: 1.2rem;
@@ -279,16 +314,17 @@
   .project-viewer {
     position: relative;
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
     height: calc(100vh - 200px);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     z-index: 1;
 
     .card-container {
-      width: 90%;
-      max-width: 1400px;
-      height: 100%;
+      width: 100%;
+      height: auto;
     }
 
     .nav-btn {
@@ -306,6 +342,7 @@
       cursor: pointer;
       color: white;
       transition: all 0.2s ease;
+      z-index: 10;
 
       svg {
         width: 24px;
@@ -314,7 +351,7 @@
       }
 
       &.prev {
-        left: 2rem;
+        left: -60px;
         
         &:hover svg {
           transform: translateX(-2px);
@@ -322,7 +359,7 @@
       }
 
       &.next {
-        right: 2rem;
+        right: -60px;
         
         &:hover svg {
           transform: translateX(2px);
@@ -337,14 +374,14 @@
 
   .property-card {
     width: 100%;
-    height: 100%;
+    height: 500px;
     display: flex;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
+    border-radius: 8px;
     overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 
     .property-image {
-      flex: 1;
+      flex: 1.5;
       position: relative;
       overflow: hidden;
 
@@ -357,17 +394,17 @@
       .fullscreen-btn {
         position: absolute;
         top: 1rem;
-        right: 1rem;
-        background: rgba(0, 0, 0, 0.5);
+        left: 1rem;
+        background: rgba(255, 255, 255, 0.7);
         border: none;
         width: 40px;
         height: 40px;
-        border-radius: 8px;
+        border-radius: 4px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        color: white;
+        color: #1A3C72;
 
         svg {
           width: 20px;
@@ -375,7 +412,7 @@
         }
 
         &:hover {
-          background: rgba(0, 0, 0, 0.7);
+          background: rgba(255, 255, 255, 0.9);
         }
       }
     }
@@ -385,35 +422,35 @@
       padding: 2rem;
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
-      background: rgba(0, 0, 0, 0.5);
+      gap: 1.2rem;
+      background: white;
+      color: #333;
 
       .company-logo {
         width: 120px;
         height: auto;
         margin-bottom: 1rem;
+        align-self: flex-end;
       }
 
       .detail-row {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.3rem;
 
         .label {
-          font-size: 0.875rem;
-          color: rgba(255, 255, 255, 0.6);
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: #1A3C72;
         }
 
         .value {
           font-size: 1rem;
-          color: white;
+          color: #666;
 
           &.completed {
-            color: #27AE60;
-            background: rgba(39, 174, 96, 0.1);
-            padding: 0.25rem 1rem;
-            border-radius: 20px;
-            display: inline-block;
+            color: #4CAF50;
+            font-weight: 500;
           }
         }
       }
@@ -427,11 +464,12 @@
         .primary-btn {
           width: 100%;
           padding: 1rem;
-          background: #2D9CDB;
+          background: #1A3C72;
           border: none;
-          border-radius: 8px;
+          border-radius: 4px;
           color: white;
           font-size: 1rem;
+          font-weight: 500;
           cursor: pointer;
           transition: all 0.2s ease;
           display: flex;
@@ -443,7 +481,7 @@
           }
 
           &:hover {
-            background: #2486BE;
+            background: #12295a;
 
             svg {
               transform: translateX(4px);
@@ -457,17 +495,18 @@
 
           .secondary-btn {
             flex: 1;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem;
+            background: #1A3C72;
             border: none;
-            border-radius: 8px;
+            border-radius: 4px;
             color: white;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.2s ease;
+            text-align: center;
 
             &:hover {
-              background: rgba(255, 255, 255, 0.2);
+              background: #12295a;
             }
           }
         }
@@ -511,6 +550,27 @@
       display: none;
     }
   }
+  
+  .project-list-page {
+    .filters-bar {
+      .filter-group {
+        flex-wrap: wrap;
+        gap: 1.5rem;
+      }
+    }
+    
+    .project-viewer {
+      .nav-btn {
+        &.prev {
+          left: 1rem;
+        }
+        
+        &.next {
+          right: 1rem;
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 768px) {
@@ -549,16 +609,18 @@
   }
   
   .project-list-page {
+    padding: 1rem;
+    
     .property-card {
       flex-direction: column;
-
-      .property-image,
-      .property-details {
-        flex: none;
-      }
+      height: auto;
 
       .property-image {
-        height: 300px;
+        height: 250px;
+      }
+      
+      .property-details {
+        padding: 1.5rem;
       }
     }
   }

@@ -22,164 +22,163 @@ body, #root {
 }
 
 .home-container {
-  height: calc(100vh - 64px);
-  width: 100%;
   position: relative;
-  background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80') center/cover no-repeat;
-  color: white;
+  width: 100%;
+  height: 100vh;
   overflow: hidden;
-  margin-top: 64px;
+  color: white;
   
-  &::before {
+  // Video background
+  .background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+  
+  // Dark overlay on video for better text visibility
+  &::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 1;
-  }
-
-  
-  .top-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 2rem;
-    display: flex;
-    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
     z-index: 2;
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 300;
-    }
-
+  }
+  
+  // Logo
+  .logo {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    z-index: 10;
+  }
+  
+  // Main navigation
+  .main-nav {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    z-index: 10;
+    
     ul {
       display: flex;
       gap: 2rem;
       list-style: none;
-
-      li a {
-        color: white;
-        text-decoration: none;
-        font-size: 0.9rem;
-        letter-spacing: 1px;
-        transition: opacity 0.3s ease;
-
-        &:hover {
-          opacity: 0.8;
+      
+      li {
+        a {
+          color: white;
+          text-decoration: none;
+          font-size: 1rem;
+          font-weight: 400;
+          transition: opacity 0.2s ease;
+          
+          &:hover, &.active {
+            opacity: 0.8;
+          }
+        }
+        
+        &.lang-selector {
+          display: flex;
+          gap: 0.5rem;
+          
+          a {
+            opacity: 0.6;
+            
+            &.active {
+              opacity: 1;
+            }
+          }
         }
       }
     }
   }
-
-  // Main Content
-  .main-content {
-    position: relative;
-    z-index: 2;
-    height: 100%;
-  }
-
-  // Left Title Section
-  .title-section {
-    position: absolute;
-    left: 80px;
-    height: calc(100vh - 64px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 300;
-      line-height: 1;
-      letter-spacing: -1px;
-      margin-bottom: 2rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      position: relative;
-      top: 25px;
   
+  // Content overlay (statistics and tagline)
+  .content-overlay {
+    position: absolute;
+    bottom: 5rem;
+    left: 2rem;
+    z-index: 3;
+    width: 80%;
+    
+    .statistics {
+      display: flex;
+      gap: 4rem;
+      margin-bottom: 2rem;
+      
+      .stat-item {
+        h2 {
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin-bottom: 0.25rem;
+        }
+        
+        p {
+          font-size: 0.9rem;
+          opacity: 0.8;
+        }
+      }
     }
-
-    .copyright {
-      font-size: 0.8rem;
-      opacity: 0.7;
-      font-weight: 300;
-      position: absolute;
-      bottom: 25px;
+    
+    .tagline {
+      h1 {
+        font-size: 2rem;
+        font-weight: 500;
+        line-height: 1.3;
+        margin-bottom: 0.5rem;
+      }
     }
   }
-
+  
+  // Vertical "THE PROJECTS" text with "Bespoke in Every Sense" on the left
   .vertical-text {
     position: absolute;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-    &.center {
-      left: 60%;
-      transform: translateX(-50%);
-    }
+    z-index: 5;
     
     &.right {
-      right: 80px;
+      right: 4rem;
     }
-
+    
     .line {
       width: 1px;
       height: 100%;
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.5);
       position: absolute;
       top: 0;
     }
-
-    .small-text {
+    
+    .left-text {
       writing-mode: vertical-rl;
       transform: rotate(180deg);
-      font-size: 0.9rem;
-      letter-spacing: 2px;
+      letter-spacing: 0.2rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: white;
       position: absolute;
-      top: 30%;
-      left: 0px;
-      transition: transform 0.3s ease;
-      cursor: pointer;
-
-      &:hover {
-        transform: rotate(180deg) translateX(-10px);
-      }
+      bottom: 25%;
+      right: 15px; // Position to the left of the line
+      text-transform: uppercase;
     }
-
+    
     .large-text {
       writing-mode: vertical-rl;
       transform: rotate(180deg);
-      font-size: 2rem;
-      letter-spacing: 2px;
+      letter-spacing: 0.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #4D88E8;
       position: absolute;
-      top: 45%;
-      right: -10px;
-      transition: transform 0.3s ease;
-      cursor: pointer;
-
-      &:hover {
-        transform: rotate(180deg) translateX(10px);
-      }
-    }
-  }
-
-  // Hover effect for text
-  .hover-text {
-    position: relative;
-    padding: 10px;
-
-    &:hover {
-      &::before {
-        width: 100%;
-      }
+      bottom: 25%;
+      left: 15px; // Position to the right of the line
+      text-transform: uppercase;
     }
   }
 }
@@ -205,16 +204,26 @@ body, #root {
 
 @media (max-width: 768px) {
   .home-container {
-    .title-section {
-      left: 40px;
+    .content-overlay {
+      width: 90%;
+      bottom: 2rem;
       
-      h1 {
-        font-size: 1rem;
+      .statistics {
+        flex-wrap: wrap;
+        gap: 2rem;
+        
+        .stat-item {
+          width: calc(50% - 1rem);
+          
+          h2 {
+            font-size: 2rem;
+          }
+        }
       }
-    }
-
-    .right-partition {
-      right: 40px;
+      
+      .tagline h1 {
+        font-size: 1.5rem;
+      }
     }
   }
 } 

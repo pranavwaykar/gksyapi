@@ -1,186 +1,195 @@
 @use '../partials/variables' as *;
 
 // Project showcase page (matches the design in the image)
-.project-showcase {
+.project-showcase-container {
   position: relative;
-  width: 100%;
-  height: calc(100vh - 64px);
-  background: linear-gradient(120deg, #1a3c72 0%, #0c2d62 100%);
-  color: white;
-  overflow: hidden;
-  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 64px;
+  backdrop-filter: blur(10px);
 
-  // Project counter (4/8 HOMES)
-  .project-counter {
-    position: absolute;
-    top: 3rem;
-    left: 3rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    opacity: 0.8;
-    letter-spacing: 2px;
-    z-index: 10;
-  }
-
-  // Left/right navigation arrows
-  .navigation-arrows {
-    position: absolute;
-    top: 50%;
-    left: 3rem;
-    transform: translateY(-50%);
-    display: flex;
-    gap: 1.5rem;
-    z-index: 10;
-
-    .nav-arrow {
-      background: transparent;
-      border: none;
-      color: white;
-      cursor: pointer;
+  .project-showcase {
+    position: relative;
+    width: 80%;
+    height: calc(80vh - 64px);
+    background: linear-gradient(120deg, #1a3c72 0%, #0c2d62 100%);
+    color: white;
+    overflow: hidden;
+    user-select: none;
+    top: 64px;
+  
+    // Project counter (4/8 HOMES)
+    .project-counter {
+      position: absolute;
+      top: 3rem;
+      left: 3rem;
+      font-size: 0.9rem;
+      font-weight: 500;
       opacity: 0.8;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      &:hover {
-        opacity: 1;
-        
-        svg {
-          transform: scale(1.1);
-        }
-      }
+      letter-spacing: 2px;
+      z-index: 10;
     }
-  }
-
-  // Click and drag indicator
-  .drag-indicator {
-    position: absolute;
-    top: 50%;
-    left: 9rem;
-    transform: translateY(-50%);
-    z-index: 10;
-
-    .drag-circle {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.3);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      font-size: 0.8rem;
-      font-weight: 300;
-      line-height: 1.2;
-      letter-spacing: 0.5px;
-    }
-  }
-
-  // Main content section
-  .project-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    
-    .content-wrapper {
+  
+    // Left/right navigation arrows
+    .navigation-arrows {
       position: absolute;
       top: 50%;
-      left: 17rem;
+      left: 3rem;
       transform: translateY(-50%);
-      max-width: 600px;
-      
-      .project-title {
-        font-size: 5.5rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        line-height: 1.1;
-      }
-      
-      .project-subtitle {
-        font-size: 1.6rem;
-        font-weight: 300;
-        opacity: 0.9;
-        margin-bottom: 3.5rem;
-      }
-      
-      .show-more-button {
-        width: 130px;
-        height: 50px;
-        border-radius: 25px;
+      display: flex;
+      gap: 1.5rem;
+      z-index: 10;
+  
+      .nav-arrow {
         background: transparent;
-        color: white;
         border: none;
+        color: white;
+        cursor: pointer;
+        opacity: 0.8;
+        transition: all 0.2s ease;
         display: flex;
         align-items: center;
         justify-content: center;
-        cursor: pointer;
-        position: relative;
-        transition: all 0.2s ease;
-        padding: 0 5px;
-        
-        span {
-          font-size: 0.9rem;
-          font-weight: 500;
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          gap: 15px;
-          width: 100%;
-          
-          svg {
-            width: 24px;
-            height: 24px;
-            transition: transform 0.2s ease;
-            background: white;
-            color: blue;
-            border-radius: 50%;
-          }
-        }
-        
+  
         &:hover {
-          transform: scale(1.05);
+          opacity: 1;
           
           svg {
-            transform: translateX(2px);
+            transform: scale(1.1);
           }
         }
       }
     }
-  }
-
-  // View all projects button
-  .view-all-button {
-    position: absolute;
-    top: 2rem;
-    right: 3rem;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background 0.2s ease;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    
-    svg {
-      transition: transform 0.2s ease;
+  
+    // Click and drag indicator
+    .drag-indicator {
+      position: absolute;
+      top: 50%;
+      left: 9rem;
+      transform: translateY(-50%);
+      z-index: 10;
+  
+      .drag-circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.3);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.8rem;
+        font-weight: 300;
+        line-height: 1.2;
+        letter-spacing: 0.5px;
+      }
     }
-    
-    &:hover {
-      background: rgba(255, 255, 255, 0.2);
+  
+    // Main content section
+    .project-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      
+      .content-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 17rem;
+        transform: translateY(-50%);
+        max-width: 600px;
+        
+        .project-title {
+          font-size: 5.5rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+          line-height: 1.1;
+        }
+        
+        .project-subtitle {
+          font-size: 1.6rem;
+          font-weight: 300;
+          opacity: 0.9;
+          margin-bottom: 3.5rem;
+        }
+        
+        .show-more-button {
+          width: 130px;
+          height: 50px;
+          border-radius: 25px;
+          background: transparent;
+          color: white;
+          border: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          position: relative;
+          transition: all 0.2s ease;
+          padding: 0 5px;
+          
+          span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            width: 100%;
+            
+            svg {
+              width: 24px;
+              height: 24px;
+              transition: transform 0.2s ease;
+              background: white;
+              color: blue;
+              border-radius: 50%;
+            }
+          }
+          
+          &:hover {
+            transform: scale(1.05);
+            
+            svg {
+              transform: translateX(2px);
+            }
+          }
+        }
+      }
+    }
+  
+    // View all projects button
+    .view-all-button {
+      position: absolute;
+      top: 2rem;
+      right: 3rem;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.2s ease;
+      z-index: 10;
+      display: flex;
+      align-items: center;
       
       svg {
-        transform: translateX(3px);
+        transition: transform 0.2s ease;
+      }
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        
+        svg {
+          transform: translateX(3px);
+        }
       }
     }
   }

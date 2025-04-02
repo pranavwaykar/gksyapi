@@ -30,7 +30,6 @@
     left: 3rem;
     transform: translateY(-50%);
     display: flex;
-    flex-direction: row;
     gap: 1.5rem;
     z-index: 10;
 
@@ -38,18 +37,12 @@
       background: transparent;
       border: none;
       color: white;
-      font-size: 1.8rem;
       cursor: pointer;
       opacity: 0.8;
-      transition: opacity 0.2s ease;
-      padding: 0;
+      transition: all 0.2s ease;
       display: flex;
       align-items: center;
       justify-content: center;
-
-      svg {
-        transition: transform 0.2s ease;
-      }
 
       &:hover {
         opacity: 1;
@@ -90,11 +83,11 @@
   .project-content {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-position: center right;
+    background-position: center;
     
     .content-wrapper {
       position: absolute;
@@ -196,7 +189,7 @@
 // Styles for property card (when viewing all projects)
 .project-list-page {
   width: 100%;
-  min-height: 100vh;
+  height: calc(100vh - 64px);
   padding: 2rem;
   background: #1A3C72; // Royal blue background
   color: white;
@@ -207,9 +200,7 @@
   .filters-bar {
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto 2rem;
-    padding: 0;
-    position: relative;
+    // margin: 0 auto 2rem;
     z-index: 10;
 
     .filter-group {
@@ -312,19 +303,15 @@
   }
 
   .project-viewer {
+    flex: 1;
     position: relative;
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
-    height: calc(100vh - 200px);
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    z-index: 1;
 
     .card-container {
       width: 100%;
       height: auto;
+      max-height: calc(100vh - 220px);
     }
 
     .nav-btn {
@@ -374,9 +361,10 @@
 
   .property-card {
     width: 100%;
-    height: 500px;
+    height: auto;
+    max-height: calc(100vh - 220px);
     display: flex;
-    border-radius: 8px;
+    // border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 

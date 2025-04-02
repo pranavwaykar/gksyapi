@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import backgroundVideo from '../assets/GKSYAPI Video.mp4';
 import logo from '../assets/GKSYAPI Logo.png';
+import Navigation from "../components/Navigation";
 
 const Home = () => {
   return (
@@ -12,8 +13,8 @@ const Home = () => {
         Your browser does not support the video tag.
       </video>
 
-      {/* Logo in top left */}
-      <div className="logo">
+      {/* Logo in top left - only shown on home page */}
+      <div className="logo home-logo">
         <img src={logo} alt="GKSYAPI Logo" />
       </div>
 
@@ -53,19 +54,8 @@ const Home = () => {
         <span className="large-text">THE PROJECTS</span>
       </div>
       
-      {/* Navigation */}
-      <nav className="main-nav">
-        <ul>
-          <li><Link to="/" className="active">Home</Link></li>
-          <li><Link to="/projects">Projects</Link></li>
-          <li><Link to="/career">Career</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
-          <li className="lang-selector">
-            <Link to="/" className="active">EN</Link>
-            <Link to="/">TR</Link>
-          </li>
-        </ul>
-      </nav>
+      {/* Use the Navigation component */}
+      <Navigation />
     </div>
   );
 }

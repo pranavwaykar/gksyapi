@@ -1,9 +1,17 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import logo from '../assets/GKSYAPI Logo.png';
 
 const Navigation = () => {
   return (
     <nav className="nav">
+      {/* Logo */}
+      <div className="nav-logo">
+        <NavLink to="/">
+          <img src={logo} alt="GKSYAPI Logo" />
+        </NavLink>
+      </div>
+      
       <ul className="nav-list">
         <li className="nav-item">
           <NavLink to="/" end>
@@ -29,6 +37,10 @@ const Navigation = () => {
           <NavLink to="/contact-us">
             Contact Us
           </NavLink>
+        </li>
+        <li className="nav-item lang-selector">
+          <NavLink to="/" className="active">EN</NavLink>
+          <NavLink to="/">TR</NavLink>
         </li>
       </ul>
     </nav>

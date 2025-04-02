@@ -51,18 +51,9 @@ body, #root {
     z-index: 2;
   }
   
-  // Logo
-  .logo {
-    position: absolute;
-    top: -1rem;
-    left: 2rem;
-    z-index: 1000;
-    
-    img {
-      height: 100px;
-      width: auto;
-      display: block;
-    }
+  // Logo - hide on home page since it's shown in the Navigation
+  .logo.home-logo {
+    display: none;
   }
   
   // Main navigation
@@ -150,7 +141,7 @@ body, #root {
     z-index: 5;
     
     &.right {
-      right: 15rem;
+      right: 8rem;
     }
     
     .line {

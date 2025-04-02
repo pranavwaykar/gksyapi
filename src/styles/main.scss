@@ -1,9 +1,9 @@
-@use './partials/variables' as *;
-@use './pages/contact';
-@use './pages/about';
-@use './pages/projects';
-@use './pages/home';
-@use './pages/project-list';
+@use "./partials/variables" as *;
+@use "./pages/contact";
+@use "./pages/about";
+@use "./pages/projects";
+@use "./pages/home";
+@use "./pages/project-list";
 
 :root {
   --navbar-height: 64px;
@@ -42,17 +42,20 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   &-logo {
     margin-left: 2rem;
-    
+    height: 100%;
+    display: flex;
+    align-items: center;
+
     img {
       height: 40px;
       width: auto;
       display: block;
     }
   }
-  
+
   &-list {
     list-style: none;
     display: flex;
@@ -97,7 +100,7 @@ body {
       height: 100%;
 
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: -4px;
         left: 0;
@@ -113,18 +116,18 @@ body {
         transform: scaleX(1);
       }
     }
-    
+
     &.lang-selector {
       display: flex;
       gap: 0.5rem;
-      
+
       a {
         opacity: 0.6;
-        
+
         &.active {
           opacity: 1;
         }
-        
+
         &::after {
           display: none;
         }
@@ -189,7 +192,7 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 3;
-    
+
     h1 {
       color: white;
       font-size: 3rem;
@@ -395,7 +398,7 @@ body {
           color: white;
 
           &.completed {
-            color: #27AE60;
+            color: #27ae60;
             background: rgba(39, 174, 96, 0.1);
             padding: 0.25rem 1rem;
             border-radius: 20px;
@@ -413,7 +416,7 @@ body {
         .primary-btn {
           width: 100%;
           padding: 1rem;
-          background: #2D9CDB;
+          background: #2d9cdb;
           border: none;
           border-radius: 8px;
           color: white;
@@ -422,7 +425,7 @@ body {
           transition: all 0.2s ease;
 
           &:hover {
-            background: #2486BE;
+            background: #2486be;
           }
         }
 
@@ -474,7 +477,7 @@ body {
 
     &.selected {
       background: rgba(45, 156, 219, 0.2);
-      color: #2D9CDB;
+      color: #2d9cdb;
     }
   }
 }

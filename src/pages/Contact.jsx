@@ -4,7 +4,7 @@ import '../styles/pages/_contact.scss';
 
 const Contact = () => {
   return (
-    <div className="luxury-contact-page">
+    <div className="contact-page">
       {/* Hero headline section */}
       <div className="hero-section">
         <motion.h1 
@@ -53,7 +53,7 @@ const Contact = () => {
         </div>
       </div>
       
-      {/* Highly detailed Google Maps section - Central Istanbul */}
+      {/* Google Maps section - Central Istanbul with blue tint */}
       <div className="map-section">
         <iframe 
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48169.684212778025!2d28.932603960644526!3d41.03746977473201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab7650656bd63%3A0x8ca058b28c20b6c3!2sBeyo%C4%9Flu%2F%C4%B0stanbul%2C%20Turkey!5e0!3m2!1sen!2sus!4v1685373782761!5m2!1sen!2sus" 

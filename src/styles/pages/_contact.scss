@@ -1,7 +1,7 @@
 // @use '../../partials/variables' as *;
 @use '../../styles/partials/_variables' as *;
 
-.luxury-contact-page {
+.contact-page {
   position: relative;
   width: 100%;
   min-height: 100vh;
@@ -145,7 +145,7 @@
 
 // Responsive adjustments
 @media (max-width: 992px) {
-  .luxury-contact-page {
+  .contact-page {
     .hero-section {
       .hero-headline {
         font-size: 3.5rem;
@@ -163,7 +163,7 @@
 }
 
 @media (max-width: 768px) {
-  .luxury-contact-page {
+  .contact-page {
     .hero-section {
       padding: 3rem 1rem;
       
@@ -187,7 +187,7 @@
 }
 
 @media (max-width: 480px) {
-  .luxury-contact-page {
+  .contact-page {
     .hero-section {
       .hero-headline {
         font-size: 2rem;

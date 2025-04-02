@@ -214,80 +214,6 @@ const FilterDropdown = ({ label, options, value, onChange }) => {
   );
 };
 
-// const PropertyCard = ({ property }) => {
-//   return (
-//     <div className="property-card">
-//       <div className="property-image">
-//         <img src={property.image} alt={property.title} />
-//         <button className="fullscreen-btn">
-//           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-//             <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-//           </svg>
-//         </button>
-//       </div>
-//       <div className="property-details">
-//         {/* <img src="/gksyyapi-logo.png" alt="GKS YAPI" className="company-logo" /> */}
-
-//         <div className="detail-row">
-//           <span className="label">Status</span>
-//           <span className="value completed">{property.status}</span>
-//         </div>
-
-//         <div className="detail-row">
-//           <span className="label">Project Start Date/End Date</span>
-//           <span className="value">{property.startDate}-{property.endDate}</span>
-//         </div>
-
-//         <div className="detail-row">
-//           <span className="label">Price</span>
-//           <span className="value">€{property.price}</span>
-//         </div>
-
-//         <div className="detail-row">
-//           <span className="label">Amenities</span>
-//           <span className="value">{property.amenities.join(' | ')}</span>
-//         </div>
-
-//         <div className="detail-row">
-//           <span className="label">Details</span>
-//           <div className="value">
-//             <p>No of Floors: {property.details.floors}</p>
-//             {property.details.bhkTypes && (
-//               <>
-//                 <p>No of 2BHK Flats</p>
-//                 <p>No of 3BHK Flats</p>
-//               </>
-//             )}
-//           </div>
-//         </div>
-
-//         <div className="action-buttons">
-//           <button className="primary-btn">
-//             Watch Video
-//             <svg
-//               width="20"
-//               height="20"
-//               viewBox="0 0 24 24"
-//               fill="none"
-//               stroke="currentColor"
-//               strokeWidth="2"
-//               strokeLinecap="round"
-//               strokeLinejoin="round"
-//               style={{ marginLeft: '8px' }}
-//             >
-//               <line x1="5" y1="12" x2="19" y2="12"></line>
-//               <polyline points="12 5 19 12 12 19"></polyline>
-//             </svg>
-//           </button>
-//           <div className="secondary-buttons">
-//             <button className="secondary-btn">View Catalog</button>
-//             <button className="secondary-btn">Enquire Now</button>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
 
 const Projects = () => {
   const [currentIndex, setCurrentIndex] = useState(0); // Start with the 1st item for better demo
@@ -380,7 +306,17 @@ const Projects = () => {
 
   if (showAllProjects) {
     return (
-      <div className="project-list-page">
+      <div 
+        className="project-list-page"
+        style={{
+          backgroundImage: filteredProperties.length > 0 
+            ? `linear-gradient(rgba(26, 60, 114, 0.85), rgba(12, 45, 98, 0.9)), url(${filteredProperties[currentPropertyIndex].image})`
+            : 'linear-gradient(120deg, #1a3c72 0%, #0c2d62 100%)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}
+      >
         <div className="filters-bar">
           <div className="filter-group">
             <FilterDropdown
@@ -549,7 +485,17 @@ const Projects = () => {
   }
 
   return (
-    <div className="project-showcase-container">
+    <div className="project-showcase-container"         style={{
+      backgroundImage: `linear-gradient(to right, 
+      rgba(26, 60, 114, 1) 0%, 
+      rgba(26, 60, 114, 0.95) 20%,
+      rgba(26, 60, 114, 0.85) 40%, 
+      rgba(26, 60, 114, 0.6) 60%, 
+      rgba(26, 60, 114, 0.4) 80%, 
+      rgba(26, 60, 114, 0.2) 100%), 
+      url(${projects[currentIndex].image})`,
+    }}>
+      
       <div
         className="project-showcase"
         ref={projectRef}

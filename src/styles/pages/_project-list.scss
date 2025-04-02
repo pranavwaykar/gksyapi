@@ -6,15 +6,11 @@
   color: white;
   overflow: hidden;
   position: relative;
-  top: 64px;
 
   .filters-bar {
     width: 100%;
-    // padding: 1rem 2rem;
-    // margin-bottom: 2rem;
-    // background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
+    // backdrop-filter: blur(10px);
+    // border-radius: 12px;
     position: relative;
     z-index: 9999;
 

@@ -311,7 +311,7 @@ body {
       }
 
       &.prev {
-        left: -6rem;
+        left: -5rem;
       }
 
       &.next {
@@ -375,6 +375,7 @@ body {
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+      overflow-y: scroll;
       background: rgba(0, 0, 0, 0.5);
 
       .company-logo {

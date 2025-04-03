@@ -176,4 +176,290 @@
   height: 24px;
   display: inline-block;
   vertical-align: middle;
+}
+
+.about-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 64px; // Space for your existing navbar
+  overflow: hidden;
+  color: white;
+  background-color: #0a1226;
+  
+  // Full-screen background with modern building image
+  .about-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: $gray-900;
+    z-index: -1;
+    
+    // Dark blue overlay
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(14, 25, 56, 0.85), rgba(14, 25, 56, 0.95));
+    }
+  }
+  
+  // Main title
+  .about-title-container {
+    padding: 3rem 0;
+    text-align: center;
+    
+    .about-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: white;
+      margin: 0;
+    }
+  }
+  
+  // Timeline container
+  .timeline-container {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem 0;
+    
+    // Horizontal line
+    .timeline-line {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: rgba(255, 255, 255, 0.3);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    
+    // Timeline items container
+    .timeline-items {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 400px;
+      
+      // Individual timeline item
+      .timeline-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: calc(100% / 6); // Adjust based on number of items
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        // Timeline dot
+        .timeline-dot {
+          width: 16px;
+          height: 16px;
+          background-color: white;
+          border-radius: 50%;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 2;
+          box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+          transition: all 0.3s ease;
+        }
+        
+        // Date styling
+        .timeline-date {
+          font-size: 1.8rem;
+          font-weight: 700;
+          margin-bottom: 0.5rem;
+          color: white;
+          transition: all 0.3s ease;
+          opacity: 0.7;
+        }
+        
+        // Content container
+        .timeline-content {
+          text-align: center;
+          padding: 1rem;
+          max-width: 220px;
+          opacity: 0;
+          transition: all 0.3s ease;
+          transform: translateY(20px);
+          
+          .timeline-item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+          }
+          
+          .timeline-item-description {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.4;
+          }
+        }
+        
+        // Position items alternately above and below the line
+        &.top {
+          .timeline-date {
+            position: absolute;
+            bottom: 60%;
+          }
+          
+          .timeline-content {
+            position: absolute;
+            top: 15%;
+          }
+        }
+        
+        &.bottom {
+          .timeline-date {
+            position: absolute;
+            top: 60%;
+          }
+          
+          .timeline-content {
+            position: absolute;
+            bottom: 15%;
+          }
+        }
+        
+        // Active state styling
+        &.active {
+          .timeline-dot {
+            background-color: #4D88E8; // Blue accent color
+            width: 20px;
+            height: 20px;
+            box-shadow: 0 0 0 6px rgba(77, 136, 232, 0.3);
+          }
+          
+          .timeline-date {
+            color: #4D88E8;
+            opacity: 1;
+            transform: scale(1.1);
+          }
+          
+          .timeline-content {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        &:hover:not(.active) {
+          .timeline-dot {
+            background-color: rgba(77, 136, 232, 0.7);
+          }
+          
+          .timeline-date {
+            opacity: 0.9;
+          }
+        }
+      }
+    }
+  }
+  
+  // Page navigation (section tabs at bottom)
+  .page-navigation {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    padding: 1rem 2rem;
+    
+    .nav-item {
+      margin: 0 1rem;
+      padding: 0.5rem 0;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      cursor: pointer;
+      position: relative;
+      opacity: 0.7;
+      transition: all 0.3s ease;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #4D88E8;
+        transition: width 0.3s ease;
+      }
+      
+      &.active, &:hover {
+        opacity: 1;
+        
+        &::after {
+          width: 100%;
+        }
+      }
+      
+      &.active {
+        color: #4D88E8;
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 992px) {
+  .about-page {
+    .timeline-container {
+      .timeline-items {
+        height: 500px;
+        
+        .timeline-item {
+          .timeline-date {
+            font-size: 1.5rem;
+          }
+          
+          .timeline-content {
+            max-width: 180px;
+            
+            .timeline-item-title {
+              font-size: 1rem;
+            }
+            
+            .timeline-item-description {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .about-page {
+    .timeline-container {
+      overflow-x: auto;
+      padding-bottom: 2rem;
+      
+      .timeline-items {
+        width: 900px; // Force horizontal scrolling on mobile
+        height: 350px;
+      }
+    }
+    
+    .page-navigation {
+      bottom: auto;
+      top: 120px;
+      right: 20px;
+      flex-direction: column;
+      
+      .nav-item {
+        margin: 0.5rem 0;
+      }
+    }
+  }
 } 

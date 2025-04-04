@@ -42,8 +42,8 @@ const Home = () => {
         
         {/* Turkish tagline */}
         <div className="tagline">
-          <h1>Building innovative spaces that inspire,</h1>
-          <h1>transforming ideas into lasting landmarks</h1>
+          <h1>Dünya fikirler üzerine inşa edilir Dünyayı, </h1>
+          <h1>her seferinde bir fikirle şekillendiriyoruz</h1>
         </div>
       </div>
       
@@ -51,7 +51,12 @@ const Home = () => {
       <div className="vertical-text right">
         <div className="line"></div>
         <span className="left-text">Bespoke in Every Sense</span>
-        <span className="large-text">THE PROJECTS</span>
+        <span className="large-text-primary">
+          THE 
+          </span>
+          <span className="large-text-secondary">
+          PROJECTS
+          </span>
       </div>
       
       {/* Use the Navigation component */}

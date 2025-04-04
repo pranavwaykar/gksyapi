@@ -57,20 +57,6 @@ const About = () => {
   
   return (
     <div className="about-page">
-      {/* Background image with overlay */}
-      <div className="about-background"></div>
-      
-      {/* Title section */}
-      <div className="about-title-container">
-        <motion.h1 
-          className="about-title"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          OUR JOURNEY
-        </motion.h1>
-      </div>
       
       {/* Timeline section */}
       <div className="timeline-container">
@@ -95,6 +81,8 @@ const About = () => {
                   <p className="timeline-item-description">{item.description}</p>
                 </div>
                 
+                <div className="timeline-line-beside-dot"></div>
+                
                 {/* Dot */}
                 <div className="timeline-dot"></div>
               </div>
@@ -103,14 +91,6 @@ const About = () => {
         </div>
       </div>
       
-      {/* Page navigation */}
-      <div className="page-navigation">
-        <div className="nav-item active">ABOUT</div>
-        <div className="nav-item">VALUES</div>
-        <div className="nav-item">TEAM</div>
-        <div className="nav-item">AWARDS</div>
-        <div className="nav-item">PARTNERS</div>
-      </div>
     </div>
   );
 };

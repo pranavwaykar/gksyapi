@@ -13,10 +13,10 @@ const Contact = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2 }}
         >
-          ENJOY A DREAM HOLIDAY<br />
+          FIND YOUR DREAM HOME<br />
           WITH THE MOST<br />
-          LUXURIOUS VILLA IN THE<br />
-          PALM
+          EXCLUSIVE PROPERTIES IN<br />
+          ISTANBUL
         </motion.h1>
       </div>
       

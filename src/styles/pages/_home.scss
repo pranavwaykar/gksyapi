@@ -168,9 +168,7 @@ body, #root {
       writing-mode: vertical-rl;
       transform: rotate(180deg);
       letter-spacing: 0.2rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #4D88E8;
+      color: rgb(80 125 250 / 90%);
       position: absolute;
       bottom: 100px;
       left: -152px;
@@ -183,9 +181,7 @@ body, #root {
       writing-mode: vertical-rl;
       transform: rotate(180deg);
       letter-spacing: 0.2rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #4D88E8;
+      color: white;
       position: absolute;
       bottom: 143px;
       left: -83px;
@@ -207,12 +203,199 @@ body, #root {
 }
 
 // Add media queries for responsiveness
+@media (max-width: 1900px) {
+  .home-container {
+    // .title-section h1 {
+    //   font-size: 2rem;
+    // }
+
+    .content-overlay {
+      position: absolute;
+      bottom: 5rem;
+      left: 2rem;
+      z-index: 3;
+      width: 80%;
+      
+      .statistics {
+        display: flex;
+        gap: 9rem;
+        margin-bottom: 2rem;
+        
+        .stat-item {
+          h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+          }
+          
+          p {
+            font-size: 1rem;
+            opacity: 0.8;
+          }
+        }
+      }
+      
+      .tagline {
+        h1 {
+          font-size: 3rem;
+          font-weight: 600;
+          line-height: 1.3;
+          margin-bottom: 0.5rem;
+          letter-spacing: 0.1rem;
+        }
+      }
+    }
+    
+    .vertical-text {
+      position: absolute;
+      height: 100%;
+      z-index: 5;
+      
+      &.right {
+        right: 4.5rem;
+      }
+      
+      .line {
+        width: 1px;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.5);
+        position: absolute;
+        top: 0;
+      }
+      
+      .left-text {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        letter-spacing: 0.2rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: white;
+        position: absolute;
+        bottom: 100px;
+        right: 165px; // Position to the left of the line
+        text-transform: uppercase;
+      }
+      
+      .large-text-primary {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        // letter-spacing: 0.2rem;
+        color: rgba(80, 125, 250, 0.9);
+        position: absolute;
+        bottom: 100px;
+        left: -152px;
+        text-transform: uppercase;
+        font-size: 3rem;
+        font-weight: 600;
+      }
+      
+      .large-text-secondary {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        // letter-spacing: 0.2rem;
+        color: white;
+        position: absolute;
+        bottom: 143px;
+        left: -83px;
+        text-transform: uppercase;
+        font-size: 3rem;
+        font-weight: 600;
+      text-decoration: dotted;
+
+      }
+    }
+  }
+
+}
+
+// Add media queries for responsiveness
 @media (max-width: 1200px) {
   .home-container {
     .title-section h1 {
       font-size: 2rem;
     }
+
+    .content-overlay {
+      position: absolute;
+      bottom: 5rem;
+      left: 2rem;
+      z-index: 3;
+      width: 80%;
+      
+      .statistics {
+        display: flex;
+        gap: 4rem;
+        margin-bottom: 2rem;
+        
+        .stat-item {
+          h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+          }
+          
+          p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+          }
+        }
+      }
+      
+      .tagline {
+        h1 {
+          font-size: 2rem;
+          font-weight: 500;
+          line-height: 1.3;
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+    
+    .vertical-text {
+      position: absolute;
+      height: 100%;
+      z-index: 5;
+      
+      &.right {
+        right: 8rem;
+      }
+      
+      .line {
+        width: 1px;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.5);
+        position: absolute;
+        top: 0;
+      }
+      
+      .left-text {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        letter-spacing: 0.2rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: white;
+        position: absolute;
+        bottom: 25%;
+        right: 15px; // Position to the left of the line
+        text-transform: uppercase;
+      }
+      
+      .large-text {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        letter-spacing: 0.4rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #4D88E8;
+        position: absolute;
+        bottom: 25%;
+        left: 15px; // Position to the right of the line
+        text-transform: uppercase;
+      }
+    }
   }
+
 }
 
 @media (max-width: 768px) {

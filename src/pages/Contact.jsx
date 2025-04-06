@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 import '../styles/pages/_contact.scss';
 
 const Contact = () => {
@@ -7,17 +7,17 @@ const Contact = () => {
     <div className="contact-page">
       {/* Hero headline section */}
       <div className="hero-section">
-        <motion.h1 
+        {/* <motion.h1 
           className="hero-headline"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2 }}
-        >
+        > */}
           FIND YOUR DREAM HOME<br />
           WITH THE MOST<br />
           EXCLUSIVE PROPERTIES IN<br />
           ISTANBUL
-        </motion.h1>
+        {/* </motion.h1> */}
       </div>
       
       {/* Contact section */}

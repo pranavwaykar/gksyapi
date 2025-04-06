@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import gsap from "gsap";
 
 // Demo projects data
 const projects = [
@@ -347,14 +347,9 @@ const Projects = () => {
         </div>
 
         <div className="project-viewer">
-          <AnimatePresence mode="wait">
             {filteredProperties.length > 0 ? (
-              <motion.div
+              <div
                 key={currentPropertyIndex}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.3 }}
                 className="card-container"
               >
                 <div className="property-card">
@@ -375,8 +370,6 @@ const Projects = () => {
                     </button>
                   </div>
                   <div className="property-details">
-                    {/* <img src="/gksyyapi-logo.png" alt="GKS YAPI" className="company-logo" /> */}
-
                     <div className="detail-row">
                       <span className="label">Status</span>
                       <span className="value completed">
@@ -439,17 +432,12 @@ const Projects = () => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ) : (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="no-results"
-              >
+              <div className="no-results">
                 No properties match the selected filters
-              </motion.div>
+              </div>
             )}
-          </AnimatePresence>
 
           {filteredProperties.length > 1 && (
             <>
@@ -485,16 +473,18 @@ const Projects = () => {
   }
 
   return (
-    <div className="project-showcase-container"         style={{
-      backgroundImage: `linear-gradient(to right, 
-      rgba(26, 60, 114, 1) 0%, 
-      rgba(26, 60, 114, 0.95) 20%,
-      rgba(26, 60, 114, 0.85) 40%, 
-      rgba(26, 60, 114, 0.6) 60%, 
-      rgba(26, 60, 114, 0.4) 80%, 
-      rgba(26, 60, 114, 0.2) 100%), 
-      url(${projects[currentIndex].image})`,
-    }}>
+    <div className="project-showcase-container" 
+      style={{
+        backgroundImage: `linear-gradient(to right, 
+        rgba(26, 60, 114, 1) 0%, 
+        rgba(26, 60, 114, 0.95) 20%,
+        rgba(26, 60, 114, 0.85) 40%, 
+        rgba(26, 60, 114, 0.6) 60%, 
+        rgba(26, 60, 114, 0.4) 80%, 
+        rgba(26, 60, 114, 0.2) 100%), 
+        url(${projects[currentIndex].image})`,
+      }}
+    >
       
       <div
         className="project-showcase"
@@ -542,57 +532,49 @@ const Projects = () => {
           </button>
         </div>
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentIndex}
-            className="project-content"
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: 1,
-              x: isDragging ? dragX : 0,
-            }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            style={{
-              backgroundImage: `linear-gradient(to right, 
-              rgba(26, 60, 114, 1) 0%, 
-              rgba(26, 60, 114, 0.95) 20%,
-              rgba(26, 60, 114, 0.85) 40%, 
-              rgba(26, 60, 114, 0.6) 60%, 
-              rgba(26, 60, 114, 0.4) 80%, 
-              rgba(26, 60, 114, 0.2) 100%), 
-              url(${projects[currentIndex].image})`,
-            }}
-          >
-            <div className="content-wrapper">
-              <h1 className="project-title">{projects[currentIndex].title}</h1>
-              <p className="project-subtitle">
-                {projects[currentIndex].subtitle}
-              </p>
+        <div
+          key={currentIndex}
+          className="project-content"
+          style={{
+            transform: isDragging ? `translateX(${dragX}px)` : 'none',
+            backgroundImage: `linear-gradient(to right, 
+            rgba(26, 60, 114, 1) 0%, 
+            rgba(26, 60, 114, 0.95) 20%,
+            rgba(26, 60, 114, 0.85) 40%, 
+            rgba(26, 60, 114, 0.6) 60%, 
+            rgba(26, 60, 114, 0.4) 80%, 
+            rgba(26, 60, 114, 0.2) 100%), 
+            url(${projects[currentIndex].image})`,
+          }}
+        >
+          <div className="content-wrapper">
+            <h1 className="project-title">{projects[currentIndex].title}</h1>
+            <p className="project-subtitle">
+              {projects[currentIndex].subtitle}
+            </p>
 
-              <button
-                className="show-more-button"
-                onClick={handleViewAllProjects}
-              >
-                <span>
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 22 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                  </svg>
-                  Show more
-                </span>
-              </button>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+            <button
+              className="show-more-button"
+              onClick={handleViewAllProjects}
+            >
+              <span>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 22 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+                Show more
+              </span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

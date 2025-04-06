@@ -138,23 +138,44 @@ body, #root {
       // }
     }
     
-    .solutions-container {
-      position: absolute;
-      bottom: 200px;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      z-index: 10;
+    // .solutions-container {
+    //   position: absolute;
+    //   bottom: 200px;
+    //   left: 0;
+    //   width: 100%;
+    //   height: 100%;
+    //   display: flex;
+    //   align-items: center;
+    //   z-index: 10;
       
-      .solutions-white-box {
-        background-color: white;
+      .solutions-white-box-wrapper {
+        // background-color: white;
         width: 60%;
         max-width: 800px;
         padding: 2.5rem 3rem;
         margin-left: 5%;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        // box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+        .solutions-white-box-top{
+          position: absolute;
+          top: 0px;
+          left: 30px;
+          background-color: white;
+          width: 80%;
+          height: 50%;
+          padding: 2.5rem 3rem;
+          margin-left: 5%;
+      }
+        .solutions-white-box-bottom{
+          position: absolute;
+          top: 190px;
+          left: 30px;
+          background-color: white;
+          width: 80%;
+          height: 50%;
+          padding: 2.5rem 3rem;
+          margin-left: 5%;
+      }
         
         .solutions-tag {
           text-transform: uppercase;
@@ -201,7 +222,7 @@ body, #root {
           }
         }
       }
-    }
+    // }
   }
   
   // Vertical "THE PROJECTS" text with "Bespoke in Every Sense" on the left

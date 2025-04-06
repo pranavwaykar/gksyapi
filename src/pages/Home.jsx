@@ -13,12 +13,22 @@ const Home = () => {
   // Create refs for elements we want to animate
   const statisticsRef = useRef(null);
   const solutionsBoxRef = useRef(null);
+  const solutionsWhiteBoxTopRef = useRef(null); // Top half of the box
+  const solutionsWhiteBoxBottomRef = useRef(null); // Bottom half of the box
+  const solutionsContentRef = useRef(null);
   const containerRef = useRef(null);
 
   useEffect(() => {
-    // Set up initial state - statistics visible, solutions box off-screen
+    // Set up initial state
     gsap.set(statisticsRef.current, { x: 0, opacity: 1 });
-    gsap.set(solutionsBoxRef.current, { x: "100%", opacity: 0 });
+    gsap.set(solutionsBoxRef.current, { opacity: 0 });
+    
+    // Set initial positions for box halves
+    gsap.set(solutionsWhiteBoxTopRef.current, { y: "-100%", opacity: 0 }); // Top half starts above
+    gsap.set(solutionsWhiteBoxBottomRef.current, { y: "100%", opacity: 0 }); // Bottom half starts below
+    
+    // Content starts from right and is invisible
+    gsap.set(solutionsContentRef.current, { x: "100%", opacity: 0 });
 
     // Create a scroll event listener
     const handleScroll = (e) => {
@@ -26,7 +36,7 @@ const Home = () => {
       e.preventDefault();
 
       if (e.deltaY > 0) {
-        // Scrolling down - slide statistics out, slide solutions box in
+        // Scrolling down
         gsap.to(statisticsRef.current, {
           x: "-100%",
           opacity: 0,
@@ -35,25 +45,75 @@ const Home = () => {
         });
 
         gsap.to(solutionsBoxRef.current, {
-          x: "0%",
-          opacity: 1,
-          duration: 0.8,
-          ease: "power2.inOut",
-        });
-      } else if (e.deltaY < 0) {
-        // Scrolling up - slide statistics in, slide solutions box out
-        gsap.to(statisticsRef.current, {
-          x: "0%",
           opacity: 1,
           duration: 0.8,
           ease: "power2.inOut",
         });
 
-        gsap.to(solutionsBoxRef.current, {
-          x: "100%",
-          opacity: 0,
+        // Animate top half down
+        gsap.to(solutionsWhiteBoxTopRef.current, {
+          y: "0%",
+          opacity: 1,
           duration: 0.8,
           ease: "power2.inOut",
+        });
+
+        // Animate bottom half up
+        gsap.to(solutionsWhiteBoxBottomRef.current, {
+          y: "0%",
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.inOut",
+          onComplete: () => {
+            // Only animate content after box halves have merged
+            gsap.to(solutionsContentRef.current, {
+              x: "0%",
+              opacity: 1,
+              duration: 0.6,
+              ease: "power2.inOut",
+            });
+          }
+        });
+      } else if (e.deltaY < 0) {
+        // Scrolling up - reverse the sequence
+        
+        // First hide the content
+        gsap.to(solutionsContentRef.current, {
+          x: "100%",
+          opacity: 0,
+          duration: 0.6,
+          ease: "power2.inOut",
+          onComplete: () => {
+            // Then split the box halves
+            gsap.to(solutionsWhiteBoxTopRef.current, {
+              y: "-100%",
+              opacity: 0,
+              duration: 0.8,
+              ease: "power2.inOut",
+            });
+            
+            gsap.to(solutionsWhiteBoxBottomRef.current, {
+              y: "100%",
+              opacity: 0,
+              duration: 0.8,
+              ease: "power2.inOut",
+            });
+            
+            // And fade out the container
+            gsap.to(solutionsBoxRef.current, {
+              opacity: 0,
+              duration: 0.8,
+              ease: "power2.inOut",
+            });
+            
+            // Show statistics again
+            gsap.to(statisticsRef.current, {
+              x: "0%",
+              opacity: 1,
+              duration: 0.8,
+              ease: "power2.inOut",
+            });
+          }
         });
       }
     };
@@ -111,21 +171,30 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Solutions Box - initially off-screen */}
+        {/* Solutions Box */}
         <div className="solutions-container" ref={solutionsBoxRef}>
-          <div className="solutions-white-box">
-            <div className="solutions-tag">SOLUTIONS</div>
-            <h1 className="solutions-title">
-              Building the Future of Türkiye,<br />One Landmark at a Time
-            </h1>
-            <p className="solutions-description">
-              At <strong>GKS Yapı</strong>, we don't just build structures—we shape modern, sustainable, and 
-              high-quality living spaces that redefine city life. As a trusted leader in 
-              İstanbul's construction and real estate sector, we are committed to innovation, 
-              excellence, and long-term value for homeowners and investors alike.
-            </p>
-            <div className="solutions-links">
-              <Link to="/projects/kentsel">Kentsel</Link> | <Link to="/projects/ozel-projeler">Özel Projeler</Link> | <Link to="/projects/konut-uretimi">Konut üretimi</Link> | <Link to="/projects/satisi-diger-projeler">Satışı Diğer Projeler & Şehir Estetiği</Link>
+          <div className="solutions-white-box-wrapper">
+            {/* Top half of the white box */}
+            <div className="solutions-white-box-top" ref={solutionsWhiteBoxTopRef}></div>
+            
+            {/* Bottom half of the white box */}
+            <div className="solutions-white-box-bottom" ref={solutionsWhiteBoxBottomRef}></div>
+            
+            {/* Content inside the box - positioned absolutely */}
+            <div className="solutions-content" ref={solutionsContentRef}>
+              <div className="solutions-tag">SOLUTIONS</div>
+              <h1 className="solutions-title">
+                Building the Future of Türkiye,<br />One Landmark at a Time
+              </h1>
+              <p className="solutions-description">
+                At <strong>GKS Yapı</strong>, we don't just build structures—we shape modern, sustainable, and 
+                high-quality living spaces that redefine city life. As a trusted leader in 
+                İstanbul's construction and real estate sector, we are committed to innovation, 
+                excellence, and long-term value for homeowners and investors alike.
+              </p>
+              <div className="solutions-links">
+                <Link to="/projects/kentsel">Kentsel</Link> | <Link to="/projects/ozel-projeler">Özel Projeler</Link> | <Link to="/projects/konut-uretimi">Konut üretimi</Link> | <Link to="/projects/satisi-diger-projeler">Satışı Diğer Projeler & Şehir Estetiği</Link>
+              </div>
             </div>
           </div>
         </div>

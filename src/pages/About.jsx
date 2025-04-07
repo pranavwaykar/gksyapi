@@ -2,14 +2,21 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations';
 import '../styles/pages/_about.scss';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+  
   const [activeIndex, setActiveIndex] = useState(0);
   const timelineItemsRef = useRef([]);
   const timelineContainerRef = useRef(null);
-  
-  const { language } = useLanguage();
-  const t = translations[language];
+  const timelineItemsContainerRef = useRef(null);
+  const scrollTween = useRef(null);
   
   const timelineData = t.aboutPage.timeline.map((item, index) => ({
     id: index + 1,
@@ -23,61 +30,205 @@ const About = () => {
     timelineItemsRef.current = timelineItemsRef.current.slice(0, timelineData.length);
   }, [timelineData]);
   
-  // Detect which item is most visible during scroll
+  // Initialize GSAP animations
+  useEffect(() => {
+    // Set up timeline item animations
+    timelineItemsRef.current.forEach((item, index) => {
+      if (!item) return;
+      
+      // Set initial opacity and scale for non-active items
+      if (index !== activeIndex) {
+        gsap.set(item, { 
+          opacity: 0.7,
+          scale: 0.95
+        });
+      }
+    });
+    
+    return () => {
+      // Clean up any lingering animations
+      if (scrollTween.current) {
+        scrollTween.current.kill();
+      }
+    };
+  }, []);
+  
+  // Handle scroll detection with debounce
   useEffect(() => {
     if (!timelineContainerRef.current) return;
     
     const timelineItems = timelineContainerRef.current.querySelector('.timeline-items');
+    timelineItemsContainerRef.current = timelineItems;
+    
+    if (!timelineItems) return;
+    
+    let scrollTimeout;
+    let isScrolling = false;
     
     const handleScroll = () => {
-      if (!timelineItemsRef.current.length) return;
+      if (isScrolling) return;
       
-      const containerRect = timelineItems.getBoundingClientRect();
-      const containerCenter = containerRect.left + containerRect.width / 2;
-      
-      // Find which timeline item is closest to the center of the container
-      let closestIndex = 0;
-      let closestDistance = Infinity;
-      
-      timelineItemsRef.current.forEach((item, index) => {
-        if (!item) return;
-        
-        const itemRect = item.getBoundingClientRect();
-        const itemCenter = itemRect.left + itemRect.width / 2;
-        const distance = Math.abs(containerCenter - itemCenter);
-        
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestIndex = index;
-        }
-      });
-      
-      if (closestIndex !== activeIndex) {
-        setActiveIndex(closestIndex);
+      // Clear the timeout if it's set
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
       }
+      
+      // Set a timeout to run after scrolling ends
+      scrollTimeout = setTimeout(() => {
+        if (!timelineItemsRef.current.length) return;
+        
+        const containerRect = timelineItems.getBoundingClientRect();
+        const containerCenter = containerRect.left + containerRect.width / 2;
+        
+        // Check if we're at the beginning of the scroll area
+        if (timelineItems.scrollLeft < 50) {
+          if (activeIndex !== 0) {
+            setActiveIndex(0);
+          }
+          return;
+        }
+        
+        // Check if we're at the end of the scroll area
+        const maxScroll = timelineItems.scrollWidth - timelineItems.clientWidth;
+        if (maxScroll - timelineItems.scrollLeft < 50) {
+          const lastIndex = timelineItemsRef.current.length - 1;
+          if (activeIndex !== lastIndex) {
+            setActiveIndex(lastIndex);
+          }
+          return;
+        }
+        
+        // Regular case - find which timeline item is closest to the center
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+        
+        timelineItemsRef.current.forEach((item, index) => {
+          if (!item) return;
+          
+          const itemRect = item.getBoundingClientRect();
+          const itemCenter = itemRect.left + itemRect.width / 2;
+          const distance = Math.abs(containerCenter - itemCenter);
+          
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
+          }
+        });
+        
+        if (closestIndex !== activeIndex) {
+          setActiveIndex(closestIndex);
+        }
+      }, 100);
     };
     
     timelineItems.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial check
     
-    return () => timelineItems.removeEventListener('scroll', handleScroll);
+    return () => {
+      if (timelineItems) {
+        timelineItems.removeEventListener('scroll', handleScroll);
+        clearTimeout(scrollTimeout);
+      }
+    };
   }, [activeIndex]);
   
-  // Allow navigation with hover and click
-  const handleMouseEnter = (index) => {
-    setActiveIndex(index);
-  };
-  
-  // Scroll active item into view when it changes
+  // Animate active item changes
   useEffect(() => {
-    if (timelineItemsRef.current[activeIndex]) {
-      timelineItemsRef.current[activeIndex].scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center'
+    // Animate all items to update their appearance
+    timelineItemsRef.current.forEach((item, index) => {
+      if (!item) return;
+      
+      if (index === activeIndex) {
+        // Animate active item
+        gsap.to(item, {
+          duration: 0.5,
+          opacity: 1,
+          scale: 1,
+          ease: "power2.out"
+        });
+        
+        // Animate the dot
+        const dot = item.querySelector('.timeline-dot');
+        if (dot) {
+          gsap.to(dot, {
+            duration: 0.5,
+            scale: 1.5,
+            backgroundColor: 'var(--primary-color)',
+            ease: "power2.out"
+          });
+        }
+        
+        // Animate content
+        const content = item.querySelector('.timeline-content');
+        if (content) {
+          gsap.to(content, {
+            duration: 0.5,
+            boxShadow: '0 0 15px rgba(0, 0, 0, 0.1)',
+            borderColor: 'var(--primary-color)',
+            ease: "power2.out"
+          });
+        }
+      } else {
+        // Animate non-active items
+        gsap.to(item, {
+          duration: 0.5,
+          opacity: 0.7,
+          scale: 0.95,
+          ease: "power2.out"
+        });
+        
+        // Reset the dot
+        const dot = item.querySelector('.timeline-dot');
+        if (dot) {
+          gsap.to(dot, {
+            duration: 0.5,
+            scale: 1,
+            backgroundColor: 'var(--background-color)',
+            ease: "power2.out"
+          });
+        }
+        
+        // Reset content
+        const content = item.querySelector('.timeline-content');
+        if (content) {
+          gsap.to(content, {
+            duration: 0.5,
+            boxShadow: '0 0 5px rgba(0, 0, 0, 0.05)',
+            borderColor: 'var(--border-color)',
+            ease: "power2.out"
+          });
+        }
+      }
+    });
+    
+    // Scroll to the active item using GSAP
+    if (timelineItemsRef.current[activeIndex] && timelineItemsContainerRef.current) {
+      const container = timelineItemsContainerRef.current;
+      const item = timelineItemsRef.current[activeIndex];
+      
+      // Calculate where to scroll
+      const itemRect = item.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      const targetScroll = container.scrollLeft + (itemRect.left - containerRect.left) - (containerRect.width / 2) + (itemRect.width / 2);
+      
+      // Kill any existing scroll animation
+      if (scrollTween.current) {
+        scrollTween.current.kill();
+      }
+      
+      // Create new scroll animation
+      scrollTween.current = gsap.to(container, {
+        scrollLeft: targetScroll,
+        duration: 1,
+        ease: "power3.out"
       });
     }
   }, [activeIndex]);
+  
+  // Handle hover and click
+  const handleMouseEnter = (index) => {
+    setActiveIndex(index);
+  };
   
   return (
     <div className="about-page">

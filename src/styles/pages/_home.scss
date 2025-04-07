@@ -201,6 +201,16 @@ body,
         }
       }
     }
+
+    .about-container{
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 100px;
+      z-index: 3;
+      background-color: red;
+    }
   }
 
   // Vertical "THE PROJECTS" text with "Bespoke in Every Sense" on the left

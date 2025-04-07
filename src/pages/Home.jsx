@@ -25,11 +25,16 @@ const Home = () => {
   const aboutWhiteBoxBottomRef = useRef(null);
   const aboutContentRef = useRef(null);
   
+  // Create refs for each stat item
+  const statItemsRef = useRef([]);
+  const taglineRef = useRef([]);
+  
   const { language } = useLanguage();
   const t = translations[language];
 
   useEffect(() => {
-    gsap.set(statisticsRef.current, { x: 0, opacity: 1 });
+    // Set initial states
+    gsap.set(statisticsRef.current, { opacity: 1 });
     gsap.set(solutionsBoxRef.current, { opacity: 0 });
     
     gsap.set(solutionsWhiteBoxTopRef.current, { y: "-100%", opacity: 0 }); 
@@ -37,10 +42,35 @@ const Home = () => {
     
     gsap.set(solutionsContentRef.current, { x: "100%", opacity: 0 });
 
+    // Position aboutBox at the bottom
     gsap.set(aboutBoxRef.current, { opacity: 0, y: "100%", x: 0 });
     gsap.set(aboutWhiteBoxTopRef.current, { y: "0%", opacity: 1 });
     gsap.set(aboutWhiteBoxBottomRef.current, { y: "0%", opacity: 1 });
     gsap.set(aboutContentRef.current, { x: "0%", opacity: 1 });
+    
+    // Set initial state for statistics items - hide them initially
+    gsap.set(statItemsRef.current, { y: 50, opacity: 0 });
+    gsap.set(taglineRef.current, { y: 30, opacity: 0 });
+
+    // Animate statistics items in with a staggered effect
+    gsap.to(statItemsRef.current, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.2,
+      ease: "power3.out",
+      delay: 0.5
+    });
+
+    // Animate taglines after statistics
+    gsap.to(taglineRef.current, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.3,
+      ease: "power2.out",
+      delay: 1.5
+    });
 
     let currentView = 1;
     let isAnimating = false;
@@ -152,6 +182,27 @@ const Home = () => {
                 duration: 0.8,
                 ease: "power2.inOut",
                 onComplete: () => {
+                  // Reset and replay statistics animations when returning
+                  // gsap.set(statItemsRef.current, { y: 50, opacity: 0 });
+                  // gsap.set(taglineRef.current, { y: 30, opacity: 0 });
+                  
+                  // gsap.to(statItemsRef.current, {
+                  //   y: 0,
+                  //   opacity: 1,
+                  //   duration: 0.8,
+                  //   stagger: 0.2,
+                  //   ease: "power3.out"
+                  // });
+                  
+                  // gsap.to(taglineRef.current, {
+                  //   y: 0,
+                  //   opacity: 1,
+                  //   duration: 0.8,
+                  //   stagger: 0.3,
+                  //   ease: "power2.out",
+                  //   delay: 0.8
+                  // });
+                  
                   currentView = 1;
                   isAnimating = false;
                 }
@@ -229,27 +280,28 @@ const Home = () => {
       <div className="content-overlay">
         <div className="statistics-container" ref={statisticsRef}>
           <div className="statistics">
-            <div className="stat-item">
+            {/* Use refs to animate each statistic item */}
+            <div className="stat-item" ref={el => statItemsRef.current[0] = el}>
               <h2>1994</h2>
               <p>{t.homePage.establishedIn}</p>
             </div>
-            <div className="stat-item">
+            <div className="stat-item" ref={el => statItemsRef.current[1] = el}>
               <h2>25+</h2>
               <p>{t.homePage.yearsInConstruction}</p>
             </div>
-            <div className="stat-item">
+            <div className="stat-item" ref={el => statItemsRef.current[2] = el}>
               <h2>100+</h2>
               <p>{t.homePage.completedProjects}</p>
             </div>
-            <div className="stat-item">
+            <div className="stat-item" ref={el => statItemsRef.current[3] = el}>
               <h2>20+</h2>
               <p>{t.homePage.ongoingProjects}</p>
             </div>
           </div>
 
           <div className="tagline">
-            <h1>{t.homePage.tagline1}</h1>
-            <h1>{t.homePage.tagline2}</h1>
+            <h1 ref={el => taglineRef.current[0] = el}>{t.homePage.tagline1}</h1>
+            <h1 ref={el => taglineRef.current[1] = el}>{t.homePage.tagline2}</h1>
           </div>
         </div>
 
@@ -286,30 +338,15 @@ const Home = () => {
             <div className="about-content" ref={aboutContentRef}>
               <div className="about-tag">KENTSEL</div>
               <h1 className="about-title">
-              Confidence in Housing: 
-              Secure, Stylish ,& Smart Investments
+                Confidence in Housing: Secure, Stylish, & Smart Investments
               </h1>
               <p className="about-description">
-              We deliver modern, high-quality, and aesthetically refined homes that are more than just living spaces—they are future-proof investments. Our expertise in housing sales and production ensures that every residence meets the evolving needs of urban life while providing unmatched comfort and security.
+                We deliver modern, high-quality, and aesthetically refined homes that are 
+                more than just living spaces—they are future-proof investments. Our expertise 
+                in housing sales and production ensures that every residence meets the 
+                evolving needs of urban life while providing unmatched comfort and security.
               </p>
-              {/* <div className="expertise-areas">
-                <div className="expertise-area">
-                  <span className="area-number">01</span>
-                  <h3>Sustainable Building</h3>
-                  <p>Eco-friendly solutions for a better tomorrow</p>
-                </div>
-                <div className="expertise-area">
-                  <span className="area-number">02</span>
-                  <h3>Urban Development</h3>
-                  <p>Transforming cities with thoughtful design</p>
-                </div>
-                <div className="expertise-area">
-                  <span className="area-number">03</span>
-                  <h3>Architectural Excellence</h3>
-                  <p>Blending aesthetics with functionality</p>
-                </div>
-              </div> */}
-              <div className="expertise-cta">
+              <div className="about-cta">
                 <Link to="/contact" className="cta-button">Your dream home is ready—invest in the future today!</Link>
               </div>
             </div>

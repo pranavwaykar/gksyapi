@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations';
 
-// Demo projects data
+// Demo projects data - keeping as a fallback
 const projects = [
   {
     id: 1,
@@ -70,7 +70,7 @@ const projects = [
   },
 ];
 
-// Detailed project data for filters
+// Detailed project data for filters - keeping as a fallback
 const propertyData = [
   {
     id: 1,
@@ -217,16 +217,12 @@ const FilterDropdown = ({ label, options, value, onChange }) => {
   );
 };
 
-
 const Projects = () => {
-  const [currentIndex, setCurrentIndex] = useState(0); // Start with the 1st item for better demo
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState(0);
   const [dragX, setDragX] = useState(0);
   const projectRef = useRef(null);
-  // Get current language
-  const { language } = useLanguage();
-  const t = translations[language];
 
   // State for filtered view
   const [showAllProjects, setShowAllProjects] = useState(false);
@@ -237,14 +233,22 @@ const Projects = () => {
     type: "",
   });
 
-  // Get unique options for each filter
+  // Get current language
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  // Use translated project data
+  const translatedProjects = t.projects.data.projects;
+  const translatedPropertyData = t.projects.data.propertyData;
+
+  // Get unique options for each filter from translated data
   const filterOptions = {
-    status: [...new Set(propertyData.map((p) => p.status))],
-    location: [...new Set(propertyData.map((p) => p.location))],
-    type: [...new Set(propertyData.map((p) => p.type))],
+    status: [...new Set(translatedPropertyData.map((p) => p.status))],
+    location: [...new Set(translatedPropertyData.map((p) => p.location))],
+    type: [...new Set(translatedPropertyData.map((p) => p.type))],
   };
 
-  const filteredProperties = propertyData.filter((property) => {
+  const filteredProperties = translatedPropertyData.filter((property) => {
     return (
       (!filters.status || property.status === filters.status) &&
       (!filters.location || property.location === filters.location) &&
@@ -253,12 +257,12 @@ const Projects = () => {
   });
 
   const nextProject = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % translatedProjects.length);
   };
 
   const prevProject = () => {
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + projects.length) % projects.length
+      (prevIndex) => (prevIndex - 1 + translatedProjects.length) % translatedProjects.length
     );
   };
 
@@ -316,7 +320,9 @@ const Projects = () => {
         className="project-list-page"
         style={{
           backgroundImage: filteredProperties.length > 0 
-            ? `linear-gradient(rgba(26, 60, 114, 0.85), rgba(12, 45, 98, 0.9)), url(${filteredProperties[currentPropertyIndex].image})`
+            ? `linear-gradient(rgba(26, 60, 114, 0.85), rgba(12, 45, 98, 0.9)), 
+               url(${filteredProperties[currentPropertyIndex].image || 
+               propertyData.find(p => p.id === filteredProperties[currentPropertyIndex].id)?.image})`
             : 'linear-gradient(120deg, #1a3c72 0%, #0c2d62 100%)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
@@ -353,97 +359,98 @@ const Projects = () => {
         </div>
 
         <div className="project-viewer">
-            {filteredProperties.length > 0 ? (
-              <div
-                key={currentPropertyIndex}
-                className="card-container"
-              >
-                <div className="property-card">
-                  <div className="property-image">
-                    <img
-                      src={filteredProperties[currentPropertyIndex].image}
-                      alt={filteredProperties[currentPropertyIndex].title}
-                    />
-                    <button className="fullscreen-btn">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                      </svg>
-                    </button>
+          {filteredProperties.length > 0 ? (
+            <div
+              key={currentPropertyIndex}
+              className="card-container"
+            >
+              <div className="property-card">
+                <div className="property-image">
+                  <img
+                    src={filteredProperties[currentPropertyIndex].image || 
+                         propertyData.find(p => p.id === filteredProperties[currentPropertyIndex].id)?.image}
+                    alt={filteredProperties[currentPropertyIndex].title}
+                  />
+                  <button className="fullscreen-btn">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="property-details">
+                  <div className="detail-row">
+                    <span className="label">{t.projects.propertyCard.status}</span>
+                    <span className="value completed">
+                      {filteredProperties[currentPropertyIndex].status}
+                    </span>
                   </div>
-                  <div className="property-details">
-                    <div className="detail-row">
-                      <span className="label">{t.projects.propertyCard.status || "Status"}</span>
-                      <span className="value completed">
-                        {filteredProperties[currentPropertyIndex].status}
-                      </span>
-                    </div>
 
-                    <div className="detail-row">
-                      <span className="label">
-                        {t.projects.propertyCard.startEndDate || "Project Start Date/ End Date"}
-                      </span>
-                      <span className="value">
-                        {filteredProperties[currentPropertyIndex].startDate}-
-                        {filteredProperties[currentPropertyIndex].endDate}
-                      </span>
-                    </div>
+                  <div className="detail-row">
+                    <span className="label">
+                      {t.projects.propertyCard.startEndDate || "Project Start Date/ End Date"}
+                    </span>
+                    <span className="value">
+                      {filteredProperties[currentPropertyIndex].startDate}-
+                      {filteredProperties[currentPropertyIndex].endDate}
+                    </span>
+                  </div>
 
-                    <div className="detail-row">
-                      <span className="label">{t.projects.propertyCard.price || "Price"}</span>
-                      <span className="value">
-                        €{filteredProperties[currentPropertyIndex].price}
-                      </span>
-                    </div>
+                  <div className="detail-row">
+                    <span className="label">{t.projects.propertyCard.price || "Price"}</span>
+                    <span className="value">
+                      €{filteredProperties[currentPropertyIndex].price}
+                    </span>
+                  </div>
 
-                    <div className="detail-row">
-                      <span className="label">{t.projects.propertyCard.amenities || "Amenities"}</span>
-                      <span className="value">
-                        {filteredProperties[
-                          currentPropertyIndex
-                        ].amenities.join(" | ")}
-                      </span>
-                    </div>
+                  <div className="detail-row">
+                    <span className="label">{t.projects.propertyCard.amenities || "Amenities"}</span>
+                    <span className="value">
+                      {filteredProperties[
+                        currentPropertyIndex
+                      ].amenities.join(" | ")}
+                    </span>
+                  </div>
 
-                    <div className="detail-row">
-                      <span className="label">{t.projects.propertyCard.details || "Details"}</span>
-                      <div className="value">
-                        <p>
-                          {t.projects.propertyCard.floorsLabel || "No of Floors:"} {" "}
-                          {
-                            filteredProperties[currentPropertyIndex].details
-                              .floors
-                          }
-                        </p>
-                        {filteredProperties[currentPropertyIndex].details
-                          .bhkTypes && (
-                          <>
-                            <p>{t.projects.propertyCard.twoBHKFlats || "No of 2BHK Flats"}</p>
-                            <p>{t.projects.propertyCard.threeBHKFlats || "No of 3 BHK Flats"}</p>
-                          </>
-                        )}
-                      </div>
+                  <div className="detail-row">
+                    <span className="label">{t.projects.propertyCard.details || "Details"}</span>
+                    <div className="value">
+                      <p>
+                        {t.projects.propertyCard.floorsLabel || "No of Floors:"} {" "}
+                        {
+                          filteredProperties[currentPropertyIndex].details
+                            .floors
+                        }
+                      </p>
+                      {filteredProperties[currentPropertyIndex].details
+                        .bhkTypes && (
+                        <>
+                          <p>{t.projects.propertyCard.twoBHKFlats || "No of 2BHK Flats"}</p>
+                          <p>{t.projects.propertyCard.threeBHKFlats || "No of 3 BHK Flats"}</p>
+                        </>
+                      )}
                     </div>
+                  </div>
 
-                    <div className="action-buttons">
-                      <button className="primary-btn">{t.projects.buttons.watchVideo || "Watch Video"}</button>
-                      <div className="secondary-buttons">
-                        <button className="secondary-btn">{t.projects.buttons.viewCatalog || "View Catalog"}</button>
-                        <button className="secondary-btn">{t.projects.buttons.enquireNow || "Enquire Now"}</button>
-                      </div>
+                  <div className="action-buttons">
+                    <button className="primary-btn">{t.projects.buttons.watchVideo || "Watch Video"}</button>
+                    <div className="secondary-buttons">
+                      <button className="secondary-btn">{t.projects.buttons.viewCatalog || "View Catalog"}</button>
+                      <button className="secondary-btn">{t.projects.buttons.enquireNow || "Enquire Now"}</button>
                     </div>
                   </div>
                 </div>
               </div>
-            ) : (
-              <div className="no-results">
-                {t.projects.messages.noResults || "No properties match the selected filters"}
-              </div>
-            )}
+            </div>
+          ) : (
+            <div className="no-results">
+              {t.projects.messages.noResults || "No properties match the selected filters"}
+            </div>
+          )}
 
           {filteredProperties.length > 1 && (
             <>
@@ -488,7 +495,7 @@ const Projects = () => {
         rgba(26, 60, 114, 0.6) 60%, 
         rgba(26, 60, 114, 0.4) 80%, 
         rgba(26, 60, 114, 0.2) 100%), 
-        url(${projects[currentIndex].image})`,
+        url(${translatedProjects[currentIndex].image || projects[currentIndex].image})`,
       }}
     >
       
@@ -504,7 +511,7 @@ const Projects = () => {
         onMouseLeave={handleDragEnd}
       >
         <div className="project-counter">
-          {currentIndex + 1}/{projects.length} {projects[currentIndex].type}
+          {currentIndex + 1}/{translatedProjects.length} {translatedProjects[currentIndex].type}
         </div>
 
         <div className="navigation-arrows">
@@ -550,13 +557,13 @@ const Projects = () => {
             rgba(26, 60, 114, 0.6) 60%, 
             rgba(26, 60, 114, 0.4) 80%, 
             rgba(26, 60, 114, 0.2) 100%), 
-            url(${projects[currentIndex].image})`,
+            url(${translatedProjects[currentIndex].image || projects[currentIndex].image})`,
           }}
         >
           <div className="content-wrapper">
-            <h1 className="project-title">{projects[currentIndex].title}</h1>
+            <h1 className="project-title">{translatedProjects[currentIndex].title}</h1>
             <p className="project-subtitle">
-              {projects[currentIndex].subtitle}
+              {translatedProjects[currentIndex].subtitle}
             </p>
 
             <button

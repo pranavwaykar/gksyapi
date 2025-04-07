@@ -7,18 +7,24 @@ import { translations } from '../translations';
 const Careers = () => {
   const { language } = useLanguage();
   const t = translations[language];
-
-  // Use translated job listings
-  const jobListings = t.careers.jobListings;
   
-  // Define job images separately so they remain consistent across languages
+  // Get job listings text content from translations
+  const jobListingsData = t.careersPage.jobListings;
+  
+  // Keep image URLs in the component
   const jobImages = {
     1: "https://plus.unsplash.com/premium_photo-1682126848758-ac1c68fa0059?q=80&w=2083&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     2: "https://plus.unsplash.com/premium_photo-1663047346199-9516fe33fce1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     3: "https://plus.unsplash.com/premium_photo-1723914155810-96d1edbaf4d7?q=80&w=2128&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     4: "https://plus.unsplash.com/premium_photo-1661768654229-5a2eeeca1857?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    5: "https://plus.unsplash.com/premium_photo-1723629708893-ba90c0cb24e5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    5: "https://plus.unsplash.com/premium_photo-1723629708893-ba90c0cb24e5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   };
+  
+  // Combine translation data with images
+  const jobListings = jobListingsData.map(job => ({
+    ...job,
+    image: jobImages[job.id]
+  }));
 
   const sliderRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -80,11 +86,7 @@ const Careers = () => {
             <div className="job-card" key={job.id}>
               <div className="job-content">
                 <div className="job-image-container">
-                  <img 
-                    src={jobImages[job.id]} 
-                    alt={job.title} 
-                    className="job-image" 
-                  />
+                  <img src={job.image} alt={job.title} className="job-image" />
                   <div className="job-overlay">
                     <h3>{job.title}</h3>
                     <p>{job.description}</p>
@@ -108,7 +110,7 @@ const Careers = () => {
                       </svg>
                     </div>
                     <Link to={job.link}>
-                      <button className="apply-btn">{t.careers.applyNow}</button>
+                      <button className="apply-btn">APPLY NOW</button>
                     </Link>
                   </div>
                 </div>

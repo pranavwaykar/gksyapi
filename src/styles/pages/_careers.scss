@@ -246,6 +246,27 @@
 
 
 // Responsive styles
+@media (max-width: 1920px) {
+  .careers-container {
+    .vertical-text {
+      .large-text-primary {
+        font-size: 2.25rem;
+        bottom: 100px;
+        left: -162px;
+      }
+      
+      .large-text-secondary {
+        font-size: 2.25rem;
+        bottom: 178px;
+        left: -124px;
+
+      }
+
+    }
+  }
+} 
+
+// Responsive styles
 @media (max-width: 768px) {
   .careers-content {
     padding: 2rem;

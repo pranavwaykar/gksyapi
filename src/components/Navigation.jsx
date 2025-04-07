@@ -63,6 +63,11 @@ const Navigation = () => {
 
   const t = translations[language]; // Get current language translations
 
+  // Toggle language handler
+  const handleLanguageToggle = () => {
+    setLanguage(language === languages.EN ? languages.TR : languages.EN);
+  };
+
   return (
     <nav className="nav">
       {/* Logo with ref */}
@@ -99,19 +104,16 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li className="nav-item lang-selector" ref={el => navItemsRef.current[5] = el}>
-          <button 
-            className={language === languages.EN ? "active" : ""} 
-            onClick={() => setLanguage(languages.EN)}
-          >
-            EN
-          </button>
-          <div className="lang-selector-divider"></div>
-          <button 
-            className={language === languages.TR ? "active" : ""} 
-            onClick={() => setLanguage(languages.TR)}
-          >
-            TR
-          </button>
+          <span className={language === languages.EN ? "active" : ""}>EN</span>
+          <label className="switch">
+            <input 
+              type="checkbox" 
+              checked={language === languages.TR}
+              onChange={handleLanguageToggle}
+            />
+            <span className="slider round"></span>
+          </label>
+          <span className={language === languages.TR ? "active" : ""}>TR</span>
         </li>
       </ul>
     </nav>

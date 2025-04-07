@@ -115,30 +115,7 @@
         object-fit: cover;
       }
 
-      .fullscreen-btn {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: rgba(0, 0, 0, 0.5);
-        border: none;
-        width: 40px;
-        height: 40px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        color: white;
 
-        svg {
-          width: 20px;
-          height: 20px;
-        }
-
-        &:hover {
-          background: rgba(0, 0, 0, 0.7);
-        }
-      }
     }
 
     .property-details {

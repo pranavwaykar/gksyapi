@@ -429,30 +429,6 @@
         object-fit: cover;
       }
 
-      .fullscreen-btn {
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        background: rgba(255, 255, 255, 0.7);
-        border: none;
-        width: 40px;
-        height: 40px;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        color: #1A3C72;
-
-        svg {
-          width: 20px;
-          height: 20px;
-        }
-
-        &:hover {
-          background: rgba(255, 255, 255, 0.9);
-        }
-      }
     }
 
     .property-details {

@@ -212,16 +212,16 @@
 
 // Styles for property card (when viewing all projects)
 .project-list-page {
-  width: 100%;
-  min-height: 100vh;
-  padding: 2rem;
-  color: white;
-  overflow: hidden;
-  position: relative;
-  // top: 64px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  // width: 100%;
+  // min-height: 100vh;
+  // padding: 2rem;
+  // color: white;
+  // overflow: hidden;
+  // position: relative;
+  // // top: 64px;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
   
   // Make sure the background doesn't affect content visibility
   &::before {

@@ -540,14 +540,9 @@ const Projects = () => {
           className="project-content"
           style={{
             transform: isDragging ? `translateX(${dragX}px)` : 'none',
-            backgroundImage: `linear-gradient(to right, 
-            rgba(26, 60, 114, 1) 0%, 
-            rgba(26, 60, 114, 0.95) 20%,
-            rgba(26, 60, 114, 0.85) 40%, 
-            rgba(26, 60, 114, 0.6) 60%, 
-            rgba(26, 60, 114, 0.4) 80%, 
-            rgba(26, 60, 114, 0.2) 100%), 
-            url(${translatedProjects[currentIndex].image || projects[currentIndex].image})`,
+            backgroundImage: `url(${translatedProjects[currentIndex].image || projects[currentIndex].image})`,
+            backgroundBlendMode: 'overlay',
+            backgroundColor: 'rgba(26, 60, 114, 0.2)',
           }}
         >
           <div className="content-wrapper">

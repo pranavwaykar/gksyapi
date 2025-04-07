@@ -26,7 +26,179 @@
     "satisiDigerProjeler": "Satışı Diğer Projeler & Şehir Estetiği",
     "bespokeInEverySense": "Her Anlamda Özel",
     "the": "PROJELER",
-    "projects": "İMİZ"
+    "projects": "İMİZ",
+    "pageTitle": "Projelerimiz",
+    "categories": {
+      "all": "Tüm Projeler",
+      "residential": "Konut",
+      "commercial": "Ticari",
+      "kentsel": "Kentsel",
+      "ozelProjeler": "Özel Projeler",
+      "konutUretimi": "Konut üretimi",
+      "satisiDigerProjeler": "Satışı Diğer Projeler & Şehir Estetiği"
+    },
+    "status": {
+      "title": "Mülk Durumu",
+      "completed": "Tamamlandı",
+      "ongoing": "Devam Ediyor",
+      "upcoming": "Yakında"
+    },
+    "projectDetails": {
+      "title": "Mülk Detayları",
+      "location": "Konum",
+      "startDate": "Başlangıç Tarihi",
+      "endDate": "Bitiş Tarihi",
+      "price": "Fiyat",
+      "area": "Alan",
+      "units": "Birimler",
+      "completion": "Tamamlanma",
+      "viewProject": "Projeyi Görüntüle",
+      "visitWebsite": "Web Sitesini Ziyaret Et",
+      "amenities": "Olanaklar",
+      "features": "Özellikler",
+      "floors": "Katlar",
+      "bhkTypes": "Oda Tipleri",
+      "totalUnits": "Toplam Birimler"
+    },
+    "filterBy": "Filtrele",
+    "sortBy": "Sırala",
+    "search": "Projelerde ara...",
+    "noResults": "Kriterlerinize uygun proje bulunamadı",
+    "filters": {
+      "propertyStatus": "Mülk Durumu",
+      "location": "Konum",
+      "propertyType": "Tür"
+    },
+    "propertyCard": {
+      "status": "Durum",
+      "startEndDate": "Proje Başlangıç Tarihi/ Bitiş Tarihi",
+      "price": "Fiyat",
+      "amenities": "Olanaklar",
+      "details": "Detaylar",
+      "floorsLabel": "Kat Sayısı:",
+      "twoBHKFlats": "2+1 Dairelerin Sayısı",
+      "threeBHKFlats": "3+1 Dairelerin Sayısı"
+    },
+    "buttons": {
+      "watchVideo": "Video İzle",
+      "viewCatalog": "Katalog Görüntüle",
+      "enquireNow": "Şimdi Bilgi Al",
+      "showMore": "Daha Fazla Göster",
+      "fullscreen": "Tam Ekran"
+    },
+    "messages": {
+      "noResults": "Seçilen filtrelere uygun mülk bulunamadı"
+    },
+    "data": {
+      "projects": [
+        {
+          "id": 1,
+          "title": "Blumental Residence",
+          "subtitle": "Şehir hayatı kapınızda",
+          "type": "KONUTLAR"
+        },
+        {
+          "id": 2,
+          "title": "Azure Heights",
+          "subtitle": "Gökyüzünde lüks yeniden tanımlandı",
+          "type": "KONUTLAR"
+        },
+        {
+          "id": 3,
+          "title": "Park Avenue",
+          "subtitle": "Doğanın kalbinde modern yaşam",
+          "type": "KONUTLAR"
+        },
+        {
+          "id": 4,
+          "title": "Marina Bay",
+          "subtitle": "Deniz manzaralı lüks daireler",
+          "type": "KONUTLAR"
+        },
+        {
+          "id": 5,
+          "title": "Sunset Tower",
+          "subtitle": "Zarafet ufukla buluştuğu yer",
+          "type": "KONUTLAR"
+        },
+        {
+          "id": 6,
+          "title": "Golden Gate Residences",
+          "subtitle": "Nefes kesen manzaralarla premium yaşam",
+          "type": "KONUTLAR"
+        },
+        {
+          "id": 7,
+          "title": "Urban Oasis",
+          "subtitle": "Şehir ormanında bir sığınak",
+          "type": "KONUTLAR"
+        },
+        {
+          "id": 8,
+          "title": "Pinnacle Heights",
+          "subtitle": "Mükemmelliğin zirvesinde yaşam",
+          "type": "KONUTLAR"
+        }
+      ],
+      "propertyData": [
+        {
+          "id": 1,
+          "title": "The Projects",
+          "location": "Eyüp Sultan",
+          "status": "Tamamlandı",
+          "type": "Konut",
+          "amenities": [
+            "Yüzme havuzları",
+            "Spor salonları",
+            "Oyun alanları",
+            "Peyzajlı bahçeler",
+            "Concierge hizmetleri",
+            "Otopark"
+          ],
+          "details": {
+            "floors": 20,
+            "bhkTypes": ["2+1", "3+1"],
+            "totalUnits": 120
+          }
+        },
+        {
+          "id": 2,
+          "title": "Urban Heights",
+          "location": "Şişli",
+          "status": "Devam Ediyor",
+          "type": "Ticari",
+          "amenities": [
+            "Ofis alanları",
+            "Toplantı odaları",
+            "Otopark",
+            "Güvenlik"
+          ],
+          "details": {
+            "floors": 15,
+            "officeTypes": ["Küçük", "Orta", "Büyük"],
+            "totalUnits": 80
+          }
+        },
+        {
+          "id": 3,
+          "title": "Garden Residences",
+          "location": "Kadıköy",
+          "status": "Tamamlandı",
+          "type": "Konut",
+          "amenities": [
+            "Bahçeler",
+            "Spor salonu",
+            "Havuz",
+            "Otopark"
+          ],
+          "details": {
+            "floors": 12,
+            "bhkTypes": ["1+1", "2+1"],
+            "totalUnits": 60
+          }
+        }
+      ]
+    }
   },
   "aboutPage": {
     "timeline": [

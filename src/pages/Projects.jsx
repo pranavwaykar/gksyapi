@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import gsap from "gsap";
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../translations';
 
 // Demo projects data
 const projects = [
@@ -136,6 +137,8 @@ const FilterDropdown = ({ label, options, value, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const labelRef = useRef(null);
+  const { language } = useLanguage();
+  const t = translations[language];
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -194,7 +197,7 @@ const FilterDropdown = ({ label, options, value, onChange }) => {
               setIsOpen(false);
             }}
           >
-            All
+            {t.projects.filterBy.all || "All"}
           </div>
           {options.map((option) => (
             <div
@@ -221,6 +224,9 @@ const Projects = () => {
   const [dragStart, setDragStart] = useState(0);
   const [dragX, setDragX] = useState(0);
   const projectRef = useRef(null);
+  // Get current language
+  const { language } = useLanguage();
+  const t = translations[language];
 
   // State for filtered view
   const [showAllProjects, setShowAllProjects] = useState(false);
@@ -320,7 +326,7 @@ const Projects = () => {
         <div className="filters-bar">
           <div className="filter-group">
             <FilterDropdown
-              label="Property Status"
+              label={t.projects.filterBy.propertyStatus || "Property Status"}
               options={filterOptions.status}
               value={filters.status}
               onChange={(value) =>
@@ -328,7 +334,7 @@ const Projects = () => {
               }
             />
             <FilterDropdown
-              label="Location"
+              label={t.projects.filterBy.location || "Location"}
               options={filterOptions.location}
               value={filters.location}
               onChange={(value) =>
@@ -336,7 +342,7 @@ const Projects = () => {
               }
             />
             <FilterDropdown
-              label="Type"
+              label={t.projects.filterBy.propertyType || "Type"}
               options={filterOptions.type}
               value={filters.type}
               onChange={(value) =>
@@ -371,7 +377,7 @@ const Projects = () => {
                   </div>
                   <div className="property-details">
                     <div className="detail-row">
-                      <span className="label">Status</span>
+                      <span className="label">{t.projects.propertyCard.status || "Status"}</span>
                       <span className="value completed">
                         {filteredProperties[currentPropertyIndex].status}
                       </span>
@@ -379,7 +385,7 @@ const Projects = () => {
 
                     <div className="detail-row">
                       <span className="label">
-                        Project Start Date/ End Date
+                        {t.projects.propertyCard.startEndDate || "Project Start Date/ End Date"}
                       </span>
                       <span className="value">
                         {filteredProperties[currentPropertyIndex].startDate}-
@@ -388,14 +394,14 @@ const Projects = () => {
                     </div>
 
                     <div className="detail-row">
-                      <span className="label">Price</span>
+                      <span className="label">{t.projects.propertyCard.price || "Price"}</span>
                       <span className="value">
                         €{filteredProperties[currentPropertyIndex].price}
                       </span>
                     </div>
 
                     <div className="detail-row">
-                      <span className="label">Amenities</span>
+                      <span className="label">{t.projects.propertyCard.amenities || "Amenities"}</span>
                       <span className="value">
                         {filteredProperties[
                           currentPropertyIndex
@@ -404,10 +410,10 @@ const Projects = () => {
                     </div>
 
                     <div className="detail-row">
-                      <span className="label">Details</span>
+                      <span className="label">{t.projects.propertyCard.details || "Details"}</span>
                       <div className="value">
                         <p>
-                          No of Floors:{" "}
+                          {t.projects.propertyCard.floorsLabel || "No of Floors:"} {" "}
                           {
                             filteredProperties[currentPropertyIndex].details
                               .floors
@@ -416,18 +422,18 @@ const Projects = () => {
                         {filteredProperties[currentPropertyIndex].details
                           .bhkTypes && (
                           <>
-                            <p>No of 2BHK Flats</p>
-                            <p>No of 3 BHK Flats</p>
+                            <p>{t.projects.propertyCard.twoBHKFlats || "No of 2BHK Flats"}</p>
+                            <p>{t.projects.propertyCard.threeBHKFlats || "No of 3 BHK Flats"}</p>
                           </>
                         )}
                       </div>
                     </div>
 
                     <div className="action-buttons">
-                      <button className="primary-btn">Watch Video</button>
+                      <button className="primary-btn">{t.projects.buttons.watchVideo || "Watch Video"}</button>
                       <div className="secondary-buttons">
-                        <button className="secondary-btn">View Catalog</button>
-                        <button className="secondary-btn">Enquire Now</button>
+                        <button className="secondary-btn">{t.projects.buttons.viewCatalog || "View Catalog"}</button>
+                        <button className="secondary-btn">{t.projects.buttons.enquireNow || "Enquire Now"}</button>
                       </div>
                     </div>
                   </div>
@@ -435,7 +441,7 @@ const Projects = () => {
               </div>
             ) : (
               <div className="no-results">
-                No properties match the selected filters
+                {t.projects.messages.noResults || "No properties match the selected filters"}
               </div>
             )}
 
@@ -570,7 +576,7 @@ const Projects = () => {
                 >
                   <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
-                Show more
+                {t.projects.buttons.showMore || "Show more"}
               </span>
             </button>
           </div>
@@ -581,3 +587,4 @@ const Projects = () => {
 };
 
 export default Projects;
+

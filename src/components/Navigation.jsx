@@ -93,6 +93,7 @@ const Navigation = () => {
         </li>
         <li className="nav-item lang-selector" ref={el => navItemsRef.current[5] = el}>
           <NavLink to="/" className="active">EN</NavLink>
+          <div className="lang-selector-divider"></div>
           <NavLink to="/">TR</NavLink>
         </li>
       </ul>

@@ -37,7 +37,7 @@ const Home = () => {
     
     gsap.set(solutionsContentRef.current, { x: "100%", opacity: 0 });
 
-    gsap.set(aboutBoxRef.current, { opacity: 0, x: "100%" });
+    gsap.set(aboutBoxRef.current, { opacity: 0, y: "100%", x: 0 });
     gsap.set(aboutWhiteBoxTopRef.current, { y: "0%", opacity: 1 });
     gsap.set(aboutWhiteBoxBottomRef.current, { y: "0%", opacity: 1 });
     gsap.set(aboutContentRef.current, { x: "0%", opacity: 1 });
@@ -105,7 +105,7 @@ const Home = () => {
               
               gsap.to(aboutBoxRef.current, {
                 opacity: 1,
-                x: "0%", 
+                y: "0%", 
                 duration: 0.8,
                 ease: "power2.inOut",
                 onComplete: () => {
@@ -163,11 +163,11 @@ const Home = () => {
           isAnimating = true;
           
           gsap.to(aboutBoxRef.current, {
-            x: "100%",
+            y: "100%",
             duration: 0.8,
             ease: "power2.inOut",
             onComplete: () => {
-              gsap.set(aboutBoxRef.current, { opacity: 0, x: "100%" });
+              gsap.set(aboutBoxRef.current, { opacity: 0, y: "100%" });
               
               gsap.set(solutionsWhiteBoxTopRef.current, { y: "0%", opacity: 1 });
               gsap.set(solutionsWhiteBoxBottomRef.current, { y: "0%", opacity: 1 });

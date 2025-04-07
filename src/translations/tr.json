@@ -300,5 +300,18 @@
         "link": "/jobs/interior-designer"
       }
     ]
+  },
+  "contact": {
+    "heroHeadline": "İSTANBUL'DAKİ\nEN ÖZEL\nMÜLKLERLE HAYAL\nEVİNİZİ BULUN",
+    "contactsAndDetails": "İLETİŞİM VE DETAYLAR",
+    "howToReachUs": "BİZE NASIL ULAŞABİLİRSİNİZ",
+    "location": {
+      "title": "İSTANBUL - TÜRKİYE",
+      "subtitle": "GKS YAPI GENEL MERKEZİ"
+    },
+    "emailInquiry": {
+      "text": "Herhangi bir soru için",
+      "email": "contact@gksyapi.com"
+    }
   }
 } 

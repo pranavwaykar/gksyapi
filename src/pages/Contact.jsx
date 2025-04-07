@@ -1,8 +1,13 @@
 import React from 'react';
 // import { motion } from 'framer-motion';
 import '../styles/pages/_contact.scss';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../translations';
 
 const Contact = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <div className="contact-page">
       {/* Hero headline section */}
@@ -13,17 +18,14 @@ const Contact = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2 }}
         > */}
-          FIND YOUR DREAM HOME<br />
-          WITH THE MOST<br />
-          EXCLUSIVE PROPERTIES IN<br />
-          ISTANBUL
+          {t.contact.heroHeadline}
         {/* </motion.h1> */}
       </div>
       
       {/* Contact section */}
       <div className="contact-section">
-        <div className="contact-label">CONTACTS AND DETAILS</div>
-        <h2 className="contact-title">HOW TO REACH US</h2>
+        <div className="contact-label">{t.contact.contactsAndDetails}</div>
+        <h2 className="contact-title">{t.contact.howToReachUs}</h2>
         
         <div className="contact-details">
           <div className="contact-item">
@@ -34,8 +36,8 @@ const Contact = () => {
               </svg>
             </div>
             <div className="contact-text">
-              ISTANBUL - TURKEY<br />
-              GKS YAPI HEADQUARTERS
+              {t.contact.location.title}<br />
+              {t.contact.location.subtitle}
             </div>
           </div>
           
@@ -46,8 +48,8 @@ const Contact = () => {
               </svg>
             </div>
             <div className="contact-text">
-              For any rental inquiry please email us at:<br />
-              contact@gksyapi.com
+              {t.contact.emailInquiry.text}<br />
+              {t.contact.emailInquiry.email}
             </div>
           </div>
         </div>

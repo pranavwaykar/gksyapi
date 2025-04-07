@@ -300,5 +300,18 @@
         "link": "/jobs/interior-designer"
       }
     ]
+  },
+  "contact": {
+    "heroHeadline": "FIND YOUR DREAM HOME\nWITH THE MOST\nEXCLUSIVE PROPERTIES IN\nISTANBUL",
+    "contactsAndDetails": "CONTACTS AND DETAILS",
+    "howToReachUs": "HOW TO REACH US",
+    "location": {
+      "title": "ISTANBUL - TURKEY",
+      "subtitle": "GKS YAPI HEADQUARTERS"
+    },
+    "emailInquiry": {
+      "text": "For any enquiry",
+      "email": "contact@gksyapi.com"
+    }
   }
 } 

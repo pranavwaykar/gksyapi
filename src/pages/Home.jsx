@@ -284,17 +284,15 @@ const Home = () => {
             <div className="about-white-box-bottom" ref={aboutWhiteBoxBottomRef}></div>
             
             <div className="about-content" ref={aboutContentRef}>
-              <div className="about-tag">OUR EXPERTISE</div>
+              <div className="about-tag">KENTSEL</div>
               <h1 className="about-title">
-                Building Excellence Through Innovation
+              Confidence in Housing: 
+              Secure, Stylish ,& Smart Investments
               </h1>
               <p className="about-description">
-                With over 25 years of experience in the construction industry, 
-                we pride ourselves on delivering quality projects that exceed expectations. 
-                Our team of experts brings innovative solutions to every challenge, 
-                ensuring timely delivery and exceptional results.
+              We deliver modern, high-quality, and aesthetically refined homes that are more than just living spaces—they are future-proof investments. Our expertise in housing sales and production ensures that every residence meets the evolving needs of urban life while providing unmatched comfort and security.
               </p>
-              <div className="expertise-areas">
+              {/* <div className="expertise-areas">
                 <div className="expertise-area">
                   <span className="area-number">01</span>
                   <h3>Sustainable Building</h3>
@@ -310,9 +308,9 @@ const Home = () => {
                   <h3>Architectural Excellence</h3>
                   <p>Blending aesthetics with functionality</p>
                 </div>
-              </div>
+              </div> */}
               <div className="expertise-cta">
-                <Link to="/contact" className="cta-button">Get in Touch</Link>
+                <Link to="/contact" className="cta-button">Your dream home is ready—invest in the future today!</Link>
               </div>
             </div>
           </div>

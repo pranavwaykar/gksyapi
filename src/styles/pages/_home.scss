@@ -202,9 +202,9 @@ body,
       }
     }
 
-    .solutions-container{
+    .solutions-container {
       position: relative;
-      top: 612px;
+      top: 400px;
       left: 0;
       width: 100px;
       height: 100px;
@@ -214,18 +214,43 @@ body,
       height: 100%;
     }
 
-    .about-container{
+    .about-container {
       position: relative;
       bottom: -82px;
-      left: 0px;
+      left: -223px;
       width: 100px;
       height: 100px;
       z-index: 3;
-      background-color: rgb(80, 125, 250);
+      background-color: white;
       width: 100%;
       height: 100%;
-    }
 
+      .about-content {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+
+        .about-tag {
+          color: black;
+        }
+
+        .about-title {
+          font-size: 36px;
+          font-weight: 700;
+          color: #0038b3;
+        }
+
+        .about-description {
+          color: black;
+        }
+
+        .about-cta {
+          .cta-button {
+            color: black;
+          }
+        }
+      }
+    }
   }
 
   // Vertical "THE PROJECTS" text with "Bespoke in Every Sense" on the left
@@ -300,8 +325,6 @@ body,
 // Add media queries for responsiveness
 @media (max-width: 1900px) {
   .home-container {
-
-
     .content-overlay {
       position: absolute;
       bottom: 5rem;
@@ -317,14 +340,14 @@ body,
           display: flex;
           gap: 9rem;
           margin-bottom: 2rem;
-  
+
           .stat-item {
             h2 {
               font-size: 3rem;
               font-weight: 700;
               margin-bottom: 0.25rem;
             }
-  
+
             p {
               font-size: 1rem;
               opacity: 0.8;
@@ -332,13 +355,13 @@ body,
           }
         }
       }
-      
+
       .solutions-white-box-wrapper {
         width: 60%;
         max-width: 800px;
         padding: 2.5rem 3rem;
         margin-left: 5%;
-  
+
         .solutions-white-box-top {
           position: absolute;
           top: 0px;
@@ -364,7 +387,7 @@ body,
           position: relative;
           right: 60px;
         }
-  
+
         .solutions-tag {
           text-transform: uppercase;
           font-size: 14px;
@@ -373,7 +396,7 @@ body,
           margin-bottom: 1rem;
           letter-spacing: 1px;
         }
-  
+
         .solutions-title {
           font-size: 36px;
           font-weight: 700;
@@ -381,28 +404,28 @@ body,
           margin-bottom: 1.5rem;
           line-height: 1.2;
         }
-  
+
         .solutions-description {
           font-size: 16px;
           line-height: 1.6;
           margin-bottom: 2rem;
           color: #333;
         }
-  
+
         .solutions-links {
           font-size: 14px;
           margin-top: 1rem;
-  
+
           a {
             color: #0038b3;
             text-decoration: none;
             transition: color 0.3s ease;
             padding: 0 5px;
-  
+
             &:first-child {
               padding-left: 0;
             }
-  
+
             &:hover {
               color: #002380;
               text-decoration: underline;
@@ -410,7 +433,6 @@ body,
           }
         }
       }
-
     }
 
     .vertical-text {

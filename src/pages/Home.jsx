@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import backgroundVideo from "../assets/GKSYAPI Video.mp4";
 import logo from "../assets/GKSYAPI Logo.png";
+import backgroundMusic from "../assets/relaxing-piano-310597.mp3";
 import Navigation from "../components/Navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -17,6 +18,7 @@ const Home = () => {
   const solutionsWhiteBoxBottomRef = useRef(null); // Bottom half of the box
   const solutionsContentRef = useRef(null);
   const containerRef = useRef(null);
+  const audioRef = useRef(null);
 
   useEffect(() => {
     // Set up initial state
@@ -122,9 +124,29 @@ const Home = () => {
     const container = containerRef.current;
     container.addEventListener("wheel", handleScroll, { passive: false });
 
+    // Audio setup - attempt autoplay
+    const audio = audioRef.current;
+    
+    // Try to play the audio automatically
+    audio.play().catch(err => {
+      console.log("Audio autoplay was prevented by the browser:", err);
+      
+      // Add a one-time click listener to the document to start audio after user interaction
+      const startAudioOnInteraction = () => {
+        audio.play().catch(e => console.log("Audio still couldn't play:", e));
+        document.removeEventListener('click', startAudioOnInteraction);
+      };
+      
+      document.addEventListener('click', startAudioOnInteraction);
+    });
+
     return () => {
       // Clean up event listener
       container.removeEventListener("wheel", handleScroll);
+      // Clean up
+      if (audio) {
+        audio.pause();
+      }
     };
   }, []);
 
@@ -135,6 +157,9 @@ const Home = () => {
         <source src={backgroundVideo} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+
+      {/* Background Music - autoplay attribute added */}
+      <audio ref={audioRef} src={backgroundMusic} loop autoPlay />
 
       {/* Logo in top left - only shown on home page */}
       <div className="logo home-logo">

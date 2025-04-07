@@ -68,27 +68,27 @@ const Navigation = () => {
       <ul className="nav-list">
         <li className="nav-item" ref={el => navItemsRef.current[0] = el}>
           <NavLink to="/" end>
-            Home
+            HOME
           </NavLink>
         </li>
         <li className="nav-item" ref={el => navItemsRef.current[1] = el}>
           <NavLink to="/about">
-            About Us
+            ABOUT US
           </NavLink>
         </li>
         <li className="nav-item" ref={el => navItemsRef.current[2] = el}>
           <NavLink to="/projects">
-            Projects
+            PROJECTS
           </NavLink>
         </li>
         <li className="nav-item" ref={el => navItemsRef.current[3] = el}> 
           <NavLink to="/careers">
-            Careers
+            CAREERS
           </NavLink>
         </li>
         <li className="nav-item" ref={el => navItemsRef.current[4] = el}>
           <NavLink to="/contact">
-            Contact Us
+            CONTACT US
           </NavLink>
         </li>
         <li className="nav-item lang-selector" ref={el => navItemsRef.current[5] = el}>

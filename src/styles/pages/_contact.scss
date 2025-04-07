@@ -33,6 +33,8 @@
     flex: 1;
     position: relative;
     z-index: 1;
+    font-size: 3rem;
+    // font-weight: 600;
     
     .hero-headline {
       font-size: 4rem;
@@ -118,6 +120,7 @@
     margin-top: 2rem;
     z-index: 1;
     padding: 0 5rem;
+    background: #0a1226;
     
     iframe {
       position: relative;

@@ -274,5 +274,18 @@
         "link": "/jobs/interior-designer"
       }
     ]
+  },
+  "contact": {
+    "heroHeadline": "Bizimle İletişime Geçin",
+    "contactsAndDetails": "İletişim ve Detaylar",
+    "howToReachUs": "Bize Nasıl Ulaşabilirsiniz",
+    "location": {
+      "title": "Konumumuz",
+      "subtitle": "Beyoğlu, İstanbul, Türkiye"
+    },
+    "emailInquiry": {
+      "text": "Sorularınız için e-posta gönderin",
+      "email": "info@company.com"
+    }
   }
 } 

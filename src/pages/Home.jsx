@@ -6,6 +6,8 @@ import backgroundMusic from "../assets/relaxing-piano-310597.mp3";
 import Navigation from "../components/Navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLanguage } from "../contexts/LanguageContext";
+import { translations } from "../translations";
 
 // Register the ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -19,6 +21,10 @@ const Home = () => {
   const solutionsContentRef = useRef(null);
   const containerRef = useRef(null);
   const audioRef = useRef(null);
+  
+  // Get current language
+  const { language } = useLanguage();
+  const t = translations[language];
 
   useEffect(() => {
     // Set up initial state
@@ -173,26 +179,26 @@ const Home = () => {
           <div className="statistics">
             <div className="stat-item">
               <h2>1994</h2>
-              <p>Established in</p>
+              <p>{t.homePage.establishedIn}</p>
             </div>
             <div className="stat-item">
               <h2>25+</h2>
-              <p>Years in construction</p>
+              <p>{t.homePage.yearsInConstruction}</p>
             </div>
             <div className="stat-item">
               <h2>100+</h2>
-              <p>Completed Projects</p>
+              <p>{t.homePage.completedProjects}</p>
             </div>
             <div className="stat-item">
               <h2>20+</h2>
-              <p>On-going Projects</p>
+              <p>{t.homePage.ongoingProjects}</p>
             </div>
           </div>
 
-          {/* Turkish tagline - always visible */}
+          {/* Tagline - now translatable */}
           <div className="tagline">
-            <h1>Dünya fikirler üzerine inşa edilir Dünyayı, </h1>
-            <h1>her seferinde bir fikirle şekillendiriyoruz</h1>
+            <h1>{t.homePage.tagline1}</h1>
+            <h1>{t.homePage.tagline2}</h1>
           </div>
         </div>
 
@@ -207,18 +213,18 @@ const Home = () => {
             
             {/* Content inside the box - positioned absolutely */}
             <div className="solutions-content" ref={solutionsContentRef}>
-              <div className="solutions-tag">SOLUTIONS</div>
+              <div className="solutions-tag">{t.solutions.title}</div>
               <h1 className="solutions-title">
-                Building the Future of Türkiye,<br />One Landmark at a Time
+                {t.solutions.solutionsTitle}
               </h1>
               <p className="solutions-description">
-                At <strong>GKS Yapı</strong>, we don't just build structures—we shape modern, sustainable, and 
-                high-quality living spaces that redefine city life. As a trusted leader in 
-                İstanbul's construction and real estate sector, we are committed to innovation, 
-                excellence, and long-term value for homeowners and investors alike.
+                {t.solutions.solutionsDescription}
               </p>
               <div className="solutions-links">
-                <Link to="/projects/kentsel">Kentsel</Link> | <Link to="/projects/ozel-projeler">Özel Projeler</Link> | <Link to="/projects/konut-uretimi">Konut üretimi</Link> | <Link to="/projects/satisi-diger-projeler">Satışı Diğer Projeler & Şehir Estetiği</Link>
+                <Link to="/projects/kentsel">{t.projects.kentsel}</Link> | 
+                <Link to="/projects/ozel-projeler">{t.projects.ozelProjeler}</Link> | 
+                <Link to="/projects/konut-uretimi">{t.projects.konutUretimi}</Link> | 
+                <Link to="/projects/satisi-diger-projeler">{t.projects.satisiDigerProjeler}</Link>
               </div>
             </div>
           </div>
@@ -228,9 +234,9 @@ const Home = () => {
       {/* Vertical "THE PROJECTS" text */}
       <div className="vertical-text right">
         <div className="line"></div>
-        <span className="left-text">Bespoke in Every Sense</span>
-        <span className="large-text-primary">THE</span>
-        <span className="large-text-secondary">PROJECTS</span>
+        <span className="left-text">{t.projects.bespokeInEverySense}</span>
+        <span className="large-text-primary">{t.projects.the}</span>
+        <span className="large-text-secondary">{t.projects.projects}</span>
       </div>
 
       {/* Use the Navigation component */}

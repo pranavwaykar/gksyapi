@@ -8,10 +8,11 @@ import Contact from './pages/Contact';
 import Projects from './pages/Projects';
 import CircularCursor from './components/CircularCursor';
 import './styles/main.scss';
+import { LanguageProvider } from './contexts/LanguageContext';
 
 function App() {
   return (
-    <>
+    <LanguageProvider>
       <CircularCursor />
       <Router>
         <div className="app">
@@ -25,7 +26,7 @@ function App() {
           </Routes>
         </div>
       </Router>
-    </>
+    </LanguageProvider>
   );
 }
 

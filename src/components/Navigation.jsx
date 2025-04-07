@@ -2,12 +2,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import logo from '../assets/GKSYAPI Logo.png';
 import gsap from 'gsap';
+import { useLanguage, languages } from '../contexts/LanguageContext';
+import { translations } from '../translations';
 
 const Navigation = () => {
   // Create refs for elements we want to animate
   const logoRef = useRef(null);
   const navItemsRef = useRef([]);
   const location = useLocation();
+  
+  // Get language context
+  const { language, setLanguage } = useLanguage();
   
   // Track previous location to prevent animation on initial load
   const [prevLocation, setPrevLocation] = useState(null);
@@ -56,6 +61,8 @@ const Navigation = () => {
     setPrevLocation(location);
   }, [location.pathname]);
 
+  const t = translations[language]; // Get current language translations
+
   return (
     <nav className="nav">
       {/* Logo with ref */}
@@ -68,33 +75,43 @@ const Navigation = () => {
       <ul className="nav-list">
         <li className="nav-item" ref={el => navItemsRef.current[0] = el}>
           <NavLink to="/" end>
-            HOME
+            {t.navigation.home}
           </NavLink>
         </li>
         <li className="nav-item" ref={el => navItemsRef.current[1] = el}>
           <NavLink to="/about">
-            ABOUT US
+            {t.navigation.aboutUs}
           </NavLink>
         </li>
         <li className="nav-item" ref={el => navItemsRef.current[2] = el}>
           <NavLink to="/projects">
-            PROJECTS
+            {t.navigation.projects}
           </NavLink>
         </li>
         <li className="nav-item" ref={el => navItemsRef.current[3] = el}> 
           <NavLink to="/careers">
-            CAREERS
+            {t.navigation.careers}
           </NavLink>
         </li>
         <li className="nav-item" ref={el => navItemsRef.current[4] = el}>
           <NavLink to="/contact">
-            CONTACT US
+            {t.navigation.contactUs}
           </NavLink>
         </li>
         <li className="nav-item lang-selector" ref={el => navItemsRef.current[5] = el}>
-          <NavLink to="/" className="active">EN</NavLink>
+          <button 
+            className={language === languages.EN ? "active" : ""} 
+            onClick={() => setLanguage(languages.EN)}
+          >
+            EN
+          </button>
           <div className="lang-selector-divider"></div>
-          <NavLink to="/">TR</NavLink>
+          <button 
+            className={language === languages.TR ? "active" : ""} 
+            onClick={() => setLanguage(languages.TR)}
+          >
+            TR
+          </button>
         </li>
       </ul>
     </nav>

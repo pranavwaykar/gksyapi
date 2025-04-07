@@ -1,0 +1,31 @@
+{
+  "navigation": {
+    "home": "ANA SAYFA",
+    "aboutUs": "HAKKIMIZDA",
+    "projects": "PROJELER",
+    "careers": "KARİYER",
+    "contactUs": "İLETİŞİM"
+  },
+  "homePage": {
+    "establishedIn": "Kuruluş yılı",
+    "yearsInConstruction": "Yıllık inşaat tecrübesi",
+    "completedProjects": "Tamamlanan Projeler",
+    "ongoingProjects": "Devam Eden Projeler",
+    "tagline1": "Dünya fikirler üzerine inşa edilir",
+    "tagline2": "Dünyayı, her seferinde bir fikirle şekillendiriyoruz"
+  },
+  "solutions": {
+    "title": "ÇÖZÜMLER",
+    "solutionsTitle": "Türkiye'nin Geleceğini, Bir Landmark'ta İnşa Ediyoruz",
+    "solutionsDescription": "GKS Yapı olarak, sadece yapılar inşa etmiyoruz - şehir hayatını yeniden tanımlayan modern, sürdürülebilir ve yüksek kaliteli yaşam alanları şekillendiriyoruz. İstanbul'un inşaat ve gayrimenkul sektöründe güvenilir bir lider olarak, ev sahipleri ve yatırımcılar için yenilikçilik, mükemmellik ve uzun vadeli değer yaratmaya önem veriyoruz."
+  },
+  "projects": {
+    "kentsel": "Kentsel",
+    "ozelProjeler": "Özel Projeler",
+    "konutUretimi": "Konut üretimi",
+    "satisiDigerProjeler": "Satışı Diğer Projeler & Şehir Estetiği",
+    "bespokeInEverySense": "Her Anlamda Özel",
+    "the": "PROJELER",
+    "projects": "İMİZ"
+  }
+} 

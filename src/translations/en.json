@@ -1,0 +1,31 @@
+{
+  "navigation": {
+    "home": "HOME",
+    "aboutUs": "ABOUT US",
+    "projects": "PROJECTS",
+    "careers": "CAREERS",
+    "contactUs": "CONTACT US"
+  },
+  "homePage": {
+    "establishedIn": "Established in",
+    "yearsInConstruction": "Years in construction",
+    "completedProjects": "Completed Projects",
+    "ongoingProjects": "On-going Projects",
+    "tagline1": "The world is built on ideas.",
+    "tagline2": "We're shaping the world, one idea at a time."
+  },
+  "solutions": {
+    "title": "SOLUTIONS",
+    "solutionsTitle": "Building the Future of Türkiye, One Landmark at a Time",
+    "solutionsDescription": "At GKS Yapı, we don't just build structures—we shape modern, sustainable, and high-quality living spaces that redefine city life. As a trusted leader in İstanbul's construction and real estate sector, we are committed to innovation, excellence, and long-term value for homeowners and investors alike."
+  },
+  "projects": {
+    "kentsel": "Kentsel",
+    "ozelProjeler": "Özel Projeler",
+    "konutUretimi": "Konut üretimi",
+    "satisiDigerProjeler": "Satışı Diğer Projeler & Şehir Estetiği",
+    "bespokeInEverySense": "Bespoke in Every Sense",
+    "the": "THE",
+    "projects": "PROJECTS"
+  }
+} 

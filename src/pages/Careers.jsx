@@ -1,55 +1,24 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import "../styles/pages/_careers.scss";
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../translations';
 
 const Careers = () => {
-  const jobListings = [
-    {
-      id: 1,
-      title: "Construction Manager",
-      description:
-        "Lead and oversee construction projects from inception to completion. Manage timelines, budgets, and team coordination.",
-      image:
-        "https://plus.unsplash.com/premium_photo-1682126848758-ac1c68fa0059?q=80&w=2083&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      link: "/jobs/construction-manager",
-    },
-    {
-      id: 2,
-      title: "Architectural Designer",
-      description:
-        "Create innovative architectural designs for residential and commercial properties. Collaborate with clients and contractors.",
-      image:
-        "https://plus.unsplash.com/premium_photo-1663047346199-9516fe33fce1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      link: "/jobs/architect",
-    },
-    {
-      id: 3,
-      title: "Project Engineer",
-      description:
-        "Manage technical aspects of construction projects. Ensure compliance with building codes and safety regulations.",
-      image:
-        "https://plus.unsplash.com/premium_photo-1723914155810-96d1edbaf4d7?q=80&w=2128&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      link: "/jobs/engineer",
-    },
-    {
-      id: 4,
-      title: "Real Estate Analyst",
-      description:
-        "Analyze market trends, property valuations, and investment opportunities. Prepare detailed financial reports and forecasts.",
-      image:
-        "https://plus.unsplash.com/premium_photo-1661768654229-5a2eeeca1857?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      link: "/jobs/analyst",
-    },
-    {
-      id: 5,
-      title: "Interior Designer",
-      description:
-        "Design and coordinate interior spaces for residential and commercial properties. Work with clients to realize their vision.",
-      image:
-        "https://plus.unsplash.com/premium_photo-1723629708893-ba90c0cb24e5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      link: "/jobs/interior-designer",
-    },
-  ];
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  // Use translated job listings
+  const jobListings = t.careers.jobListings;
+  
+  // Define job images separately so they remain consistent across languages
+  const jobImages = {
+    1: "https://plus.unsplash.com/premium_photo-1682126848758-ac1c68fa0059?q=80&w=2083&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    2: "https://plus.unsplash.com/premium_photo-1663047346199-9516fe33fce1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    3: "https://plus.unsplash.com/premium_photo-1723914155810-96d1edbaf4d7?q=80&w=2128&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    4: "https://plus.unsplash.com/premium_photo-1661768654229-5a2eeeca1857?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    5: "https://plus.unsplash.com/premium_photo-1723629708893-ba90c0cb24e5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  };
 
   const sliderRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -111,7 +80,11 @@ const Careers = () => {
             <div className="job-card" key={job.id}>
               <div className="job-content">
                 <div className="job-image-container">
-                  <img src={job.image} alt={job.title} className="job-image" />
+                  <img 
+                    src={jobImages[job.id]} 
+                    alt={job.title} 
+                    className="job-image" 
+                  />
                   <div className="job-overlay">
                     <h3>{job.title}</h3>
                     <p>{job.description}</p>
@@ -135,7 +108,7 @@ const Careers = () => {
                       </svg>
                     </div>
                     <Link to={job.link}>
-                      <button className="apply-btn">APPLY NOW</button>
+                      <button className="apply-btn">{t.careers.applyNow}</button>
                     </Link>
                   </div>
                 </div>
@@ -151,9 +124,9 @@ const Careers = () => {
 
       <div className="vertical-text left">
         <div className="line"></div>
-        <span className="left-text">Join Our Team</span>
-        <span className="large-text-primary">Explore</span>
-        <span className="large-text-secondary">Career</span>
+        <span className="left-text">{t.careers.joinOurTeam}</span>
+        <span className="large-text-primary">{t.careers.exploreText}</span>
+        <span className="large-text-secondary">{t.careers.careerText}</span>
       </div>
     </div>
   );

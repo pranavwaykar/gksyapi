@@ -233,5 +233,72 @@
         "description": "Tüm yeni gelişmelerde akıllı bina teknolojisi entegrasyonunu öncü ediyoruz"
       }
     ]
+  },
+  "careers": {
+    "pageTitle": "Kariyer",
+    "joinOurTeam": "Ekibimize Katılın",
+    "exploreText": "Keşfet",
+    "careerText": "Kariyer",
+    "introduction": "Kentsel manzaraları dönüştüren bir şirketle kariyerinizi inşa edin.",
+    "openPositions": "Açık Pozisyonlar",
+    "noOpenings": "Şu anda açık pozisyon bulunmamaktadır. Lütfen daha sonra tekrar kontrol edin.",
+    "benefits": {
+      "title": "Avantajlar ve Yan Haklar",
+      "professionalGrowth": "Profesyonel Gelişim",
+      "healthInsurance": "Sağlık Sigortası",
+      "retirement": "Emeklilik Planları",
+      "workLifeBalance": "İş-Yaşam Dengesi",
+      "paidTimeOff": "Ücretli İzin",
+      "teamEvents": "Takım Etkinlikleri"
+    },
+    "applicationProcess": {
+      "title": "Başvuru Süreci",
+      "step1": "Başvuru Gönderimi",
+      "step2": "Ön Değerlendirme",
+      "step3": "Mülakat Süreci",
+      "step4": "Final Kararı"
+    },
+    "whyJoinUs": {
+      "title": "Neden GKS YAPI'ya Katılmalısınız",
+      "innovation": "Yenilikçilik Kültürü",
+      "impact": "Anlamlı Etki",
+      "growth": "Kariyer Gelişimi",
+      "community": "Destekleyici Topluluk"
+    },
+    "contactHR": "İK ile İletişime Geçin",
+    "applyNow": "Şimdi Başvur",
+    "viewJobDetails": "Detayları Görüntüle",
+    "jobListings": [
+      {
+        "id": 1,
+        "title": "İnşaat Müdürü",
+        "description": "İnşaat projelerini başlangıçtan tamamlanmaya kadar yönetmek ve denetlemek. Zaman çizelgelerini, bütçeleri ve ekip koordinasyonunu yönetmek.",
+        "link": "/jobs/construction-manager"
+      },
+      {
+        "id": 2,
+        "title": "Mimari Tasarımcı",
+        "description": "Konut ve ticari mülkler için yenilikçi mimari tasarımlar oluşturmak. Müşteriler ve yüklenicilerle işbirliği yapmak.",
+        "link": "/jobs/architect"
+      },
+      {
+        "id": 3,
+        "title": "Proje Mühendisi",
+        "description": "İnşaat projelerinin teknik yönlerini yönetmek. Bina kodlarına ve güvenlik düzenlemelerine uygunluğu sağlamak.",
+        "link": "/jobs/engineer"
+      },
+      {
+        "id": 4,
+        "title": "Gayrimenkul Analisti",
+        "description": "Piyasa trendlerini, emlak değerlemelerini ve yatırım fırsatlarını analiz etmek. Detaylı finansal raporlar ve tahminler hazırlamak.",
+        "link": "/jobs/analyst"
+      },
+      {
+        "id": 5,
+        "title": "İç Mimar",
+        "description": "Konut ve ticari mülkler için iç mekanları tasarlamak ve koordine etmek. Müşterilerin vizyonlarını gerçekleştirmek için onlarla çalışmak.",
+        "link": "/jobs/interior-designer"
+      }
+    ]
   }
 } 

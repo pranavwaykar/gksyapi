@@ -233,5 +233,72 @@
         "description": "Pioneering smart building technology integration in all new developments"
       }
     ]
+  },
+  "careers": {
+    "pageTitle": "Careers",
+    "joinOurTeam": "Join Our Team",
+    "exploreText": "Explore",
+    "careerText": "Career",
+    "introduction": "Build your career with a company that's transforming urban landscapes.",
+    "openPositions": "Open Positions",
+    "noOpenings": "No open positions at the moment. Please check back later.",
+    "benefits": {
+      "title": "Benefits & Perks",
+      "professionalGrowth": "Professional Growth",
+      "healthInsurance": "Health Insurance",
+      "retirement": "Retirement Plans",
+      "workLifeBalance": "Work-Life Balance",
+      "paidTimeOff": "Paid Time Off",
+      "teamEvents": "Team Events"
+    },
+    "applicationProcess": {
+      "title": "Application Process",
+      "step1": "Submit Application",
+      "step2": "Initial Screening",
+      "step3": "Interview Process",
+      "step4": "Final Decision"
+    },
+    "whyJoinUs": {
+      "title": "Why Join GKS YAPI",
+      "innovation": "Culture of Innovation",
+      "impact": "Meaningful Impact",
+      "growth": "Career Growth",
+      "community": "Supportive Community"
+    },
+    "contactHR": "Contact HR",
+    "applyNow": "Apply Now",
+    "viewJobDetails": "View Details",
+    "jobListings": [
+      {
+        "id": 1,
+        "title": "Construction Manager",
+        "description": "Lead and oversee construction projects from inception to completion. Manage timelines, budgets, and team coordination.",
+        "link": "/jobs/construction-manager"
+      },
+      {
+        "id": 2,
+        "title": "Architectural Designer",
+        "description": "Create innovative architectural designs for residential and commercial properties. Collaborate with clients and contractors.",
+        "link": "/jobs/architect"
+      },
+      {
+        "id": 3,
+        "title": "Project Engineer",
+        "description": "Manage technical aspects of construction projects. Ensure compliance with building codes and safety regulations.",
+        "link": "/jobs/engineer"
+      },
+      {
+        "id": 4,
+        "title": "Real Estate Analyst",
+        "description": "Analyze market trends, property valuations, and investment opportunities. Prepare detailed financial reports and forecasts.",
+        "link": "/jobs/analyst"
+      },
+      {
+        "id": 5,
+        "title": "Interior Designer",
+        "description": "Design and coordinate interior spaces for residential and commercial properties. Work with clients to realize their vision.",
+        "link": "/jobs/interior-designer"
+      }
+    ]
   }
 } 

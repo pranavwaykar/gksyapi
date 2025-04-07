@@ -208,9 +208,39 @@
         "description": "GKS YAPI was established with a vision to transform urban landscapes"
       },
       {
+        "date": "2014",
+        "title": "First Land Acquisition",
+        "description": "Acquired our first development plot in Istanbul's emerging Beylikdüzü district"
+      },
+      {
+        "date": "2015",
+        "title": "First Office Opened",
+        "description": "Opened our first headquarters in the heart of Istanbul's business district"
+      },
+      {
+        "date": "2015",
+        "title": "Initial Design Team",
+        "description": "Assembled our core architectural and engineering team of industry veterans"
+      },
+      {
         "date": "2016",
         "title": "First Major Project",
         "description": "Completed our first landmark residential tower in Istanbul"
+      },
+      {
+        "date": "2016",
+        "title": "Quality Certification",
+        "description": "Received ISO 9001 certification for our quality management systems"
+      },
+      {
+        "date": "2017",
+        "title": "Expansion to Ankara",
+        "description": "Extended our operations to Turkey's capital with a new regional office"
+      },
+      {
+        "date": "2017",
+        "title": "Residential Innovation",
+        "description": "Pioneered smart home technology in our mid-market residential developments"
       },
       {
         "date": "2018",
@@ -218,9 +248,39 @@
         "description": "Expanded operations into European and Middle Eastern markets"
       },
       {
+        "date": "2018",
+        "title": "Strategic Partnership",
+        "description": "Formed partnership with European investment group for commercial projects"
+      },
+      {
+        "date": "2019",
+        "title": "Technology Integration",
+        "description": "Implemented BIM (Building Information Modeling) across all project phases"
+      },
+      {
+        "date": "2019",
+        "title": "First Mixed-Use Development",
+        "description": "Launched our first mixed-use project combining retail, office and residential spaces"
+      },
+      {
         "date": "2020",
         "title": "Sustainability Initiative",
         "description": "Launched eco-friendly building practices across all projects"
+      },
+      {
+        "date": "2020",
+        "title": "COVID-19 Response",
+        "description": "Adapted construction protocols to ensure safety while maintaining project timelines"
+      },
+      {
+        "date": "2021",
+        "title": "100th Project Milestone",
+        "description": "Celebrated the successful completion of our 100th construction project"
+      },
+      {
+        "date": "2021",
+        "title": "Community Foundation",
+        "description": "Established the GKS Foundation to support urban renewal in underprivileged areas"
       },
       {
         "date": "2022",
@@ -228,90 +288,40 @@
         "description": "Received international recognition for architectural innovation"
       },
       {
+        "date": "2022",
+        "title": "Hospitality Sector Entry",
+        "description": "Diversified into luxury hotel construction with our first five-star property"
+      },
+      {
         "date": "2023",
         "title": "Future Vision",
         "description": "Pioneering smart building technology integration in all new developments"
+      },
+      {
+        "date": "2023",
+        "title": "Research Partnership",
+        "description": "Collaborated with leading universities on sustainable construction materials research"
+      },
+      {
+        "date": "2024",
+        "title": "Corporate Headquarters",
+        "description": "Inaugurated our new state-of-the-art headquarters building in Istanbul"
+      },
+      {
+        "date": "2024",
+        "title": "Digital Transformation",
+        "description": "Launched proprietary project management platform for enhanced client communication"
+      },
+      {
+        "date": "2025",
+        "title": "Global Expansion Plan",
+        "description": "Setting the foundation for expansion into Asian and North American markets"
+      },
+      {
+        "date": "2025",
+        "title": "Carbon Neutrality Goal",
+        "description": "Committed to achieving carbon-neutral construction practices by 2030"
       }
     ]
-  },
-  "careers": {
-    "pageTitle": "Careers",
-    "joinOurTeam": "Join Our Team",
-    "exploreText": "Explore",
-    "careerText": "Career",
-    "introduction": "Build your career with a company that's transforming urban landscapes.",
-    "openPositions": "Open Positions",
-    "noOpenings": "No open positions at the moment. Please check back later.",
-    "benefits": {
-      "title": "Benefits & Perks",
-      "professionalGrowth": "Professional Growth",
-      "healthInsurance": "Health Insurance",
-      "retirement": "Retirement Plans",
-      "workLifeBalance": "Work-Life Balance",
-      "paidTimeOff": "Paid Time Off",
-      "teamEvents": "Team Events"
-    },
-    "applicationProcess": {
-      "title": "Application Process",
-      "step1": "Submit Application",
-      "step2": "Initial Screening",
-      "step3": "Interview Process",
-      "step4": "Final Decision"
-    },
-    "whyJoinUs": {
-      "title": "Why Join GKS YAPI",
-      "innovation": "Culture of Innovation",
-      "impact": "Meaningful Impact",
-      "growth": "Career Growth",
-      "community": "Supportive Community"
-    },
-    "contactHR": "Contact HR",
-    "applyNow": "Apply Now",
-    "viewJobDetails": "View Details",
-    "jobListings": [
-      {
-        "id": 1,
-        "title": "Construction Manager",
-        "description": "Lead and oversee construction projects from inception to completion. Manage timelines, budgets, and team coordination.",
-        "link": "/jobs/construction-manager"
-      },
-      {
-        "id": 2,
-        "title": "Architectural Designer",
-        "description": "Create innovative architectural designs for residential and commercial properties. Collaborate with clients and contractors.",
-        "link": "/jobs/architect"
-      },
-      {
-        "id": 3,
-        "title": "Project Engineer",
-        "description": "Manage technical aspects of construction projects. Ensure compliance with building codes and safety regulations.",
-        "link": "/jobs/engineer"
-      },
-      {
-        "id": 4,
-        "title": "Real Estate Analyst",
-        "description": "Analyze market trends, property valuations, and investment opportunities. Prepare detailed financial reports and forecasts.",
-        "link": "/jobs/analyst"
-      },
-      {
-        "id": 5,
-        "title": "Interior Designer",
-        "description": "Design and coordinate interior spaces for residential and commercial properties. Work with clients to realize their vision.",
-        "link": "/jobs/interior-designer"
-      }
-    ]
-  },
-  "contact": {
-    "heroHeadline": "FIND YOUR DREAM HOME\nWITH THE MOST\nEXCLUSIVE PROPERTIES IN\nISTANBUL",
-    "contactsAndDetails": "CONTACTS AND DETAILS",
-    "howToReachUs": "HOW TO REACH US",
-    "location": {
-      "title": "ISTANBUL - TURKEY",
-      "subtitle": "GKS YAPI HEADQUARTERS"
-    },
-    "emailInquiry": {
-      "text": "For any enquiry",
-      "email": "contact@gksyapi.com"
-    }
   }
 } 

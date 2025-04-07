@@ -208,9 +208,39 @@
         "description": "GKS YAPI, kentsel manzaraları dönüştürme vizyonuyla kuruldu"
       },
       {
+        "date": "2014",
+        "title": "İlk Arazi Alımı",
+        "description": "İstanbul'un gelişmekte olan Beylikdüzü bölgesinde ilk geliştirme arazimizi edindik"
+      },
+      {
+        "date": "2015",
+        "title": "İlk Ofis Açılışı",
+        "description": "İstanbul'un iş merkezinde ilk genel merkezimizi açtık"
+      },
+      {
+        "date": "2015",
+        "title": "İlk Tasarım Ekibi",
+        "description": "Sektör uzmanlarından oluşan temel mimari ve mühendislik ekibimizi kurduk"
+      },
+      {
         "date": "2016",
         "title": "İlk Büyük Proje", 
         "description": "İstanbul'da ilk önemli konut kulemizi tamamladık"
+      },
+      {
+        "date": "2016",
+        "title": "Kalite Sertifikası",
+        "description": "Kalite yönetim sistemlerimiz için ISO 9001 sertifikası aldık"
+      },
+      {
+        "date": "2017",
+        "title": "Ankara'ya Genişleme",
+        "description": "Türkiye'nin başkentinde yeni bir bölge ofisiyle operasyonlarımızı genişlettik"
+      },
+      {
+        "date": "2017",
+        "title": "Konut İnovasyonu",
+        "description": "Orta segment konut projelerimizde akıllı ev teknolojisine öncülük ettik"
       },
       {
         "date": "2018",
@@ -218,9 +248,39 @@
         "description": "Avrupa ve Orta Doğu pazarlarına operasyonları genişlettik"
       },
       {
+        "date": "2018",
+        "title": "Stratejik Ortaklık",
+        "description": "Ticari projeler için Avrupalı yatırım grubuyla ortaklık kurduk"
+      },
+      {
+        "date": "2019",
+        "title": "Teknoloji Entegrasyonu",
+        "description": "Tüm proje aşamalarında BIM (Yapı Bilgi Modellemesi) uygulamasını hayata geçirdik"
+      },
+      {
+        "date": "2019",
+        "title": "İlk Karma Kullanım Projesi",
+        "description": "Perakende, ofis ve konut alanlarını birleştiren ilk karma kullanım projemizi başlattık"
+      },
+      {
         "date": "2020",
         "title": "Sürdürülebilirlik Girişimi",
         "description": "Tüm projelerde çevre dostu bina uygulamalarını başlattık"
+      },
+      {
+        "date": "2020",
+        "title": "COVID-19 Yanıtı",
+        "description": "Proje zaman çizelgelerini korurken güvenliği sağlamak için inşaat protokollerini uyarladık"
+      },
+      {
+        "date": "2021",
+        "title": "100. Proje Kilometre Taşı",
+        "description": "100. inşaat projemizin başarıyla tamamlanmasını kutladık"
+      },
+      {
+        "date": "2021",
+        "title": "Topluluk Vakfı",
+        "description": "Yoksul bölgelerde kentsel yenilemeyi desteklemek için GKS Vakfı'nı kurduk"
       },
       {
         "date": "2022",
@@ -228,90 +288,40 @@
         "description": "Mimari yenilik için uluslararası tanınma aldık"
       },
       {
+        "date": "2022",
+        "title": "Otelcilik Sektörüne Giriş",
+        "description": "İlk beş yıldızlı tesisimizle lüks otel inşaatına çeşitlendirdik"
+      },
+      {
         "date": "2023",
         "title": "Gelecek Vizyonu",
-        "description": "Tüm yeni gelişmelerde akıllı bina teknolojisi entegrasyonunu öncü ediyoruz"
+        "description": "Tüm yeni gelişmelerde akıllı bina teknolojisi entegrasyonuna öncülük ediyoruz"
+      },
+      {
+        "date": "2023",
+        "title": "Araştırma Ortaklığı",
+        "description": "Sürdürülebilir inşaat malzemeleri araştırmasında önde gelen üniversitelerle işbirliği yaptık"
+      },
+      {
+        "date": "2024",
+        "title": "Kurumsal Genel Merkez",
+        "description": "İstanbul'da yeni son teknoloji genel merkez binamızı hizmete açtık"
+      },
+      {
+        "date": "2024",
+        "title": "Dijital Dönüşüm",
+        "description": "Gelişmiş müşteri iletişimi için özel proje yönetim platformumuzu başlattık"
+      },
+      {
+        "date": "2025",
+        "title": "Küresel Genişleme Planı",
+        "description": "Asya ve Kuzey Amerika pazarlarına genişleme için temel atıyoruz"
+      },
+      {
+        "date": "2025",
+        "title": "Karbon Nötrlük Hedefi",
+        "description": "2030 yılına kadar karbon nötr inşaat uygulamalarına ulaşma taahhüdünde bulunduk"
       }
     ]
-  },
-  "careers": {
-    "pageTitle": "Kariyer",
-    "joinOurTeam": "Ekibimize Katılın",
-    "exploreText": "Keşfet",
-    "careerText": "Kariyer",
-    "introduction": "Kentsel manzaraları dönüştüren bir şirketle kariyerinizi inşa edin.",
-    "openPositions": "Açık Pozisyonlar",
-    "noOpenings": "Şu anda açık pozisyon bulunmamaktadır. Lütfen daha sonra tekrar kontrol edin.",
-    "benefits": {
-      "title": "Avantajlar ve Yan Haklar",
-      "professionalGrowth": "Profesyonel Gelişim",
-      "healthInsurance": "Sağlık Sigortası",
-      "retirement": "Emeklilik Planları",
-      "workLifeBalance": "İş-Yaşam Dengesi",
-      "paidTimeOff": "Ücretli İzin",
-      "teamEvents": "Takım Etkinlikleri"
-    },
-    "applicationProcess": {
-      "title": "Başvuru Süreci",
-      "step1": "Başvuru Gönderimi",
-      "step2": "Ön Değerlendirme",
-      "step3": "Mülakat Süreci",
-      "step4": "Final Kararı"
-    },
-    "whyJoinUs": {
-      "title": "Neden GKS YAPI'ya Katılmalısınız",
-      "innovation": "Yenilikçilik Kültürü",
-      "impact": "Anlamlı Etki",
-      "growth": "Kariyer Gelişimi",
-      "community": "Destekleyici Topluluk"
-    },
-    "contactHR": "İK ile İletişime Geçin",
-    "applyNow": "Şimdi Başvur",
-    "viewJobDetails": "Detayları Görüntüle",
-    "jobListings": [
-      {
-        "id": 1,
-        "title": "İnşaat Müdürü",
-        "description": "İnşaat projelerini başlangıçtan tamamlanmaya kadar yönetmek ve denetlemek. Zaman çizelgelerini, bütçeleri ve ekip koordinasyonunu yönetmek.",
-        "link": "/jobs/construction-manager"
-      },
-      {
-        "id": 2,
-        "title": "Mimari Tasarımcı",
-        "description": "Konut ve ticari mülkler için yenilikçi mimari tasarımlar oluşturmak. Müşteriler ve yüklenicilerle işbirliği yapmak.",
-        "link": "/jobs/architect"
-      },
-      {
-        "id": 3,
-        "title": "Proje Mühendisi",
-        "description": "İnşaat projelerinin teknik yönlerini yönetmek. Bina kodlarına ve güvenlik düzenlemelerine uygunluğu sağlamak.",
-        "link": "/jobs/engineer"
-      },
-      {
-        "id": 4,
-        "title": "Gayrimenkul Analisti",
-        "description": "Piyasa trendlerini, emlak değerlemelerini ve yatırım fırsatlarını analiz etmek. Detaylı finansal raporlar ve tahminler hazırlamak.",
-        "link": "/jobs/analyst"
-      },
-      {
-        "id": 5,
-        "title": "İç Mimar",
-        "description": "Konut ve ticari mülkler için iç mekanları tasarlamak ve koordine etmek. Müşterilerin vizyonlarını gerçekleştirmek için onlarla çalışmak.",
-        "link": "/jobs/interior-designer"
-      }
-    ]
-  },
-  "contact": {
-    "heroHeadline": "İSTANBUL'DAKİ\nEN ÖZEL\nMÜLKLERLE HAYAL\nEVİNİZİ BULUN",
-    "contactsAndDetails": "İLETİŞİM VE DETAYLAR",
-    "howToReachUs": "BİZE NASIL ULAŞABİLİRSİNİZ",
-    "location": {
-      "title": "İSTANBUL - TÜRKİYE",
-      "subtitle": "GKS YAPI GENEL MERKEZİ"
-    },
-    "emailInquiry": {
-      "text": "Herhangi bir soru için",
-      "email": "contact@gksyapi.com"
-    }
   }
 } 

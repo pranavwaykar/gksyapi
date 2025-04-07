@@ -27,5 +27,39 @@
     "bespokeInEverySense": "Bespoke in Every Sense",
     "the": "THE",
     "projects": "PROJECTS"
+  },
+  "aboutPage": {
+    "timeline": [
+      {
+        "date": "2014",
+        "title": "Company Founded",
+        "description": "GKS YAPI was established with a vision to transform urban landscapes"
+      },
+      {
+        "date": "2016",
+        "title": "First Major Project",
+        "description": "Completed our first landmark residential tower in Istanbul"
+      },
+      {
+        "date": "2018",
+        "title": "International Expansion",
+        "description": "Expanded operations into European and Middle Eastern markets"
+      },
+      {
+        "date": "2020",
+        "title": "Sustainability Initiative",
+        "description": "Launched eco-friendly building practices across all projects"
+      },
+      {
+        "date": "2022",
+        "title": "Design Excellence Award",
+        "description": "Received international recognition for architectural innovation"
+      },
+      {
+        "date": "2023",
+        "title": "Future Vision",
+        "description": "Pioneering smart building technology integration in all new developments"
+      }
+    ]
   }
 } 

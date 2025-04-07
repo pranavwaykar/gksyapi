@@ -27,5 +27,39 @@
     "bespokeInEverySense": "Her Anlamda Özel",
     "the": "PROJELER",
     "projects": "İMİZ"
+  },
+  "aboutPage": {
+    "timeline": [
+      {
+        "date": "2014",
+        "title": "Şirket Kuruldu",
+        "description": "GKS YAPI, kentsel manzaraları dönüştürme vizyonuyla kuruldu"
+      },
+      {
+        "date": "2016",
+        "title": "İlk Büyük Proje", 
+        "description": "İstanbul'da ilk önemli konut kulemizi tamamladık"
+      },
+      {
+        "date": "2018",
+        "title": "Uluslararası Genişleme",
+        "description": "Avrupa ve Orta Doğu pazarlarına operasyonları genişlettik"
+      },
+      {
+        "date": "2020",
+        "title": "Sürdürülebilirlik Girişimi",
+        "description": "Tüm projelerde çevre dostu bina uygulamalarını başlattık"
+      },
+      {
+        "date": "2022",
+        "title": "Tasarım Mükemmellik Ödülü",
+        "description": "Mimari yenilik için uluslararası tanınma aldık"
+      },
+      {
+        "date": "2023",
+        "title": "Gelecek Vizyonu",
+        "description": "Tüm yeni gelişmelerde akıllı bina teknolojisi entegrasyonunu öncü ediyoruz"
+      }
+    ]
   }
 } 

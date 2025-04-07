@@ -1,58 +1,27 @@
 import React, { useState, useEffect } from 'react';
-// import { motion } from 'framer-motion';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../translations';
 import '../styles/pages/_about.scss';
 
 const About = () => {
-  const [activeTimelineItem, setActiveTimelineItem] = useState(null);
+  // Track active index instead of ID
+  const [activeIndex, setActiveIndex] = useState(0);
   
-  // Timeline data - replace with your company's actual milestones
-  const timelineData = [
-    {
-      id: 1,
-      date: "2014",
-      title: "Company Founded",
-      description: "GKS YAPI was established with a vision to transform urban landscapes"
-    },
-    {
-      id: 2,
-      date: "2016",
-      title: "First Major Project",
-      description: "Completed our first landmark residential tower in Istanbul"
-    },
-    {
-      id: 3,
-      date: "2018",
-      title: "International Expansion",
-      description: "Expanded operations into European and Middle Eastern markets"
-    },
-    {
-      id: 4,
-      date: "2020",
-      title: "Sustainability Initiative",
-      description: "Launched eco-friendly building practices across all projects"
-    },
-    {
-      id: 5,
-      date: "2022",
-      title: "Design Excellence Award",
-      description: "Received international recognition for architectural innovation"
-    },
-    {
-      id: 6,
-      date: "2023",
-      title: "Future Vision",
-      description: "Pioneering smart building technology integration in all new developments"
-    }
-  ];
+  // Get current language
+  const { language } = useLanguage();
+  const t = translations[language];
   
-  // Activate first timeline item on load
-  useEffect(() => {
-    setActiveTimelineItem(timelineData[0].id);
-  }, []);
+  // Get timeline data from translations
+  const timelineData = t.aboutPage.timeline.map((item, index) => ({
+    id: index + 1,
+    date: item.date,
+    title: item.title,
+    description: item.description
+  }));
   
-  // Activate timeline item on click
-  const handleTimelineClick = (id) => {
-    setActiveTimelineItem(id);
+  // Activate timeline item on click using index
+  const handleTimelineClick = (index) => {
+    setActiveIndex(index);
   };
   
   return (
@@ -66,11 +35,11 @@ const About = () => {
         {/* Timeline items */}
         <div className="timeline-items">
           {timelineData.map((item, index) => (
-            <React.Fragment key={item.id}>
+            <React.Fragment key={index}>
               {/* Timeline item */}
               <div 
-                className={`timeline-item ${index % 2 === 0 ? 'top' : 'bottom'} ${activeTimelineItem === item.id ? 'active' : ''}`}
-                onClick={() => handleTimelineClick(item.id)}
+                className={`timeline-item ${index % 2 === 0 ? 'top' : 'bottom'} ${activeIndex === index ? 'active' : ''}`}
+                onClick={() => handleTimelineClick(index)}
               >
                 {/* Date */}
                 <div className="timeline-date">{item.date}</div>

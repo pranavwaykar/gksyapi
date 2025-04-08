@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../styles/pages/_careers.scss";
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations';
+import Footer from '../components/organisms/Footer';
 
 const Careers = () => {
   const { language } = useLanguage();
@@ -68,68 +69,72 @@ const Careers = () => {
   };
 
   return (
-    <div className="careers-container">
-      <div className="careers-content">
-        <button className="nav-button prev" onClick={handleScrollLeft}>
-          <span>&#8249;</span>
-        </button>
+    <div className="careers-page">
+      <div className="careers-container">
+        <div className="careers-content">
+          <button className="nav-button prev" onClick={handleScrollLeft}>
+            <span>&#8249;</span>
+          </button>
 
-        <div
-          className="careers-slider"
-          ref={sliderRef}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-        >
-          {jobListings.map((job) => (
-            <div className="job-card" key={job.id}>
-              <div className="job-content">
-                <div className="job-image-container">
-                  <img src={job.image} alt={job.title} className="job-image" />
-                  <div className="job-overlay">
-                    <h3>{job.title}</h3>
-                    <p>{job.description}</p>
-                    <div className="link-icon">
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <path
-                          d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        />
-                        <path
-                          d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        />
-                      </svg>
+          <div
+            className="careers-slider"
+            ref={sliderRef}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+          >
+            {jobListings.map((job) => (
+              <div className="job-card" key={job.id}>
+                <div className="job-content">
+                  <div className="job-image-container">
+                    <img src={job.image} alt={job.title} className="job-image" />
+                    <div className="job-overlay">
+                      <h3>{job.title}</h3>
+                      <p>{job.description}</p>
+                      <div className="link-icon">
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <path
+                            d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                          <path
+                            d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                        </svg>
+                      </div>
+                      <Link to={job.link}>
+                        <button className="apply-btn">APPLY NOW</button>
+                      </Link>
                     </div>
-                    <Link to={job.link}>
-                      <button className="apply-btn">APPLY NOW</button>
-                    </Link>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          <button className="nav-button next" onClick={handleScrollRight}>
+            <span>&#8250;</span>
+          </button>
         </div>
 
-        <button className="nav-button next" onClick={handleScrollRight}>
-          <span>&#8250;</span>
-        </button>
+        <div className="vertical-text left">
+          <div className="line"></div>
+          <span className="left-text">{t.careers.joinOurTeam}</span>
+          <span className="large-text-primary">{t.careers.exploreText}</span>
+          <span className="large-text-secondary">{t.careers.careerText}</span>
+        </div>
       </div>
-
-      <div className="vertical-text left">
-        <div className="line"></div>
-        <span className="left-text">{t.careers.joinOurTeam}</span>
-        <span className="large-text-primary">{t.careers.exploreText}</span>
-        <span className="large-text-secondary">{t.careers.careerText}</span>
-      </div>
+      
+      <Footer />
     </div>
   );
 };

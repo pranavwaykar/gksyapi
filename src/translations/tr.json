@@ -204,57 +204,57 @@
     "timeline": [
       {
         "date": "2014",
-        "title": "Şirket Kuruluşu",
-        "description": "GKS YAPI, kent manzaralarını dönüştürme vizyonuyla kuruldu"
+        "title": "Şirket Kuruldu",
+        "description": "GKS YAPI, kentsel manzaraları dönüştürme vizyonuyla kuruldu"
       },
       {
         "date": "2016",
-        "title": "İlk Büyük Proje",
-        "description": "İstanbul'daki ilk simgesel konut kulesini tamamladık"
+        "title": "İlk Büyük Proje", 
+        "description": "İstanbul'da ilk önemli konut kulemizi tamamladık"
       },
       {
         "date": "2018",
         "title": "Uluslararası Genişleme",
-        "description": "Avrupa ve Orta Doğu pazarlarına faaliyetlerimizi genişlettik"
+        "description": "Avrupa ve Orta Doğu pazarlarına operasyonları genişlettik"
       },
       {
         "date": "2020",
         "title": "Sürdürülebilirlik Girişimi",
-        "description": "Tüm projelerde çevre dostu inşaat uygulamalarını başlattık"
+        "description": "Tüm projelerde çevre dostu bina uygulamalarını başlattık"
       },
       {
         "date": "2022",
-        "title": "Tasarım Mükemmelliği Ödülü",
-        "description": "Mimari yenilik için uluslararası tanınırlık kazandık"
+        "title": "Tasarım Mükemmellik Ödülü",
+        "description": "Mimari yenilik için uluslararası tanınma aldık"
       },
       {
         "date": "2023",
         "title": "Gelecek Vizyonu",
-        "description": "Tüm yeni gelişmelerde akıllı bina teknolojisi entegrasyonunda öncülük"
+        "description": "Tüm yeni gelişmelerde akıllı bina teknolojisi entegrasyonunu öncü ediyoruz"
       },
       {
         "date": "2024",
         "title": "10. Yıl Dönümü",
-        "description": "Bugüne kadarki en iddialı projemizin lansmanıyla mükemmellikte on yılı kutladık"
+        "description": "Şimdiye kadarki en iddialı projemizin lansmanıyla mükemmelliğin on yılını kutladık"
       },
       {
         "date": "2019",
         "title": "Yeşil Bina Sertifikası",
-        "description": "Sürdürülebilir inşaata bağlılığımız için LEED Altın sertifikası aldık"
+        "description": "Sürdürülebilir inşaat taahhüdümüz için LEED Gold sertifikası aldık"
       },
       {
         "date": "2017",
-        "title": "Şirket Merkezi",
-        "description": "İstanbul'un merkezindeki son teknoloji şirket merkezimize taşındık"
+        "title": "Kurumsal Merkez",
+        "description": "İstanbul'un merkezindeki yeni son teknoloji kurumsal genel merkezimize taşındık"
       },
       {
         "date": "2021",
         "title": "Topluluk Girişimi",
-        "description": "Yerel topluluk kalkınma projelerini desteklemek için GKS YAPI Vakfı'nı kurduk"
+        "description": "Yerel topluluk geliştirme projelerini desteklemek için GKS YAPI Vakfı'nı kurduk"
       },
       {
         "date": "2015",
-        "title": "İlk Konut Geliştirme",
+        "title": "İlk Konut Projesi",
         "description": "50 lüks daireden oluşan ilk butik konut projemizi tamamladık"
       },
       {
@@ -262,6 +262,71 @@
         "title": "Teknoloji Entegrasyonu",
         "description": "Tüm tasarım ve inşaat süreçlerinde en son BIM teknolojisini uyguladık"
       }
+    ],
+    "verticalText": {
+      "leftText": "İnşaat Mükemmelliği",
+      "primary": "BİZİM",
+      "secondary": "HİKAYEMİZ"
+    }
+  },
+  "about": {
+    "title": "HAKKIMIZDA",
+    "aboutTitle": "Konut Mükemmelliği",
+    "aboutDescription": "Hakkımızda Bilgi Edinin",
+    "ctaText": "Bilgi Edinin!"
+  },
+  "careers": {
+    "joinOurTeam": "Ekibimize Katılın",
+    "exploreText": "Keşfet",
+    "careerText": "Kariyer"
+  },
+  "careersPage": {
+    "title": "Ekibimize Katılın",
+    "subtitle": "Kariyer fırsatlarını keşfedin",
+    "jobListings": [
+      {
+        "id": 1,
+        "title": "İnşaat Müdürü",
+        "description": "İnşaat projelerini başlangıçtan tamamlanmasına kadar yönetin ve denetleyin. Zaman çizelgelerini, bütçeleri ve ekip koordinasyonunu yönetin.",
+        "link": "/jobs/construction-manager"
+      },
+      {
+        "id": 2,
+        "title": "Mimari Tasarımcı",
+        "description": "Konut ve ticari mülkler için yenilikçi mimari tasarımlar oluşturun. Müşteriler ve yüklenicilerle işbirliği yapın.",
+        "link": "/jobs/architect"
+      },
+      {
+        "id": 3,
+        "title": "Proje Mühendisi",
+        "description": "İnşaat projelerinin teknik yönlerini yönetin. Bina kodlarına ve güvenlik düzenlemelerine uygunluğu sağlayın.",
+        "link": "/jobs/engineer"
+      },
+      {
+        "id": 4,
+        "title": "Gayrimenkul Analisti",
+        "description": "Pazar trendlerini, mülk değerlemelerini ve yatırım fırsatlarını analiz edin. Detaylı finansal raporlar ve tahminler hazırlayın.",
+        "link": "/jobs/analyst"
+      },
+      {
+        "id": 5,
+        "title": "İç Mimar",
+        "description": "Konut ve ticari mülkler için iç mekanları tasarlayın ve koordine edin. Vizyonlarını gerçekleştirmek için müşterilerle çalışın.",
+        "link": "/jobs/interior-designer"
+      }
     ]
+  },
+  "contact": {
+    "heroHeadline": "Bizimle İletişime Geçin",
+    "contactsAndDetails": "Bizimle",
+    "howToReachUs": "İletişime Geçin",
+    "location": {
+      "title": "Konumumuz",
+      "subtitle": "Beyoğlu, İstanbul, Türkiye"
+    },
+    "emailInquiry": {
+      "text": "Sorularınız için e-posta gönderin",
+      "email": "info@company.com"
+    }
   }
 } 

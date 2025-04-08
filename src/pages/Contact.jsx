@@ -24,6 +24,13 @@ const Contact = () => {
         {/* </motion.h1> */}
       </div>
 
+      <div className="vertical-text right">
+        <div className="line"></div>
+        <span className="left-text">{t.contact.heroHeadline}</span>
+        <span className="large-text-primary">{t.contact.contactsAndDetails}</span>
+        <span className="large-text-secondary">{t.contact.howToReachUs}</span>
+      </div>
+
             {/* Contact section */}
             <div className="contact-section">
         <div className="contact-label">{t.contact.contactsAndDetails}</div>
@@ -77,6 +84,7 @@ const Contact = () => {
           title="Central Istanbul, Turkey Map"
         ></iframe>
       </div>
+      
       
       {/* Footer Component */}
       <Footer />

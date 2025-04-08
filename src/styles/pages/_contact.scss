@@ -145,6 +145,65 @@
       z-index: 2;
     }
   }
+
+  .vertical-text {
+    position: absolute;
+    height: 55%;
+    z-index: 5;
+    top: 0px;
+    right: 30px !important;
+
+    &.right {
+      right: 8rem;
+    }
+
+    .line {
+      width: 1px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      position: absolute;
+      top: 0;
+      right: 160px;
+    }
+
+    .left-text {
+      font-size: 1.2rem;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      letter-spacing: 0.1rem;
+      font-weight: 500;
+      color: white;
+      position: absolute;
+      bottom: 100px;
+      right: 163px;
+    }
+
+    .large-text-primary {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      letter-spacing: 0.2rem;
+      color: rgb(80 125 250 / 90%);
+      position: absolute;
+      bottom: 100px;
+      left: -152px;
+      text-transform: uppercase;
+      font-size: 3.65rem;
+      font-weight: 600;
+    }
+
+    .large-text-secondary {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      letter-spacing: 0.2rem;
+      color: white;
+      position: absolute;
+      bottom: 143px;
+      left: -83px;
+      text-transform: uppercase;
+      font-size: 3.65rem;
+      font-weight: 600;
+    }
+  }
 }
 
 // Responsive adjustments

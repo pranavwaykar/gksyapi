@@ -262,7 +262,18 @@
         "title": "Technology Integration",
         "description": "Implemented cutting-edge BIM technology across all design and construction processes"
       }
-    ]
+    ],
+    "verticalText": {
+      "leftText": "Building Excellence",
+      "primary": "OUR",
+      "secondary": "STORY"
+    }
+  },
+  "about": {
+    "title": "ABOUT US",
+    "aboutTitle": "Housing Excellence",
+    "aboutDescription": "Know ",
+    "ctaText": "About Us!"
   },
   "careers": {
     "joinOurTeam": "Join Our Team",
@@ -307,8 +318,8 @@
   },
   "contact": {
     "heroHeadline": "Get in Touch With Us",
-    "contactsAndDetails": "Contacts & Details",
-    "howToReachUs": "How to Reach Us",
+    "contactsAndDetails": "Get In Touch",
+    "howToReachUs": "With Us",
     "location": {
       "title": "Our Location",
       "subtitle": "Beyoğlu, Istanbul, Turkey"

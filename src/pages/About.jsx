@@ -260,6 +260,13 @@ const About = () => {
           ))}
         </div>
       </div>
+
+      <div className="vertical-text right">
+        <div className="line"></div>
+        <span className="left-text">{t.aboutPage.verticalText.leftText}</span>
+        <span className="large-text-primary">{t.aboutPage.verticalText.primary}</span>
+        <span className="large-text-secondary">{t.aboutPage.verticalText.secondary}</span>
+      </div>
       
     </div>
   );

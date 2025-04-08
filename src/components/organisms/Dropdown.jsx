@@ -36,6 +36,8 @@ const Dropdown = ({
       )
     : options;
 
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
   return (
     <div className={`form-group dropdown-container ${className}`} ref={dropdownRef}>
       {label && (
@@ -45,7 +47,7 @@ const Dropdown = ({
       )}
       <div
         className={`form-dropdown ${error ? 'error' : ''} ${isOpen ? 'open' : ''}`}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleDropdown}
       >
         <div className="dropdown-header">
           <span className="dropdown-value">

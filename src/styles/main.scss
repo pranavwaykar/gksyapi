@@ -272,7 +272,7 @@ body {
 
     .filter-group {
       display: flex;
-      gap: 1rem;
+      gap: 0.1rem;
       align-items: center;
 
       .filter-dropdown {
@@ -381,6 +381,7 @@ body {
       flex: 1;
       position: relative;
       overflow: hidden;
+
 
       img {
         width: 100%;
@@ -524,6 +525,66 @@ body {
     &.selected {
       background: rgba(45, 156, 219, 0.2);
       color: #2d9cdb;
+    }
+  }
+}
+
+// Filter dropdown styles
+.filter-dropdown {
+  position: relative;
+  margin-right: 15px;
+  min-width: 180px;
+  z-index: 1000;
+  
+  .filter-dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.2s ease;
+    color: white;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .dropdown-arrow {
+      font-size: 10px;
+      margin-left: 10px;
+    }
+  }
+  
+  .dropdown-content {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    z-index: 100000;
+  
+    .dropdown-item {
+      padding: 0.75rem 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      transition: all 0.2s ease;
+      cursor: pointer;
+  
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+  
+      &.selected {
+        background: rgba(45, 156, 219, 0.2);
+        color: #2d9cdb;
+      }
     }
   }
 }

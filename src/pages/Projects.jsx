@@ -297,16 +297,24 @@ const Projects = () => {
     setCurrentPropertyIndex(0);
   };
 
-  const handleNextProperty = () => {
-    setCurrentPropertyIndex((prev) =>
-      prev === filteredProperties.length - 1 ? 0 : prev + 1
-    );
+  const handlePrevProperty = () => {
+    setCurrentPropertyIndex((prevIndex) => {
+      if (prevIndex <= 0) {
+        return filteredProperties.length - 1;
+      } else {
+        return prevIndex - 1;
+      }
+    });
   };
 
-  const handlePrevProperty = () => {
-    setCurrentPropertyIndex((prev) =>
-      prev === 0 ? filteredProperties.length - 1 : prev - 1
-    );
+  const handleNextProperty = () => {
+    setCurrentPropertyIndex((prevIndex) => {
+      if (prevIndex >= filteredProperties.length - 1) {
+        return 0;
+      } else {
+        return prevIndex + 1;
+      }
+    });
   };
 
   // Reset currentIndex when filters change
@@ -371,67 +379,132 @@ const Projects = () => {
                          propertyData.find(p => p.id === filteredProperties[currentPropertyIndex].id)?.image}
                     alt={filteredProperties[currentPropertyIndex].title}
                   />
-                </div>
-                <div className="property-details">
-                  <div className="detail-row">
-                    <span className="label">{t.projects.propertyCard.status}</span>
-                    <span className="value completed">
-                      {filteredProperties[currentPropertyIndex].status}
-                    </span>
+                  
+                  {/* Location information */}
+                  <div className="location-info">
+                    <div className="location-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                      </svg>
+                    </div>
+                    <span className="location-text">{filteredProperties[currentPropertyIndex].location}</span>
                   </div>
-
-                  <div className="detail-row">
-                    <span className="label">
-                      {t.projects.propertyCard.startEndDate || "Project Start Date/ End Date"}
-                    </span>
-                    <span className="value">
-                      {filteredProperties[currentPropertyIndex].startDate}-
-                      {filteredProperties[currentPropertyIndex].endDate}
-                    </span>
+                  
+                  {/* Company logo */}
+                  <img 
+                    src="https://yourdomain.com/logo.png" 
+                    alt="Company Logo" 
+                    className="property-logo" 
+                    style={{
+                      zIndex: -1
+                    }}
+                  />
+                  
+                  {/* Action buttons at top */}
+                  <div className="action-buttons-top">
+                    <button className="action-button">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                      </svg>
+                      {t.projects.buttons.watchVideo}
+                    </button>
+                    <button className="action-button">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                      </svg>
+                      {t.projects.buttons.viewCatalog}
+                    </button>
+                    <button className="action-button">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                      </svg>
+                      {t.projects.buttons.enquireNow}
+                    </button>
                   </div>
-
-                  <div className="detail-row">
-                    <span className="label">{t.projects.propertyCard.price || "Price"}</span>
-                    <span className="value">
-                      €{filteredProperties[currentPropertyIndex].price}
-                    </span>
-                  </div>
-
-                  <div className="detail-row">
-                    <span className="label">{t.projects.propertyCard.amenities || "Amenities"}</span>
-                    <span className="value">
-                      {filteredProperties[
-                        currentPropertyIndex
-                      ].amenities.join(" | ")}
-                    </span>
-                  </div>
-
-                  <div className="detail-row">
-                    <span className="label">{t.projects.propertyCard.details || "Details"}</span>
-                    <div className="value">
-                      <p>
-                        {t.projects.propertyCard.floorsLabel || "No of Floors:"} {" "}
-                        {
-                          filteredProperties[currentPropertyIndex].details
-                            .floors
-                        }
-                      </p>
-                      {filteredProperties[currentPropertyIndex].details
-                        .bhkTypes && (
-                        <>
-                          <p>{t.projects.propertyCard.twoBHKFlats || "No of 2BHK Flats"}</p>
-                          <p>{t.projects.propertyCard.threeBHKFlats || "No of 3 BHK Flats"}</p>
-                        </>
-                      )}
+                  
+                  {/* Information boxes at bottom */}
+                  <div className="info-boxes">
+                    <div className="info-box">
+                      <div className="info-title">{t.projects.projectDetails.startDate}</div>
+                      <div className="info-value">{filteredProperties[currentPropertyIndex].startDate?.split(" ")[1] || "2020"}</div>
+                    </div>
+                    
+                    <div className="info-box">
+                      <div className="info-title">{t.projects.projectDetails.endDate}</div>
+                      <div className="info-value">{filteredProperties[currentPropertyIndex].endDate?.split(" ")[1] || "2025"}</div>
+                    </div>
+                    
+                    <div className="info-box">
+                      <div className="info-title">{t.projects.propertyCard.price}</div>
+                      <div className="info-value flex">
+                        From
+                        <svg className="currency-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="12" y1="1" x2="12" y2="23"></line>
+                          <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                      </div>
+                    </div>
+                    
+                    <div className="info-box">
+                      <div className="info-title">{t.projects.propertyCard.amenities}</div>
+                      <div className="info-value">
+                        <div className="amenity-icons">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                          </svg>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="info-box">
+                      <div className="info-title">{t.projects.propertyCard.details}</div>
+                      <div className="info-value">More Info</div>
                     </div>
                   </div>
-
-                  <div className="action-buttons">
-                    <button className="primary-btn">{t.projects.buttons.watchVideo || "Watch Video"}</button>
-                    <div className="secondary-buttons">
-                      <button className="secondary-btn">{t.projects.buttons.viewCatalog || "View Catalog"}</button>
-                      <button className="secondary-btn">{t.projects.buttons.enquireNow || "Enquire Now"}</button>
+                  
+                  {/* Navigation arrows for horizontal image sliding */}
+                  {filteredProperties.length > 1 && (
+                    <div className="navigation-controls">
+                      <button 
+                        className="nav-arrow prev" 
+                        onClick={(e) => {
+                          e.stopPropagation();  // Prevent event bubbling
+                          handlePrevProperty();
+                        }}
+                      >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                      </button>
+                      <button 
+                        className="nav-arrow next" 
+                        onClick={(e) => {
+                          e.stopPropagation();  // Prevent event bubbling
+                          handleNextProperty();
+                        }}
+                      >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                      </button>
                     </div>
+                  )}
+                  
+                  {/* Pagination dots */}
+                  <div className="pagination-dots">
+                    <div className="dot active"></div>
+                    <div className="dot"></div>
+                    <div className="dot"></div>
                   </div>
                 </div>
               </div>
@@ -440,35 +513,6 @@ const Projects = () => {
             <div className="no-results">
               {t.projects.messages.noResults || "No properties match the selected filters"}
             </div>
-          )}
-
-          {filteredProperties.length > 1 && (
-            <>
-              <button className="nav-btn prev" onClick={handlePrevProperty}>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </button>
-              <button className="nav-btn next" onClick={handleNextProperty}>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </button>
-            </>
           )}
         </div>
       </div>

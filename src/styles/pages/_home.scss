@@ -130,7 +130,7 @@ body,
       padding: 2.5rem 3rem;
       margin-left: 5%;
 
-      .solutions-white-box-top {
+      .animation-white-box-first {
         position: absolute;
         top: 0px;
         left: -173px;
@@ -140,7 +140,18 @@ body,
         padding: 2.5rem 3rem;
         margin-left: 5%;
       }
-      .solutions-white-box-bottom {
+      .animation-white-box-second,
+      .animation-white-box-third {
+        position: absolute;
+        top: 190px;
+        left: -173px;
+        background-color: white;
+        width: 50%;
+        height: 50%;
+        padding: 2.5rem 3rem;
+        margin-left: 5%;
+      }
+      .animation-white-box-fourth {
         position: absolute;
         top: 190px;
         left: -173px;
@@ -362,7 +373,7 @@ body,
         padding: 2.5rem 3rem;
         margin-left: 5%;
 
-        .solutions-white-box-top {
+        .animation-white-box-first {
           position: absolute;
           top: 0px;
           left: -90px;
@@ -372,7 +383,7 @@ body,
           padding: 2.5rem 3rem;
           margin-left: 5%;
         }
-        .solutions-white-box-bottom {
+        .animation-white-box-second {
           position: absolute;
           top: 190px;
           left: -90px;

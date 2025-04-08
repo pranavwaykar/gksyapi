@@ -296,3 +296,100 @@
     }
   }
 } 
+
+// Career application form styles
+.career-application-form {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(10, 18, 38, 0.08);
+  
+  .form-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    
+    .back-button {
+      align-self: flex-start;
+      background: none;
+      border: none;
+      color: #0a1226;
+      font-weight: 500;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: translateX(-5px);
+        color: #1a3c72;
+      }
+      
+      &:focus {
+        outline: none;
+      }
+    }
+    
+    h3 {
+      margin: 15px 0;
+      color: #0a1226;
+      font-size: 28px;
+      font-weight: 600;
+    }
+  }
+  
+  // Styles specifically for the contact form inside careers page
+  .contact-form-container {
+    margin: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+    
+    .contact-info {
+      background-color: #f5f7fa;
+    }
+    
+    .contact-form {
+      background-color: #ffffff;
+      
+      .send-button {
+        background-color: #0a1226;
+        
+        &:hover {
+          background-color: #1a3c72;
+        }
+      }
+    }
+  }
+  
+  // Make sure form adapts well to different screen sizes
+  @media (max-width: 768px) {
+    padding: 20px 15px;
+    
+    .form-header h3 {
+      font-size: 24px;
+    }
+  }
+}
+
+// Ensure the form is properly centered when displayed
+.careers-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+  height: 100%;
+  
+  // Adjust when form is visible
+  &.form-visible {
+    padding: 20px;
+  }
+} 

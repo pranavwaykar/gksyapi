@@ -3,7 +3,7 @@ import '../styles/components/contactForm.scss';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations';
 
-const ContactForm = () => {
+const ContactForm = ({ jobTitle }) => {
   const { language } = useLanguage();
   const t = translations[language];
   
@@ -42,7 +42,7 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    console.log("Form submitted for position:", jobTitle);
     // Add your form submission logic here
   };
 
@@ -51,159 +51,86 @@ const ContactForm = () => {
       <div className="contact-info">
         <div className="info-item">
           <div className="info-content">
-            <p className="info-label">You can Email Me Here</p>
-            <p className="info-value">jefferycannon@gmail.com</p>
+            <p className="info-label">Email</p>
+            <p className="info-value">hello@company.com</p>
           </div>
-          <div className="info-arrow">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
+          <a href="mailto:hello@company.com" className="info-arrow">
+            <i className="fas fa-arrow-right"></i>
+          </a>
         </div>
         
         <div className="info-item">
           <div className="info-content">
-            <p className="info-label">Give Me a Call on</p>
-            <p className="info-value">+91 91813 23 2309</p>
+            <p className="info-label">Phone</p>
+            <p className="info-value">+1 (555) 000-0000</p>
           </div>
-          <div className="info-arrow">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
+          <a href="tel:+15550000000" className="info-arrow">
+            <i className="fas fa-arrow-right"></i>
+          </a>
         </div>
         
         <div className="info-item">
           <div className="info-content">
             <p className="info-label">Location</p>
-            <p className="info-value">Somewhere in the World</p>
+            <p className="info-value">123 Business Ave, City</p>
           </div>
-          <div className="info-arrow">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
+          <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="info-arrow">
+            <i className="fas fa-arrow-right"></i>
+          </a>
         </div>
         
-
+        <div className="social-connections">
+          <p className="social-label">Connect with us</p>
+          <div className="social-icons">
+            <a href="#" className="social-icon linkedin">
+              <i className="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" className="social-icon twitter">
+              <i className="fab fa-twitter"></i>
+            </a>
+            <a href="#" className="social-icon dribbble">
+              <i className="fab fa-dribbble"></i>
+            </a>
+          </div>
+        </div>
       </div>
       
       <div className="contact-form">
         <form onSubmit={handleSubmit}>
+          {jobTitle && (
+            <div className="form-group">
+              <input type="text" name="position" value={`Position: ${jobTitle}`} readOnly />
+            </div>
+          )}
+          
           <div className="form-row">
             <div className="form-group">
-              <input 
-                type="text" 
-                id="firstName" 
-                name="firstName"
-                placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleInputChange}
-                required
-              />
+              <input type="text" name="firstName" placeholder="First Name" required />
             </div>
             <div className="form-group">
-              <input 
-                type="text" 
-                id="lastName" 
-                name="lastName"
-                placeholder="Last Name"
-                value={formData.lastName}
-                onChange={handleInputChange}
-                required
-              />
+              <input type="text" name="lastName" placeholder="Last Name" required />
             </div>
           </div>
           
           <div className="form-row">
             <div className="form-group">
-              <input 
-                type="email" 
-                id="email" 
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
+              <input type="email" name="email" placeholder="Email Address" required />
             </div>
             <div className="form-group">
-              <input 
-                type="tel" 
-                id="phone" 
-                name="phone"
-                placeholder="Phone Number"
-                value={formData.phone}
-                onChange={handleInputChange}
-              />
+              <input type="tel" name="phone" placeholder="Phone Number" />
             </div>
           </div>
           
           <div className="form-group">
-            <p className="checkbox-label">Why are you contacting us?</p>
-            <div className="checkbox-group">
-              <div className="checkbox-row">
-                <div className="checkbox-item">
-                  <input 
-                    type="checkbox" 
-                    id="webDesign" 
-                    name="webDesign"
-                    checked={formData.contactReason.webDesign}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label htmlFor="webDesign">Web Design</label>
-                </div>
-                <div className="checkbox-item">
-                  <input 
-                    type="checkbox" 
-                    id="collaboration" 
-                    name="collaboration"
-                    checked={formData.contactReason.collaboration}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label htmlFor="collaboration">Collaboration</label>
-                </div>
-              </div>
-              <div className="checkbox-row">
-                <div className="checkbox-item">
-                  <input 
-                    type="checkbox" 
-                    id="mobileAppDesign" 
-                    name="mobileAppDesign"
-                    checked={formData.contactReason.mobileAppDesign}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label htmlFor="mobileAppDesign">Mobile App Design</label>
-                </div>
-                <div className="checkbox-item">
-                  <input 
-                    type="checkbox" 
-                    id="others" 
-                    name="others"
-                    checked={formData.contactReason.others}
-                    onChange={handleCheckboxChange}
-                  />
-                  <label htmlFor="others">Others</label>
-                </div>
-              </div>
-            </div>
+            <textarea name="message" placeholder="Tell us about your experience and why you're interested in this position" required></textarea>
           </div>
           
           <div className="form-group">
-            <textarea 
-              id="message" 
-              name="message"
-              placeholder="Your Message here..."
-              value={formData.message}
-              onChange={handleInputChange}
-              rows="6"
-              required
-            ></textarea>
+            <p className="checkbox-label">Upload your CV/Resume:</p>
+            <input type="file" name="resume" accept=".pdf,.doc,.docx" required />
           </div>
           
-          <div className="form-group">
-            <button type="submit" className="send-button">Send</button>
-          </div>
+          <button type="submit" className="send-button">Apply</button>
         </form>
       </div>
     </div>

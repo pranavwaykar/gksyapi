@@ -1,0 +1,242 @@
+.contact-form-container {
+  display: flex;
+  background-color: #f5f2ef;
+//   border-radius: 8px;
+  overflow: hidden;
+  margin: 40px 0;
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.contact-info {
+  flex: 1;
+  padding: 40px;
+  background-color: #f1eee9;
+  
+  .info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+  
+  .info-content {
+    flex: 1;
+  }
+  
+  .info-label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  
+  .info-value {
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+    margin: 0;
+  }
+  
+  .info-arrow {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 50%;
+    color: #333;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: #0a1226;
+      color: white;
+      transform: translateX(5px);
+    }
+  }
+  
+  
+  .social-label {
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 15px;
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-3px);
+    }
+    
+    &.linkedin {
+      background-color: #0a1226;
+    }
+    
+    &.twitter {
+      background-color: #0a1226;
+    }
+    
+    &.dribbble {
+      background-color: #0a1226;
+    }
+  }
+}
+
+.contact-form {
+  flex: 1.5;
+  padding: 40px;
+  background-color: white;
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 20px;
+    
+    @media (max-width: 576px) {
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+  
+  .form-group {
+    flex: 1;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border-color 0.3s;
+    background-color: #f9f9f9;
+    
+    &:focus {
+      border-color: #0a1226;
+      outline: none;
+    }
+    
+    &::placeholder {
+      color: #999;
+    }
+  }
+  
+  .checkbox-label {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .checkbox-row {
+    display: flex;
+    gap: 30px;
+    
+    @media (max-width: 576px) {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    input[type="checkbox"] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      background-color: #f9f9f9;
+      margin: 0;
+      position: relative;
+      cursor: pointer;
+      
+      &:checked {
+        background-color: #0a1226;
+        border-color: #0a1226;
+        
+        &::after {
+          content: "";
+          position: absolute;
+          top: 40%;
+          left: 50%;
+          transform: translate(-50%, -50%) rotate(45deg);
+          width: 5px;
+          height: 10px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+        }
+      }
+    }
+    
+    label {
+      font-size: 14px;
+      color: #666;
+      cursor: pointer;
+    }
+  }
+  
+  textarea {
+    resize: none;
+    min-height: 120px;
+  }
+  
+  .send-button {
+    background-color: #0a1226;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 13px 28px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    max-width: 120px;
+    align-self: center;
+    
+    &:hover {
+      background-color: #050b17;
+      transform: translateY(-2px);
+    }
+  }
+} 

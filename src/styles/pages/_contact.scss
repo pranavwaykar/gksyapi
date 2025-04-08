@@ -35,6 +35,7 @@
     z-index: 1;
     font-size: 3rem;
     // font-weight: 600;
+    margin-bottom: 60px;
     
     .hero-headline {
       font-size: 4rem;
@@ -117,11 +118,10 @@
     height: 450px;
     position: relative;
     overflow: hidden;
-    margin-top: 2rem;
+    margin: 2rem 0;
     z-index: 1;
     padding: 0 5rem;
     background: #0a1226;
-    margin-bottom: 5rem;
     
     iframe {
       position: relative;
@@ -212,4 +212,10 @@
       height: 250px;
     }
   }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }

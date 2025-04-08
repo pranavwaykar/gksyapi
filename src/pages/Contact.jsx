@@ -3,6 +3,7 @@ import React from 'react';
 import '../styles/pages/_contact.scss';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations';
+import ContactForm from '../components/ContactForm';
 import Footer from '../components/organisms/Footer';
 
 const Contact = () => {
@@ -22,9 +23,9 @@ const Contact = () => {
           {t.contact.heroHeadline}
         {/* </motion.h1> */}
       </div>
-      
-      {/* Contact section */}
-      <div className="contact-section">
+
+            {/* Contact section */}
+            <div className="contact-section">
         <div className="contact-label">{t.contact.contactsAndDetails}</div>
         <h2 className="contact-title">{t.contact.howToReachUs}</h2>
         
@@ -55,6 +56,13 @@ const Contact = () => {
           </div>
         </div>
       </div>
+      
+      {/* Contact form section */}
+      <div className="container">
+        <ContactForm />
+      </div>
+      
+
       
       {/* Google Maps section - Central Istanbul with blue tint */}
       <div className="map-section">

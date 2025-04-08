@@ -3,6 +3,7 @@ import React from 'react';
 import '../styles/pages/_contact.scss';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations';
+import Footer from '../components/organisms/Footer';
 
 const Contact = () => {
   const { language } = useLanguage();
@@ -68,6 +69,9 @@ const Contact = () => {
           title="Central Istanbul, Turkey Map"
         ></iframe>
       </div>
+      
+      {/* Footer Component */}
+      <Footer />
     </div>
   );
 };

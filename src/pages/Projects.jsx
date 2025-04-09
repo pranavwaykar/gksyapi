@@ -518,19 +518,19 @@ const Projects = () => {
       <div
         className="project-list-page"
         style={{
-          backgroundImage:
-            filteredProperties.length > 0
-              ? `linear-gradient(rgba(26, 60, 114, 0.85), rgba(12, 45, 98, 0.9)), 
-               url(${
-                 filteredProperties[currentPropertyIndex].image ||
-                 propertyData.find(
-                   (p) => p.id === filteredProperties[currentPropertyIndex].id
-                 )?.image
-               })`
-              : "linear-gradient(120deg, #1a3c72 0%, #0c2d62 100%)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
+          // backgroundImage:
+          //   filteredProperties.length > 0
+          //     ? `linear-gradient(rgba(26, 60, 114, 0.85), rgba(12, 45, 98, 0.9)), 
+          //      url(${
+          //        filteredProperties[currentPropertyIndex].image ||
+          //        propertyData.find(
+          //          (p) => p.id === filteredProperties[currentPropertyIndex].id
+          //        )?.image
+          //      })`
+          //     : "linear-gradient(120deg, #1a3c72 0%, #0c2d62 100%)",
+          // backgroundSize: "cover",
+          // backgroundPosition: "center",
+          // backgroundAttachment: "fixed",
         }}
         onWheel={handleScroll}
       >

@@ -252,13 +252,13 @@ body {
 // Dropdown styles for filters in Projects page
 .project-list-page {
   position: relative;
-  display: flex
-;
+  display: flex;
   align-items: center;
   overflow: hidden;
   height: 100vh;
   flex-direction: column;
   padding-top: 100px;
+  background-color: #1a2b56;
 
   .filters-bar {
     width: 100%;

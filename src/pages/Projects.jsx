@@ -419,6 +419,40 @@ const Projects = () => {
     setCurrentPropertyIndex(0);
   }, [filters]);
 
+  // Create refs for the info boxes
+  const infoBoxesRef = useRef(null);
+  const infoBoxesArray = useRef([]);
+  
+  // Set up GSAP animation for info boxes
+  useEffect(() => {
+    if (showAllProjects) {
+      // Reset the array when view changes
+      infoBoxesArray.current = [];
+      
+      // Find all info-box elements
+      const boxes = document.querySelectorAll('.info-box');
+      if (boxes.length > 0) {
+        // Create animation timeline
+        const tl = gsap.timeline();
+        
+        // Initial state - invisible and offset
+        gsap.set(boxes, { 
+          y: 50, 
+          opacity: 0 
+        });
+        
+        // Animate each box with a stagger
+        tl.to(boxes, {
+          duration: 0.8,
+          y: 0,
+          opacity: 1,
+          ease: "power3.out",
+          stagger: 0.15
+        });
+      }
+    }
+  }, [showAllProjects, currentPropertyIndex]); // Re-run when project changes
+
   if (showAllProjects) {
     return (
       <div
@@ -532,8 +566,8 @@ const Projects = () => {
                   </div>
 
                   {/* Information boxes at bottom */}
-                  <div className="info-boxes">
-                    <div className="info-box">
+                  <div className="info-boxes" ref={infoBoxesRef}>
+                    <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
                       <div className="info-title">
                         {t.projects.projectDetails.startDate}
                       </div>
@@ -544,7 +578,7 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    <div className="info-box">
+                    <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
                       <div className="info-title">
                         {t.projects.projectDetails.endDate}
                       </div>
@@ -555,7 +589,7 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    <div className="info-box">
+                    <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
                       <div className="info-title">
                         {t.projects.propertyCard.price}
                       </div>
@@ -576,7 +610,7 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    <div className="info-box">
+                    <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
                       <div className="info-title">
                         {t.projects.propertyCard.amenities}
                       </div>
@@ -614,7 +648,7 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    <div className="info-box">
+                    <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
                       <div className="info-title">
                         {t.projects.propertyCard.details}
                       </div>

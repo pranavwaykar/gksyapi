@@ -204,11 +204,18 @@
 // Responsive adjustments
 
 @media (max-width: 1900px) {
-  .contact-page .vertical-text { .large-text-primary{
-    bottom: 100px;
+  .contact-page .vertical-text { 
+    top: -34rem;
+    right: 18px;
+
+    .left-text{    bottom: 15rem;
+    }
+    
+    .large-text-primary{
+    bottom: 15rem;
     left: -166px;
   } .large-text-secondary{
-    bottom: 220px;
+    bottom: 22.6rem;
     left: -128px;
 
   }}

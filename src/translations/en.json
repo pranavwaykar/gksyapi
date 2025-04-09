@@ -214,64 +214,54 @@
   "aboutPage": {
     "timeline": [
       {
+        "date": "1994",
+        "title": "Establishment of GKS YAPI",
+        "description": "GKS YAPI was founded, laying groundwork for future real estate innovations."
+      },
+      {
+        "date": "1998",
+        "title": "First Residential Project",
+        "description": "Completed our first residential project, setting standards for quality living spaces."
+      },
+      {
+        "date": "2005",
+        "title": "Expansion in Istanbul",
+        "description": "Expanded operations within Istanbul, focusing on urban residential developments."
+      },
+      {
+        "date": "2010",
+        "title": "Commercial Ventures",
+        "description": "Entered the commercial real estate market with innovative office spaces."
+      },
+      {
         "date": "2014",
-        "title": "Company Founded",
-        "description": "GKS YAPI was established with a vision to transform urban landscapes"
+        "title": "Sustainability Initiatives",
+        "description": "Implemented sustainable building practices across all projects."
       },
       {
         "date": "2016",
-        "title": "First Major Project",
-        "description": "Completed our first landmark residential tower in Istanbul"
+        "title": "National Recognition",
+        "description": "Received national awards for excellence in real estate development."
       },
       {
         "date": "2018",
         "title": "International Expansion",
-        "description": "Expanded operations into European and Middle Eastern markets"
+        "description": "Expanded into European markets, establishing presence in key cities."
       },
       {
         "date": "2020",
-        "title": "Sustainability Initiative",
-        "description": "Launched eco-friendly building practices across all projects"
+        "title": "Digital Transformation",
+        "description": "Adopted digital tools for project management and customer engagement."
       },
       {
         "date": "2022",
-        "title": "Design Excellence Award",
-        "description": "Received international recognition for architectural innovation"
+        "title": "Community Development",
+        "description": "Launched initiatives to support and develop local communities."
       },
       {
-        "date": "2023",
-        "title": "Future Vision",
-        "description": "Pioneering smart building technology integration in all new developments"
-      },
-      {
-        "date": "2024",
-        "title": "10th Anniversary Milestone",
-        "description": "Celebrated a decade of excellence with the launch of our most ambitious project yet"
-      },
-      {
-        "date": "2019",
-        "title": "Green Building Certification",
-        "description": "Achieved LEED Gold certification for our commitment to sustainable construction"
-      },
-      {
-        "date": "2017",
-        "title": "Corporate Headquarters",
-        "description": "Moved into our new state-of-the-art corporate headquarters in downtown Istanbul"
-      },
-      {
-        "date": "2021",
-        "title": "Community Initiative",
-        "description": "Launched the GKS YAPI Foundation to support local community development projects"
-      },
-      {
-        "date": "2015",
-        "title": "First Residential Development",
-        "description": "Completed our first boutique residential project featuring 50 luxury apartments"
-      },
-      {
-        "date": "2019",
-        "title": "Technology Integration",
-        "description": "Implemented cutting-edge BIM technology across all design and construction processes"
+        "date": "2025",
+        "title": "Future-Ready Projects",
+        "description": "Focused on integrating smart technologies in new developments."
       }
     ],
     "verticalText": {
@@ -337,7 +327,7 @@
     },
     "emailInquiry": {
       "text": "Email us for inquiries",
-      "email": "info@company.com"
+      "email": "info@gksyapi.com"
     }
   }
 } 

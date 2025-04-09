@@ -213,64 +213,54 @@
   "aboutPage": {
     "timeline": [
       {
+        "date": "1994",
+        "title": "GKS YAPI'nın Kuruluşu",
+        "description": "GKS YAPI kuruldu, gayrimenkul yenilikleri için temel atıldı."
+      },
+      {
+        "date": "1998",
+        "title": "İlk Konut Projesi",
+        "description": "İlk konut projemizi tamamladık, kalite standartlarını belirledik."
+      },
+      {
+        "date": "2005",
+        "title": "İstanbul'da Genişleme",
+        "description": "İstanbul'da operasyonlarımızı genişlettik, kentsel konutlara odaklandık."
+      },
+      {
+        "date": "2010",
+        "title": "Ticari Girişimler",
+        "description": "Yenilikçi ofis alanları ile ticari gayrimenkul pazarına girdik."
+      },
+      {
         "date": "2014",
-        "title": "Şirket Kuruldu",
-        "description": "GKS YAPI, kentsel manzaraları dönüştürme vizyonuyla kuruldu"
+        "title": "Sürdürülebilirlik Girişimleri",
+        "description": "Tüm projelerde sürdürülebilir bina uygulamalarını başlattık."
       },
       {
         "date": "2016",
-        "title": "İlk Büyük Proje", 
-        "description": "İstanbul'da ilk önemli konut kulemizi tamamladık"
+        "title": "Ulusal Tanınma",
+        "description": "Gayrimenkul geliştirmede mükemmellik için ulusal ödüller aldık."
       },
       {
         "date": "2018",
         "title": "Uluslararası Genişleme",
-        "description": "Avrupa ve Orta Doğu pazarlarına operasyonları genişlettik"
+        "description": "Avrupa pazarına açıldık, önemli şehirlerde varlık gösterdik."
       },
       {
         "date": "2020",
-        "title": "Sürdürülebilirlik Girişimi",
-        "description": "Tüm projelerde çevre dostu bina uygulamalarını başlattık"
+        "title": "Dijital Dönüşüm",
+        "description": "Proje yönetimi ve müşteri etkileşimi için dijital araçlar benimsedik."
       },
       {
         "date": "2022",
-        "title": "Tasarım Mükemmellik Ödülü",
-        "description": "Mimari yenilik için uluslararası tanınma aldık"
+        "title": "Topluluk Gelişimi",
+        "description": "Yerel toplulukları desteklemek için girişimler başlattık."
       },
       {
-        "date": "2023",
-        "title": "Gelecek Vizyonu",
-        "description": "Tüm yeni gelişmelerde akıllı bina teknolojisi entegrasyonunu öncü ediyoruz"
-      },
-      {
-        "date": "2024",
-        "title": "10. Yıl Dönümü",
-        "description": "Şimdiye kadarki en iddialı projemizin lansmanıyla mükemmelliğin on yılını kutladık"
-      },
-      {
-        "date": "2019",
-        "title": "Yeşil Bina Sertifikası",
-        "description": "Sürdürülebilir inşaat taahhüdümüz için LEED Gold sertifikası aldık"
-      },
-      {
-        "date": "2017",
-        "title": "Kurumsal Merkez",
-        "description": "İstanbul'un merkezindeki yeni son teknoloji kurumsal genel merkezimize taşındık"
-      },
-      {
-        "date": "2021",
-        "title": "Topluluk Girişimi",
-        "description": "Yerel topluluk geliştirme projelerini desteklemek için GKS YAPI Vakfı'nı kurduk"
-      },
-      {
-        "date": "2015",
-        "title": "İlk Konut Projesi",
-        "description": "50 lüks daireden oluşan ilk butik konut projemizi tamamladık"
-      },
-      {
-        "date": "2019",
-        "title": "Teknoloji Entegrasyonu",
-        "description": "Tüm tasarım ve inşaat süreçlerinde en son BIM teknolojisini uyguladık"
+        "date": "2025",
+        "title": "Geleceğe Hazır Projeler",
+        "description": "Akıllı teknolojileri entegre ederek geleceğe hazır yaşam alanları sunduk."
       }
     ],
     "verticalText": {
@@ -336,7 +326,7 @@
     },
     "emailInquiry": {
       "text": "Sorularınız için e-posta gönderin",
-      "email": "info@company.com"
+      "email": "info@gksyapi.com"
     }
   }
 } 

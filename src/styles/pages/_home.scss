@@ -80,6 +80,8 @@ body,
         &.lang-selector {
           display: flex;
           gap: 0.5rem;
+          width: 50px;
+          height: 24px;
 
           a {
             opacity: 0.6;

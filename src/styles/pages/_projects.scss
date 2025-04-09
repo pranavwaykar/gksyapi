@@ -629,6 +629,10 @@
         cursor: pointer;
         transition: all 0.2s ease;
 
+        &.highlighted {
+          background-color: grey;
+        }
+
         &.active {
           background-color: white;
         }

@@ -741,11 +741,33 @@ const Projects = () => {
                     </div>
                   )}
 
-                  {/* Pagination dots */}
-                  <div className="pagination-dots">
-                    <div className="dot active"></div>
-                    <div className="dot"></div>
-                    <div className="dot"></div>
+                  {/* Pagination dots - Dynamic based on number of images */}
+                  <div className="pagination-dots flex justify-center space-x-2 mt-4">
+                    {(() => {
+                      const currentProperty = filteredProperties[currentPropertyIndex];
+                      // Get original property that has the images
+                      const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+                      
+                      // If no images array or only one image, don't show dots
+                      if (!originalProperty?.images || originalProperty.images.length <= 1) {
+                        return null;
+                      }
+                      
+                      // Create array of dots based on number of images
+                      return originalProperty.images.map((_, index) => (
+                        <div 
+                          key={index}
+                          className={`dot w-2 h-2 rounded-full cursor-pointer transition-all duration-300 ${
+                            currentImageIndex === index ? 'highlighted scale-125' : 'bg-gray-300'
+                          }`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setCurrentImageIndex(index);
+                          }}
+                          aria-label={`Image ${index + 1}`}
+                        ></div>
+                      ));
+                    })()}
                   </div>
                 </div>
               </div>

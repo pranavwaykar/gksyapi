@@ -3,7 +3,7 @@
 @use "./pages/about";
 @use "./pages/projects";
 @use "./pages/home";
-@use "./pages/project-list";
+// @use "./pages/project-list";
 
 :root {
   --navbar-height: 100px;
@@ -272,8 +272,9 @@ body {
 
     .filter-group {
       display: flex;
-      gap: 0.1rem;
+      gap: 1rem;
       align-items: center;
+      margin-bottom: 20px;
 
       .filter-dropdown {
         cursor: pointer;
@@ -533,7 +534,7 @@ body {
 .filter-dropdown {
   position: relative;
   margin-right: 15px;
-  min-width: 180px;
+  // min-width: 180px;
   z-index: 1000;
   
   .filter-dropdown-header {

@@ -46,8 +46,8 @@
     "projectDetails": {
       "title": "Property Details",
       "location": "Location",
-      "startDate": "Start Date",
-      "endDate": "End Date",
+      "startDate": "Project Start Date",
+      "endDate": "Project End Date",
       "price": "Price",
       "area": "Area",
       "units": "Units",

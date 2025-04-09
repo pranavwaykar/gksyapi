@@ -197,6 +197,7 @@
             "Parking"
           ],
           "videoUrl": "https://www.youtube.com/watch?v=yaWHEh0R1yo",
+          "brochureUrl": "",
           "details": {
             "floors": 12,
             "bhkTypes": ["1 BHK", "2 BHK"],

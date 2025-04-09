@@ -158,6 +158,7 @@ const propertyData = [
     price: "550,000",
     amenities: ["Gardens", "Gym", "Pool", "Parking"],
     videoUrl: "https://www.youtube.com/watch?v=yaWHEh0R1yo",
+    brochureUrl: "",
     details: {
       floors: 12,
       bhkTypes: ["1 BHK", "2 BHK"],
@@ -654,14 +655,50 @@ const Projects = () => {
                       </span>
                     </div>
 
-                    <button className="action-button" onClick={handleWatchVideo}>
-                      <FontAwesomeIcon icon={faPlay} />
-                      {t.projects.buttons.watchVideo}
-                    </button>
-                    <button className="action-button" onClick={handleViewCatalog}>
-                      <FontAwesomeIcon icon={faFileAlt} />
-                      {t.projects.buttons.viewCatalog}
-                    </button>
+                    {/* Watch Video button - disabled if no videoUrl */}
+                    {(() => {
+                      const currentProperty = filteredProperties[currentPropertyIndex];
+                      const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+                      const hasVideo = originalProperty?.videoUrl && originalProperty.videoUrl.trim() !== '';
+                      
+                      return (
+                        <button 
+                          className={`action-button ${hasVideo ? '' : 'disabled'}`} 
+                          onClick={hasVideo ? handleWatchVideo : null}
+                          disabled={!hasVideo}
+                          title={hasVideo ? 'Watch video' : 'No video available'}
+                        >
+                          <FontAwesomeIcon 
+                            icon={faPlay} 
+                            style={{ opacity: hasVideo ? 1 : 0.5 }}
+                          />
+                          {t.projects.buttons.watchVideo}
+                        </button>
+                      );
+                    })()}
+
+                    {/* View Catalog button - disabled if no brochureUrl */}
+                    {(() => {
+                      const currentProperty = filteredProperties[currentPropertyIndex];
+                      const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+                      const hasBrochure = originalProperty?.brochureUrl && originalProperty.brochureUrl.trim() !== '';
+                      
+                      return (
+                        <button 
+                          className={`action-button ${hasBrochure ? '' : 'disabled'}`} 
+                          onClick={hasBrochure ? handleViewCatalog : null}
+                          disabled={!hasBrochure}
+                          title={hasBrochure ? 'View catalog' : 'No catalog available'}
+                        >
+                          <FontAwesomeIcon 
+                            icon={faFileAlt} 
+                            style={{ opacity: hasBrochure ? 1 : 0.5 }}
+                          />
+                          {t.projects.buttons.viewCatalog}
+                        </button>
+                      );
+                    })()}
+
                     <button className="action-button">
                       <FontAwesomeIcon icon={faPhone} />
                       {t.projects.buttons.enquireNow}

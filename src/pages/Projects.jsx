@@ -271,6 +271,9 @@ const Projects = () => {
   // Add this state at the top of your component near your other states
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // First, add a new state to track whether the form is showing
+  const [showContactForm, setShowContactForm] = useState(false);
+
   // Get current language
   const { language } = useLanguage();
   const t = translations[language];
@@ -610,40 +613,27 @@ const Projects = () => {
               ref={cardRef}
             >
               <div className="property-card">
-                <div className="property-image">
-                  <img
-                    src={
-                      (() => {
-                        const property = filteredProperties[currentPropertyIndex];
-                        // Get the original property from propertyData using the ID
-                        const originalProp = propertyData.find(p => p?.id === property?.id);
-                        
-                        // Use image/images from the original propertyData
-                        const imageUrl = originalProp?.images?.[currentImageIndex] || originalProp?.image;
-                        return imageUrl;
-                      })()
-                    }
-                    alt={filteredProperties[currentPropertyIndex].title}
-                    className="w-full h-full object-cover transition-all duration-500 ease-in-out transform rounded-sm"
-                  />
+                {!showContactForm ? (
+                  // Regular property card content
+                  <div className="property-image">
+                    <img
+                      src={
+                        (() => {
+                          const property = filteredProperties[currentPropertyIndex];
+                          // Get the original property from propertyData using the ID
+                          const originalProp = propertyData.find(p => p?.id === property?.id);
+                          
+                          // Use image/images from the original propertyData
+                          const imageUrl = originalProp?.images?.[currentImageIndex] || originalProp?.image;
+                          return imageUrl;
+                        })()
+                      }
+                      alt={filteredProperties[currentPropertyIndex].title}
+                      className="w-full h-full object-cover transition-all duration-500 ease-in-out transform rounded-sm"
+                    />
 
-
-                  {/* Location information */}
-                  {/* <div className="location-info">
-                    <div className="location-icon">
-                      <FontAwesomeIcon
-                        icon={faMapMarkerAlt}
-                        style={{ width: "20px", height: "20px" }}
-                      />
-                    </div>
-                    <span className="location-text">
-                      {filteredProperties[currentPropertyIndex].location}
-                    </span>
-                  </div> */}
-
-                  {/* Action buttons at top */}
-                  <div className="action-buttons-top">
-                    <div className="location-info">
+                    {/* Location information */}
+                    {/* <div className="location-info">
                       <div className="location-icon">
                         <FontAwesomeIcon
                           icon={faMapMarkerAlt}
@@ -653,110 +643,111 @@ const Projects = () => {
                       <span className="location-text">
                         {filteredProperties[currentPropertyIndex].location}
                       </span>
-                    </div>
+                    </div> */}
 
-                    {/* Watch Video button - disabled if no videoUrl */}
-                    {(() => {
-                      const currentProperty = filteredProperties[currentPropertyIndex];
-                      const originalProperty = propertyData.find(p => p.id === currentProperty.id);
-                      const hasVideo = originalProperty?.videoUrl && originalProperty.videoUrl.trim() !== '';
-                      
-                      return (
-                        <button 
-                          className={`action-button ${hasVideo ? '' : 'disabled'}`} 
-                          onClick={hasVideo ? handleWatchVideo : null}
-                          disabled={!hasVideo}
-                          title={hasVideo ? 'Watch video' : 'No video available'}
-                        >
-                          <FontAwesomeIcon 
-                            icon={faPlay} 
-                            style={{ opacity: hasVideo ? 1 : 0.5 }}
+                    {/* Action buttons at top */}
+                    <div className="action-buttons-top">
+                      <div className="location-info">
+                        <div className="location-icon">
+                          <FontAwesomeIcon
+                            icon={faMapMarkerAlt}
+                            style={{ width: "20px", height: "20px" }}
                           />
-                          {t.projects.buttons.watchVideo}
-                        </button>
-                      );
-                    })()}
-
-                    {/* View Catalog button - disabled if no brochureUrl */}
-                    {(() => {
-                      const currentProperty = filteredProperties[currentPropertyIndex];
-                      const originalProperty = propertyData.find(p => p.id === currentProperty.id);
-                      const hasBrochure = originalProperty?.brochureUrl && originalProperty.brochureUrl.trim() !== '';
-                      
-                      return (
-                        <button 
-                          className={`action-button ${hasBrochure ? '' : 'disabled'}`} 
-                          onClick={hasBrochure ? handleViewCatalog : null}
-                          disabled={!hasBrochure}
-                          title={hasBrochure ? 'View catalog' : 'No catalog available'}
-                        >
-                          <FontAwesomeIcon 
-                            icon={faFileAlt} 
-                            style={{ opacity: hasBrochure ? 1 : 0.5 }}
-                          />
-                          {t.projects.buttons.viewCatalog}
-                        </button>
-                      );
-                    })()}
-
-                    <button className="action-button">
-                      <FontAwesomeIcon icon={faPhone} />
-                      {t.projects.buttons.enquireNow}
-                    </button>
-                  </div>
-
-                  {/* Information boxes at bottom */}
-                  <div className="info-boxes" ref={infoBoxesRef}>
-                    <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
-                      <div className="info-title">
-                        {t.projects.projectDetails.startDate}
+                        </div>
+                        <span className="location-text">
+                          {filteredProperties[currentPropertyIndex].location}
+                        </span>
                       </div>
-                      <div className="info-value">
-                        {filteredProperties[
-                          currentPropertyIndex
-                        ].startDate?.split(" ")[1] || "2020"}
-                      </div>
+
+                      {/* Watch Video button - disabled if no videoUrl */}
+                      {(() => {
+                        const currentProperty = filteredProperties[currentPropertyIndex];
+                        const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+                        const hasVideo = originalProperty?.videoUrl && originalProperty.videoUrl.trim() !== '';
+                        
+                        return (
+                          <button 
+                            className={`action-button ${hasVideo ? '' : 'disabled'}`} 
+                            onClick={hasVideo ? handleWatchVideo : null}
+                            disabled={!hasVideo}
+                            title={hasVideo ? 'Watch video' : 'No video available'}
+                          >
+                            <FontAwesomeIcon 
+                              icon={faPlay} 
+                              style={{ opacity: hasVideo ? 1 : 0.5 }}
+                            />
+                            {t.projects.buttons.watchVideo}
+                          </button>
+                        );
+                      })()}
+
+                      {/* View Catalog button - disabled if no brochureUrl */}
+                      {(() => {
+                        const currentProperty = filteredProperties[currentPropertyIndex];
+                        const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+                        const hasBrochure = originalProperty?.brochureUrl && originalProperty.brochureUrl.trim() !== '';
+                        
+                        return (
+                          <button 
+                            className={`action-button ${hasBrochure ? '' : 'disabled'}`} 
+                            onClick={hasBrochure ? handleViewCatalog : null}
+                            disabled={!hasBrochure}
+                            title={hasBrochure ? 'View catalog' : 'No catalog available'}
+                          >
+                            <FontAwesomeIcon 
+                              icon={faFileAlt} 
+                              style={{ opacity: hasBrochure ? 1 : 0.5 }}
+                            />
+                            {t.projects.buttons.viewCatalog}
+                          </button>
+                        );
+                      })()}
+
+                      <button 
+                        className="action-button" 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setShowContactForm(true);
+                        }}
+                      >
+                        <FontAwesomeIcon icon={faPhone} />
+                        {t.projects.buttons.enquireNow}
+                      </button>
                     </div>
 
-                    <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
-                      <div className="info-title">
-                        {t.projects.projectDetails.endDate}
+                    {/* Information boxes at bottom */}
+                    <div className="info-boxes" ref={infoBoxesRef}>
+                      <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
+                        <div className="info-title">
+                          {t.projects.projectDetails.startDate}
+                        </div>
+                        <div className="info-value">
+                          {filteredProperties[
+                            currentPropertyIndex
+                          ].startDate?.split(" ")[1] || "2020"}
+                        </div>
                       </div>
-                      <div className="info-value">
-                        {filteredProperties[
-                          currentPropertyIndex
-                        ].endDate?.split(" ")[1] || "2025"}
-                      </div>
-                    </div>
 
-                    <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
-                      <div className="info-title">
-                        {t.projects.propertyCard.price}
+                      <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
+                        <div className="info-title">
+                          {t.projects.projectDetails.endDate}
+                        </div>
+                        <div className="info-value">
+                          {filteredProperties[
+                            currentPropertyIndex
+                          ].endDate?.split(" ")[1] || "2025"}
+                        </div>
                       </div>
-                      <div className="info-value flex">
-                        From
-                        <svg
-                          className="currency-icon"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <line x1="12" y1="1" x2="12" y2="23"></line>
-                          <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                        </svg>
-                      </div>
-                    </div>
 
-                    <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
-                      <div className="info-title">
-                        {t.projects.propertyCard.amenities}
-                      </div>
-                      <div className="info-value">
-                        <div className="amenity-icons">
+                      <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
+                        <div className="info-title">
+                          {t.projects.propertyCard.price}
+                        </div>
+                        <div className="info-value flex">
+                          From
                           <svg
+                            className="currency-icon"
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
@@ -764,87 +755,203 @@ const Projects = () => {
                             strokeLinecap="round"
                             strokeLinejoin="round"
                           >
-                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                          </svg>
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <rect
-                              x="2"
-                              y="7"
-                              width="20"
-                              height="14"
-                              rx="2"
-                              ry="2"
-                            ></rect>
-                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                           </svg>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
-                      <div className="info-title">
-                        {t.projects.propertyCard.details}
+                      <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
+                        <div className="info-title">
+                          {t.projects.propertyCard.amenities}
+                        </div>
+                        <div className="info-value">
+                          <div className="amenity-icons">
+                            <svg
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                            </svg>
+                            <svg
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <rect
+                                x="2"
+                                y="7"
+                                width="20"
+                                height="14"
+                                rx="2"
+                                ry="2"
+                              ></rect>
+                              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg>
+                          </div>
+                        </div>
                       </div>
-                      <div className="info-value">More Info</div>
+
+                      <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
+                        <div className="info-title">
+                          {t.projects.propertyCard.details}
+                        </div>
+                        <div className="info-value">More Info</div>
+                      </div>
+                    </div>
+
+                    {/* Navigation arrows for horizontal image sliding */}
+                    {filteredProperties.length > 1 && (
+                      <div className="navigation-controls">
+                        <button
+                          className="nav-arrow prev"
+                          onClick={handlePrevousImage}
+                          style={{ cursor: 'pointer' }}
+                        >
+                          <FontAwesomeIcon icon={faAngleLeft} style={{ color: "white" }} />
+                        </button>
+                        <button
+                          className="nav-arrow next"
+                          onClick={handleNextImage}
+                          style={{ cursor: 'pointer' }}
+                        >
+                          <FontAwesomeIcon icon={faAngleRight} style={{ color: "white" }} />
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Pagination dots - Dynamic based on number of images */}
+                    <div className="pagination-dots flex justify-center space-x-2 mt-4">
+                      {(() => {
+                        const currentProperty = filteredProperties[currentPropertyIndex];
+                        // Get original property that has the images
+                        const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+                        
+                        // If no images array or only one image, don't show dots
+                        if (!originalProperty?.images || originalProperty.images.length <= 1) {
+                          return null;
+                        }
+                        
+                        // Create array of dots based on number of images
+                        return originalProperty.images.map((_, index) => (
+                          <div 
+                            key={index}
+                            className={`dot w-2 h-2 rounded-full cursor-pointer transition-all duration-300 ${
+                              currentImageIndex === index ? 'highlighted scale-125' : 'bg-gray-300'
+                            }`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setCurrentImageIndex(index);
+                            }}
+                            aria-label={`Image ${index + 1}`}
+                          ></div>
+                        ));
+                      })()}
                     </div>
                   </div>
-
-                  {/* Navigation arrows for horizontal image sliding */}
-                  {filteredProperties.length > 1 && (
-                    <div className="navigation-controls">
-                      <button
-                        className="nav-arrow prev"
-                        onClick={handlePrevousImage}
-                        style={{ cursor: 'pointer' }}
-                      >
-                        <FontAwesomeIcon icon={faAngleLeft} style={{ color: "white" }} />
-                      </button>
-                      <button
-                        className="nav-arrow next"
-                        onClick={handleNextImage}
-                        style={{ cursor: 'pointer' }}
-                      >
-                        <FontAwesomeIcon icon={faAngleRight} style={{ color: "white" }} />
-                      </button>
+                ) : (
+                  // Contact form directly inside the property card
+                  <div className="contact-form-wrapper">
+                    <button 
+                      className="back-to-property-button"
+                      onClick={() => setShowContactForm(false)}
+                    >
+                      ← Back to property
+                    </button>
+                    
+                    <div className="contact-form-container">
+                      <div className="contact-form-columns">
+                        {/* Left Column */}
+                        <div className="contact-info-column">
+                          <div className="info-item">
+                            <div className="info-content">
+                              <p className="info-label">You can Email Me Here</p>
+                              <p className="info-value">jefferrycannon@gmail.com</p>
+                            </div>
+                            <a href="mailto:jefferrycannon@gmail.com" className="info-arrow">
+                              →
+                            </a>
+                          </div>
+                          
+                          <div className="info-item">
+                            <div className="info-content">
+                              <p className="info-label">Give Me a Call on</p>
+                              <p className="info-value">+91 91813 23 2309</p>
+                            </div>
+                            <a href="tel:+919181323209" className="info-arrow">
+                              →
+                            </a>
+                          </div>
+                          
+                          <div className="info-item">
+                            <div className="info-content">
+                              <p className="info-label">Location</p>
+                              <p className="info-value">Somewhere in the World</p>
+                            </div>
+                            <a href="#" className="info-arrow">
+                              →
+                            </a>
+                          </div>
+                          
+                        </div>
+                        
+                        {/* Right Column */}
+                        <div className="contact-form-column">
+                          <form>
+                            <div className="form-row">
+                              <input type="text" placeholder="First Name" className="form-input" />
+                              <input type="text" placeholder="Last Name" className="form-input" />
+                            </div>
+                            
+                            <div className="form-row">
+                              <input type="email" placeholder="Email" className="form-input" />
+                              <input type="tel" placeholder="Phone Number" className="form-input" />
+                            </div>
+                            
+                            <div className="form-group">
+                              <p className="form-label">Why are you contacting us?</p>
+                              <div className="checkbox-container">
+                                <div className="checkbox-row">
+                                  <label className="checkbox-item">
+                                    <input type="checkbox" />
+                                    <span>Web Design</span>
+                                  </label>
+                                  <label className="checkbox-item">
+                                    <input type="checkbox" />
+                                    <span>Collaboration</span>
+                                  </label>
+                                </div>
+                                <div className="checkbox-row">
+                                  <label className="checkbox-item">
+                                    <input type="checkbox" />
+                                    <span>Mobile App Design</span>
+                                  </label>
+                                  <label className="checkbox-item">
+                                    <input type="checkbox" />
+                                    <span>Others</span>
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div className="form-group">
+                              <textarea placeholder="Your Message here..." className="form-textarea"></textarea>
+                            </div>
+                            
+                            <button type="submit" className="send-button">Send</button>
+                          </form>
+                        </div>
+                      </div>
                     </div>
-                  )}
-
-                  {/* Pagination dots - Dynamic based on number of images */}
-                  <div className="pagination-dots flex justify-center space-x-2 mt-4">
-                    {(() => {
-                      const currentProperty = filteredProperties[currentPropertyIndex];
-                      // Get original property that has the images
-                      const originalProperty = propertyData.find(p => p.id === currentProperty.id);
-                      
-                      // If no images array or only one image, don't show dots
-                      if (!originalProperty?.images || originalProperty.images.length <= 1) {
-                        return null;
-                      }
-                      
-                      // Create array of dots based on number of images
-                      return originalProperty.images.map((_, index) => (
-                        <div 
-                          key={index}
-                          className={`dot w-2 h-2 rounded-full cursor-pointer transition-all duration-300 ${
-                            currentImageIndex === index ? 'highlighted scale-125' : 'bg-gray-300'
-                          }`}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setCurrentImageIndex(index);
-                          }}
-                          aria-label={`Image ${index + 1}`}
-                        ></div>
-                      ));
-                    })()}
                   </div>
-                </div>
+                )}
               </div>
             </div>
           ) : (

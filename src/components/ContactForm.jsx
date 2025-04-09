@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import '../styles/components/contactForm.scss';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const ContactForm = ({ jobTitle }) => {
   const { language } = useLanguage();
@@ -55,7 +57,7 @@ const ContactForm = ({ jobTitle }) => {
             <p className="info-value">hello@company.com</p>
           </div>
           <a href="mailto:hello@company.com" className="info-arrow">
-            <i className="fas fa-arrow-right"></i>
+            <FontAwesomeIcon icon={faArrowRight} />
           </a>
         </div>
         
@@ -65,7 +67,7 @@ const ContactForm = ({ jobTitle }) => {
             <p className="info-value">+1 (555) 000-0000</p>
           </div>
           <a href="tel:+15550000000" className="info-arrow">
-            <i className="fas fa-arrow-right"></i>
+          <FontAwesomeIcon icon={faArrowRight} />
           </a>
         </div>
         
@@ -75,24 +77,10 @@ const ContactForm = ({ jobTitle }) => {
             <p className="info-value">123 Business Ave, City</p>
           </div>
           <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="info-arrow">
-            <i className="fas fa-arrow-right"></i>
+          <FontAwesomeIcon icon={faArrowRight} />
           </a>
         </div>
         
-        <div className="social-connections">
-          <p className="social-label">Connect with us</p>
-          <div className="social-icons">
-            <a href="#" className="social-icon linkedin">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
-            <a href="#" className="social-icon twitter">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="#" className="social-icon dribbble">
-              <i className="fab fa-dribbble"></i>
-            </a>
-          </div>
-        </div>
       </div>
       
       <div className="contact-form">

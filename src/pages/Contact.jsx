@@ -24,7 +24,7 @@ const Contact = () => {
         {/* </motion.h1> */}
       </div>
 
-      <div className="vertical-text right">
+      <div className="vertical-text">
         <div className="line"></div>
         <span className="left-text">{t.contact.heroHeadline}</span>
         <span className="large-text-primary">{t.contact.contactsAndDetails}</span>

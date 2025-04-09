@@ -27,25 +27,20 @@ const Home = () => {
   const aboutWhiteBoxBottomRef = useRef(null);
   const aboutContentRef = useRef(null);
 
-  // Create refs for each stat item
   const statItemsRef = useRef([]);
   const taglineRef = useRef([]);
 
   const { language } = useLanguage();
   const t = translations[language];
 
-  // Store the current video index
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const videoRef = useRef(null);
   
-  // Define your videos array
   const videos = [
     backgroundVideo,
     backgroundVideo2,
-    // Add more videos as needed
   ];
   
-  // Function to change video
   const changeBackgroundVideo = (newIndex) => {
     const video = videoRef.current;
     
@@ -55,7 +50,6 @@ const Home = () => {
       // duration: 1, 
       ease: "sine.inOut",
       onComplete: () => {
-        // Change source
         video.src = videos[newIndex];
         video.load();
         
@@ -71,7 +65,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // Set initial states
     gsap.set(statisticsRef.current, { opacity: 1 });
     gsap.set(solutionsBoxRef.current, { opacity: 0 });
 
@@ -104,8 +97,8 @@ const Home = () => {
     gsap.set(aboutContentRef.current, { x: "0%", opacity: 1 });
 
     // Set initial state for statistics items - hide them initially
-    gsap.set(statItemsRef.current, { y: 50, opacity: 0 });
-    gsap.set(taglineRef.current, { y: 30, opacity: 0 });
+    // gsap.set(statItemsRef.current, { y: 50, opacity: 0 });
+    // gsap.set(taglineRef.current, { y: 30, opacity: 0 });
 
     // Animate statistics items in with a staggered effect
     gsap.to(statItemsRef.current, {
@@ -117,7 +110,6 @@ const Home = () => {
       delay: 0.5,
     });
 
-    // Animate taglines after statistics
     gsap.to(taglineRef.current, {
       y: 0,
       opacity: 1,
@@ -139,7 +131,6 @@ const Home = () => {
         if (currentView === 1) {
           isAnimating = true;
 
-          // Change video when transitioning to view 2
           if (currentVideoIndex === 0) {
             changeBackgroundVideo(1);
           }
@@ -202,9 +193,8 @@ const Home = () => {
         } else if (currentView === 2) {
           isAnimating = true;
 
-          // Change video when transitioning to view 3
           if (currentVideoIndex === 1) {
-            changeBackgroundVideo(2); // Assuming you'll add a third video
+            changeBackgroundVideo(2); 
           }
 
           gsap.to(animationWhiteBoxThirdRef.current, {
@@ -341,7 +331,6 @@ const Home = () => {
 
   return (
     <div className="home-container" ref={containerRef}>
-      {/* Single video element with dynamically changing source */}
       <video 
         className="background-video" 
         ref={videoRef}

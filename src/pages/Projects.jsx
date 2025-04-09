@@ -577,7 +577,7 @@ const Projects = () => {
                       (() => {
                         const property = filteredProperties[currentPropertyIndex];
                         // Get the original property from propertyData using the ID
-                        const originalProp = propertyData.find(p => p.id === property.id);
+                        const originalProp = propertyData.find(p => p?.id === property?.id);
                         
                         // Use image/images from the original propertyData
                         const imageUrl = originalProp?.images?.[currentImageIndex] || originalProp?.image;

@@ -195,10 +195,6 @@ body {
   align-items: center;
   justify-content: center;
   flex: 1;
-
-  @media (max-width: $mobile) {
-    padding: $spacing-md;
-  }
 }
 
 // Page styles
@@ -589,6 +585,8 @@ body {
     }
   }
 }
+
+
 
 @media (max-width: 1024px) {
   .project-list-page {

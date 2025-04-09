@@ -758,6 +758,36 @@
 }
 
 // Responsive styles
+
+@media (max-width: 1900px) {
+
+  .project-list-page   .filters-bar {
+    width: 65% !important;
+  }
+
+  .project-list-page   .project-viewer {
+    width: 65% !important;
+    // height: 70vh !important;
+  }
+
+  .project-list-page .property-card .info-boxes {
+    gap: 54px ;
+  }
+
+  .project-list-page .vertical-text-left .large-text-primary{
+    font-size: 2.2rem !important;
+  }
+
+  .project-list-page .vertical-text-right .icon {
+    top: 20rem !important;
+  }
+
+  .project-list-page .project-viewer .card-container{
+    max-height: calc(100vh - 200px);
+  }
+}
+
+
 @media (max-width: 1200px) {
   .project-showcase {
     .project-content {

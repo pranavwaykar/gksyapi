@@ -143,8 +143,8 @@
       "propertyData": [
         {
           "id": 1,
-          "title": "The Projects",
-          "location": "Eyup Sultan",
+          "title": "GÖKSU YAŞAM",
+          "location": "Downtown",
           "status": "Completed",
           "type": "Residential",
           "amenities": [
@@ -155,16 +155,19 @@
             "Concierge services",
             "Parking"
           ],
+          "videoUrl": "https://www.youtube.com/watch?v=tX7cDYqxTCI&t=1s",
+          "brochureUrl": "https://www.gksyapi.com/Panel/upload/katalog/goksu_yasam_katalog.pdf",
           "details": {
             "floors": 20,
             "bhkTypes": ["2 BHK", "3 BHK"],
             "totalUnits": 120
           }
+          
         },
         {
           "id": 2,
-          "title": "Urban Heights",
-          "location": "Sisli",
+          "title": "GÖKSU SARAY",
+          "location": "Istanbul",
           "status": "In-Progress",
           "type": "Commercial",
           "amenities": [
@@ -173,6 +176,8 @@
             "Parking",
             "Security"
           ],
+          "videoUrl": "",
+          "brochureUrl": "https://www.gksyapi.com/Panel/upload/katalog/Goksu_saray_katalog.pdf",
           "details": {
             "floors": 15,
             "officeTypes": ["Small", "Medium", "Large"],
@@ -181,8 +186,8 @@
         },
         {
           "id": 3,
-          "title": "Garden Residences",
-          "location": "Kadikoy",
+          "title": "ERDEMLI MANSIONS",
+          "location": "Eyüp",
           "status": "Completed",
           "type": "Residential",
           "amenities": [
@@ -191,6 +196,7 @@
             "Pool",
             "Parking"
           ],
+          "videoUrl": "https://www.youtube.com/watch?v=yaWHEh0R1yo",
           "details": {
             "floors": 12,
             "bhkTypes": ["1 BHK", "2 BHK"],

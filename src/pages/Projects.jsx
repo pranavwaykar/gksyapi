@@ -85,15 +85,17 @@ const projects = [
 const propertyData = [
   {
     id: 1,
-    title: "The Projects",
-    location: "Eyup Sultan",
+    title: "GÖKSU YAŞAM",
+    location: "Downtown",
     status: "Completed",
     type: "Residential",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
-    images: [
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+    "images": [
+      "https://www.gksyapi.com/Panel/upload/projeler/KAMERA12_GUNDUZ_9800.jpg",
+      "https://www.gksyapi.com/Panel/upload/projeler/KAMERA9_GECE_6648.jpg",
+      "https://www.gksyapi.com/Panel/upload/projeler/KAMERA1_GUNDUZ_7053.jpg",
+      "https://www.gksyapi.com/Panel/upload/projeler/KAMERA9_GUNDUZ_8692.jpg",
+      "https://www.gksyapi.com/Panel/upload/projeler/kapak_PSYKAMERA_GUNDUZ_3387.jpg"
     ],
     startDate: "Mar 2020",
     endDate: "Apr 2023",
@@ -106,6 +108,8 @@ const propertyData = [
       "Concierge services",
       "Parking",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=tX7cDYqxTCI&t=1s",
+    brochureUrl: "https://www.gksyapi.com/Panel/upload/katalog/goksu_yasam_katalog.pdf",
     details: {
       floors: 20,
       bhkTypes: ["2 BHK", "3 BHK"],
@@ -114,21 +118,23 @@ const propertyData = [
   },
   {
     id: 2,
-    title: "Urban Heights",
+    title: "GÖKSU SARAY",
     location: "Sisli",
     status: "In-Progress",
     type: "Commercial",
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab",
     images: [
-      "https://images.unsplash.com/photo-1613977257365-aaae5a9817ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-      "https://images.unsplash.com/photo-1613977257592-4a9a32f9734e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-      "https://images.unsplash.com/photo-1600607687644-c7171b42498f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+      "https://www.gksyapi.com/Panel/upload/projeler/kapak_5-goksaray_5105.jpg",
+      "https://www.gksyapi.com/Panel/upload/projeler/3-goksaray_1948.jpg",
+      "https://www.gksyapi.com/Panel/upload/projeler/3-goksaray_1948.jpg",
+      "https://www.gksyapi.com/Panel/upload/projeler/2-goksaray_4741.jpg"
     ],
     startDate: "Jan 2023",
     endDate: "Dec 2024",
     price: "890,000",
     amenities: ["Office spaces", "Meeting rooms", "Parking", "Security"],
+    videoUrl: "",
+    brochureUrl: "https://www.gksyapi.com/Panel/upload/katalog/Goksu_saray_katalog.pdf",
     details: {
       floors: 15,
       officeTypes: ["Small", "Medium", "Large"],
@@ -137,20 +143,21 @@ const propertyData = [
   },
   {
     id: 3,
-    title: "Garden Residences",
-    location: "Kadikoy",
+    title: "ERDEMLI MANSIONS",
+    location: "Eyüp",
     status: "Completed",
     type: "Residential",
     image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750",
     images: [
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-      "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+      "https://www.gksyapi.com/Panel/upload/projeler/Erdemli_5_3533.jpg",
+      "https://www.gksyapi.com/Panel/upload/projeler/erdemli-3_4482.jpg",
+      "https://www.gksyapi.com/Panel/upload/projeler/Erdemli_3_9039.jpg"
     ],
     startDate: "Jun 2021",
     endDate: "Jul 2023",
     price: "550,000",
     amenities: ["Gardens", "Gym", "Pool", "Parking"],
+    videoUrl: "https://www.youtube.com/watch?v=yaWHEh0R1yo",
     details: {
       floors: 12,
       bhkTypes: ["1 BHK", "2 BHK"],
@@ -302,6 +309,37 @@ const Projects = () => {
     console.log("Property changed, resetting image index");
     setCurrentImageIndex(0);
   }, [currentPropertyIndex]);
+
+  const handleWatchVideo = (e) => {
+    e.stopPropagation();
+    
+    const currentProperty = filteredProperties[currentPropertyIndex];
+    // Get original property that has the videoUrl
+    const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+    
+    if (originalProperty?.videoUrl) {
+      // Open the YouTube link in a new tab
+      window.open(originalProperty.videoUrl, '_blank');
+    } else {
+      console.log("No video URL available for this property");
+    }
+  };
+
+  const handleViewCatalog = (e) => {
+    e.stopPropagation();
+    
+    const currentProperty = filteredProperties[currentPropertyIndex];
+    // Get original property that has the brochureUrl
+    const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+    
+    if (originalProperty?.brochureUrl) {
+      // Open the PDF link in a new tab
+      window.open(originalProperty.brochureUrl, '_blank');
+    } else {
+      console.log("No brochure available for this property");
+    }
+  };
+  
 
   // Update these functions with more detailed logic and debugging
   const handlePrevousImage = (e) => {
@@ -616,11 +654,11 @@ const Projects = () => {
                       </span>
                     </div>
 
-                    <button className="action-button">
+                    <button className="action-button" onClick={handleWatchVideo}>
                       <FontAwesomeIcon icon={faPlay} />
                       {t.projects.buttons.watchVideo}
                     </button>
-                    <button className="action-button">
+                    <button className="action-button" onClick={handleViewCatalog}>
                       <FontAwesomeIcon icon={faFileAlt} />
                       {t.projects.buttons.viewCatalog}
                     </button>

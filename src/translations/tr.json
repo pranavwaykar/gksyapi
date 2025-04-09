@@ -143,8 +143,8 @@
       "propertyData": [
         {
           "id": 1,
-          "title": "The Projects",
-          "location": "Eyüp Sultan",
+          "title": "GÖKSU YAŞAM",
+          "location": "Downtown",
           "status": "Tamamlandı",
           "type": "Konut",
           "amenities": [
@@ -155,6 +155,8 @@
             "Concierge hizmetleri",
             "Otopark"
           ],
+          "videoUrl": "https://www.youtube.com/watch?v=tX7cDYqxTCI&t=1s",
+          "brochureUrl": "https://www.gksyapi.com/Panel/upload/katalog/goksu_yasam_katalog.pdf",
           "details": {
             "floors": 20,
             "bhkTypes": ["2+1", "3+1"],
@@ -163,8 +165,8 @@
         },
         {
           "id": 2,
-          "title": "Urban Heights",
-          "location": "Şişli",
+          "title": "GÖKSU SARAY",
+          "location": "Istanbul",
           "status": "Devam Ediyor",
           "type": "Ticari",
           "amenities": [
@@ -173,6 +175,8 @@
             "Otopark",
             "Güvenlik"
           ],
+          "videoUrl": "",
+          "brochureUrl": "https://www.gksyapi.com/Panel/upload/katalog/Goksu_saray_katalog.pdf",
           "details": {
             "floors": 15,
             "officeTypes": ["Küçük", "Orta", "Büyük"],
@@ -181,8 +185,8 @@
         },
         {
           "id": 3,
-          "title": "Garden Residences",
-          "location": "Kadıköy",
+          "title": "ERDEMLI MANSIONS",
+          "location": "Eyüp",
           "status": "Tamamlandı",
           "type": "Konut",
           "amenities": [
@@ -191,6 +195,7 @@
             "Havuz",
             "Otopark"
           ],
+          "videoUrl": "https://www.youtube.com/watch?v=yaWHEh0R1yo",
           "details": {
             "floors": 12,
             "bhkTypes": ["1+1", "2+1"],

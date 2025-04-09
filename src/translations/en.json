@@ -207,7 +207,7 @@
       ]
     },
     "buildingExpertise": "BUILDING EXPERTISE",
-    "exploreProject": "EXPLORE PROJECT",
+    "explore": "EXPLORE ",
     "backToTop": "Back To",
     "top": "Top"
   },
@@ -275,7 +275,7 @@
       }
     ],
     "verticalText": {
-      "leftText": "Building Excellence",
+      "leftText": "BUILDING EXCELLENCE",
       "primary": "OUR",
       "secondary": "STORY"
     }
@@ -287,7 +287,7 @@
     "ctaText": "About Us!"
   },
   "careers": {
-    "joinOurTeam": "Join Our Team",
+    "joinOurTeam": "JOIN OUR TEAM",
     "exploreText": "Explore",
     "careerText": "Careers"
   },

@@ -360,7 +360,7 @@
       width: 100%;
       height: auto;
       max-height: calc(100vh - 250px);
-      position: relative;    
+      position: relative;
     }
 
     .nav-btn {
@@ -505,8 +505,7 @@
       bottom: 64px;
       left: 0;
       right: 0;
-      display: flex
-  ;
+      display: flex;
       justify-content: center;
       gap: 94px;
       z-index: 10;
@@ -609,7 +608,8 @@
           }
         }
 
-        &:focus, &:active {
+        &:focus,
+        &:active {
           outline: none;
           border: none;
           box-shadow: none;
@@ -687,7 +687,7 @@
       bottom: 175px;
       left: -160px;
       text-transform: uppercase;
-      font-size: 3.0rem;
+      font-size: 3rem;
       font-weight: 600;
     }
 
@@ -766,33 +766,45 @@
 // Responsive styles
 
 @media (max-width: 1900px) {
-
-  .project-list-page   .filters-bar {
+  .project-list-page .filters-bar {
     width: 65% !important;
   }
 
-  .project-list-page   .project-viewer {
+  .project-list-page .project-viewer {
     width: 65% !important;
     // height: 70vh !important;
   }
 
   .project-list-page .property-card .info-boxes {
-    gap: 30px ;
+    gap: 30px;
   }
 
-  .project-list-page .vertical-text-left .large-text-primary{
-    font-size: 2.2rem !important;
+  .project-list-page .vertical-text-left {
+    .left-text {
+      bottom: 10.5rem !important;
+      left: -11.6rem !important;
+      letter-spacing: 0.2rem !important;
+      font-size: 0.8rem !important;
+    }
+    .large-text-primary {
+      bottom: 10.2rem !important;
+      left: -10.3rem !important;
+      font-size: 2.25rem !important;
+    }
+    .large-text-secondary {
+      bottom: 13.8rem !important;
+      left: -7.7rem !important;
+      font-size: 2.25rem !important;
+    }
   }
-
   .project-list-page .vertical-text-right .icon {
     top: 20rem !important;
   }
 
-  .project-list-page .project-viewer .card-container{
+  .project-list-page .project-viewer .card-container {
     max-height: calc(100vh - 200px);
   }
 }
-
 
 @media (max-width: 1200px) {
   .project-showcase {

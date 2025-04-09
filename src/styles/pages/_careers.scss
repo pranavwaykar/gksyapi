@@ -1,14 +1,13 @@
 .careers-container {
   min-height: 100vh;
   background-color: #0a1226;
-  display: flex
-;
+  display: flex;
   align-items: center;
   justify-content: center;
   padding-bottom: 133px;
-  
+
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -18,62 +17,62 @@
     z-index: 0;
   }
 
-    .vertical-text {
-      position: absolute;
-      height: 114%;
-      z-index: 5;
-      
-      &.left {
-        left: 14rem;
-      }
-      
-      .line {
-        width: 1px;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.2);
-        position: absolute;
-        top: 0;
-        right: 160px;
-      }
-      
-      .left-text {
-        font-size: 1.2rem;
-        writing-mode: vertical-rl;
-        transform: rotate(180deg);
-        letter-spacing: 0.1rem;
-        font-weight: 500;
-        color: white;
-        position: absolute;
-        bottom: 104px;
-        right: 163px;
-      }
-      
-      .large-text-primary {
-        writing-mode: vertical-rl;
-        transform: rotate(180deg);
-        letter-spacing: 0.2rem;
-        color: rgba(80, 125, 250, 0.9);
-        position: absolute;
-        bottom: 100px;
-        left: -172px;
-        text-transform: uppercase;
-        font-size: 3.65rem;
-        font-weight: 600;
-      }
-      
-      .large-text-secondary {
-        writing-mode: vertical-rl;
-        transform: rotate(180deg);
-        letter-spacing: 0.2rem;
-        color: white;
-        position: absolute;
-        bottom: 218px;
-        left: -113px;
-        text-transform: uppercase;
-        font-size: 3.65rem;
-        font-weight: 600;
-      }
+  .vertical-text {
+    position: absolute;
+    height: 114%;
+    z-index: 5;
+
+    &.left {
+      left: 14rem;
     }
+
+    .line {
+      width: 1px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      position: absolute;
+      top: 0;
+      right: 160px;
+    }
+
+    .left-text {
+      font-size: 1.2rem;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      letter-spacing: 0.1rem;
+      font-weight: 500;
+      color: white;
+      position: absolute;
+      bottom: 104px;
+      right: 163px;
+    }
+
+    .large-text-primary {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      letter-spacing: 0.2rem;
+      color: rgba(80, 125, 250, 0.9);
+      position: absolute;
+      bottom: 100px;
+      left: -172px;
+      text-transform: uppercase;
+      font-size: 3.65rem;
+      font-weight: 600;
+    }
+
+    .large-text-secondary {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      letter-spacing: 0.2rem;
+      color: white;
+      position: absolute;
+      bottom: 218px;
+      left: -113px;
+      text-transform: uppercase;
+      font-size: 3.65rem;
+      font-weight: 600;
+    }
+  }
 }
 
 .careers-content {
@@ -84,6 +83,7 @@
   position: relative;
   z-index: 1;
   width: 79%;
+  border-radius: 4px;
   height: calc(80vh - 64px);
   display: flex;
   align-items: center;
@@ -92,8 +92,8 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   // border-radius: 10px;
   background: linear-gradient(
-    135deg, 
-    rgba(255, 255, 255, 0.12) 0%, 
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
     rgba(255, 255, 255, 0.08) 100%
   );
 }
@@ -104,10 +104,10 @@
   overflow-x: auto;
   scroll-behavior: smooth;
   cursor: grab;
-  padding: 1rem;
+  // padding: 1rem;
   scrollbar-width: none; /* For Firefox */
   -ms-overflow-style: none; /* For IE and Edge */
-  
+
   &::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Opera */
   }
@@ -118,27 +118,34 @@
 }
 
 .job-card {
-  min-width: 300px;
-  max-width: 300px; /* Fixed width */
+  min-width: 230px;
+  max-width: 230px; /* Fixed width */
   flex: 0 0 300px; /* Fixed size, won't grow or shrink */
   background: transparent;
   border-radius: 20px;
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin: 0 10px;
 
   &:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(0.96);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 0px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 
     .job-overlay {
       opacity: 1;
+
+      p {
+        padding: 0 1rem;
+      }
     }
   }
 }
 
 .job-image-container {
   position: relative;
-  width: 300px; /* Fixed width */
+  // width: 100%; /* Fixed width */
   height: 400px; /* Fixed height */
   overflow: hidden;
   border-radius: 20px;
@@ -161,12 +168,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgb(17 31 73 / 90%);
+  background: rgb(76 86 118 / 90%);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  // padding: 2rem;
   opacity: 0;
   transition: opacity 0.3s ease;
   color: white;
@@ -193,7 +200,7 @@
 
 .apply-btn {
   background: white;
-  color: #4169E1;
+  color: #4169e1;
   border: none;
   padding: 0.8rem 2rem;
   border-radius: 25px;
@@ -249,32 +256,48 @@
   }
 }
 
-
 // Responsive styles
 @media (max-width: 1900px) {
   .careers-container {
+    
     .vertical-text {
+      left: 15.5rem;
+
+      .line {
+        left: -8.4rem;
+        height: 39rem;
+        top: 11.64rem;
+      }
+      
+      .left-text{
+        bottom: 6.4rem !important;
+        left: -9.8rem !important;
+        letter-spacing: 0.2rem !important;
+        font-size: 0.8rem !important;
+      }
       .large-text-primary {
         font-size: 2.25rem;
         bottom: 100px;
-        left: -162px;
+        left: -140px;
       }
-      
+
       .large-text-secondary {
         font-size: 2.25rem;
         bottom: 178px;
-        left: -124px;
-
+        left: -104px;
       }
+    }
 
+    .careers-content{
+      width: 65%;
+      border-radius: 4px;
     }
   }
 
-
-.careers-slider {
-  gap: 1rem;
+  .careers-slider {
+    gap: 1.3rem;
+  }
 }
-} 
 
 // Responsive styles
 @media (max-width: 768px) {
@@ -287,7 +310,7 @@
     max-width: 260px;
     flex: 0 0 260px;
   }
-  
+
   .job-image-container {
     width: 260px;
     height: 347px; /* Maintains the same aspect ratio */
@@ -305,7 +328,7 @@
       right: -20px;
     }
   }
-} 
+}
 
 // Career application form styles
 .career-application-form {
@@ -316,12 +339,12 @@
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(10, 18, 38, 0.08);
-  
+
   .form-header {
     display: flex;
     flex-direction: column;
     margin-bottom: 30px;
-    
+
     .back-button {
       align-self: flex-start;
       background: none;
@@ -334,17 +357,17 @@
       display: flex;
       align-items: center;
       transition: all 0.3s ease;
-      
+
       &:hover {
         transform: translateX(-5px);
         color: #1a3c72;
       }
-      
+
       &:focus {
         outline: none;
       }
     }
-    
+
     h3 {
       margin: 15px 0;
       color: #0a1226;
@@ -352,38 +375,38 @@
       font-weight: 600;
     }
   }
-  
+
   // Styles specifically for the contact form inside careers page
   .contact-form-container {
     margin: 0;
     border-radius: 8px;
     overflow: hidden;
-    
+
     @media (max-width: 768px) {
       flex-direction: column;
     }
-    
+
     .contact-info {
       background-color: #f5f7fa;
     }
-    
+
     .contact-form {
       background-color: #ffffff;
-      
+
       .send-button {
         background-color: #0a1226;
-        
+
         &:hover {
           background-color: #1a3c72;
         }
       }
     }
   }
-  
+
   // Make sure form adapts well to different screen sizes
   @media (max-width: 768px) {
     padding: 20px 15px;
-    
+
     .form-header h3 {
       font-size: 24px;
     }
@@ -401,9 +424,8 @@
   padding: 0 4rem;
   top: 100px;
 
-  
   // Adjust when form is visible
   &.form-visible {
     padding: 20px;
   }
-} 
+}

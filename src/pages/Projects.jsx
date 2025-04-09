@@ -858,7 +858,8 @@ const Projects = () => {
         <div className="vertical-text-left">
           <div className="line"></div>
           <span className="left-text">{t.projects.buildingExpertise}</span>
-          <span className="large-text-primary">{t.projects.exploreProject}</span>
+          <span className="large-text-primary">{t.projects.explore}</span>
+          <span className="large-text-secondary">{t.projects.projects}</span>
         </div>
 
         <div className="vertical-text-right">

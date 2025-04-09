@@ -90,6 +90,11 @@ const propertyData = [
     status: "Completed",
     type: "Residential",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+    images: [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+    ],
     startDate: "Mar 2020",
     endDate: "Apr 2023",
     price: "690,000",
@@ -114,6 +119,12 @@ const propertyData = [
     status: "In-Progress",
     type: "Commercial",
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab",
+    images: [
+      "https://images.unsplash.com/photo-1613977257365-aaae5a9817ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1613977257592-4a9a32f9734e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1600607687644-c7171b42498f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+    ],
     startDate: "Jan 2023",
     endDate: "Dec 2024",
     price: "890,000",
@@ -131,6 +142,11 @@ const propertyData = [
     status: "Completed",
     type: "Residential",
     image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750",
+    images: [
+      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+    ],
     startDate: "Jun 2021",
     endDate: "Jul 2023",
     price: "550,000",
@@ -244,6 +260,9 @@ const Projects = () => {
     type: "",
   });
 
+  // Add this state at the top of your component near your other states
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   // Get current language
   const { language } = useLanguage();
   const t = translations[language];
@@ -275,6 +294,47 @@ const Projects = () => {
     setCurrentIndex(
       (prevIndex) =>
         (prevIndex - 1 + translatedProjects.length) % translatedProjects.length
+    );
+  };
+
+  // Make sure this useEffect exists to reset image index when property changes
+  useEffect(() => {
+    console.log("Property changed, resetting image index");
+    setCurrentImageIndex(0);
+  }, [currentPropertyIndex]);
+
+  // Update these functions with more detailed logic and debugging
+  const handlePrevousImage = (e) => {
+    if (e) e.stopPropagation();
+    
+    const currentProperty = filteredProperties[currentPropertyIndex];
+    // Get original property that has the images
+    const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+    
+    // Use images array from the original property data
+    if (!originalProperty?.images || originalProperty.images.length <= 1) {
+      return;
+    }
+    
+    setCurrentImageIndex(prevIndex => 
+      prevIndex <= 0 ? originalProperty.images.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNextImage = (e) => {
+    if (e) e.stopPropagation();
+    
+    const currentProperty = filteredProperties[currentPropertyIndex];
+    // Get original property that has the images
+    const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+    
+    // Use images array from the original property data
+    if (!originalProperty?.images || originalProperty.images.length <= 1) {
+      return;
+    }
+    
+    setCurrentImageIndex(prevIndex => 
+      prevIndex >= originalProperty.images.length - 1 ? 0 : prevIndex + 1
     );
   };
 
@@ -514,13 +574,18 @@ const Projects = () => {
                 <div className="property-image">
                   <img
                     src={
-                      filteredProperties[currentPropertyIndex].image ||
-                      propertyData.find(
-                        (p) =>
-                          p.id === filteredProperties[currentPropertyIndex].id
-                      )?.image
+                      (() => {
+                        const property = filteredProperties[currentPropertyIndex];
+                        // Get the original property from propertyData using the ID
+                        const originalProp = propertyData.find(p => p.id === property.id);
+                        
+                        // Use image/images from the original propertyData
+                        const imageUrl = originalProp?.images?.[currentImageIndex] || originalProp?.image;
+                        return imageUrl;
+                      })()
                     }
                     alt={filteredProperties[currentPropertyIndex].title}
+                    className="w-full h-full object-cover transition-all duration-500 ease-in-out transform rounded-sm"
                   />
 
 
@@ -661,19 +726,15 @@ const Projects = () => {
                     <div className="navigation-controls">
                       <button
                         className="nav-arrow prev"
-                        onClick={(e) => {
-                          e.stopPropagation(); // Prevent event bubbling
-                          handlePrevProperty();
-                        }}
+                        onClick={handlePrevousImage}
+                        style={{ cursor: 'pointer' }}
                       >
                         <FontAwesomeIcon icon={faAngleLeft} style={{ color: "white" }} />
                       </button>
                       <button
                         className="nav-arrow next"
-                        onClick={(e) => {
-                          e.stopPropagation(); // Prevent event bubbling
-                          handleNextProperty();
-                        }}
+                        onClick={handleNextImage}
+                        style={{ cursor: 'pointer' }}
                       >
                         <FontAwesomeIcon icon={faAngleRight} style={{ color: "white" }} />
                       </button>

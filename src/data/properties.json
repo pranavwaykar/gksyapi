@@ -1,0 +1,90 @@
+{
+  "properties": [
+    {
+      "id": 1,
+      "title": "Modern Apartment",
+      "description": "Beautiful modern apartment in downtown",
+      "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      "images": [
+        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+      ],
+      "location": "Downtown",
+      "type": "Apartment",
+      "price": 250000
+    },
+    {
+      "id": 2,
+      "title": "Luxury Villa",
+      "description": "Stunning waterfront villa with private pool",
+      "image": "https://images.unsplash.com/photo-1613977257365-aaae5a9817ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      "images": [
+        "https://images.unsplash.com/photo-1613977257365-aaae5a9817ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1613977257592-4a9a32f9734e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1600607687644-c7171b42498f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+      ],
+      "location": "Beachfront",
+      "type": "Villa",
+      "price": 1250000
+    },
+    {
+      "id": 3,
+      "title": "Country House",
+      "description": "Charming country house with expansive garden",
+      "image": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      "images": [
+        "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+      ],
+      "location": "Countryside",
+      "type": "House",
+      "price": 450000
+    },
+    {
+      "id": 4,
+      "title": "Modern Office Space",
+      "description": "Open-concept office space in business district",
+      "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      "images": [
+        "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1557425955-df376b5903c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+      ],
+      "location": "Business District",
+      "type": "Commercial",
+      "price": 750000
+    },
+    {
+      "id": 5,
+      "title": "Penthouse Apartment",
+      "description": "Luxurious penthouse with city skyline views",
+      "image": "https://images.unsplash.com/photo-1594484208280-efa00f96fc21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      "images": [
+        "https://images.unsplash.com/photo-1594484208280-efa00f96fc21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+      ],
+      "location": "City Center",
+      "type": "Penthouse",
+      "price": 1800000
+    },
+    {
+      "id": 6,
+      "title": "Beach Bungalow",
+      "description": "Cozy beachfront bungalow with stunning ocean views",
+      "image": "https://images.unsplash.com/photo-1505881502353-a1986add4405?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      "images": [
+        "https://images.unsplash.com/photo-1505881502353-a1986add4405?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1561414927-6d86591d0c4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+      ],
+      "location": "Beachfront",
+      "type": "Bungalow",
+      "price": 550000
+    }
+  ]
+} 

@@ -224,8 +224,8 @@ const Projects = () => {
   const [dragX, setDragX] = useState(0);
   const projectRef = useRef(null);
 
-  // State for filtered view
-  const [showAllProjects, setShowAllProjects] = useState(false);
+  // State for filtered view - changed initial value to true
+  const [showAllProjects, setShowAllProjects] = useState(true);
   const [currentPropertyIndex, setCurrentPropertyIndex] = useState(0);
   const [filters, setFilters] = useState({
     status: "",

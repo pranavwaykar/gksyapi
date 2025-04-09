@@ -200,7 +200,9 @@
       ]
     },
     "buildingExpertise": "BUILDING EXPERTISE",
-    "exploreProject": "EXPLORE PROJECT"
+    "exploreProject": "EXPLORE PROJECT",
+    "backToTop": "Back To",
+    "top": "Top"
   },
   "aboutPage": {
     "timeline": [

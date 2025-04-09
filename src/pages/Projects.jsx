@@ -9,6 +9,7 @@ import {
   faPhone,
   faAngleRight,
   faAngleLeft,
+  faArrowUpLong
 } from "@fortawesome/free-solid-svg-icons";
 import gsap from "gsap";
 
@@ -662,10 +663,30 @@ const Projects = () => {
           )}
         </div>
 
-        <div className="vertical-text">
+        <div className="vertical-text-left">
           <div className="line"></div>
           <span className="left-text">{t.projects.buildingExpertise}</span>
           <span className="large-text-primary">{t.projects.exploreProject}</span>
+        </div>
+
+        <div className="vertical-text-right">
+          <div className="icon">
+            <svg
+              width="24"
+              height="100"
+              viewBox="0 0 24 100"
+              fill="none"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="12" y1="0" x2="12" y2="80" />
+              <polyline points="6 74 12 80 18 74" />
+            </svg>
+          </div>
+          <span className="large-text-primary">{t.projects.top}</span>
+          <span className="left-text">{t.projects.backToTop}</span>
         </div>
       </div>
     );

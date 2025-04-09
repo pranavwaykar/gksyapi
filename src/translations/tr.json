@@ -200,7 +200,9 @@
       ]
     },
     "buildingExpertise": "BİNALAR UZMANI",
-    "exploreProject": "PROJEYİ KEŞFET"
+    "exploreProject": "PROJEYİ KEŞFET",
+    "backToTop": "Geri Dön",
+    "top": "Üst"
   },
   "aboutPage": {
     "timeline": [

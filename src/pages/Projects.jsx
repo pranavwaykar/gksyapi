@@ -661,6 +661,12 @@ const Projects = () => {
             </div>
           )}
         </div>
+
+        <div className="vertical-text">
+          <div className="line"></div>
+          <span className="left-text">{t.projects.buildingExpertise}</span>
+          <span className="large-text-primary">{t.projects.exploreProject}</span>
+        </div>
       </div>
     );
   }

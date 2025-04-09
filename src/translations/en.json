@@ -198,7 +198,9 @@
           }
         }
       ]
-    }
+    },
+    "buildingExpertise": "BUILDING EXPERTISE",
+    "exploreProject": "EXPLORE PROJECT"
   },
   "aboutPage": {
     "timeline": [

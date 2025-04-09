@@ -198,7 +198,9 @@
           }
         }
       ]
-    }
+    },
+    "buildingExpertise": "BİNALAR UZMANI",
+    "exploreProject": "PROJEYİ KEŞFET"
   },
   "aboutPage": {
     "timeline": [

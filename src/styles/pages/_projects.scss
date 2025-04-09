@@ -470,7 +470,7 @@
     .action-buttons-top {
       position: absolute;
       top: 50px;
-      left: 70px;
+      left: 56px;
       display: flex;
       gap: 15px;
       z-index: 10;
@@ -508,7 +508,7 @@
       display: flex
   ;
       justify-content: center;
-      gap: 103px;
+      gap: 94px;
       z-index: 10;
       padding: 0px 64px;
 
@@ -519,7 +519,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        min-width: 120px;
+        min-width: 138px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
         .info-title {
@@ -583,7 +583,7 @@
         cursor: pointer;
         pointer-events: auto;
         transition: all 0.2s ease;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        // box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
         svg {
           width: 24px;
@@ -607,6 +607,12 @@
           svg {
             transform: scale(1.1);
           }
+        }
+
+        &:focus, &:active {
+          outline: none;
+          border: none;
+          box-shadow: none;
         }
       }
     }
@@ -771,7 +777,7 @@
   }
 
   .project-list-page .property-card .info-boxes {
-    gap: 54px ;
+    gap: 30px ;
   }
 
   .project-list-page .vertical-text-left .large-text-primary{

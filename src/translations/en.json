@@ -318,7 +318,10 @@
     ]
   },
   "contact": {
-    "heroHeadline": "Get in Touch With Us",
+    "heroHeadline": "Reach Out to Us",
+    "verticalPunchline": "Don’t Be a Stranger",
+    "heroHeadlineSecond": "We're Here",
+    "heroHeadlineThird": "For You At",
     "contactsAndDetails": "Get In Touch",
     "howToReachUs": "With Us",
     "location": {
@@ -326,7 +329,7 @@
       "subtitle": "Yavuz Selim District 1000. Street Bagcilar, Istanbul"
     },
     "emailInquiry": {
-      "text": "Email us for inquiries",
+      "text": "Email",
       "email": "info@gksyapi.com"
     }
   }

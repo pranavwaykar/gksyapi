@@ -318,14 +318,17 @@
   },
   "contact": {
     "heroHeadline": "Bizimle İletişime Geçin",
-    "contactsAndDetails": "Bizimle",
-    "howToReachUs": "İletişime Geçin",
+    "verticalPunchline": "Bizimle İletişime Geçin",
+    "heroHeadlineSecond": "Buradayız",
+    "heroHeadlineThird": "Bize Ulaşın",
+    "contactsAndDetails": "İletişime Geçin",
+    "howToReachUs": "İletişim",
     "location": {
       "title": "Konumumuz",
       "subtitle": "Yavuz Selim District 1000. Street Bagcilar, Istanbul"
     },
     "emailInquiry": {
-      "text": "Sorularınız için e-posta gönderin",
+      "text": "e-posta",
       "email": "info@gksyapi.com"
     }
   }

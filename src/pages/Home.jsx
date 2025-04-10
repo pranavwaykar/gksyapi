@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import backgroundVideo from "../assets/GKSYAPI Video.mp4";
 import backgroundVideo2 from "../assets/GKSYAPI Video 2.mp4";
+import backgroundVideo3 from "../assets/GKSYAPI Video 3.mp4";
 import logo from "../assets/GKSYAPI Logo.png";
 import backgroundMusic from "../assets/relaxing-piano-310597.mp3";
 import Navigation from "../components/Navigation";
@@ -39,6 +40,7 @@ const Home = () => {
   const videos = [
     backgroundVideo,
     backgroundVideo2,
+    backgroundVideo3
   ];
   
   const changeBackgroundVideo = (newIndex) => {
@@ -227,6 +229,7 @@ const Home = () => {
             }
           });
         }
+        
       } else if (e.deltaY < 0) {
         if (currentView === 2) {
           isAnimating = true;

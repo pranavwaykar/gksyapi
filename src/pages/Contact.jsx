@@ -26,15 +26,15 @@ const Contact = () => {
 
       <div className="vertical-text">
         <div className="line"></div>
-        <span className="left-text">{t.contact.heroHeadline}</span>
+        <span className="left-text">{t.contact.verticalPunchline}</span>
         <span className="large-text-primary">{t.contact.contactsAndDetails}</span>
         <span className="large-text-secondary">{t.contact.howToReachUs}</span>
       </div>
 
             {/* Contact section */}
             <div className="contact-section">
-        <div className="contact-label">{t.contact.contactsAndDetails}</div>
-        <h2 className="contact-title">{t.contact.howToReachUs}</h2>
+        <div className="contact-label">{t.contact.heroHeadlineSecond}</div>
+        <h2 className="contact-title">{t.contact.heroHeadlineThird}</h2>
         
         <div className="contact-details">
           <div className="contact-item">

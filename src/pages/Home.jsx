@@ -68,9 +68,47 @@ const Home = () => {
       )
     },
     { 
-      // Card 2 - keeping original structure
-      title: "Card 2", 
-      text: "This is the second card with a unique animation." 
+      // Card 2 - About Us UI
+      customRender: () => (
+        <div className="about-us-container">
+          <div className="about-header">
+            <span className="section-label">ABOUT US</span>
+            <h1 className="about-title">
+              The World is Built on IDEAS, <br />
+              GKSYAPI Brings Your Ideas into Reality
+            </h1>
+          </div>
+          
+          <div className="about-description">
+            <p>With diverse backgrounds and expertise, we collaborate seamlessly to turn ideas 
+            into reality, crafting architectural masterpieces that inspire and endure.</p>
+            <p>We believe in construction that enhances the human experience, providing clarity 
+            in form while maintaining an effortless elegance.</p>
+          </div>
+          
+          {/* <div className="stats-row">
+            <div className="stat-box">
+              <div className="stat-number">1994</div>
+              <div className="stat-label">Established in</div>
+            </div>
+            
+            <div className="stat-box">
+              <div className="stat-number">25+</div>
+              <div className="stat-label">Years in construction</div>
+            </div>
+            
+            <div className="stat-box">
+              <div className="stat-number">100+</div>
+              <div className="stat-label">Completed Projects</div>
+            </div>
+            
+            <div className="stat-box">
+              <div className="stat-number">20+</div>
+              <div className="stat-label">On going Projects</div>
+            </div>
+          </div> */}
+        </div>
+      )
     },
     { title: "Card 3", text: "Third card with another animation style." },
     { title: "Card 4", text: "Fourth card displaying yet another animation effect." },

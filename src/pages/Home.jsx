@@ -1,8 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import backgroundVideo from "../assets/GKSYAPI Video.mp4";
+import backgroundVideo from "../assets/GKSYAPI Video 1.mp4";
 import backgroundVideo2 from "../assets/GKSYAPI Video 2.mp4";
 import backgroundVideo3 from "../assets/GKSYAPI Video 3.mp4";
+import backgroundVideo4 from "../assets/GKSYAPI Video 4.mp4";
+import backgroundVideo5 from "../assets/GKSYAPI Video 5.mp4";
+import backgroundVideo6 from "../assets/GKSYAPI Video 6.mp4";
+import backgroundVideo7 from "../assets/GKSYAPI Video 7.mp4";
 import logo from "../assets/GKSYAPI Logo.png";
 import backgroundMusic from "../assets/relaxing-piano-310597.mp3";
 import Navigation from "../components/Navigation";
@@ -86,17 +90,17 @@ const Home = () => {
       case 2:
         return backgroundVideo3;
       case 3:
-        return backgroundVideo;
+        return backgroundVideo4;
       case 4:
-        return backgroundVideo2;
+        return backgroundVideo5;
       case 5:
-        return backgroundVideo3;
+        return backgroundVideo6;
       case 6:
-        return backgroundVideo;
+        return backgroundVideo7;
       case 7:
-        return backgroundVideo2;
+        return backgroundVideo4;
       default:
-        return backgroundVideo;
+        return backgroundVideo3;
     }
   };
 

@@ -14,305 +14,631 @@ import { translations } from "../translations";
 gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
-  const statisticsRef = useRef(null);
-  const solutionsBoxRef = useRef(null);
-  const animationWhiteBoxFirstRef = useRef(null);
-  const animationWhiteBoxSecondRef = useRef(null);
-  const animationWhiteBoxThirdRef = useRef(null);
-  const solutionsContentRef = useRef(null);
   const containerRef = useRef(null);
   const audioRef = useRef(null);
-
-  const aboutBoxRef = useRef(null);
-  const aboutWhiteBoxTopRef = useRef(null);
-  const aboutWhiteBoxBottomRef = useRef(null);
-  const aboutContentRef = useRef(null);
-
-  const statItemsRef = useRef([]);
-  const taglineRef = useRef([]);
-
+  const videoRef = useRef(null);
+  
+  // Store the current card index
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  // Track animation direction (1: down, -1: up)
+  const [direction, setDirection] = useState(0);
+  // Track if card is entering or exiting
+  const [animationState, setAnimationState] = useState('idle'); // 'idle', 'entering', 'exiting'
+  
   const { language } = useLanguage();
   const t = translations[language];
 
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const videoRef = useRef(null);
-  
-  const videos = [
-    backgroundVideo,
-    backgroundVideo2,
-    backgroundVideo3
+  // Card content
+  const cardContents = [
+    { 
+      // Card 1 with stats UI
+      customRender: () => (
+        <div className="stats-overview">
+          <div className="stats-row">
+            <div className="stat-item">
+              <div className="stat-number">1994</div>
+              <div className="stat-label">Established in</div>
+            </div>
+            
+            <div className="stat-item">
+              <div className="stat-number">25+</div>
+              <div className="stat-label">Years in construction</div>
+            </div>
+            
+            <div className="stat-item">
+              <div className="stat-number">100+</div>
+              <div className="stat-label">Completed Projects</div>
+            </div>
+            
+            <div className="stat-item">
+              <div className="stat-number">20+</div>
+              <div className="stat-label">On going Projects</div>
+            </div>
+          </div>
+          
+          <div className="company-slogan">
+            <h1>Dünya fikirler üzerine inşa edilir Dünyayı,</h1>
+            <h1>her seferinde bir fikirle şekillendiriyoruz</h1>
+          </div>
+        </div>
+      )
+    },
+    { 
+      // Card 2 - keeping original structure
+      title: "Card 2", 
+      text: "This is the second card with a unique animation." 
+    },
+    { title: "Card 3", text: "Third card with another animation style." },
+    { title: "Card 4", text: "Fourth card displaying yet another animation effect." },
+    { title: "Card 5", text: "Fifth card with an exciting transition." },
+    { title: "Card 6", text: "This is the last card. Try scrolling back up to see all the animations in reverse!" }
   ];
+
+  // Map cards to videos - one unique video per card
+  const getVideoForCard = (cardIndex) => {
+    switch (cardIndex) {
+      case 0:
+        return backgroundVideo;
+      case 1:
+        return backgroundVideo2;
+      case 2:
+        return backgroundVideo3;
+      case 3:
+        return backgroundVideo; // Start cycling again
+      case 4:
+        return backgroundVideo2;
+      case 5:
+        return backgroundVideo3;
+      default:
+        return backgroundVideo;
+    }
+  };
+
+  // Add refs for transition elements
+  const transitionLineRef = useRef(null);
+  const transitionCircleRef = useRef(null);
+  const transitionBoxRef = useRef(null);
   
-  const changeBackgroundVideo = (newIndex) => {
-    const video = videoRef.current;
+  // Change the background video with a cool transition effect
+  const changeBackgroundVideo = (newCardIndex) => {
+    if (!videoRef.current) return;
     
-    // Fade out current video
-    gsap.to(video, { 
-      opacity: 0, 
-      // duration: 1, 
-      ease: "sine.inOut",
-      onComplete: () => {
-        video.src = videos[newIndex];
-        video.load();
+    const video = videoRef.current;
+    const currentSrc = video.querySelector('source').getAttribute('src');
+    const newVideoSrc = getVideoForCard(newCardIndex);
+    
+    // Simple way to compare the video files - get just the filename
+    const getCurrentVideoName = (path) => {
+      return path.split('/').pop();
+    };
+    
+    const currentVideoName = getCurrentVideoName(currentSrc);
+    const newVideoName = getCurrentVideoName(newVideoSrc);
+    
+    if (currentVideoName === newVideoName) {
+      return;
+    }
+    
+    // Perform cool transition effects
+    const tl = gsap.timeline();
+    
+    // Choose a sequential transition effect (8 options)
+    let transitionType = (currentCardIndex % 8);
+    
+    switch(transitionType) {
+      case 0:
+        // Corner Swipes
+        const corners = [];
+        const cornerPositions = [
+          { top: 0, left: 0, rotation: 0 },            // Top-left
+          { top: 0, right: 0, rotation: 90 },          // Top-right
+          { bottom: 0, right: 0, rotation: 180 },      // Bottom-right
+          { bottom: 0, left: 0, rotation: 270 }        // Bottom-left
+        ];
         
-        // Play and fade in when loaded
-        video.onloadeddata = () => {
+        // Create corner elements
+        cornerPositions.forEach(pos => {
+          const corner = document.createElement('div');
+          corner.className = 'corner-wipe';
+          corner.style.position = 'absolute';
+          corner.style.width = '100%';
+          corner.style.height = '100%';
+          
+          // Position each corner
+          Object.keys(pos).forEach(key => {
+            if (key !== 'rotation') {
+              corner.style[key] = pos[key] + 'px';
+            }
+          });
+          
+          corner.style.background = 'white';
+          corner.style.clipPath = 'polygon(0 0, 0% 0, 0% 0%)'; // Start with nothing showing
+          corner.style.zIndex = '10';
+          
+          containerRef.current.appendChild(corner);
+          corners.push(corner);
+        });
+        
+        // Define clip paths for each corner
+        const clipPaths = [
+          'polygon(0 0, 100% 0, 0% 100%)',        // Top-left
+          'polygon(100% 0, 100% 100%, 0% 0)',     // Top-right
+          'polygon(100% 100%, 0% 100%, 100% 0%)', // Bottom-right
+          'polygon(0 100%, 0% 0%, 100% 100%)'     // Bottom-left
+        ];
+        
+        // Animate corners to swipe in
+        tl.to(corners, {
+          clipPath: (i) => clipPaths[i],
+          duration: 0.6,
+          stagger: 0.15,
+          ease: 'power2.inOut'
+        })
+        .set(video, { opacity: 0 }, 0.6)
+        .call(() => {
+          // Change video source
+          video.querySelector('source').src = newVideoSrc;
+          video.load();
           video.play();
-          gsap.to(video, { opacity: 1, duration: 0.5 });
-        };
+        })
+        // Animate corners to swipe out
+        .to(corners, {
+          clipPath: 'polygon(0 0, 0% 0, 0% 0%)',
+          duration: 0.6,
+          stagger: 0.15,
+          ease: 'power2.inOut',
+          onComplete: () => {
+            // Clean up
+            corners.forEach(corner => {
+              if (corner.parentNode) {
+                corner.parentNode.removeChild(corner);
+              }
+            });
+          }
+        })
+        .set(video, { opacity: 1 });
+        break;
         
-        setCurrentVideoIndex(newIndex);
-      } 
-    });
+      case 1:
+        // Thick Border Rectangle Zoom
+        const containerWidth = containerRef.current.offsetWidth;
+        const containerHeight = containerRef.current.offsetHeight;
+        const borderWidth = 150; // Thick border width in pixels
+        
+        // Create the rectangle with thick border
+        const rectangle = document.createElement('div');
+        rectangle.className = 'rectangle-zoom';
+        rectangle.style.position = 'absolute';
+        rectangle.style.top = '50%';
+        rectangle.style.left = '50%';
+        rectangle.style.transform = 'translate(-50%, -50%) scale(0.001)'; // Start even smaller
+        rectangle.style.width = `${containerWidth}px`;
+        rectangle.style.height = `${containerHeight}px`;
+        rectangle.style.boxSizing = 'border-box';
+        rectangle.style.border = `${borderWidth}px solid white`;
+        rectangle.style.boxShadow = '0 0 40px rgba(255, 255, 255, 0.6)';
+        rectangle.style.backgroundColor = 'transparent';
+        rectangle.style.zIndex = '10';
+        rectangle.style.opacity = '0'; // Start invisible
+        
+        // Add perspective to container for 3D effect
+        containerRef.current.style.perspective = '1000px';
+        containerRef.current.appendChild(rectangle);
+        
+        // Animation: zoom from a large size outside view toward the viewer
+        tl.set(rectangle, { opacity: 1 })
+          .fromTo(rectangle, 
+            { 
+              scale: 5, // Start much larger (outside view)
+              z: -1000 // Start far behind
+            },
+            {
+              scale: 1,
+              z: 0,
+              duration: 1,
+              ease: 'sine.out'
+            }
+          )
+          .set(video, { opacity: 0 })
+          .call(() => {
+            // Change video source
+            video.querySelector('source').src = newVideoSrc;
+            video.load();
+            video.play();
+          })
+          // Animation: zoom back in while sliding to the left
+          .to(rectangle, {
+            scale: 0.01,
+            y: 0,
+            xPercent: -200, // Use xPercent for straight horizontal movement
+            duration: 1,
+            ease: 'back.in(1.2)',
+            onComplete: () => {
+              if (rectangle.parentNode) {
+                rectangle.parentNode.removeChild(rectangle);
+                // Remove perspective when done
+                containerRef.current.style.perspective = 'none';
+              }
+            }
+          })
+          .set(video, { opacity: 1 });
+        break;
+
+      case 2:
+        // Venetian Blinds Effect
+        const blindCount = 10; // Number of blinds
+        const blinds = [];
+        const blindsContainerWidth = containerRef.current.offsetWidth;
+        const blindWidth = blindsContainerWidth / blindCount;
+        
+        // Create all blinds
+        for (let i = 0; i < blindCount; i++) {
+          const blind = document.createElement('div');
+          blind.className = 'venetian-blind';
+          blind.style.position = 'absolute';
+          blind.style.top = '0';
+          blind.style.left = `${i * blindWidth}px`;
+          blind.style.width = `${blindWidth}px`;
+          blind.style.height = '100%';
+          blind.style.backgroundColor = 'white';
+          blind.style.transformOrigin = 'left center';
+          blind.style.transform = 'scaleX(0)';
+          blind.style.zIndex = '10';
+          
+          containerRef.current.appendChild(blind);
+          blinds.push(blind);
+        }
+        
+        // Animate blinds to open
+        tl.to(blinds, {
+          scaleX: 1,
+          stagger: 0.05,
+          duration: 0.5,
+          ease: 'power2.inOut'
+        })
+        .set(video, { opacity: 0 })
+        .call(() => {
+          // Change video source
+          video.querySelector('source').src = newVideoSrc;
+          video.load();
+          video.play();
+        })
+        // Animate blinds to close
+        .to(blinds, {
+          scaleX: 0,
+          stagger: 0.05,
+          duration: 0.5,
+          ease: 'power2.inOut',
+          onComplete: () => {
+            // Clean up
+            blinds.forEach(blind => {
+              if (blind.parentNode) {
+                blind.parentNode.removeChild(blind);
+              }
+            });
+          }
+        })
+        .set(video, { opacity: 1 });
+        break;
+        
+      case 3:
+        // Domino Fall Effect
+        const numDominoes = 10; // Number of domino pieces
+        const dominoElements = [];
+        const containersWidth = containerRef.current.offsetWidth;
+        const dominoWidth = containersWidth / numDominoes;
+        const containersHeight = containerRef.current.offsetHeight;
+        
+        // Create domino elements
+        for (let i = 0; i < numDominoes; i++) {
+          const domino = document.createElement('div');
+          domino.className = 'domino-piece';
+          domino.style.position = 'absolute';
+          domino.style.right = `${i * dominoWidth}px`;
+          domino.style.top = '0';
+          domino.style.width = `${dominoWidth}px`;
+          domino.style.height = '0'; // Start with no height
+          domino.style.backgroundColor = 'white';
+          domino.style.zIndex = '10';
+          domino.style.transformOrigin = 'top center'; // For the falling effect
+          
+          containerRef.current.appendChild(domino);
+          dominoElements.push(domino);
+        }
+        
+        // Animate dominoes falling in sequence from right to left
+        const staggerDelay = 0.08; // Delay between each domino falling
+        
+        // First, make all dominoes appear at full height
+        dominoElements.forEach((domino, index) => {
+          tl.to(domino, {
+            height: `${containersHeight}px`,
+            duration: 0.7,
+            ease: 'power1.out',
+          }, index > 0 ? '<+' + (staggerDelay/2) : 0);
+        });
+        
+        // Then make them fall like dominoes
+        dominoElements.forEach((domino, index) => {
+          tl.to(domino, {
+            rotateX: 90, // Fall forward
+            duration: 0.9,
+            ease: 'power2.in',
+          }, index > 0 ? '<+' + staggerDelay : 0.2); // Start after all appear
+        });
+        
+        // Change video
+        tl.set(video, { opacity: 0 })
+          .call(() => {
+            // Change video source
+            video.querySelector('source').src = newVideoSrc;
+            video.load();
+            video.play();
+            
+            // Reset dominoes for exit animation
+            dominoElements.forEach(domino => {
+              domino.style.rotateX = '0deg';
+              domino.style.right = ''; 
+              domino.style.left = domino.style.right;
+              domino.style.right = '';
+            });
+          });
+        
+        // Animate dominoes out with a different effect - slide out to bottom
+        tl.to(dominoElements, {
+          top: '100%',
+          duration: 0.5,
+          ease: 'power2.in',
+          stagger: staggerDelay,
+          onComplete: () => {
+            // Clean up
+            dominoElements.forEach(domino => {
+              if (domino.parentNode) {
+                domino.parentNode.removeChild(domino);
+              }
+            });
+          }
+        });
+        
+        // Show new video
+        tl.set(video, { opacity: 1 });
+        break;
+        
+      case 4:
+        // Simultaneous Horizontal Lines Wipe
+        const lines = [
+          document.createElement('div'),
+          document.createElement('div'),
+          document.createElement('div'),
+          document.createElement('div')
+        ];
+        
+        // Set up common styles for all lines
+        lines.forEach((line, index) => {
+          line.className = 'wipe-line';
+          line.style.position = 'absolute';
+          line.style.height = '25%'; // Each line takes exactly 1/4 of the screen height
+          line.style.width = '100%';
+          line.style.backgroundColor = 'white';
+          line.style.zIndex = '10';
+          line.style.top = `${index * 25}%`; // Position at 0%, 25%, 50%, 75%
+          
+          // Set initial positions (alternating right/left)
+          if (index % 2 === 0) {
+            // Even index lines start from right
+            line.style.left = '100%';
+          } else {
+            // Odd index lines start from left
+            line.style.left = '-100%';
+          }
+          
+          containerRef.current.appendChild(line);
+        });
+        
+        // Animate all lines together in one direction only
+        tl
+          // All lines move simultaneously
+          .to(lines.filter((_, i) => i % 2 === 0), { 
+            left: '-100%', // Even lines move from right to left
+            duration: 0.6, 
+            ease: 'power2.inOut'
+          })
+          .to(lines.filter((_, i) => i % 2 === 1), { 
+            left: '100%',  // Odd lines move from left to right
+            duration: 0.6, 
+            ease: 'power2.inOut'
+          }, '<') // The '<' makes this animation start at the same time as the previous one
+          
+          // Change video
+          .set(video, { opacity: 0 })
+          .call(() => {
+            // Change video source
+            video.querySelector('source').src = newVideoSrc;
+            video.load();
+            video.play();
+          })
+          
+          // Show new video
+          .set(video, { opacity: 1 })
+          // Clean up
+          .call(() => {
+            lines.forEach(line => {
+              if (line.parentNode) {
+                line.parentNode.removeChild(line);
+              }
+            });
+          });
+        break;
+        
+      case 5:
+        // Split Vertical Swipe (Left up, Right down)
+        const leftHalf = document.createElement('div');
+        const rightHalf = document.createElement('div');
+        
+        // Common styles for both halves
+        [leftHalf, rightHalf].forEach(half => {
+          half.style.position = 'absolute';
+          half.style.height = '100%';
+          half.style.width = '80%';
+          half.style.backgroundColor = 'white';
+          half.style.zIndex = '10';
+        });
+        
+        // Position the halves
+        leftHalf.style.left = '0';
+        leftHalf.style.top = '100%'; // Start from bottom, will move up
+        
+        rightHalf.style.right = '0';
+        rightHalf.style.bottom = '100%'; // Start from top, will move down
+        
+        containerRef.current.appendChild(leftHalf);
+        containerRef.current.appendChild(rightHalf);
+        
+        // Animate left half from bottom to top, right half from top to bottom
+        tl.to(leftHalf, {
+          top: '0%',
+          duration: 0.7,
+          ease: 'power2.inOut'
+        })
+        .to(rightHalf, {
+          bottom: '0%',
+          duration: 0.7,
+          ease: 'power2.inOut'
+        }, '<') // Start at the same time as left half
+        .set(video, { opacity: 0 })
+        .call(() => {
+          // Change video source
+          video.querySelector('source').src = newVideoSrc;
+          video.load();
+          video.play();
+        })
+        // Animate out: left half continues up, right half continues down
+        .to(leftHalf, {
+          top: '-100%',
+          duration: 0.7,
+          ease: 'power2.inOut'
+        })
+        .to(rightHalf, {
+          bottom: '-100%',
+          duration: 0.7,
+          ease: 'power2.inOut',
+          onComplete: () => {
+            // Clean up
+            [leftHalf, rightHalf].forEach(el => {
+              if (el.parentNode) {
+                el.parentNode.removeChild(el);
+              }
+            });
+          }
+        }, '<') // Start at the same time as left half
+        .set(video, { opacity: 1 });
+        break;
+      
+      case 6:
+        // Staircase Wipe
+        const bars = [];
+        const barCount = 4;
+        const containersssHeight = containerRef.current.offsetHeight;
+        const barHeight = containersssHeight / barCount;
+        
+        // Create staircase bars
+        for (let i = 0; i < barCount; i++) {
+          const bar = document.createElement('div');
+          bar.className = 'staircase-bar';
+          bar.style.position = 'absolute';
+          bar.style.width = '0';
+          bar.style.height = `${barHeight}px`;
+          bar.style.left = '-10%'; // Start off-screen
+          bar.style.top = `${i * barHeight}px`;
+          bar.style.backgroundColor = 'white';
+          bar.style.zIndex = '10';
+          
+          // Make bars thicker in the middle
+          if (i === 1 || i === 2) {
+            bar.style.height = `${barHeight * 1.2}px`;
+          }
+          
+          containerRef.current.appendChild(bar);
+          bars.push(bar);
+        }
+        
+        // First animate bars from left to right
+        tl.to(bars, {
+          width: '120%', // Extra width to ensure it covers the screen
+          left: '0%',
+          duration: 0.7,
+          stagger: 0.1,
+          ease: 'power2.inOut'
+        })
+        .set(video, { opacity: 0 }, 0.3)
+        .call(() => {
+          // Change video source
+          video.querySelector('source').src = newVideoSrc;
+          video.load();
+          video.play();
+        })
+        // Then animate bars continuing off-screen to the right
+        .to(bars, {
+          left: '100%',
+          duration: 0.7,
+          stagger: 0.1,
+          ease: 'power2.inOut',
+          onComplete: () => {
+            // Clean up
+            bars.forEach(bar => {
+              if (bar.parentNode) {
+                bar.parentNode.removeChild(bar);
+              }
+            });
+          }
+        })
+        .set(video, { opacity: 1 });
+        break;
+    }
+  };
+
+  // Handle wheel events
+  const handleWheel = (e) => {
+    e.preventDefault();
+    
+    // Don't process if animation is in progress
+    if (animationState !== 'idle') return;
+    
+    // Determine direction
+    const scrollDirection = e.deltaY > 0 ? 1 : -1;
+    
+    // Calculate new index with boundary checks
+    const newIndex = Math.min(
+      Math.max(0, currentCardIndex + scrollDirection),
+      cardContents.length - 1
+    );
+    
+    // Only update if the index actually changes
+    if (newIndex !== currentCardIndex) {
+      // Set direction for animation
+      setDirection(scrollDirection);
+      
+      // Start exit animation
+      setAnimationState('exiting');
+      
+      // After exit animation completes, change card and start enter animation
+      setTimeout(() => {
+        // Change the video when changing card
+        changeBackgroundVideo(newIndex);
+        setCurrentCardIndex(newIndex);
+        setAnimationState('entering');
+        
+        // Reset to idle state after enter animation completes
+        setTimeout(() => {
+          setAnimationState('idle');
+        }, 500); // Match this to the CSS transition duration
+      }, 500); // Match this to the CSS transition duration
+    }
   };
 
   useEffect(() => {
-    gsap.set(statisticsRef.current, { opacity: 1 });
-    gsap.set(solutionsBoxRef.current, { opacity: 0 });
-
-    gsap.set(animationWhiteBoxFirstRef.current, {
-      y: "-100vh",
-      x: "0%",
-      width: "100vw",
-      opacity: 0,
-    });
-    gsap.set(animationWhiteBoxSecondRef.current, {
-      y: "100%",
-      x: "0%",
-      width: "100vw",
-      opacity: 0,
-    });
-    gsap.set(animationWhiteBoxThirdRef.current, {
-      y: "-100vh",
-      x: "100vw",
-      width: "100vw",
-      opacity: 0,
-      rotate: "90deg",
-    });
-
-    gsap.set(solutionsContentRef.current, { x: "100%", opacity: 0 });
-
-    // Position aboutBox at the bottom
-    gsap.set(aboutBoxRef.current, { opacity: 0, y: "100%", x: 0 });
-    gsap.set(aboutWhiteBoxTopRef.current, { y: "0%", opacity: 1 });
-    gsap.set(aboutWhiteBoxBottomRef.current, { y: "0%", opacity: 1 });
-    gsap.set(aboutContentRef.current, { x: "0%", opacity: 1 });
-
-    // Set initial state for statistics items - hide them initially
-    // gsap.set(statItemsRef.current, { y: 50, opacity: 0 });
-    // gsap.set(taglineRef.current, { y: 30, opacity: 0 });
-
-    // Animate statistics items in with a staggered effect
-    gsap.to(statItemsRef.current, {
-      y: 0,
-      opacity: 1,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: "power3.out",
-      delay: 0.5,
-    });
-
-    gsap.to(taglineRef.current, {
-      y: 0,
-      opacity: 1,
-      duration: 0.8,
-      stagger: 0.3,
-      ease: "power2.out",
-      delay: 1.5,
-    });
-
-    let currentView = 1;
-    let isAnimating = false;
-
-    const handleScroll = (e) => {
-      e.preventDefault();
-
-      if (isAnimating) return;
-
-      if (e.deltaY > 0) {
-        if (currentView === 1) {
-          isAnimating = true;
-
-          if (currentVideoIndex === 0) {
-            changeBackgroundVideo(1);
-          }
-
-          gsap.to(statisticsRef.current, {
-            x: "-100%",
-            opacity: 0,
-            duration: 0.8,
-            ease: "power2.inOut",
-          });
-
-          gsap.to(solutionsBoxRef.current, {
-            opacity: 1,
-            duration: 0.8,
-            ease: "power2.inOut",
-          });
-
-          //reset box
-          gsap.set(animationWhiteBoxFirstRef.current, {
-            y: "-100vh",
-            x: "0%",
-            width: "100vw",
-            opacity: 0,
-          });
-          gsap.to(animationWhiteBoxFirstRef.current, {
-            y: "0%",
-            opacity: 1,
-            duration: 1.4,
-            ease: "power2.inOut",
-            onComplete: () => {
-              gsap.to(animationWhiteBoxFirstRef.current, {
-                x: "0%",
-                width: "80%",
-                duration: 1,
-                ease: "power2.inOut",
-              });
-            },
-          });
-
-          gsap.to(animationWhiteBoxSecondRef.current, {
-            y: "0%",
-            x: "0%",
-            opacity: 1,
-            width: "80%",
-            duration: 1.8,
-            ease: "power4.in",
-            onComplete: () => {
-              gsap.to(solutionsContentRef.current, {
-                x: "0%",
-                opacity: 1,
-                duration: 0.6,
-                ease: "power2.inOut",
-                onComplete: () => {
-                  currentView = 2;
-                  isAnimating = false;
-                },
-              });
-            },
-          });
-        } else if (currentView === 2) {
-          isAnimating = true;
-
-          if (currentVideoIndex === 1) {
-            changeBackgroundVideo(2); 
-          }
-
-          gsap.to(animationWhiteBoxThirdRef.current, {
-            x: "0vw",
-            y: "0vh",
-            opacity: 1,
-            duration: 1.5,
-            ease: "sine.inOut",
-            backgroundColor: "rgba(80, 125, 250, 0.9)",
-            onComplete: () => {
-              gsap.to(solutionsBoxRef.current, {
-                x: "-100%",
-                duration: 0.8,
-                ease: "power2.inOut",
-                onComplete: () => {
-                  gsap.set(solutionsBoxRef.current, { opacity: 0, x: 0 });
-
-                  gsap.to(aboutBoxRef.current, {
-                    opacity: 1,
-                    y: "0%",
-                    duration: 0.8,
-                    ease: "power2.inOut",
-                    onComplete: () => {
-                      currentView = 3;
-                      isAnimating = false;
-                    },
-                  });
-                },
-              });
-            }
-          });
-        }
-        
-      } else if (e.deltaY < 0) {
-        if (currentView === 2) {
-          isAnimating = true;
-
-          gsap.to(solutionsContentRef.current, {
-            x: "100%",
-            opacity: 0,
-            duration: 0.6,
-            ease: "power2.inOut",
-            onComplete: () => {
-              gsap.to(animationWhiteBoxFirstRef.current, {
-                y: "-100%",
-                opacity: 0,
-                duration: 0.8,
-                ease: "power2.inOut",
-              });
-
-              gsap.to(animationWhiteBoxSecondRef.current, {
-                y: "100%",
-                opacity: 0,
-                duration: 0.8,
-                ease: "power2.inOut",
-              });
-
-              gsap.to(solutionsBoxRef.current, {
-                opacity: 0,
-                duration: 0.8,
-                ease: "power2.inOut",
-              });
-
-              gsap.to(statisticsRef.current, {
-                x: "0%",
-                opacity: 1,
-                duration: 0.8,
-                ease: "power2.inOut",
-                onComplete: () => {
-                  currentView = 1;
-                  isAnimating = false;
-                },
-              });
-            },
-          });
-        } else if (currentView === 3) {
-          isAnimating = true;
-
-          gsap.to(aboutBoxRef.current, {
-            y: "100%",
-            duration: 0.8,
-            ease: "power2.inOut",
-            onComplete: () => {
-              gsap.set(aboutBoxRef.current, { opacity: 0, y: "100%" });
-
-              gsap.set(animationWhiteBoxFirstRef.current, {
-                y: "0%",
-                opacity: 1,
-              });
-              gsap.set(animationWhiteBoxSecondRef.current, {
-                y: "0%",
-                opacity: 1,
-              });
-              gsap.set(solutionsContentRef.current, { x: "0%", opacity: 1 });
-
-              gsap.to(solutionsBoxRef.current, {
-                opacity: 1,
-                x: "0%",
-                duration: 0.8,
-                ease: "power2.inOut",
-                onComplete: () => {
-                  currentView = 2;
-                  isAnimating = false;
-                },
-              });
-            },
-          });
-        }
-      }
-    };
-
-    const container = containerRef.current;
-    container.addEventListener("wheel", handleScroll, { passive: false });
-
+    // Audio setup
     const audio = audioRef.current;
-
     audio.play().catch((err) => {
       console.log("Audio autoplay was prevented by the browser:", err);
 
@@ -323,157 +649,76 @@ const Home = () => {
 
       document.addEventListener("click", startAudioOnInteraction);
     });
-
+    
+    // Add wheel event listener
+    const container = containerRef.current;
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    
     return () => {
-      container.removeEventListener("wheel", handleScroll);
+      container.removeEventListener('wheel', handleWheel);
       if (audio) {
         audio.pause();
       }
     };
-  }, [currentVideoIndex]);
+  }, [currentCardIndex, animationState]); // Dependencies include animation state
+
+  // Determine animation classes
+  const getCardClasses = () => {
+    const baseClass = 'card';
+    
+    if (animationState === 'idle') return baseClass;
+    if (animationState === 'entering') return `${baseClass} ${direction > 0 ? 'slide-in-up' : 'slide-in-down'}`;
+    if (animationState === 'exiting') return `${baseClass} ${direction > 0 ? 'slide-out-up' : 'slide-out-down'}`;
+    
+    return baseClass;
+  };
 
   return (
     <div className="home-container" ref={containerRef}>
       <video 
         className="background-video" 
-        ref={videoRef}
         autoPlay 
         loop 
         muted 
         playsInline
+        ref={videoRef}
       >
-        <source src={videos[currentVideoIndex]} type="video/mp4" />
+        <source src={getVideoForCard(currentCardIndex)} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
+      {/* Add transition elements */}
+      <div className="transition-line" ref={transitionLineRef}></div>
+      <div className="transition-circle" ref={transitionCircleRef}></div>
+      <div className="transition-box" ref={transitionBoxRef}></div>
+
       <audio ref={audioRef} src={backgroundMusic} loop autoPlay />
 
-      <div className="logo home-logo">
-        <img src={logo} alt="GKSYAPI Logo" />
-      </div>
-
       <div className="content-overlay">
-        <div className="statistics-container" ref={statisticsRef}>
-          <div className="statistics">
-            {/* Use refs to animate each statistic item */}
-            <div
-              className="stat-item"
-              ref={(el) => (statItemsRef.current[0] = el)}
-            >
-              <h2>1994</h2>
-              <p>{t.homePage.establishedIn}</p>
-            </div>
-            <div
-              className="stat-item"
-              ref={(el) => (statItemsRef.current[1] = el)}
-            >
-              <h2>25+</h2>
-              <p>{t.homePage.yearsInConstruction}</p>
-            </div>
-            <div
-              className="stat-item"
-              ref={(el) => (statItemsRef.current[2] = el)}
-            >
-              <h2>100+</h2>
-              <p>{t.homePage.completedProjects}</p>
-            </div>
-            <div
-              className="stat-item"
-              ref={(el) => (statItemsRef.current[3] = el)}
-            >
-              <h2>20+</h2>
-              <p>{t.homePage.ongoingProjects}</p>
-            </div>
-          </div>
-
-          <div className="tagline">
-            <h1 ref={(el) => (taglineRef.current[0] = el)}>
-              {t.homePage.tagline1}
-            </h1>
-            <h1 ref={(el) => (taglineRef.current[1] = el)}>
-              {t.homePage.tagline2}
-            </h1>
-          </div>
-        </div>
-
-        <div className="solutions-container" ref={solutionsBoxRef}>
-          <div className="solutions-white-box-wrapper">
-            <div
-              className="animation-white-box-first"
-              ref={animationWhiteBoxFirstRef}
-            ></div>
-
-            <div
-              className="animation-white-box-second"
-              ref={animationWhiteBoxSecondRef}
-            ></div>
-
-            <div className="animation-white-box-third" ref={animationWhiteBoxThirdRef}></div>
-            {/* <div className="animation-white-box-fourth"></div> */}
-
-            <div className="solutions-content" ref={solutionsContentRef}>
-              <div className="solutions-tag">{t.solutions.title}</div>
-              <h1 className="solutions-title">{t.solutions.solutionsTitle}</h1>
-              <p className="solutions-description">
-                {t.solutions.solutionsDescription}
-              </p>
-              <div className="solutions-links">
-                <Link to="/projects/kentsel">{t.projects.kentsel}</Link> |
-                <Link to="/projects/ozel-projeler">
-                  {t.projects.ozelProjeler}
-                </Link>{" "}
-                |
-                <Link to="/projects/konut-uretimi">
-                  {t.projects.konutUretimi}
-                </Link>{" "}
-                |
-                <Link to="/projects/satisi-diger-projeler">
-                  {t.projects.satisiDigerProjeler}
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="about-container" ref={aboutBoxRef}>
-          <div className="about-white-box-wrapper">
-            <div
-              className="about-white-box-top"
-              ref={aboutWhiteBoxTopRef}
-            ></div>
-
-            <div
-              className="about-white-box-bottom"
-              ref={aboutWhiteBoxBottomRef}
-            ></div>
-
-            <div className="about-content" ref={aboutContentRef}>
-              <div className="about-tag">KENTSEL</div>
-              <h1 className="about-title">
-                Confidence in Housing: Secure, Stylish, & Smart Investments
-              </h1>
-              <p className="about-description">
-                We deliver modern, high-quality, and aesthetically refined homes
-                that are more than just living spaces—they are future-proof
-                investments. Our expertise in housing sales and production
-                ensures that every residence meets the evolving needs of urban
-                life while providing unmatched comfort and security.
-              </p>
-              <div className="about-cta">
-                <Link to="/contact" className="cta-button">
-                  Your dream home is ready—invest in the future today!
-                </Link>
-              </div>
+        <div className="cards-container">
+          <div className={getCardClasses()}>
+            <div className="card-inner">
+              {cardContents[currentCardIndex].customRender ? 
+                // Use custom rendering if available
+                cardContents[currentCardIndex].customRender() : 
+                // Otherwise use standard title/text rendering
+                <>
+                  <h2>{cardContents[currentCardIndex].title}</h2>
+                  <p>{cardContents[currentCardIndex].text}</p>
+                </>
+              }
             </div>
           </div>
         </div>
       </div>
 
       <div className="vertical-text right">
-        <div className="line"></div>
+        <div className="vertical-line"></div>
         <span className="left-text">{t.projects.bespokeInEverySense}</span>
-        <span className="large-text-primary">{t.projects.the}</span>
-        <span className="large-text-secondary">{t.projects.projects}</span>
+        <div className="project-title-container">
+          <span className="large-text-primary">{t.projects.the}</span>
+          <span className="large-text-secondary">{t.projects.projects}</span>
+        </div>
       </div>
 
       <Navigation />

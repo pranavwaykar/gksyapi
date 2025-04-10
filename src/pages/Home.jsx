@@ -355,55 +355,62 @@ const Home = () => {
     
     // This ensures we cycle through our sequence repeatedly
     const transitionIndex = currentCardIndex % 7;
+
+    switch(transitionIndex) {
+      case 0: transitionType = 5; break; 
+      case 1: transitionType = 1; break; 
+      case 2: transitionType = 0; break; 
+      case 3: transitionType = 2; break; 
+      case 4: transitionType = 4; break; 
+      case 5: transitionType = 0; break; 
+      case 6: transitionType = 3; break; 
+      case 7: transitionType = 6; break; 
+      default: transitionType = 7; break;
+    }
     
     // Define our specific sequence - 7 unique transitions
     switch(transitionIndex) {
-      case 0: transitionType = 5; break; // Slide Up Transition
-      case 1: transitionType = 6; break; // Thick Border Rectangle Zoom
-      case 2: transitionType = 1; break; // Venetian Blinds Effect
-      case 3: transitionType = 3; break; // Domino Fall Effect
-      case 4: transitionType = 4; break; // Zigzag Wipe
-      case 5: transitionType = 0; break; // Split Vertical Swipe
-      case 6: transitionType = 2; break; // Staircase Wipe
-      case 7: transitionType = 7; break; // Barn Door Transition
-      default: transitionType = 0; break; // Default to Slide Up Transition
-    }
-    
-    switch(0) {
       case 0:
-        // Venetian Blinds
-        const blindsContainer = document.createElement('div');
-        blindsContainer.style.position = 'absolute';
-        blindsContainer.style.width = '100%';
-        blindsContainer.style.height = '100%';
-        blindsContainer.style.zIndex = '10';
-        blindsContainer.style.overflow = 'hidden';
-        containerRef.current.appendChild(blindsContainer);
+        // Horizontal Cards Split Vertically
+        const cardsContainer = document.createElement('div');
+        cardsContainer.style.position = 'absolute';
+        cardsContainer.style.width = '100%';
+        cardsContainer.style.height = '100%';
+        cardsContainer.style.zIndex = '10';
+        cardsContainer.style.overflow = 'hidden';
+        containerRef.current.appendChild(cardsContainer);
         
-        // Create horizontal blinds
-        const blindCounts = 12;
-        const blindHeight = 100 / blindCounts;
-        const blindss = [];
+        // Create left and right cards
+        const leftCard = document.createElement('div');
+        leftCard.style.position = 'absolute';
+        leftCard.style.top = '0';
+        leftCard.style.left = '-50%'; // Start off-screen left
+        leftCard.style.width = '50%'; // Half width
+        leftCard.style.height = '100%'; // Full height
+        leftCard.style.backgroundColor = 'white';
         
-        for (let i = 0; i < blindCounts; i++) {
-          const blind = document.createElement('div');
-          blind.style.position = 'absolute';
-          blind.style.left = '0';
-          blind.style.top = `${i * blindHeight}%`;
-          blind.style.width = '0';
-          blind.style.height = `${blindHeight}%`;
-          blind.style.backgroundColor = 'white';
-          
-          blindsContainer.appendChild(blind);
-          blindss.push(blind);
-        }
+        const rightCard = document.createElement('div');
+        rightCard.style.position = 'absolute';
+        rightCard.style.top = '0';
+        rightCard.style.left = '100%'; // Start off-screen right
+        rightCard.style.width = '50%'; // Half width
+        rightCard.style.height = '100%'; // Full height
+        rightCard.style.backgroundColor = 'white';
         
-        // Animate blinds opening (all at once)
-        tl.to(blindss, {
-          width: '100%',
-          duration: 0.5,
-          ease: 'power1.out'
-        })
+        cardsContainer.appendChild(leftCard);
+        cardsContainer.appendChild(rightCard);
+        
+        // Use the timeline as it was working before
+        tl.to(leftCard, {
+          left: '0%', // Move to center
+          duration: 0.7,
+          ease: 'power2.out'
+        }, 'moveIn')
+        .to(rightCard, {
+          left: '50%', // Move to center
+          duration: 0.7,
+          ease: 'power2.out'
+        }, 'moveIn') // Same label to animate simultaneously
         .set(video, { opacity: 0 })
         .call(() => {
           // Change video source
@@ -414,17 +421,22 @@ const Home = () => {
           // CARD CONTENT CHANGE TIMING
           setCurrentCardIndex(nextCardIndex);
         })
-        // Slide blinds out to the right instead of closing them
-        .to(blindss, {
-          x: '100%', // Move right off screen
-          duration: 0.5,
-          ease: 'power1.in',
+        // Split vertically
+        .to(leftCard, {
+          top: '-100%', // Left card moves UP
+          duration: 0.7,
+          ease: 'power2.in'
+        }, 'moveOut')
+        .to(rightCard, {
+          top: '100%', // Right card moves DOWN
+          duration: 0.7,
+          ease: 'power2.in',
           onComplete: () => {
-            if (blindsContainer.parentNode) {
-              blindsContainer.parentNode.removeChild(blindsContainer);
+            if (cardsContainer.parentNode) {
+              cardsContainer.parentNode.removeChild(cardsContainer);
             }
           }
-        })
+        }, 'moveOut') // Same label to animate simultaneously
         .set(video, { opacity: 1 });
         break;
         

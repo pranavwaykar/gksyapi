@@ -137,8 +137,24 @@ const Home = () => {
       }
     });
     
-    // Choose a sequential transition effect (8 options)
-    let transitionType = (currentCardIndex % 8);
+    // Use our fixed sequence instead of random calculation
+    // Map the card index to the specific transition types in the requested order
+    let transitionType;
+    
+    // This ensures we cycle through our sequence repeatedly
+    const transitionIndex = currentCardIndex % 7;
+    
+    // Define our specific sequence
+    switch(transitionIndex) {
+      case 0: transitionType = 5; break; // Split Vertical Swipe (Left up, Right down)
+      case 1: transitionType = 6; break; // Staircase Wipe
+      case 2: transitionType = 1; break; // Thick Border Rectangle Zoom
+      case 3: transitionType = 0; break; // Corner Swipes
+      case 4: transitionType = 4; break; // Simultaneous Horizontal Lines Wipe
+      case 5: transitionType = 2; break; // Venetian Blinds Effect
+      case 6: transitionType = 3; break; // Domino Fall Effect
+      default: transitionType = 5; break; // Default to Split Vertical Swipe
+    }
     
     switch(transitionType) {
       case 0:

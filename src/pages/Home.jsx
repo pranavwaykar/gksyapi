@@ -369,7 +369,7 @@ const Home = () => {
       default: transitionType = 0; break; // Default to Slide Up Transition
     }
     
-    switch(transitionType) {
+    switch(0) {
       case 0:
         // Venetian Blinds
         const blindsContainer = document.createElement('div');
@@ -558,88 +558,84 @@ const Home = () => {
         
       case 3:
         // Domino Fall Effect
-        const numDominoes = 10; // Number of domino pieces
-        const dominoElements = [];
-        const containersWidth = containerRef.current.offsetWidth;
-        const dominoWidth = containersWidth / numDominoes;
-        const containersHeight = containerRef.current.offsetHeight;
+        const dominoContainer = document.createElement('div');
+        dominoContainer.style.position = 'absolute';
+        dominoContainer.style.width = '100%';
+        dominoContainer.style.height = '100%';
+        dominoContainer.style.zIndex = '10';
+        dominoContainer.style.overflow = 'hidden';
+        containerRef.current.appendChild(dominoContainer);
         
-        // Create domino elements
-        for (let i = 0; i < numDominoes; i++) {
+        // Create dominos - REDUCED COUNT FOR BIGGER DOMINOS
+        const dominoCount = 12; // Reduced from 20 to make dominos bigger
+        const dominoWidth = 100 / dominoCount;
+        const dominos = [];
+        
+        for (let i = 0; i < dominoCount; i++) {
           const domino = document.createElement('div');
-          domino.className = 'domino-piece';
           domino.style.position = 'absolute';
-          domino.style.right = `${i * dominoWidth}px`;
           domino.style.top = '0';
-          domino.style.width = `${dominoWidth}px`;
-          domino.style.height = '0'; // Start with no height
+          domino.style.left = `${i * dominoWidth}%`;
+          domino.style.width = `${dominoWidth}%`;
+          domino.style.height = '100%';
           domino.style.backgroundColor = 'white';
-          domino.style.zIndex = '10';
-          domino.style.transformOrigin = 'top center'; // For the falling effect
+          domino.style.transformOrigin = 'center top';
+          domino.style.transform = 'rotateX(90deg)';
           
-          containerRef.current.appendChild(domino);
-          dominoElements.push(domino);
+          dominoContainer.appendChild(domino);
+          dominos.push(domino);
         }
         
-        // Animate dominoes falling in sequence from right to left
-        const staggerDelay = 0.08; // Delay between each domino falling
+        // Track if this transition is in progress
+        let dominoTransitionActive = true;
         
-        // First, make all dominoes appear at full height
-        dominoElements.forEach((domino, index) => {
-          tl.to(domino, {
-            height: `${containersHeight}px`,
-            duration: 0.7,
-            ease: 'power1.out',
-          }, index > 0 ? '<+' + (staggerDelay/2) : 0);
-        });
-        
-        // Then make them fall like dominoes
-        dominoElements.forEach((domino, index) => {
-          tl.to(domino, {
-            rotateX: 90, // Fall forward
-            duration: 0.9,
-            ease: 'power2.in',
-          }, index > 0 ? '<+' + staggerDelay : 0.2); // Start after all appear
-        });
-        
-        // Change video
-        tl.set(video, { opacity: 0 })
-          .call(() => {
-            // Change video source
-            video.querySelector('source').src = newVideoSrc;
-            video.load();
-            video.play();
-            
-            // Reset dominoes for exit animation
-            dominoElements.forEach(domino => {
-              domino.style.rotateX = '0deg';
-              domino.style.right = ''; 
-              domino.style.left = domino.style.right;
-              domino.style.right = '';
-            });
-            
-            // CARD CONTENT CHANGE TIMING
-            setCurrentCardIndex(nextCardIndex);
-          });
-        
-        // Animate dominoes out with a different effect - slide out to bottom
-        tl.to(dominoElements, {
-          top: '100%',
-          duration: 0.5,
-          ease: 'power2.in',
-          stagger: staggerDelay,
-          onComplete: () => {
-            // Clean up
-            dominoElements.forEach(domino => {
-              if (domino.parentNode) {
-                domino.parentNode.removeChild(domino);
-              }
-            });
+        // Ensure cleanup happens if the component unmounts or transition is interrupted
+        const cleanupDominos = () => {
+          if (dominoContainer.parentNode) {
+            dominoContainer.parentNode.removeChild(dominoContainer);
           }
-        });
+          dominoTransitionActive = false;
+        };
         
-        // Show new video
-        tl.set(video, { opacity: 1 });
+        // Add domino fall animation - SLOWED DOWN
+        tl.to(dominos, {
+          rotateX: 0,
+          stagger: 0.05, // Increased from 0.03 for slower domino fall
+          duration: 0.6, // Increased from 0.4 for slower animation
+          ease: 'power1.inOut'
+        })
+        .set(video, { opacity: 0 })
+        .call(() => {
+          if (!dominoTransitionActive) return;
+          
+          // Change video source
+          video.querySelector('source').src = newVideoSrc;
+          video.load();
+          video.play();
+          
+          // CARD CONTENT CHANGE TIMING
+          setCurrentCardIndex(nextCardIndex);
+        })
+        // Fall down the other way
+        .to(dominos, {
+          rotateX: -90,
+          stagger: 0.05, // Increased from 0.03 for slower domino fall
+          duration: 0.6, // Increased from 0.4 for slower animation
+          ease: 'power1.inOut',
+          onComplete: cleanupDominos,
+          // Add cleanup to each domino's animation for redundancy
+          onInterrupt: cleanupDominos
+        })
+        // Add cleanup call earlier in the timeline as well
+        .call(() => {
+          if (dominoTransitionActive) {
+            cleanupDominos();
+          }
+        }, null, "-=0.5")
+        .set(video, { opacity: 1 });
+        
+        // Safety timeout to ensure cleanup happens even if animation is interrupted
+        setTimeout(cleanupDominos, 4000); // Increased from 3000 to match slower animation
         break;
         
       case 4:

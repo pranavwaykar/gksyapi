@@ -356,90 +356,73 @@ const Home = () => {
     // This ensures we cycle through our sequence repeatedly
     const transitionIndex = currentCardIndex % 7;
     
-    // Define our specific sequence
+    // Define our specific sequence - 7 unique transitions
     switch(transitionIndex) {
-      case 0: transitionType = 5; break; // Split Vertical Swipe (Left up, Right down)
-      case 1: transitionType = 6; break; // Staircase Wipe
-      case 2: transitionType = 1; break; // Thick Border Rectangle Zoom
-      case 3: transitionType = 0; break; // Corner Swipes
+      case 0: transitionType = 5; break; // Slide Up Transition
+      case 1: transitionType = 6; break; // Thick Border Rectangle Zoom
+      case 2: transitionType = 1; break; // Venetian Blinds Effect
+      case 3: transitionType = 3; break; // Domino Fall Effect
       case 4: transitionType = 4; break; // Zigzag Wipe
-      case 5: transitionType = 2; break; // Venetian Blinds Effect
-      case 6: transitionType = 3; break; // Domino Fall Effect
-      default: transitionType = 5; break; // Default to Split Vertical Swipe
+      case 5: transitionType = 0; break; // Split Vertical Swipe
+      case 6: transitionType = 2; break; // Staircase Wipe
+      case 7: transitionType = 7; break; // Barn Door Transition
+      default: transitionType = 0; break; // Default to Slide Up Transition
     }
     
     switch(transitionType) {
       case 0:
-        // Corner Swipes
-        const corners = [];
-        const cornerPositions = [
-          { top: 0, left: 0, rotation: 0 },            // Top-left
-          { top: 0, right: 0, rotation: 90 },          // Top-right
-          { bottom: 0, right: 0, rotation: 180 },      // Bottom-right
-          { bottom: 0, left: 0, rotation: 270 }        // Bottom-left
-        ];
+        // Venetian Blinds
+        const blindsContainer = document.createElement('div');
+        blindsContainer.style.position = 'absolute';
+        blindsContainer.style.width = '100%';
+        blindsContainer.style.height = '100%';
+        blindsContainer.style.zIndex = '10';
+        blindsContainer.style.overflow = 'hidden';
+        containerRef.current.appendChild(blindsContainer);
         
-        // Create corner elements
-        cornerPositions.forEach(pos => {
-          const corner = document.createElement('div');
-          corner.className = 'corner-wipe';
-          corner.style.position = 'absolute';
-          corner.style.width = '100%';
-          corner.style.height = '100%';
-          
-          // Position each corner
-          Object.keys(pos).forEach(key => {
-            if (key !== 'rotation') {
-              corner.style[key] = pos[key] + 'px';
-            }
-          });
-          
-          corner.style.background = 'white';
-          corner.style.clipPath = 'polygon(0 0, 0% 0, 0% 0%)'; // Start with nothing showing
-          corner.style.zIndex = '10';
-          
-          containerRef.current.appendChild(corner);
-          corners.push(corner);
-        });
+        // Create horizontal blinds
+        const blindCounts = 12;
+        const blindHeight = 100 / blindCounts;
+        const blindss = [];
         
-        // Define clip paths for each corner
-        const clipPaths = [
-          'polygon(0 0, 100% 0, 0% 100%)',        // Top-left
-          'polygon(100% 0, 100% 100%, 0% 0)',     // Top-right
-          'polygon(100% 100%, 0% 100%, 100% 0%)', // Bottom-right
-          'polygon(0 100%, 0% 0%, 100% 100%)'     // Bottom-left
-        ];
+        for (let i = 0; i < blindCounts; i++) {
+          const blind = document.createElement('div');
+          blind.style.position = 'absolute';
+          blind.style.left = '0';
+          blind.style.top = `${i * blindHeight}%`;
+          blind.style.width = '0';
+          blind.style.height = `${blindHeight}%`;
+          blind.style.backgroundColor = 'white';
+          
+          blindsContainer.appendChild(blind);
+          blindss.push(blind);
+        }
         
-        // Animate corners to swipe in
-        tl.to(corners, {
-          clipPath: (i) => clipPaths[i],
-          duration: 0.6,
-          stagger: 0.15,
-          ease: 'power2.inOut'
+        // Animate blinds opening (all at once)
+        tl.to(blindss, {
+          width: '100%',
+          duration: 0.5,
+          ease: 'power1.out'
         })
-        .set(video, { opacity: 0 }, 0.6)
+        .set(video, { opacity: 0 })
         .call(() => {
           // Change video source
           video.querySelector('source').src = newVideoSrc;
           video.load();
           video.play();
           
-          // CARD CONTENT CHANGE TIMING - change here at midpoint of transition
+          // CARD CONTENT CHANGE TIMING
           setCurrentCardIndex(nextCardIndex);
         })
-        // Animate corners to swipe out
-        .to(corners, {
-          clipPath: 'polygon(0 0, 0% 0, 0% 0%)',
-          duration: 0.6,
-          stagger: 0.15,
-          ease: 'power2.inOut',
+        // Slide blinds out to the right instead of closing them
+        .to(blindss, {
+          x: '100%', // Move right off screen
+          duration: 0.5,
+          ease: 'power1.in',
           onComplete: () => {
-            // Clean up
-            corners.forEach(corner => {
-              if (corner.parentNode) {
-                corner.parentNode.removeChild(corner);
-              }
-            });
+            if (blindsContainer.parentNode) {
+              blindsContainer.parentNode.removeChild(blindsContainer);
+            }
           }
         })
         .set(video, { opacity: 1 });
@@ -851,6 +834,56 @@ const Home = () => {
                 bar.parentNode.removeChild(bar);
               }
             });
+          }
+        })
+        .set(video, { opacity: 1 });
+        break;
+
+      case 7:
+        const slideContainer = document.createElement('div');
+        slideContainer.style.position = 'absolute';
+        slideContainer.style.width = '100%';
+        slideContainer.style.height = '100%';
+        slideContainer.style.zIndex = '10';
+        slideContainer.style.overflow = 'hidden';
+        containerRef.current.appendChild(slideContainer);
+        
+        // Create sliding panel
+        const slidingPanel = document.createElement('div');
+        slidingPanel.style.position = 'absolute';
+        slidingPanel.style.left = '0';
+        slidingPanel.style.width = '100%';
+        slidingPanel.style.height = '100%';
+        slidingPanel.style.backgroundColor = 'white';
+        slidingPanel.style.transform = 'translateY(100%)'; // Start below the screen
+        
+        slideContainer.appendChild(slidingPanel);
+        
+        // Animate panel sliding up from bottom
+        tl.to(slidingPanel, {
+          y: '0%', // Move to cover screen
+          duration: 0.6,
+          ease: 'power2.out'
+        })
+        .set(video, { opacity: 0 })
+        .call(() => {
+          // Change video source
+          video.querySelector('source').src = newVideoSrc;
+          video.load();
+          video.play();
+          
+          // CARD CONTENT CHANGE TIMING
+          setCurrentCardIndex(nextCardIndex);
+        })
+        // Continue sliding up to exit the screen
+        .to(slidingPanel, {
+          y: '-100%', // Move up off screen
+          duration: 0.6,
+          ease: 'power2.in',
+          onComplete: () => {
+            if (slideContainer.parentNode) {
+              slideContainer.parentNode.removeChild(slideContainer);
+            }
           }
         })
         .set(video, { opacity: 1 });

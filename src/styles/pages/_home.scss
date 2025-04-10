@@ -356,7 +356,7 @@ body,
 
           .stat-item {
             h2 {
-              font-size: 3rem;
+              font-size: 2.3rem;
               font-weight: 700;
               margin-bottom: 0.25rem;
             }
@@ -411,7 +411,7 @@ body,
         }
 
         .solutions-title {
-          font-size: 36px;
+          font-size: 2.3rem;
           font-weight: 700;
           color: #0038b3;
           margin-bottom: 1.5rem;
@@ -451,6 +451,14 @@ body,
         bottom: -81px;
         left: -32px;
       }
+
+      .tagline {
+        h1 {
+          font-size: 2.3rem;
+        }
+      }
+
+
     }
 
     .vertical-text {

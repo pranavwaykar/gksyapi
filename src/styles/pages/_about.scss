@@ -388,7 +388,7 @@
 
   .vertical-text-about {
     position: absolute;
-    height: 100%;
+    height: 45rem;
     z-index: 5;
     top: 0px;
     right: 30px;
@@ -477,6 +477,7 @@
 
   .vertical-text-about {
     left: 5rem;
+    height: 38.2rem !important;
     width: min-content !important;
 
     .line {
@@ -544,6 +545,106 @@
         width: 900px; // Force horizontal scrolling on mobile
         height: 350px;
       }
+    }
+  }
+}
+
+.about-content-sections {
+  padding: 4rem 8%;
+  margin-top: 2rem;
+  background-color: rgb(38 62 128 / 90%);
+  ;
+  
+  .about-section {
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    
+    &.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    h2 {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background-color: var(--primary-color);
+      }
+    }
+    
+    p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--text-color);
+      margin-bottom: 1.2rem;
+      
+      &.cta {
+        font-weight: 500;
+        color: var(--primary-color);
+        font-size: 1.2rem;
+        margin-top: 1.5rem;
+        transition: transform 0.3s ease;
+        
+        &:hover {
+          transform: translateX(5px);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  
+  .service-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+    
+    .service-item {
+      background-color: var(--background-alt-color, rgba(80, 125, 250, 0.9));
+      border-left: 4px solid var(--primary-color);
+      padding: 1.5rem;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      font-weight: 600;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 100px;
+      
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        background-color: var(--primary-color);
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    padding: 2rem 5%;
+    
+    .about-section h2 {
+      font-size: 1.6rem;
+    }
+    
+    .service-categories {
+      grid-template-columns: 1fr;
     }
   }
 }

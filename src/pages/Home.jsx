@@ -362,7 +362,7 @@ const Home = () => {
       case 1: transitionType = 6; break; // Staircase Wipe
       case 2: transitionType = 1; break; // Thick Border Rectangle Zoom
       case 3: transitionType = 0; break; // Corner Swipes
-      case 4: transitionType = 4; break; // Simultaneous Horizontal Lines Wipe
+      case 4: transitionType = 4; break; // Zigzag Wipe
       case 5: transitionType = 2; break; // Venetian Blinds Effect
       case 6: transitionType = 3; break; // Domino Fall Effect
       default: transitionType = 5; break; // Default to Split Vertical Swipe
@@ -497,7 +497,7 @@ const Home = () => {
           })
           // Animation: zoom back in while sliding to the left
           .to(rectangle, {
-            scale: 0.01,
+            // scale: 0.01,
             y: 0,
             xPercent: -200, // Use xPercent for straight horizontal movement
             duration: 1,
@@ -660,72 +660,69 @@ const Home = () => {
         break;
         
       case 4:
-        // Simultaneous Horizontal Lines Wipe
-        const lines = [
-          document.createElement('div'),
-          document.createElement('div'),
-          document.createElement('div'),
-          document.createElement('div')
-        ];
+        // Zigzag Wipe
+        const zigzagContainer = document.createElement('div');
+        zigzagContainer.style.position = 'absolute';
+        zigzagContainer.style.width = '100%';
+        zigzagContainer.style.height = '100%';
+        zigzagContainer.style.zIndex = '10';
+        zigzagContainer.style.overflow = 'hidden';
+        containerRef.current.appendChild(zigzagContainer);
         
-        // Set up common styles for all lines
-        lines.forEach((line, index) => {
-          line.className = 'wipe-line';
-          line.style.position = 'absolute';
-          line.style.height = '25%'; // Each line takes exactly 1/4 of the screen height
-          line.style.width = '100%';
-          line.style.backgroundColor = 'white';
-          line.style.zIndex = '10';
-          line.style.top = `${index * 25}%`; // Position at 0%, 25%, 50%, 75%
+        // Create zigzag segments
+        const zags = 8; // Number of zigzag points
+        const zagHeight = 100 / zags;
+        const zigzagSegments = [];
+        
+        for (let i = 0; i < zags; i++) {
+          const segment = document.createElement('div');
+          segment.style.position = 'absolute';
+          segment.style.height = `${zagHeight}%`;
+          segment.style.width = '0%';
+          segment.style.top = `${i * zagHeight}%`;
+          segment.style.backgroundColor = 'white';
           
-          // Set initial positions (alternating right/left)
-          if (index % 2 === 0) {
-            // Even index lines start from right
-            line.style.left = '100%';
+          // Alternate left and right alignment
+          if (i % 2 === 0) {
+            segment.style.left = '0';
           } else {
-            // Odd index lines start from left
-            line.style.left = '-100%';
+            segment.style.right = '0';
           }
           
-          containerRef.current.appendChild(line);
-        });
+          zigzagContainer.appendChild(segment);
+          zigzagSegments.push(segment);
+        }
         
-        // Animate all lines together in one direction only
-        tl
-          // All lines move simultaneously
-          .to(lines.filter((_, i) => i % 2 === 0), { 
-            left: '-100%', // Even lines move from right to left
-            duration: 0.6, 
-            ease: 'power2.inOut'
-          })
-          .to(lines.filter((_, i) => i % 2 === 1), { 
-            left: '100%',  // Odd lines move from left to right
-            duration: 0.6, 
-            ease: 'power2.inOut'
-          }, '<') // The '<' makes this animation start at the same time as the previous one
+        // Animate zigzag segments expanding
+        tl.to(zigzagSegments, {
+          width: '100%',
+          stagger: 0.07,
+          duration: 0.4,
+          ease: 'power2.out'
+        })
+        .set(video, { opacity: 0 })
+        .call(() => {
+          // Change video source
+          video.querySelector('source').src = newVideoSrc;
+          video.load();
+          video.play();
           
-          // Change video
-          .set(video, { opacity: 0 })
-          .call(() => {
-            // Change video source
-            video.querySelector('source').src = newVideoSrc;
-            video.load();
-            video.play();
-            
-            // CARD CONTENT CHANGE TIMING
-            setCurrentCardIndex(nextCardIndex);
-          })
-          
-          // Show new video
-          .set(video, { opacity: 1 })
-          // Clean up
-          .call(() => {
-            lines.forEach(line => {
-              if (line.parentNode) {
-                line.parentNode.removeChild(line);
-              }
-            });
-          });
+          // CARD CONTENT CHANGE TIMING
+          setCurrentCardIndex(nextCardIndex);
+        })
+        // Animate zigzag segments contracting
+        .to(zigzagSegments, {
+          width: '0%',
+          stagger: 0.07,
+          duration: 0.4,
+          ease: 'power2.in',
+          onComplete: () => {
+            if (zigzagContainer.parentNode) {
+              zigzagContainer.parentNode.removeChild(zigzagContainer);
+            }
+          }
+        })
+        .set(video, { opacity: 1 });
         break;
         
       case 5:

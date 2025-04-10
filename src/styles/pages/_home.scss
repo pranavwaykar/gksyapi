@@ -613,15 +613,29 @@
   left: -14rem;
   overflow: visible; // Ensure the blue div can extend outside
   
-  // Blue accent on the right side
+  // Blue accent on the right side - enhanced visibility
   .blue-accent-right {
     position: absolute;
-    top: -30px;
-    right: -33px;
-    width: 60px;
+    top: 0;
+    right: -80px;
+    width: 80px;
     height: 100%;
-    background-color: #0038b3;
-    z-index: 1;
+    background-color: #0038b3; // Deep blue color
+    z-index: 10; // Increase z-index
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    // Page indicator - enhanced visibility
+    .page-indicator {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 600;
+      transform: rotate(90deg); // Rotate text to be vertical
+      letter-spacing: 1px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3); // Stronger shadow
+      white-space: nowrap; // Prevent text wrapping
+    }
   }
   
   .housing-header {

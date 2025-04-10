@@ -123,11 +123,13 @@ const Home = () => {
       )
     },
     { 
-      // Card 4 - Housing UI
+      // Card 4 - Housing UI (KENTSEL)
       customRender: () => (
         <div className="housing-container">
-          {/* Add the blue div on the right side */}
-          <div className="blue-accent-right"></div>
+          {/* Update the blue accent right div */}
+          <div className="blue-accent-right">
+            <div className="page-indicator">1/5</div>
+          </div>
           
           <div className="housing-header">
             <span className="section-label">KENTSEL</span>
@@ -154,10 +156,136 @@ const Home = () => {
         </div>
       )
     },
-    { title: "Card 5", text: "Fifth card with an exciting transition." },
-    { title: "Card 6", text: "This is the last card. Try scrolling back up to see all the animations in reverse!" },
-    { title: "Card 7", text: "This is the last card. Try scrolling back up to see all the animations in reverse!" },
-    { title: "Card 8", text: "This is the last card. Try scrolling back up to see all the animations in reverse!" }
+    { 
+      // Card 5 - Custom-Built Excellence
+      customRender: () => (
+        <div className="housing-container">
+          <div className="blue-accent-right">
+            <div className="page-indicator">2/5</div>
+          </div>
+          
+          <div className="housing-header">
+            <span className="section-label">Services</span>
+            <h1 className="housing-title">
+              Custom-Built Excellence: <br />
+              From Homes to Corporate Spaces
+            </h1>
+          </div>
+          
+          <div className="housing-description">
+            <p>
+              From residences and workspaces to large-scale corporate and private projects, we tailor 
+              every build with precision. GKS Yapı integrates cutting-edge construction technologies 
+              with a meticulous quality approach, ensuring that every project is a benchmark of excellence.
+            </p>
+          </div>
+          
+          <div className="housing-cta">
+            <button className="cta-button">
+              Crafted with precision, built for legacy.
+            </button>
+          </div>
+        </div>
+      )
+    },
+    { 
+      // Card 6 - Building the Future
+      customRender: () => (
+        <div className="housing-container">
+          <div className="blue-accent-right">
+            <div className="page-indicator">3/5</div>
+          </div>
+          
+          <div className="housing-header">
+            <span className="section-label">Services</span>
+            <h1 className="housing-title">
+              Building the Future of Türkiye, <br />
+              One Landmark at a Time
+            </h1>
+          </div>
+          
+          <div className="housing-description">
+            <p>
+              At GKS Yapı, we don't just build structures—we shape modern, sustainable, and 
+              high-quality living spaces that redefine city life. As a trusted leader in 
+              İstanbul's construction and real estate sector, we are committed to innovation, 
+              excellence, and long-term value for homeowners and investors alike.
+            </p>
+          </div>
+          
+          <div className="housing-cta">
+            <button className="cta-button">
+              Let's build your vision together—contact us now!
+            </button>
+          </div>
+        </div>
+      )
+    },
+    { 
+      // Card 7 - Urban Transformation
+      customRender: () => (
+        <div className="housing-container">
+          <div className="blue-accent-right">
+            <div className="page-indicator">4/5</div>
+          </div>
+          
+          <div className="housing-header">
+            <span className="section-label">Services</span>
+            <h1 className="housing-title">
+              Urban Transformation: <br />
+              Rebuilding Cities, Restoring Confidence
+            </h1>
+          </div>
+          
+          <div className="housing-description">
+            <p>
+              With a focus on earthquake-resistant, energy-efficient, and sustainable urban 
+              renewal, we are reshaping İstanbul's skyline. Our expertise in fast project 
+              execution and strategic planning ensures that urban transformation is smooth, 
+              safe, and economically viable.
+            </p>
+          </div>
+          
+          <div className="housing-cta">
+            <button className="cta-button">
+              Be part of the new era of modern cities—partner with us!
+            </button>
+          </div>
+        </div>
+      )
+    },
+    { 
+      // Card 8 - Sustainable Living
+      customRender: () => (
+        <div className="housing-container">
+          <div className="blue-accent-right">
+            <div className="page-indicator">5/5</div>
+          </div>
+          
+          <div className="housing-header">
+            <span className="section-label">Services</span>
+            <h1 className="housing-title">
+              Sustainable Living: <br />
+              Nature & Innovation in Harmony
+            </h1>
+          </div>
+          
+          <div className="housing-description">
+            <p>
+              We integrate green spaces, eco-friendly materials, and smart energy solutions 
+              into our projects, creating cities that thrive both today and in the future. 
+              Sustainability isn't an afterthought—it's at the core of our design philosophy.
+            </p>
+          </div>
+          
+          <div className="housing-cta">
+            <button className="cta-button">
+              Sustainable cities, better living—join the movement!
+            </button>
+          </div>
+        </div>
+      )
+    }
   ];
 
   // Map cards to videos - one unique video per card

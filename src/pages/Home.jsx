@@ -86,32 +86,74 @@ const Home = () => {
             in form while maintaining an effortless elegance.</p>
           </div>
           
-          {/* <div className="stats-row">
-            <div className="stat-box">
-              <div className="stat-number">1994</div>
-              <div className="stat-label">Established in</div>
-            </div>
-            
-            <div className="stat-box">
-              <div className="stat-number">25+</div>
-              <div className="stat-label">Years in construction</div>
-            </div>
-            
-            <div className="stat-box">
-              <div className="stat-number">100+</div>
-              <div className="stat-label">Completed Projects</div>
-            </div>
-            
-            <div className="stat-box">
-              <div className="stat-number">20+</div>
-              <div className="stat-label">On going Projects</div>
-            </div>
-          </div> */}
         </div>
       )
     },
-    { title: "Card 3", text: "Third card with another animation style." },
-    { title: "Card 4", text: "Fourth card displaying yet another animation effect." },
+    { 
+      // Card 3 - Solutions UI
+      customRender: () => (
+        <div className="solutions-container">
+          <div className="solutions-header">
+            <span className="section-label">SOLUTIONS</span>
+            <h1 className="solutions-title">
+              Building the Future of Türkiye, <br />
+              One Landmark at a Time
+            </h1>
+          </div>
+          
+          <div className="solutions-description">
+            <p>
+              At <strong>GKS Yapı</strong>, we don't just build structures—we shape modern, sustainable, and 
+              high-quality living spaces that redefine city life. As a trusted leader in 
+              Istanbul's construction and real estate sector, we are committed to innovation, 
+              excellence, and long-term value for homeowners and investors alike.
+            </p>
+          </div>
+          
+          <div className="solutions-categories">
+            <span className="category-item">Kentsel</span>
+            <span className="category-divider">|</span>
+            <span className="category-item">Özel Projeler</span>
+            <span className="category-divider">|</span>
+            <span className="category-item">Konut uretimi</span>
+            <span className="category-divider">|</span>
+            <span className="category-item">Satisi Diger Projeler & Sehir Estetigi</span>
+          </div>
+        </div>
+      )
+    },
+    { 
+      // Card 4 - Housing UI
+      customRender: () => (
+        <div className="housing-container">
+          {/* Add the blue div on the right side */}
+          <div className="blue-accent-right"></div>
+          
+          <div className="housing-header">
+            <span className="section-label">KENTSEL</span>
+            <h1 className="housing-title">
+              Confidence in Housing: <br />
+              Secure, Stylish, & Smart Investments
+            </h1>
+          </div>
+          
+          <div className="housing-description">
+            <p>
+              We deliver modern, high-quality, and aesthetically refined homes that are 
+              more than just living spaces—they are future-proof investments. Our expertise 
+              in housing sales and production ensures that every residence meets the 
+              evolving needs of urban life while providing unmatched comfort and security.
+            </p>
+          </div>
+          
+          <div className="housing-cta">
+            <button className="cta-button">
+              Your dream home is ready—invest in the future today!
+            </button>
+          </div>
+        </div>
+      )
+    },
     { title: "Card 5", text: "Fifth card with an exciting transition." },
     { title: "Card 6", text: "This is the last card. Try scrolling back up to see all the animations in reverse!" },
     { title: "Card 7", text: "This is the last card. Try scrolling back up to see all the animations in reverse!" },

@@ -71,7 +71,9 @@ const Home = () => {
     { title: "Card 3", text: "Third card with another animation style." },
     { title: "Card 4", text: "Fourth card displaying yet another animation effect." },
     { title: "Card 5", text: "Fifth card with an exciting transition." },
-    { title: "Card 6", text: "This is the last card. Try scrolling back up to see all the animations in reverse!" }
+    { title: "Card 6", text: "This is the last card. Try scrolling back up to see all the animations in reverse!" },
+    { title: "Card 7", text: "This is the last card. Try scrolling back up to see all the animations in reverse!" },
+    { title: "Card 8", text: "This is the last card. Try scrolling back up to see all the animations in reverse!" }
   ];
 
   // Map cards to videos - one unique video per card
@@ -84,11 +86,15 @@ const Home = () => {
       case 2:
         return backgroundVideo3;
       case 3:
-        return backgroundVideo; // Start cycling again
+        return backgroundVideo;
       case 4:
         return backgroundVideo2;
       case 5:
         return backgroundVideo3;
+      case 6:
+        return backgroundVideo;
+      case 7:
+        return backgroundVideo2;
       default:
         return backgroundVideo;
     }
@@ -119,8 +125,17 @@ const Home = () => {
       return;
     }
     
+    // Store the new index to update content later
+    const nextCardIndex = newCardIndex;
+    
     // Perform cool transition effects
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({
+      onUpdate: function() {
+        // You can use this to track progress if needed
+        // const progress = this.progress();
+        // console.log("Animation progress:", progress);
+      }
+    });
     
     // Choose a sequential transition effect (8 options)
     let transitionType = (currentCardIndex % 8);
@@ -180,6 +195,9 @@ const Home = () => {
           video.querySelector('source').src = newVideoSrc;
           video.load();
           video.play();
+          
+          // CARD CONTENT CHANGE TIMING - change here at midpoint of transition
+          setCurrentCardIndex(nextCardIndex);
         })
         // Animate corners to swipe out
         .to(corners, {
@@ -245,6 +263,9 @@ const Home = () => {
             video.querySelector('source').src = newVideoSrc;
             video.load();
             video.play();
+            
+            // CARD CONTENT CHANGE TIMING
+            setCurrentCardIndex(nextCardIndex);
           })
           // Animation: zoom back in while sliding to the left
           .to(rectangle, {
@@ -302,6 +323,9 @@ const Home = () => {
           video.querySelector('source').src = newVideoSrc;
           video.load();
           video.play();
+          
+          // CARD CONTENT CHANGE TIMING
+          setCurrentCardIndex(nextCardIndex);
         })
         // Animate blinds to close
         .to(blinds, {
@@ -382,6 +406,9 @@ const Home = () => {
               domino.style.left = domino.style.right;
               domino.style.right = '';
             });
+            
+            // CARD CONTENT CHANGE TIMING
+            setCurrentCardIndex(nextCardIndex);
           });
         
         // Animate dominoes out with a different effect - slide out to bottom
@@ -456,6 +483,9 @@ const Home = () => {
             video.querySelector('source').src = newVideoSrc;
             video.load();
             video.play();
+            
+            // CARD CONTENT CHANGE TIMING
+            setCurrentCardIndex(nextCardIndex);
           })
           
           // Show new video
@@ -511,6 +541,9 @@ const Home = () => {
           video.querySelector('source').src = newVideoSrc;
           video.load();
           video.play();
+          
+          // CARD CONTENT CHANGE TIMING
+          setCurrentCardIndex(nextCardIndex);
         })
         // Animate out: left half continues up, right half continues down
         .to(leftHalf, {
@@ -576,6 +609,9 @@ const Home = () => {
           video.querySelector('source').src = newVideoSrc;
           video.load();
           video.play();
+          
+          // CARD CONTENT CHANGE TIMING
+          setCurrentCardIndex(nextCardIndex);
         })
         // Then animate bars continuing off-screen to the right
         .to(bars, {
@@ -601,7 +637,7 @@ const Home = () => {
   const handleWheel = (e) => {
     e.preventDefault();
     
-    // Don't process if animation is in progress
+    // Don't process if a video transition is in progress
     if (animationState !== 'idle') return;
     
     // Determine direction
@@ -615,24 +651,22 @@ const Home = () => {
     
     // Only update if the index actually changes
     if (newIndex !== currentCardIndex) {
-      // Set direction for animation
+      // Set direction for tracking purposes
       setDirection(scrollDirection);
       
-      // Start exit animation
-      setAnimationState('exiting');
+      // Set to processing state to prevent multiple wheel events
+      setAnimationState('processing');
       
-      // After exit animation completes, change card and start enter animation
+      // Change the video with transition - card content change happens inside this function now
+      changeBackgroundVideo(newIndex);
+      
+      // Note: We no longer update currentCardIndex here
+      // setCurrentCardIndex(newIndex); - REMOVED
+      
+      // Reset to idle state after video transition completes
       setTimeout(() => {
-        // Change the video when changing card
-        changeBackgroundVideo(newIndex);
-        setCurrentCardIndex(newIndex);
-        setAnimationState('entering');
-        
-        // Reset to idle state after enter animation completes
-        setTimeout(() => {
-          setAnimationState('idle');
-        }, 500); // Match this to the CSS transition duration
-      }, 500); // Match this to the CSS transition duration
+        setAnimationState('idle');
+      }, 1500);
     }
   };
 

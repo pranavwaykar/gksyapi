@@ -15,8 +15,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import { setupHomeVerticalTextAnimation, addEnergyParticlesStyles } from '../utils/animations';
+import { faArrowDown, faVolumeUp, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,6 +23,7 @@ const Home = () => {
   const containerRef = useRef(null);
   const audioRef = useRef(null);
   const videoRef = useRef(null);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(true);
   
   // Store the current card index
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -1060,6 +1060,23 @@ const Home = () => {
     };
   }, [currentCardIndex, animationState]); // Dependencies include animation state
 
+
+  // Function to toggle music play/pause
+  const toggleMusic = () => {
+    const audio = audioRef.current;
+    if (audio) {
+      if (isMusicPlaying) {
+        audio.pause();
+      } else {
+        audio.play().catch(err => {
+          console.log("Could not play audio:", err);
+        });
+      }
+      setIsMusicPlaying(!isMusicPlaying);
+    }
+  };
+  
+  
   // Determine animation classes
   const getCardClasses = () => {
     const baseClass = 'card';
@@ -1122,17 +1139,6 @@ const Home = () => {
     });
   };
 
-  // Add this useEffect for vertical text animations
-  useEffect(() => {
-    // Add energy particles styles
-    addEnergyParticlesStyles();
-    
-    // Initialize the home-specific vertical text animation
-    setupHomeVerticalTextAnimation();
-    
-    // ... your existing effects can remain here ...
-  }, []);
-
   return (
     <div className="home-container" ref={containerRef}>
       <video 
@@ -1179,6 +1185,16 @@ const Home = () => {
           <span className="large-text-primary">{t.projects.the}</span>
           <span className="large-text-secondary">{t.projects.projects}</span>
         </div>
+      </div>
+
+            {/* Add music control button */}
+            <div className="music-control">
+        <button onClick={toggleMusic} title={isMusicPlaying ? "Mute music" : "Play music"}>
+          <FontAwesomeIcon 
+            icon={isMusicPlaying ? faVolumeUp : faVolumeMute} 
+            size="sm" 
+          />
+        </button>
       </div>
 
       <Navigation />

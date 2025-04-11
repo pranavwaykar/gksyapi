@@ -441,79 +441,100 @@ const Home = () => {
         .set(video, { opacity: 1 });
         break;
         
-      case 1:
-        // Thick Border Rectangle Zoom
-        const containerWidth = containerRef.current.offsetWidth;
-        const containerHeight = containerRef.current.offsetHeight;
-        const borderWidthTop = `${containerHeight * 0.42}px`; // 40% border top
-        const borderWidthRight = `${containerWidth * 0.32}px`; // 40% border right
+        case 1:
+          // Thick Border Rectangle Zoom - Split L Shape
+          const containerWidth = containerRef.current.offsetWidth;
+          const containerHeight = containerRef.current.offsetHeight;
+          const borderWidthTop = `${containerHeight * 0.40}px`; // 40% border top
+          const borderWidthRight = `${containerWidth * 0.30}px`; // 40% border right
+          
+          // Create container for both pieces
+          const rectangleContainer = document.createElement('div');
+          rectangleContainer.className = 'rectangle-zoom-container';
+          rectangleContainer.style.position = 'absolute';
+          rectangleContainer.style.top = '0';
+          rectangleContainer.style.left = '0';
+          rectangleContainer.style.width = '100%';
+          rectangleContainer.style.height = '100%';
+          rectangleContainer.style.zIndex = '10';
+          rectangleContainer.style.opacity = '0'; // Start invisible
+          
+          // Create horizontal piece (top of the L)
+          const horizontalPiece = document.createElement('div');
+          horizontalPiece.className = 'rectangle-zoom-horizontal';
+          horizontalPiece.style.position = 'absolute';
+          horizontalPiece.style.top = '0';
+          horizontalPiece.style.left = '0';
+          horizontalPiece.style.width = '100%';
+          horizontalPiece.style.height = borderWidthTop;
+          horizontalPiece.style.backgroundColor = 'white';
+          horizontalPiece.style.zIndex = '11';
+          
+          // Create vertical piece (right side of the L)
+          const verticalPiece = document.createElement('div');
+          verticalPiece.className = 'rectangle-zoom-vertical';
+          verticalPiece.style.position = 'absolute';
+          verticalPiece.style.top = '0';
+          verticalPiece.style.right = '0';
+          verticalPiece.style.width = borderWidthRight;
+          verticalPiece.style.height = '100%';
+          verticalPiece.style.backgroundColor = 'white';
+          verticalPiece.style.zIndex = '11';
+          
+          // Add pieces to container
+          rectangleContainer.appendChild(horizontalPiece);
+          rectangleContainer.appendChild(verticalPiece);
+          
+          // Add perspective to container for 3D effect
+          containerRef.current.style.perspective = '1000px';
+          containerRef.current.appendChild(rectangleContainer);
+          
+          // Animation: zoom from a large size outside view toward the viewer
+          tl.set(rectangleContainer, { opacity: 1 })
+            .fromTo([horizontalPiece, verticalPiece], 
+              { 
+                scale: 5, // Start much larger (outside view)
+                z: -1000 // Start far behind
+              },
+              {
+                scale: 1,
+                z: 0,
+                duration: 1,
+                ease: 'sine.out',
+                onStart: () => {
+                  fadeInCurrentCard('bottom', 0.2, 0.5);
         
-        // Create the rectangle with specified borders
-        const rectangle = document.createElement('div');
-        rectangle.className = 'rectangle-zoom';
-        rectangle.style.position = 'absolute';
-        rectangle.style.top = '50%';
-        rectangle.style.left = '50%';
-        rectangle.style.transform = 'translate(-50%, -50%) scale(0.001)'; // Start even smaller
-        rectangle.style.width = `${containerWidth}px`;
-        rectangle.style.height = `${containerHeight}px`;
-        rectangle.style.boxSizing = 'border-box';
-        rectangle.style.borderTop = `${borderWidthTop} solid white`;
-        rectangle.style.borderRight = `${borderWidthRight} solid white`;
-        rectangle.style.borderBottom = 'none';
-        rectangle.style.borderLeft = 'none';
-        rectangle.style.boxShadow = '0 0 40px rgba(255, 255, 255, 0.6)';
-        rectangle.style.backgroundColor = 'transparent';
-        rectangle.style.zIndex = '10';
-        rectangle.style.opacity = '0'; // Start invisible
-        
-        // Add perspective to container for 3D effect
-        containerRef.current.style.perspective = '1000px';
-        containerRef.current.appendChild(rectangle);
-        
-        // Animation: zoom from a large size outside view toward the viewer
-        tl.set(rectangle, { opacity: 1 })
-          .fromTo(rectangle, 
-            { 
-              scale: 5, // Start much larger (outside view)
-              z: -1000 // Start far behind
-            },
-            {
-              scale: 1,
-              z: 0,
+                  // Change video source
+                  video.querySelector('source').src = newVideoSrc;
+                  video.load();
+                  video.play();
+                  
+                  // CARD CONTENT CHANGE TIMING
+                  setCurrentCardIndex(nextCardIndex);
+                }
+              }
+            )
+            .set(video, { opacity: 0 })
+            // Different exit animations for horizontal and vertical pieces
+            .to(horizontalPiece, {
+              x: '-100%', // Horizontal piece slides left
               duration: 1,
-              ease: 'sine.out',
-              onStart: () => {
-                fadeInCurrentCard('bottom', 0.2, 0.5); // Zero delay, faster animation
-
-                // Change video source
-                video.querySelector('source').src = newVideoSrc;
-                video.load();
-                video.play();
-                
-                // CARD CONTENT CHANGE TIMING
-                setCurrentCardIndex(nextCardIndex);
+              ease: 'back.in(1.2)'
+            }, 'exitPieces')
+            .to(verticalPiece, {
+              y: '100%', // Vertical piece slides down
+              duration: 1,
+              ease: 'back.in(1.2)',
+              onComplete: () => {
+                if (rectangleContainer.parentNode) {
+                  rectangleContainer.parentNode.removeChild(rectangleContainer);
+                  // Remove perspective when done
+                  containerRef.current.style.perspective = 'none';
+                }
               }
-            }
-          )
-          .set(video, { opacity: 0 })
-          // Animation: zoom back in while sliding to the left
-          .to(rectangle, {
-            // scale: 0.01,
-            y: 0,
-            xPercent: -200, // Use xPercent for straight horizontal movement
-            duration: 1,
-            ease: 'back.in(1.2)',
-            onComplete: () => {
-              if (rectangle.parentNode) {
-                rectangle.parentNode.removeChild(rectangle);
-                // Remove perspective when done
-                containerRef.current.style.perspective = 'none';
-              }
-            }
-          })
-          .set(video, { opacity: 1 });
-        break;
+            }, 'exitPieces') // Same label to start at the same time
+            .set(video, { opacity: 1 });
+          break;
 
       case 2:
         // Horizontal Lines Meeting Effect
@@ -659,7 +680,7 @@ const Home = () => {
           
           // CARD CONTENT CHANGE TIMING
           setCurrentCardIndex(nextCardIndex);
-          fadeInCurrentCard('left', 0.1, 0.45);
+          fadeInCurrentCard('bottom', 0.1, 0.45);
         })
         // Fall down the other way
         .to(dominos, {

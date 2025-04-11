@@ -31,6 +31,155 @@ export const addEnergyParticlesStyles = () => {
   document.head.appendChild(styleElement);
 };
 
+// Helper function to apply the animation to a specific element
+const applyVerticalTextAnimation = (element) => {
+  // Get elements - account for different class naming between pages
+  const line = element.querySelector('.line') || element.querySelector('.vertical-line');
+  const leftText = element.querySelector('.left-text');
+  const primaryText = element.querySelector('.large-text-primary');
+  const secondaryText = element.querySelector('.large-text-secondary');
+  
+  if (!line) return;
+  
+  // Create particles container
+  const particleContainer = document.createElement('div');
+  particleContainer.className = 'energy-particles';
+  line.appendChild(particleContainer);
+  
+  // Create particles
+  for (let i = 0; i < 10; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'energy-particle';
+    particleContainer.appendChild(particle);
+    
+    gsap.set(particle, {
+      y: Math.random() * line.offsetHeight,
+      opacity: 0,
+      scale: 0
+    });
+  }
+  
+  // Set initial states
+  gsap.set(line, { 
+    scaleY: 0,
+    transformOrigin: 'top center',
+    boxShadow: '0 0 0 rgba(255, 255, 255, 0)'
+  });
+  
+  const textElements = [];
+  if (leftText) {
+    textElements.push(leftText);
+    gsap.set(leftText, { opacity: 0, y: 40, filter: 'blur(10px)' });
+  }
+  
+  if (primaryText) {
+    textElements.push(primaryText);
+    gsap.set(primaryText, { opacity: 0, y: 40, filter: 'blur(10px)' });
+  }
+  
+  if (secondaryText) {
+    textElements.push(secondaryText);
+    gsap.set(secondaryText, { opacity: 0, y: 40, filter: 'blur(10px)' });
+  }
+  
+  // Create timeline for the animation
+  const tl = gsap.timeline();
+  
+  // Extra noticeable animation
+  tl.to(line, {
+    scaleY: 1,
+    duration: 1,
+    ease: 'power3.inOut',
+    boxShadow: '0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(0, 150, 255, 0.6)',
+    onStart: () => {
+      // Animate particles along the line
+      const particles = element.querySelectorAll('.energy-particle');
+      particles.forEach((particle, i) => {
+        // Delayed appearance
+        gsap.to(particle, {
+          opacity: Math.random() * 0.7 + 0.3,
+          scale: Math.random() * 0.6 + 0.4,
+          duration: 0.4,
+          delay: 0.1 + i * 0.05
+        });
+        
+        // Upward floating movement
+        gsap.to(particle, {
+          y: '-=' + (Math.random() * 120 + 80),
+          repeat: -1,
+          duration: Math.random() * 3 + 2,
+          ease: 'sine.inOut',
+          yoyo: true
+        });
+        
+        // Pulsing effect
+        gsap.to(particle, {
+          boxShadow: '0 0 15px rgba(0, 150, 255, 0.8)',
+          repeat: -1,
+          duration: Math.random() * 2 + 1,
+          ease: 'sine.inOut',
+          yoyo: true
+        });
+      });
+    }
+  });
+  
+  if (leftText) {
+    tl.to(leftText, {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      duration: 0.8,
+      ease: 'back.out(1.7)',
+      textShadow: '0 0 12px rgba(255, 255, 255, 0.8)'
+    }, '-=0.5');
+  }
+  
+  if (primaryText) {
+    tl.to(primaryText, {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      duration: 0.8,
+      textShadow: '0 0 12px rgba(0, 150, 255, 0.7)',
+      ease: 'back.out(1.7)'
+    }, '-=0.6');
+  }
+  
+  if (secondaryText) {
+    tl.to(secondaryText, {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      duration: 0.8,
+      textShadow: '0 0 12px rgba(0, 150, 255, 0.7)',
+      ease: 'back.out(1.7)',
+      onComplete: () => {
+        if (primaryText && secondaryText) {
+          gsap.to([primaryText, secondaryText], {
+            y: '+=8', // Extra movement for visibility
+            duration: 2,
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1
+          });
+        }
+        
+        // Enhanced glow pulse for the line
+        gsap.to(line, {
+          boxShadow: '0 0 30px rgba(255, 255, 255, 1), 0 0 50px rgba(0, 150, 255, 0.8)',
+          duration: 1.5,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1
+        });
+      }
+    }, '-=0.6');
+  }
+  
+  return tl;
+};
+
 // Enhanced animation specifically for the Home page
 export const setupHomeVerticalTextAnimation = () => {
   // Find home page vertical text elements
@@ -158,18 +307,8 @@ export const setupHomeVerticalTextAnimation = () => {
       filter: 'blur(0px)',
       duration: 0.8,
       ease: 'elastic.out(1, 0.3)',
-      onComplete: () => {
-        // Add holographic color shift
-        gsap.to(primaryText, {
-          textShadow: '0 0 10px rgba(0, 150, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.5)',
-          color: 'rgba(220, 220, 255, 1)',
-          duration: 2,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut'
-        });
-      }
-    }, '-=0.5')
+      textShadow: '0 0 15px rgba(0, 150, 255, 0.7)'
+    }, '-=0.6')
     .to(primaryText, {
       scale: 1,
       duration: 0.5,
@@ -177,19 +316,20 @@ export const setupHomeVerticalTextAnimation = () => {
     });
   }
   
-  // Secondary text with staggered reveal
+  // Secondary text with dramatic scale
   if (secondaryText) {
     tl.to(secondaryText, {
       opacity: 1,
-      scale: 1,
+      scale: 1.2,
       y: 0,
       filter: 'blur(0px)',
       duration: 0.8,
       ease: 'back.out(1.7)',
+      textShadow: '0 0 15px rgba(0, 150, 255, 0.7)',
       onComplete: () => {
         // Create floating animation
         gsap.to([primaryText, secondaryText].filter(Boolean), {
-          y: '+=7',
+          y: '+=10',
           duration: 2.5,
           ease: 'sine.inOut',
           yoyo: true,
@@ -205,162 +345,54 @@ export const setupHomeVerticalTextAnimation = () => {
           repeat: -1
         });
       }
+    })
+    .to(secondaryText, {
+      scale: 1,
+      duration: 0.5,
+      ease: 'back.out(1.5)'
     });
   }
   
   return tl;
 };
 
-// For other pages - keeping your original function with enhancements
+// Add this function to your animations.js file for specifically targeting projects page
+export const setupProjectsVerticalTextAnimation = () => {
+  // Try different selectors that might be used on the Projects page, including vertical-text-left
+  const projectsVerticalText = document.querySelector('.projects-container .vertical-text') || 
+                              document.querySelector('.projects-page .vertical-text') || 
+                              document.querySelector('.vertical-text-left') ||
+                              document.querySelector('#projects .vertical-text');
+  
+  if (!projectsVerticalText) {
+    console.log('Projects vertical text element not found, checking for any remaining vertical text elements');
+    // As a fallback, look for any vertical text elements that might not have been animated yet
+    const allVerticalTexts = document.querySelectorAll('.vertical-text, .vertical-text-left, .vertical-text-about');
+    allVerticalTexts.forEach(element => {
+      // Check if this element has already been animated
+      if (!element.classList.contains('animated')) {
+        applyVerticalTextAnimation(element);
+        element.classList.add('animated');
+      }
+    });
+    return;
+  }
+  
+  applyVerticalTextAnimation(projectsVerticalText);
+  projectsVerticalText.classList.add('animated');
+};
+
+// Setup for all vertical text animations
 export const setupVerticalTextAnimations = () => {
   // Find all vertical text elements across the site (except home which has its own)
-  const verticalTextElements = document.querySelectorAll('.vertical-text:not(.right), .vertical-text-about, .vertical-text.left');
+  const verticalTextElements = document.querySelectorAll('.vertical-text:not(.right), .vertical-text-about, .vertical-text.left, .vertical-text-left');
   
   verticalTextElements.forEach(element => {
-    // Get elements - account for different class naming between pages
-    const line = element.querySelector('.line') || element.querySelector('.vertical-line');
-    const leftText = element.querySelector('.left-text');
-    const primaryText = element.querySelector('.large-text-primary');
-    const secondaryText = element.querySelector('.large-text-secondary');
+    // Skip elements that have already been animated
+    if (element.classList.contains('animated')) return;
     
-    if (!line || !leftText) return;
-    
-    // Create particles container
-    const particleContainer = document.createElement('div');
-    particleContainer.className = 'energy-particles';
-    line.appendChild(particleContainer);
-    
-    // Create particles
-    for (let i = 0; i < 7; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'energy-particle';
-      particleContainer.appendChild(particle);
-      
-      gsap.set(particle, {
-        y: Math.random() * line.offsetHeight,
-        opacity: 0,
-        scale: 0
-      });
-    }
-    
-    // Set initial states
-    gsap.set(line, { 
-      scaleY: 0,
-      transformOrigin: 'top center',
-      boxShadow: '0 0 0 rgba(255, 255, 255, 0)'
-    });
-    
-    const textElements = [leftText];
-    if (primaryText) textElements.push(primaryText);
-    if (secondaryText) textElements.push(secondaryText);
-    
-    gsap.set(textElements, { 
-      opacity: 0,
-      y: 40,
-      filter: 'blur(10px)'
-    });
-    
-    // Create observation setup to trigger when element is in view
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const tl = gsap.timeline();
-          
-          // Line animation with enhanced glow
-          tl.to(line, {
-            scaleY: 1,
-            duration: 1,
-            ease: 'power3.inOut',
-            boxShadow: '0 0 15px rgba(255, 255, 255, 0.7), 0 0 30px rgba(0, 150, 255, 0.5)',
-            onStart: () => {
-              // Animate particles along the line
-              const particles = element.querySelectorAll('.energy-particle');
-              particles.forEach((particle, i) => {
-                // Delayed appearance
-                gsap.to(particle, {
-                  opacity: Math.random() * 0.6 + 0.3,
-                  scale: Math.random() * 0.5 + 0.3,
-                  duration: 0.4,
-                  delay: 0.1 + i * 0.05
-                });
-                
-                // Upward floating movement
-                gsap.to(particle, {
-                  y: '-=' + (Math.random() * 100 + 50),
-                  repeat: -1,
-                  duration: Math.random() * 3 + 2,
-                  ease: 'sine.inOut',
-                  yoyo: true
-                });
-                
-                // Pulsing effect
-                gsap.to(particle, {
-                  boxShadow: '0 0 10px rgba(0, 150, 255, 0.6)',
-                  repeat: -1,
-                  duration: Math.random() * 2 + 1,
-                  ease: 'sine.inOut',
-                  yoyo: true
-                });
-              });
-            }
-          })
-          
-          .to(leftText, {
-            opacity: 1,
-            y: 0,
-            filter: 'blur(0px)',
-            duration: 0.8,
-            ease: 'back.out(1.7)',
-            textShadow: '0 0 8px rgba(255, 255, 255, 0.7)'
-          }, '-=0.5');
-          
-          if (primaryText) {
-            tl.to(primaryText, {
-              opacity: 1,
-              y: 0,
-              filter: 'blur(0px)',
-              duration: 0.8,
-              textShadow: '0 0 10px rgba(0, 150, 255, 0.6)',
-              ease: 'back.out(1.7)'
-            }, '-=0.6');
-          }
-          
-          if (secondaryText) {
-            tl.to(secondaryText, {
-              opacity: 1,
-              y: 0,
-              filter: 'blur(0px)',
-              duration: 0.8,
-              textShadow: '0 0 10px rgba(0, 150, 255, 0.6)',
-              ease: 'back.out(1.7)',
-              onComplete: () => {
-                if (primaryText && secondaryText) {
-                  gsap.to([primaryText, secondaryText], {
-                    y: '+=7',
-                    duration: 2,
-                    ease: 'sine.inOut',
-                    yoyo: true,
-                    repeat: -1
-                  });
-                }
-                
-                // Enhanced glow pulse for the line
-                gsap.to(line, {
-                  boxShadow: '0 0 25px rgba(255, 255, 255, 0.9), 0 0 40px rgba(0, 150, 255, 0.7)',
-                  duration: 1.5,
-                  ease: 'sine.inOut',
-                  yoyo: true,
-                  repeat: -1
-                });
-              }
-            }, '-=0.6');
-          }
-          
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    
-    observer.observe(element);
+    // Apply animation and mark as animated
+    applyVerticalTextAnimation(element);
+    element.classList.add('animated');
   });
 }; 

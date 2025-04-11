@@ -14,6 +14,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,6 +65,11 @@ const Home = () => {
           <div className="company-slogan">
             <h1>Dünya fikirler üzerine inşa edilir Dünyayı,</h1>
             <h1>her seferinde bir fikirle şekillendiriyoruz</h1>
+          </div>
+
+          <div className="swipe-down-text">
+            Swipe Down to Continue
+            <FontAwesomeIcon icon={faArrowDown} style={{height:"30px"}} />
           </div>
         </div>
       )

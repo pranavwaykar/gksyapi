@@ -38,7 +38,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 3;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -64,7 +64,7 @@ body {
     margin: 0;
     padding: 0;
     margin-right: 2rem;
-    gap: 2.5rem;
+    gap: 0.8rem;
     flex-wrap: nowrap;
   }
 
@@ -590,6 +590,15 @@ body {
   }
 }
 
+// @media (max-width: 1900px) {
+  
+// }
+
+@media (min-width: 1910px) {
+ .nav-list {
+  gap: 2.5rem;
+ }
+}
 
 
 @media (max-width: 1024px) {

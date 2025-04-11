@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import logo from '../assets/GKSYAPI Logo.png';
+import logo from '../assets/Logos/GKSYAPI Logo.png';
 import gsap from 'gsap';
 import { useLanguage, languages } from '../contexts/LanguageContext';
 import { translations } from '../translations';

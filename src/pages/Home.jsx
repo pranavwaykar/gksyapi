@@ -360,7 +360,7 @@ const Home = () => {
       case 0: transitionType = 5; break; // Split Vertical Swipe (Left up, Right down)
       case 1: transitionType = 1; break; // Thick Border Rectangle Zoom
       case 2: transitionType = 6; break; // Staircase Wipe
-      case 3: transitionType = 4; break; // Zigzag Wipe
+      case 3: transitionType = 4; break; // Vertical Sections Slide with Special Middle Section
       case 4: transitionType = 0; break; // Horizontal Cards Split Vertically
       case 5: transitionType = 2; break; // Horizontal Lines Meeting Effect
       case 6: transitionType = 3; break; // Domino Fall Effect
@@ -674,71 +674,109 @@ const Home = () => {
         setTimeout(cleanupDominos, 4000); // Increased from 3000 to match slower animation
         break;
         
-      case 4:
-        // Zigzag Wipe
-        const zigzagContainer = document.createElement('div');
-        zigzagContainer.style.position = 'absolute';
-        zigzagContainer.style.width = '100%';
-        zigzagContainer.style.height = '100%';
-        zigzagContainer.style.zIndex = '10';
-        zigzagContainer.style.overflow = 'hidden';
-        containerRef.current.appendChild(zigzagContainer);
-        
-        // Create zigzag segments
-        const zags = 8; // Number of zigzag points
-        const zagHeight = 100 / zags;
-        const zigzagSegments = [];
-        
-        for (let i = 0; i < zags; i++) {
-          const segment = document.createElement('div');
-          segment.style.position = 'absolute';
-          segment.style.height = `${zagHeight}%`;
-          segment.style.width = '0%';
-          segment.style.top = `${i * zagHeight}%`;
-          segment.style.backgroundColor = 'white';
+        case 4:
+          // Vertical Sections Slide with Special Middle Section
+          const sectionsContainer = document.createElement('div');
+          sectionsContainer.style.position = 'absolute';
+          sectionsContainer.style.width = '100%';
+          sectionsContainer.style.height = '100%';
+          sectionsContainer.style.zIndex = '10';
+          sectionsContainer.style.display = 'flex';
+          sectionsContainer.style.left = '-100%'; // Start off-screen left
+          sectionsContainer.style.overflow = 'hidden'; // Hide overflow
+          containerRef.current.appendChild(sectionsContainer);
           
-          // Alternate left and right alignment
-          if (i % 2 === 0) {
-            segment.style.left = '0';
-          } else {
-            segment.style.right = '0';
-          }
+          // Create three vertical sections - all white initially
+          // Left section (60% width)
+          const leftSection = document.createElement('div');
+          leftSection.style.width = '69%';
+          leftSection.style.height = '100%';
+          leftSection.style.backgroundColor = 'white';
           
-          zigzagContainer.appendChild(segment);
-          zigzagSegments.push(segment);
-        }
-        
-        // Animate zigzag segments expanding
-        tl.to(zigzagSegments, {
-          width: '100%',
-          stagger: 0.07,
-          duration: 0.4,
-          ease: 'power2.out'
-        })
-        .set(video, { opacity: 0 })
-        .call(() => {
-          // Change video source
-          video.querySelector('source').src = newVideoSrc;
-          video.load();
-          video.play();
+          // Middle section container (10% width)
+          const middleSectionContainer = document.createElement('div');
+          middleSectionContainer.style.width = '6%';
+          middleSectionContainer.style.height = '100%';
+          middleSectionContainer.style.position = 'relative';
+          middleSectionContainer.style.overflow = 'hidden'; // Hide overflow
           
-          // CARD CONTENT CHANGE TIMING
-          setCurrentCardIndex(nextCardIndex);
-        })
-        // Animate zigzag segments contracting
-        .to(zigzagSegments, {
-          width: '0%',
-          stagger: 0.07,
-          duration: 0.4,
-          ease: 'power2.in',
-          onComplete: () => {
-            if (zigzagContainer.parentNode) {
-              zigzagContainer.parentNode.removeChild(zigzagContainer);
+          // For the middle section, create a white visible part and a blue hidden part
+          const middleWhiteVisible = document.createElement('div');
+          middleWhiteVisible.style.position = 'absolute';
+          middleWhiteVisible.style.width = '100%';
+          middleWhiteVisible.style.height = '100%';
+          middleWhiteVisible.style.backgroundColor = 'white';
+          middleWhiteVisible.style.top = '0';
+          
+          // Blue part that will slide in from the top - initially hidden
+          const middleBlueHidden = document.createElement('div');
+          middleBlueHidden.style.position = 'absolute';
+          middleBlueHidden.style.width = '100%';
+          middleBlueHidden.style.height = '100%';
+          middleBlueHidden.style.backgroundColor = '#0038b3';
+          middleBlueHidden.style.top = '-100%'; // Hidden above
+          
+          middleSectionContainer.appendChild(middleWhiteVisible);
+          middleSectionContainer.appendChild(middleBlueHidden);
+          
+          // Right section (30% width)
+          const rightSection = document.createElement('div');
+          rightSection.style.width = '25%';
+          rightSection.style.height = '100%';
+          rightSection.style.backgroundColor = 'white';
+          
+          // Add sections to container
+          sectionsContainer.appendChild(leftSection);
+          sectionsContainer.appendChild(middleSectionContainer);
+          sectionsContainer.appendChild(rightSection);
+          
+          // First animate whole container from left to cover viewport - all white
+          tl.to(sectionsContainer, {
+            left: '0%',
+            duration: 0.7,
+            ease: 'power2.out'
+          })
+          .set(video, { opacity: 0 })
+          .call(() => {
+            // Change video source
+            video.querySelector('source').src = newVideoSrc;
+            video.load();
+            video.play();
+            
+            // CARD CONTENT CHANGE TIMING
+            setCurrentCardIndex(nextCardIndex);
+          })
+          // Animate side sections up
+          .to([leftSection, rightSection], {
+            y: '-100%', // White sections slide up
+            duration: 0.7,
+            ease: 'power2.in'
+          }, 'sectionsOut')
+          // First move blue section into view
+          .to(middleBlueHidden, {
+            top: '0%', // Bring blue part into view
+            duration: 0.7,
+            ease: 'power2.in'
+          }, 'sectionsOut')
+          // Then move white section out of view
+          .to(middleWhiteVisible, {
+            top: '100%', // Move white part down out of view
+            duration: 0.7,
+            ease: 'power2.in'
+          }, 'sectionsOut+=0.2') // Slightly delayed
+          // Continue moving the whole middle section down
+          .to(middleSectionContainer, {
+            top: '100%', // Move entire container down out of view
+            duration: 0.7,
+            ease: 'power2.in',
+            onComplete: () => {
+              if (sectionsContainer.parentNode) {
+                sectionsContainer.parentNode.removeChild(sectionsContainer);
+              }
             }
-          }
-        })
-        .set(video, { opacity: 1 });
-        break;
+          }, 'sectionsOut+=0.7') // Start after white has moved out
+          .set(video, { opacity: 1 });
+          break;
         
       case 5:
         // Split Vertical Swipe (Left up, Right down)

@@ -420,6 +420,7 @@ const Home = () => {
           
           // CARD CONTENT CHANGE TIMING
           setCurrentCardIndex(nextCardIndex);
+          fadeInCurrentCard();
         })
         // Split vertically
         .to(leftCard, {
@@ -481,19 +482,21 @@ const Home = () => {
               scale: 1,
               z: 0,
               duration: 1,
-              ease: 'sine.out'
+              ease: 'sine.out',
+              onStart: () => {
+                fadeInCurrentCard();
+
+                // Change video source
+                video.querySelector('source').src = newVideoSrc;
+                video.load();
+                video.play();
+                
+                // CARD CONTENT CHANGE TIMING
+                setCurrentCardIndex(nextCardIndex);
+              }
             }
           )
           .set(video, { opacity: 0 })
-          .call(() => {
-            // Change video source
-            video.querySelector('source').src = newVideoSrc;
-            video.load();
-            video.play();
-            
-            // CARD CONTENT CHANGE TIMING
-            setCurrentCardIndex(nextCardIndex);
-          })
           // Animation: zoom back in while sliding to the left
           .to(rectangle, {
             // scale: 0.01,
@@ -580,6 +583,7 @@ const Home = () => {
           
           // CARD CONTENT CHANGE TIMING
           setCurrentCardIndex(nextCardIndex);
+          fadeInCurrentCard();
         })
         // Animate the entire container up out of view
         .to(linesContainer, {
@@ -655,6 +659,7 @@ const Home = () => {
           
           // CARD CONTENT CHANGE TIMING
           setCurrentCardIndex(nextCardIndex);
+          fadeInCurrentCard();
         })
         // Fall down the other way
         .to(dominos, {
@@ -749,6 +754,7 @@ const Home = () => {
             
             // CARD CONTENT CHANGE TIMING
             setCurrentCardIndex(nextCardIndex);
+            fadeInCurrentCard();
           })
           // Animate side sections up
           .to([leftSection, rightSection], {
@@ -826,6 +832,7 @@ const Home = () => {
           
           // CARD CONTENT CHANGE TIMING
           setCurrentCardIndex(nextCardIndex);
+          fadeInCurrentCard();
         })
         // Animate out: left half continues up, right half continues down
         .to(leftHalf, {
@@ -894,6 +901,7 @@ const Home = () => {
           
           // CARD CONTENT CHANGE TIMING
           setCurrentCardIndex(nextCardIndex);
+          fadeInCurrentCard();
         })
         // Then animate bars continuing off-screen to the right
         .to(bars, {
@@ -949,6 +957,7 @@ const Home = () => {
           
           // CARD CONTENT CHANGE TIMING
           setCurrentCardIndex(nextCardIndex);
+          fadeInCurrentCard();
         })
         // Continue sliding up to exit the screen
         .to(slidingPanel, {
@@ -1038,6 +1047,43 @@ const Home = () => {
     if (animationState === 'exiting') return `${baseClass} ${direction > 0 ? 'slide-out-up' : 'slide-out-down'}`;
     
     return baseClass;
+  };
+
+  const fadeInCurrentCard = () => {
+    if (!containerRef.current) return;
+    
+    // Find the current card inner content
+    const cardInner = containerRef.current.querySelector('.card-inner');
+    if (!cardInner) return;
+    
+    // Define a sequence of different slide-in animations
+    // 0: from bottom, 1: from top, 2: from left, 3: from right
+    const slideSequence = [
+      { y: 30, x: 0 },   // From bottom
+      { y: -30, x: 0 },  // From top
+      { y: 0, x: -30 },  // From left
+      { y: 0, x: 30 }    // From right
+    ];
+    
+    // Get animation style based on current card index (cycle through sequence)
+    const animationIndex = currentCardIndex % slideSequence.length;
+    const slideFrom = slideSequence[animationIndex];
+    
+    // Reset position and opacity first
+    gsap.set(cardInner, { 
+      opacity: 0, 
+      x: slideFrom.x, 
+      y: slideFrom.y 
+    });
+    
+    // Animate fade in with slide from the determined direction
+    gsap.to(cardInner, {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      duration: 0.8,
+      ease: 'power1.in'
+    });
   };
 
   return (

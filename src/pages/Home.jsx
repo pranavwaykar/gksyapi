@@ -318,7 +318,7 @@ const Home = () => {
   const transitionBoxRef = useRef(null);
   
   // Change the background video with a cool transition effect
-  const changeBackgroundVideo = (newCardIndex) => {
+  const changeBackgroundVideo = (newCardIndex, newDirection) => {
     if (!videoRef.current) return;
     
     const video = videoRef.current;
@@ -337,9 +337,6 @@ const Home = () => {
       return;
     }
     
-    // Store the new index to update content later
-    const nextCardIndex = newCardIndex;
-    
     // Perform cool transition effects
     const tl = gsap.timeline({
       onUpdate: function() {
@@ -349,26 +346,29 @@ const Home = () => {
       }
     });
     
-    // Use our fixed sequence instead of random calculation
-    // Map the card index to the specific transition types in the requested order
-    let transitionType;
+    // Add debugging
+    console.log("Direction:", newDirection);
+    console.log("Current Card Index:", currentCardIndex);
     
-    // This ensures we cycle through our sequence repeatedly
-    const transitionIndex = currentCardIndex % 7;
-
-    switch(transitionIndex) {
-      case 0: transitionType = 1; break; // Thick Border Rectangle Zoom
-      case 1: transitionType = 5; break; // Split Vertical Swipe (Left up, Right down)
-      case 2: transitionType = 4; break; // Vertical Sections Slide with Special Middle Section
-      case 3: transitionType = 6; break; // Staircase Wipe
-      case 4: transitionType = 0; break; // Horizontal Cards Split Vertically
-      case 5: transitionType = 2; break; // Horizontal Lines Meeting Effect
-      case 6: transitionType = 3; break; // Domino Fall Effect
-      case 7: transitionType = 0; break; // Horizontal Cards Split Vertically
-      default: transitionType = 7; break; // Slide Up Transition
+    // Define forward and reverse transition sequences
+    const forwardSequence = [1, 5, 4, 6, 0, 2, 3];
+    const reverseSequence = [3, 2, 0, 6, 4, 5, 1]; // Reverse order of forward sequence
+    
+    // Choose sequence based on direction
+    let transitionType;
+    if (newDirection >= 0) {
+      // Going down - use forward sequence
+      const forwardIndex = currentCardIndex % forwardSequence.length;
+      transitionType = forwardSequence[forwardIndex];
+      console.log("Using forward sequence, index:", forwardIndex, "transition type:", transitionType);
+    } else {
+      // Going up - use reverse sequence
+      const reverseIndex = currentCardIndex % reverseSequence.length;
+      transitionType = reverseSequence[reverseIndex];
+      console.log("Using reverse sequence, index:", reverseIndex, "transition type:", transitionType);
     }
     
-    // Define our specific sequence - 7 unique transitions
+    // Rest of transition code remains the same
     switch(transitionType) {
       case 0:
         // Horizontal Cards Split Vertically
@@ -419,7 +419,6 @@ const Home = () => {
           video.play();
           
           // CARD CONTENT CHANGE TIMING
-          setCurrentCardIndex(nextCardIndex);
           fadeInCurrentCard('bottom', 0.1, 0.5);
         })
         // Split vertically
@@ -510,7 +509,7 @@ const Home = () => {
                   video.play();
                   
                   // CARD CONTENT CHANGE TIMING
-                  setCurrentCardIndex(nextCardIndex);
+                  fadeInCurrentCard('bottom', 0.2, 0.5);
                 }
               }
             )
@@ -603,7 +602,6 @@ const Home = () => {
           video.play();
           
           // CARD CONTENT CHANGE TIMING
-          setCurrentCardIndex(nextCardIndex);
           fadeInCurrentCard('top', 0.15, 0.4);
         })
         // Animate the entire container up out of view
@@ -679,7 +677,6 @@ const Home = () => {
           video.play();
           
           // CARD CONTENT CHANGE TIMING
-          setCurrentCardIndex(nextCardIndex);
           fadeInCurrentCard('bottom', 0.1, 0.45);
         })
         // Fall down the other way
@@ -774,7 +771,6 @@ const Home = () => {
             video.play();
             
             // CARD CONTENT CHANGE TIMING
-            setCurrentCardIndex(nextCardIndex);
             fadeInCurrentCard('bottom', 0.25, 0.5);
           })
           // Animate side sections up
@@ -852,7 +848,6 @@ const Home = () => {
           video.play();
           
           // CARD CONTENT CHANGE TIMING
-          setCurrentCardIndex(nextCardIndex);
           fadeInCurrentCard('none', 0.1, 0.35);
         })
         // Animate out: left half continues up, right half continues down
@@ -921,7 +916,6 @@ const Home = () => {
           video.play();
           
           // CARD CONTENT CHANGE TIMING
-          setCurrentCardIndex(nextCardIndex);
           fadeInCurrentCard('right', 0, 0.4);
         })
         // Then animate bars continuing off-screen to the right
@@ -977,7 +971,6 @@ const Home = () => {
           video.play();
           
           // CARD CONTENT CHANGE TIMING
-          setCurrentCardIndex(nextCardIndex);
           fadeInCurrentCard('top', 0.2, 0.6);
         })
         // Continue sliding up to exit the screen
@@ -1012,19 +1005,19 @@ const Home = () => {
       cardContents.length - 1
     );
     
+    // Debug the actual index change
+    console.log("Current index:", currentCardIndex, "New index:", newIndex, "Direction:", scrollDirection);
+    
     // Only update if the index actually changes
     if (newIndex !== currentCardIndex) {
-      // Set direction for tracking purposes
-      setDirection(scrollDirection);
-      
       // Set to processing state to prevent multiple wheel events
       setAnimationState('processing');
       
-      // Change the video with transition - card content change happens inside this function now
-      changeBackgroundVideo(newIndex);
+      // Update current card index immediately to ensure proper next transition calculation
+      setCurrentCardIndex(newIndex);
       
-      // Note: We no longer update currentCardIndex here
-      // setCurrentCardIndex(newIndex); - REMOVED
+      // Pass the direction directly instead of relying on state
+      changeBackgroundVideo(newIndex, scrollDirection);
       
       // Reset to idle state after video transition completes
       setTimeout(() => {

@@ -259,7 +259,6 @@ const Projects = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const animationDirection = useRef("down");
 
-  // State for filtered view - changed initial value to true
   const [showAllProjects, setShowAllProjects] = useState(true);
   const [currentPropertyIndex, setCurrentPropertyIndex] = useState(0);
   const [filters, setFilters] = useState({
@@ -268,21 +267,15 @@ const Projects = () => {
     type: "",
   });
 
-  // Add this state at the top of your component near your other states
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // First, add a new state to track whether the form is showing
   const [showContactForm, setShowContactForm] = useState(false);
 
-  // Get current language
   const { language } = useLanguage();
   const t = translations[language];
 
-  // Use translated project data
   const translatedProjects = t.projects.data.projects;
   const translatedPropertyData = t.projects.data.propertyData;
 
-  // Get unique options for each filter from translated data
   const filterOptions = {
     status: [...new Set(translatedPropertyData.map((p) => p.status))],
     location: [...new Set(translatedPropertyData.map((p) => p.location))],
@@ -308,7 +301,6 @@ const Projects = () => {
     );
   };
 
-  // Make sure this useEffect exists to reset image index when property changes
   useEffect(() => {
     console.log("Property changed, resetting image index");
     setCurrentImageIndex(0);
@@ -318,11 +310,9 @@ const Projects = () => {
     e.stopPropagation();
     
     const currentProperty = filteredProperties[currentPropertyIndex];
-    // Get original property that has the videoUrl
     const originalProperty = propertyData.find(p => p.id === currentProperty.id);
     
     if (originalProperty?.videoUrl) {
-      // Open the YouTube link in a new tab
       window.open(originalProperty.videoUrl, '_blank');
     } else {
       console.log("No video URL available for this property");
@@ -333,11 +323,9 @@ const Projects = () => {
     e.stopPropagation();
     
     const currentProperty = filteredProperties[currentPropertyIndex];
-    // Get original property that has the brochureUrl
     const originalProperty = propertyData.find(p => p.id === currentProperty.id);
     
     if (originalProperty?.brochureUrl) {
-      // Open the PDF link in a new tab
       window.open(originalProperty.brochureUrl, '_blank');
     } else {
       console.log("No brochure available for this property");

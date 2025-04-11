@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "../styles/pages/_careers.scss";
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations';
@@ -6,6 +6,7 @@ import Footer from '../components/organisms/Footer';
 
 // Import ContactForm component - adjust the path as needed
 import ContactForm from '../components/ContactForm';
+import { setupVerticalTextAnimations } from '../utils/animations';
 
 const Careers = () => {
   const { language } = useLanguage();
@@ -85,6 +86,11 @@ const Careers = () => {
       });
     }
   };
+
+  // Initialize vertical text animations
+  useEffect(() => {
+    setupVerticalTextAnimations();
+  }, []);
 
   return (
     <div className="careers-page">

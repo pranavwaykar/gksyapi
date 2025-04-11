@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import { motion } from 'framer-motion';
 import '../styles/pages/_contact.scss';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations';
 import ContactForm from '../components/ContactForm';
 import Footer from '../components/organisms/Footer';
+import { setupVerticalTextAnimations } from '../utils/animations';
 
 const Contact = () => {
   const { language } = useLanguage();
   const t = translations[language];
+
+  // Initialize vertical text animations
+  useEffect(() => {
+    setupVerticalTextAnimations();
+  }, []);
 
   return (
     <div className="contact-page">

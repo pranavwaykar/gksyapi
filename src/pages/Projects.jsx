@@ -12,6 +12,7 @@ import {
   faArrowUpLong
 } from "@fortawesome/free-solid-svg-icons";
 import gsap from "gsap";
+import { setupVerticalTextAnimations } from '../utils/animations';
 
 // Demo projects data - keeping as a fallback
 const projects = [
@@ -542,6 +543,13 @@ const Projects = () => {
       }
     }
   }, [showAllProjects, currentPropertyIndex]); // Re-run when project changes
+
+  // Initialize vertical text animations
+  useEffect(() => {
+    setupVerticalTextAnimations();
+    
+    // ... your existing code ...
+  }, []);
 
   if (showAllProjects) {
     return (

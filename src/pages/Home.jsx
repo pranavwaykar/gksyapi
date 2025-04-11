@@ -16,6 +16,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { setupHomeVerticalTextAnimation, addEnergyParticlesStyles } from '../utils/animations';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -1120,6 +1121,17 @@ const Home = () => {
       ease: 'sine.in'
     });
   };
+
+  // Add this useEffect for vertical text animations
+  useEffect(() => {
+    // Add energy particles styles
+    addEnergyParticlesStyles();
+    
+    // Initialize the home-specific vertical text animation
+    setupHomeVerticalTextAnimation();
+    
+    // ... your existing effects can remain here ...
+  }, []);
 
   return (
     <div className="home-container" ref={containerRef}>

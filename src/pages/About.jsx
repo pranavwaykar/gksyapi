@@ -4,6 +4,7 @@ import { translations } from '../translations';
 import '../styles/pages/_about.scss';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { setupVerticalTextAnimations } from '../utils/animations';
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -254,6 +255,13 @@ const About = () => {
         observer.unobserve(section);
       });
     };
+  }, []);
+  
+  // Setup vertical text animations when component mounts
+  useEffect(() => {
+    setupVerticalTextAnimations();
+    
+    // ... your existing code for other animations ...
   }, []);
   
   return (

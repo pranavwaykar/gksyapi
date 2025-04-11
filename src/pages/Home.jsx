@@ -357,19 +357,19 @@ const Home = () => {
     const transitionIndex = currentCardIndex % 7;
 
     switch(transitionIndex) {
-      case 0: transitionType = 5; break; 
-      case 1: transitionType = 1; break; 
-      case 2: transitionType = 0; break; 
-      case 3: transitionType = 2; break; 
-      case 4: transitionType = 4; break; 
-      case 5: transitionType = 0; break; 
-      case 6: transitionType = 3; break; 
-      case 7: transitionType = 6; break; 
-      default: transitionType = 7; break;
+      case 0: transitionType = 5; break; // Split Vertical Swipe (Left up, Right down)
+      case 1: transitionType = 1; break; // Thick Border Rectangle Zoom
+      case 2: transitionType = 6; break; // Staircase Wipe
+      case 3: transitionType = 4; break; // Zigzag Wipe
+      case 4: transitionType = 0; break; // Horizontal Cards Split Vertically
+      case 5: transitionType = 2; break; // Horizontal Lines Meeting Effect
+      case 6: transitionType = 3; break; // Domino Fall Effect
+      case 7: transitionType = 0; break; // Horizontal Cards Split Vertically
+      default: transitionType = 7; break; // Slide Up Transition
     }
     
     // Define our specific sequence - 7 unique transitions
-    switch(transitionIndex) {
+    switch(transitionType) {
       case 0:
         // Horizontal Cards Split Vertically
         const cardsContainer = document.createElement('div');
@@ -509,37 +509,64 @@ const Home = () => {
         break;
 
       case 2:
-        // Venetian Blinds Effect
-        const blindCount = 10; // Number of blinds
-        const blinds = [];
-        const blindsContainerWidth = containerRef.current.offsetWidth;
-        const blindWidth = blindsContainerWidth / blindCount;
+        // Horizontal Lines Meeting Effect
+        const linesContainer = document.createElement('div');
+        linesContainer.style.position = 'absolute';
+        linesContainer.style.top = '0';
+        linesContainer.style.left = '0';
+        linesContainer.style.width = '100%';
+        linesContainer.style.height = '100%';
+        linesContainer.style.zIndex = '10';
+        linesContainer.style.overflow = 'hidden';
+        containerRef.current.appendChild(linesContainer);
         
-        // Create all blinds
-        for (let i = 0; i < blindCount; i++) {
-          const blind = document.createElement('div');
-          blind.className = 'venetian-blind';
-          blind.style.position = 'absolute';
-          blind.style.top = '0';
-          blind.style.left = `${i * blindWidth}px`;
-          blind.style.width = `${blindWidth}px`;
-          blind.style.height = '100%';
-          blind.style.backgroundColor = 'white';
-          blind.style.transformOrigin = 'left center';
-          blind.style.transform = 'scaleX(0)';
-          blind.style.zIndex = '10';
-          
-          containerRef.current.appendChild(blind);
-          blinds.push(blind);
-        }
+        // Create 3 horizontal lines
+        const lineHeight = containerRef.current.offsetHeight / 3;
         
-        // Animate blinds to open
-        tl.to(blinds, {
-          scaleX: 1,
-          stagger: 0.05,
-          duration: 0.5,
-          ease: 'power2.inOut'
-        })
+        // First line - comes from left
+        const line1 = document.createElement('div');
+        line1.style.position = 'absolute';
+        line1.style.top = '0';
+        line1.style.left = '-100%';  // Start off-screen left
+        line1.style.width = '100%';
+        line1.style.height = `${lineHeight}px`;
+        line1.style.backgroundColor = 'white';
+        
+        // Second line - comes from right
+        const line2 = document.createElement('div');
+        line2.style.position = 'absolute';
+        line2.style.top = `${lineHeight}px`;
+        line2.style.left = '100%';  // Start off-screen right
+        line2.style.width = '100%';
+        line2.style.height = `${lineHeight}px`;
+        line2.style.backgroundColor = 'white';
+        
+        // Third line - comes from right
+        const line3 = document.createElement('div');
+        line3.style.position = 'absolute';
+        line3.style.top = `${lineHeight * 2}px`;
+        line3.style.left = '100%';  // Start off-screen right
+        line3.style.width = '100%';
+        line3.style.height = `${lineHeight}px`;
+        line3.style.backgroundColor = 'white';
+        
+        // Add lines to container
+        linesContainer.appendChild(line1);
+        linesContainer.appendChild(line2);
+        linesContainer.appendChild(line3);
+        
+        // Animate lines to meet in the middle
+        tl.to(line1, {
+          left: '0%',
+          duration: 0.6,
+          ease: 'power2.out'
+        }, 'linesIn')
+        .to([line2, line3], {
+          left: '0%',
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power2.out'
+        }, 'linesIn') // Use same label to animate together
         .set(video, { opacity: 0 })
         .call(() => {
           // Change video source
@@ -550,19 +577,16 @@ const Home = () => {
           // CARD CONTENT CHANGE TIMING
           setCurrentCardIndex(nextCardIndex);
         })
-        // Animate blinds to close
-        .to(blinds, {
-          scaleX: 0,
-          stagger: 0.05,
-          duration: 0.5,
-          ease: 'power2.inOut',
+        // Animate the entire container up out of view
+        .to(linesContainer, {
+          y: '-100%',
+          duration: 0.7,
+          ease: 'power2.in',
           onComplete: () => {
             // Clean up
-            blinds.forEach(blind => {
-              if (blind.parentNode) {
-                blind.parentNode.removeChild(blind);
-              }
-            });
+            if (linesContainer.parentNode) {
+              linesContainer.parentNode.removeChild(linesContainer);
+            }
           }
         })
         .set(video, { opacity: 1 });
@@ -848,6 +872,7 @@ const Home = () => {
         break;
 
       case 7:
+        // Slide Up Transition
         const slideContainer = document.createElement('div');
         slideContainer.style.position = 'absolute';
         slideContainer.style.width = '100%';

@@ -359,8 +359,8 @@ const Home = () => {
     switch(transitionIndex) {
       case 0: transitionType = 1; break; // Thick Border Rectangle Zoom
       case 1: transitionType = 5; break; // Split Vertical Swipe (Left up, Right down)
-      case 2: transitionType = 6; break; // Staircase Wipe
-      case 3: transitionType = 4; break; // Vertical Sections Slide with Special Middle Section
+      case 2: transitionType = 4; break; // Vertical Sections Slide with Special Middle Section
+      case 3: transitionType = 6; break; // Staircase Wipe
       case 4: transitionType = 0; break; // Horizontal Cards Split Vertically
       case 5: transitionType = 2; break; // Horizontal Lines Meeting Effect
       case 6: transitionType = 3; break; // Domino Fall Effect
@@ -698,13 +698,13 @@ const Home = () => {
           // Create three vertical sections - all white initially
           // Left section (60% width)
           const leftSection = document.createElement('div');
-          leftSection.style.width = '69%';
+          leftSection.style.width = '67.5%';
           leftSection.style.height = '100%';
           leftSection.style.backgroundColor = 'white';
           
           // Middle section container (10% width)
           const middleSectionContainer = document.createElement('div');
-          middleSectionContainer.style.width = '6%';
+          middleSectionContainer.style.width = '3.8rem';
           middleSectionContainer.style.height = '100%';
           middleSectionContainer.style.position = 'relative';
           middleSectionContainer.style.overflow = 'hidden'; // Hide overflow

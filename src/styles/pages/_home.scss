@@ -618,13 +618,15 @@
     position: absolute;
     top: 0;
     right: -80px;
-    width: 80px;
+    width: 3.5rem;
     height: 100%;
-    background-color: #0038b3; // Deep blue color
-    z-index: 10; // Increase z-index
+    background-color: #0038b3;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
+    right: -2rem;
+    top: -2.5rem;
     
     // Page indicator - enhanced visibility
     .page-indicator {

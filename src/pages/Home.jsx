@@ -420,7 +420,7 @@ const Home = () => {
           
           // CARD CONTENT CHANGE TIMING
           setCurrentCardIndex(nextCardIndex);
-          fadeInCurrentCard();
+          fadeInCurrentCard('bottom', 0.1, 0.5);
         })
         // Split vertically
         .to(leftCard, {
@@ -484,7 +484,7 @@ const Home = () => {
               duration: 1,
               ease: 'sine.out',
               onStart: () => {
-                fadeInCurrentCard();
+                fadeInCurrentCard('bottom', 0.2, 0.5); // Zero delay, faster animation
 
                 // Change video source
                 video.querySelector('source').src = newVideoSrc;
@@ -583,7 +583,7 @@ const Home = () => {
           
           // CARD CONTENT CHANGE TIMING
           setCurrentCardIndex(nextCardIndex);
-          fadeInCurrentCard();
+          fadeInCurrentCard('top', 0.15, 0.4);
         })
         // Animate the entire container up out of view
         .to(linesContainer, {
@@ -659,7 +659,7 @@ const Home = () => {
           
           // CARD CONTENT CHANGE TIMING
           setCurrentCardIndex(nextCardIndex);
-          fadeInCurrentCard();
+          fadeInCurrentCard('left', 0.1, 0.45);
         })
         // Fall down the other way
         .to(dominos, {
@@ -754,7 +754,7 @@ const Home = () => {
             
             // CARD CONTENT CHANGE TIMING
             setCurrentCardIndex(nextCardIndex);
-            fadeInCurrentCard();
+            fadeInCurrentCard('bottom', 0.25, 0.5);
           })
           // Animate side sections up
           .to([leftSection, rightSection], {
@@ -832,7 +832,7 @@ const Home = () => {
           
           // CARD CONTENT CHANGE TIMING
           setCurrentCardIndex(nextCardIndex);
-          fadeInCurrentCard();
+          fadeInCurrentCard('none', 0.1, 0.35);
         })
         // Animate out: left half continues up, right half continues down
         .to(leftHalf, {
@@ -901,7 +901,7 @@ const Home = () => {
           
           // CARD CONTENT CHANGE TIMING
           setCurrentCardIndex(nextCardIndex);
-          fadeInCurrentCard();
+          fadeInCurrentCard('right', 0, 0.4);
         })
         // Then animate bars continuing off-screen to the right
         .to(bars, {
@@ -957,7 +957,7 @@ const Home = () => {
           
           // CARD CONTENT CHANGE TIMING
           setCurrentCardIndex(nextCardIndex);
-          fadeInCurrentCard();
+          fadeInCurrentCard('top', 0.2, 0.6);
         })
         // Continue sliding up to exit the screen
         .to(slidingPanel, {
@@ -1049,31 +1049,44 @@ const Home = () => {
     return baseClass;
   };
 
-  const fadeInCurrentCard = () => {
+  const fadeInCurrentCard = (direction = 'bottom', delay = 0, duration = 0.4) => {
     if (!containerRef.current) return;
     
     // Find the current card inner content
     const cardInner = containerRef.current.querySelector('.card-inner');
     if (!cardInner) return;
     
-    // Define a sequence of different slide-in animations
-    // 0: from bottom, 1: from top, 2: from left, 3: from right
-    const slideSequence = [
-      { y: 30, x: 0 },   // From bottom
-      { y: -30, x: 0 },  // From top
-      { y: 0, x: -30 },  // From left
-      { y: 0, x: 30 }    // From right
-    ];
+    // Define the initial position based on direction
+    let initialX = 0;
+    let initialY = 0;
     
-    // Get animation style based on current card index (cycle through sequence)
-    const animationIndex = currentCardIndex % slideSequence.length;
-    const slideFrom = slideSequence[animationIndex];
+    // Set initial position based on specified direction
+    switch (direction) {
+      case 'top':
+        initialY = -30;
+        break;
+      case 'bottom':
+        initialY = 30;
+        break;
+      case 'left':
+        initialX = -30;
+        break;
+      case 'right':
+        initialX = 30;
+        break;
+      case 'none': // No slide, just fade
+        initialX = 0;
+        initialY = 0;
+        break;
+      default:
+        initialY = 30; // Default to bottom
+    }
     
     // Reset position and opacity first
     gsap.set(cardInner, { 
       opacity: 0, 
-      x: slideFrom.x, 
-      y: slideFrom.y 
+      x: initialX, 
+      y: initialY 
     });
     
     // Animate fade in with slide from the determined direction
@@ -1081,8 +1094,9 @@ const Home = () => {
       opacity: 1,
       x: 0,
       y: 0,
-      duration: 0.8,
-      ease: 'power1.in'
+      duration: duration,
+      delay: delay,
+      ease: 'sine.in'
     });
   };
 

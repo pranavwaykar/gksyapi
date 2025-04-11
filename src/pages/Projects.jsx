@@ -624,7 +624,7 @@ const Projects = () => {
                           return imageUrl;
                         })()
                       }
-                      alt={filteredProperties[currentPropertyIndex].title}
+                      alt={filteredProperties[currentPropertyIndex]?.title}
                       className="w-full h-full object-cover transition-all duration-500 ease-in-out transform rounded-sm"
                     />
 
@@ -651,7 +651,7 @@ const Projects = () => {
                           />
                         </div>
                         <span className="location-text">
-                          {filteredProperties[currentPropertyIndex].location}
+                          {filteredProperties[currentPropertyIndex]?.location}
                         </span>
                       </div>
 

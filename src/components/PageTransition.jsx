@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import LoadingScreen from './LoadingScreen';
+import { triggerAnimationsAfterTransition } from '../utils/animations';
 
 const PageTransition = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -10,6 +11,20 @@ const PageTransition = ({ children }) => {
   useEffect(() => {
     setIsLoading(true);
   }, [location.pathname]);
+  
+  // Notify when loading is complete
+  useEffect(() => {
+    if (!isLoading) {
+      // First dispatch custom events
+      const loadEvent = new CustomEvent('loadingScreenComplete');
+      document.dispatchEvent(loadEvent);
+      
+      // Then trigger animations after a short delay to ensure DOM is ready
+      setTimeout(() => {
+        triggerAnimationsAfterTransition();
+      }, 300);
+    }
+  }, [isLoading]);
   
   return (
     <>
@@ -21,4 +36,4 @@ const PageTransition = ({ children }) => {
   );
 };
 
-export default PageTransition; 
+export default PageTransition;

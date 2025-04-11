@@ -357,8 +357,8 @@ const Home = () => {
     const transitionIndex = currentCardIndex % 7;
 
     switch(transitionIndex) {
-      case 0: transitionType = 5; break; // Split Vertical Swipe (Left up, Right down)
-      case 1: transitionType = 1; break; // Thick Border Rectangle Zoom
+      case 0: transitionType = 1; break; // Thick Border Rectangle Zoom
+      case 1: transitionType = 5; break; // Split Vertical Swipe (Left up, Right down)
       case 2: transitionType = 6; break; // Staircase Wipe
       case 3: transitionType = 4; break; // Vertical Sections Slide with Special Middle Section
       case 4: transitionType = 0; break; // Horizontal Cards Split Vertically
@@ -444,9 +444,10 @@ const Home = () => {
         // Thick Border Rectangle Zoom
         const containerWidth = containerRef.current.offsetWidth;
         const containerHeight = containerRef.current.offsetHeight;
-        const borderWidth = 150; // Thick border width in pixels
+        const borderWidthTop = `${containerHeight * 0.42}px`; // 40% border top
+        const borderWidthRight = `${containerWidth * 0.32}px`; // 40% border right
         
-        // Create the rectangle with thick border
+        // Create the rectangle with specified borders
         const rectangle = document.createElement('div');
         rectangle.className = 'rectangle-zoom';
         rectangle.style.position = 'absolute';
@@ -456,7 +457,10 @@ const Home = () => {
         rectangle.style.width = `${containerWidth}px`;
         rectangle.style.height = `${containerHeight}px`;
         rectangle.style.boxSizing = 'border-box';
-        rectangle.style.border = `${borderWidth}px solid white`;
+        rectangle.style.borderTop = `${borderWidthTop} solid white`;
+        rectangle.style.borderRight = `${borderWidthRight} solid white`;
+        rectangle.style.borderBottom = 'none';
+        rectangle.style.borderLeft = 'none';
         rectangle.style.boxShadow = '0 0 40px rgba(255, 255, 255, 0.6)';
         rectangle.style.backgroundColor = 'transparent';
         rectangle.style.zIndex = '10';

@@ -263,10 +263,8 @@ export const setupHomeVerticalTextAnimation = () => {
     });
   }
 
-  // Create dramatic timeline
   const tl = gsap.timeline();
 
-  // Line animation with energy effect
   tl.to(line, {
     scaleY: 1,
     duration: 1.2,
@@ -274,10 +272,8 @@ export const setupHomeVerticalTextAnimation = () => {
     boxShadow:
       "0 0 25px rgba(255, 255, 255, 0.9), 0 0 50px rgba(0, 150, 255, 0.7)",
     onStart: () => {
-      // Animate particles along the line
       const particles = verticalText.querySelectorAll(".energy-particle");
       particles.forEach((particle, i) => {
-        // Delayed appearance
         gsap.to(particle, {
           opacity: Math.random() * 0.7 + 0.3,
           scale: Math.random() * 0.7 + 0.5,
@@ -388,9 +384,7 @@ export const setupHomeVerticalTextAnimation = () => {
   return tl;
 };
 
-// Add this function to your animations.js file for specifically targeting projects page
 export const setupProjectsVerticalTextAnimation = () => {
-  // Try different selectors that might be used on the Projects page
   const projectsVerticalText =
     document.querySelector(".projects-container .vertical-text") ||
     document.querySelector(".projects-page .vertical-text") ||
@@ -401,10 +395,8 @@ export const setupProjectsVerticalTextAnimation = () => {
     console.log(
       "Projects vertical text element not found, checking for any remaining vertical text elements"
     );
-    // As a fallback, look for any vertical text elements that might not have been animated yet
     const allVerticalTexts = document.querySelectorAll(".vertical-text");
     allVerticalTexts.forEach((element) => {
-      // Check if this element has already been animated
       if (!element.classList.contains("animated")) {
         applyVerticalTextAnimation(element);
         element.classList.add("animated");
@@ -417,18 +409,14 @@ export const setupProjectsVerticalTextAnimation = () => {
   projectsVerticalText.classList.add("animated");
 };
 
-// Setup for all vertical text animations
 export const setupVerticalTextAnimations = () => {
-  // Find all vertical text elements across the site (except home which has its own)
   const verticalTextElements = document.querySelectorAll(
     ".vertical-text:not(.right), .vertical-text-about, .vertical-text.left"
   );
 
   verticalTextElements.forEach((element) => {
-    // Skip elements that have already been animated
     if (element.classList.contains("animated")) return;
 
-    // Apply animation and mark as animated
     applyVerticalTextAnimation(element);
     element.classList.add("animated");
   });

@@ -86,6 +86,102 @@ const projects = [
 const propertyData = [
   {
     id: 1,
+    title: "Casa Refugio - Fazenda Boa Vista - Renan Mendes",
+    location: "São Paulo",
+    status: "Completed",
+    type: "Residential Villa",
+    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750",
+    images: [
+      "https://mir-s3-cdn-cf.behance.net/project_modules/fs/a9494b87161211.5daf85b4234eb.png",
+      "https://mir-s3-cdn-cf.behance.net/project_modules/1400/323b2d87161211.5daf85b420faf.png",
+      "https://i.pinimg.com/736x/0f/46/63/0f4663334390a62b6b9e8b47d0e40bfb.jpg"
+    ],
+    startDate: "June 2021",
+    endDate: "July 2023",
+    price: "R$ 3,500,000",
+    amenities: ["Infinity Pool", "Private Garden", "Spa", "Home Theatre", "Solar Panels"],
+    videoUrl: "https://www.youtube.com/watch?v=yaWHEh0R1yo",
+    brochureUrl: "",
+    details: {
+      floors: 2,
+      bhkTypes: ["3 BHK", "4 BHK"],
+      totalUnits: 1
+    }
+  },
+  {
+    id: 2,
+    title: "Keturah Villa",
+    location: "Dubai",
+    status: "In-Progress",
+    type: "Luxury Residential",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+    images: [
+      "https://api.archvoyage.ae/uploads/227_Keturah_0040004_kopiya_9a8b3ef352.jpg",
+      "https://api.archvoyage.ae/uploads/227_Keturah_0060006_kopiya_6b906d07f7.jpg",
+      "https://api.archvoyage.ae/uploads/227_Keturah_0060006_kopiya_6b906d07f7.jpg"
+    ],
+    startDate: "June 2023",
+    endDate: "December 2025",
+    price: "AED 15,000,000",
+    amenities: ["Private Beach", "Infinity Pool", "Spa", "Home Automation", "Rooftop Garden"],
+    videoUrl: "https://www.youtube.com/watch?v=xBA7RFnYwSA",
+    brochureUrl: "",
+    details: {
+      floors: 4,
+      bhkTypes: ["6 BHK", "7 BHK"],
+      totalUnits: 5
+    }
+  },
+  {
+    id: 3,
+    title: "Castle Cove - Arkhaus",
+    location: "Sydney",
+    status: "In-Progress",
+    type: "Luxury Residential",
+    image: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
+    images: [
+      "https://arkhaus.com.au/wp-content/uploads/2024/07/Willis-02-1.webp",
+      "https://arkhaus.com.au/wp-content/uploads/2024/07/Willis-03.webp"
+    ],
+    startDate: "January 2023",
+    endDate: "December 2024",
+    price: "AUD 4,200,000",
+    amenities: ["Private Beach", "Helipad", "Wine Cellar", "Smart Home Technology", "Infinity Pool"],
+    videoUrl: "https://www.youtube.com/watch?v=DojiLWPfZOA",
+    brochureUrl: "",
+    details: {
+      floors: 3,
+      bhkTypes: ["5 BHK", "6 BHK"],
+      totalUnits: 10
+    }
+  },
+  {
+    id: 4,
+    title: "Bahcekoy House - Habif Mimarlik",
+    location: "Istanbul",
+    status: "Completed",
+    type: "Residential Villa",
+    image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
+    images: [
+      "https://images.adsttc.com/media/images/5b72/36f9/f197/cc6f/ff00/0029/large_jpg/bhc13_7810b_rvz2.jpg?1534211822",
+      "https://www.habifmimarlik.com/wp-content/uploads/2024/01/20181213_Habif_Mimarlik_Bahcekoy_Evi13551_52.jpg",
+      "https://f7e5m2b4.delivery.rocketcdn.me/wp-content/uploads/2019/10/Bahcekoy-House-25.jpg"
+    ],
+    startDate: "March 2020",
+    endDate: "August 2022",
+    price: "TRY 5,000,000",
+    amenities: ["Private Garden", "Swimming Pool", "Gym", "Sauna", "Smart Home Technology"],
+    videoUrl: "https://www.youtube.com/watch?v=yD27GevbIVs",
+    brochureUrl: "",
+    details: {
+      floors: 2,
+      bhkTypes: ["4 BHK", "5 BHK"],
+      totalUnits: 1
+    }
+  },
+
+  {
+    id: 5,
     title: "GÖKSU YAŞAM",
     location: "Downtown",
     status: "Completed",
@@ -118,7 +214,7 @@ const propertyData = [
     },
   },
   {
-    id: 2,
+    id: 6,
     title: "GÖKSU SARAY",
     location: "Sisli",
     status: "In-Progress",
@@ -143,7 +239,7 @@ const propertyData = [
     },
   },
   {
-    id: 3,
+    id: 7,
     title: "ERDEMLI MANSIONS",
     location: "Eyüp",
     status: "Completed",

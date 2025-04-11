@@ -143,6 +143,91 @@
       "propertyData": [
         {
           "id": 1,
+          "title": "Casa Refugio - Fazenda Boa Vista - Renan Mendes",
+          "location": "São Paulo",
+          "status": "Devam Ediyor",
+          "type": "Konut",
+          "amenities": [
+            "Yüzme havuzu",
+            "Özel Bahçe",
+            "Spa & Sauna",
+            "Ev teateri",
+            "Solar enerji",
+            "Golf arabası erişimi"
+          ],
+          "videoUrl": "https://www.youtube.com/watch?v=yaWHEh0R1yo",
+          "brochureUrl": "",
+          "details": {
+            "floors": 12,
+            "bhkTypes": ["4 BHK", "5 BHK Suite"],
+            "totalUnits": 60
+          }
+        },
+        {
+          "id": 2,
+          "title": "Keturah Villa",
+          "location": "Dubai",
+          "status": "Devam Ediyor",
+          "type": "Lüks Konut",
+          "amenities": [
+            "Özel Plaj",
+            "Sonsuzluk Havuzu",
+            "Spa",
+            "Ev Otomasyonu",
+            "Çatı Bahçesi"
+          ],
+          "videoUrl": "https://www.youtube.com/watch?v=xBA7RFnYwSA",
+          "brochureUrl": "",
+          "details": {
+            "floors": 4,
+            "bhkTypes": ["6+1", "7+1"],
+            "totalUnits": 5
+          }
+        },
+        {
+          "id": 3,
+          "title": "Castle Cove - Arkhaus",
+          "location": "Sydney",
+          "status": "Devam Ediyor",
+          "type": "Lüks Konut",
+          "amenities": [
+            "Özel Plaj",
+            "Helikopter Pisti",
+            "Şarap Mahzeni",
+            "Akıllı Ev Teknolojisi",
+            "Sonsuzluk Havuzu"
+          ],
+          "videoUrl": "https://www.youtube.com/watch?v=DojiLWPfZOA",
+          "brochureUrl": "",
+          "details": {
+            "floors": 3,
+            "bhkTypes": ["5 BHK", "6 BHK"],
+            "totalUnits": 10
+          }
+        },
+        {
+          "id": 4,
+          "title": "Bahcekoy House - Habif Mimarlik",
+          "location": "Istanbul",
+          "status": "Tamamlandı",
+          "type": "Konut Villası",
+          "amenities": [
+            "Özel Bahçe",
+            "Yüzme Havuzu",
+            "Spor Salonu",
+            "Sauna",
+            "Akıllı Ev Teknolojisi"
+          ],
+          "videoUrl": "https://www.youtube.com/watch?v=yD27GevbIVs",
+          "brochureUrl": "",
+          "details": {
+            "floors": 2,
+            "bhkTypes": ["4+1", "5+1"],
+            "totalUnits": 1
+          }
+        },
+        {
+          "id": 5,
           "title": "GÖKSU YAŞAM",
           "location": "Downtown",
           "status": "Tamamlandı",
@@ -164,7 +249,7 @@
           }
         },
         {
-          "id": 2,
+          "id": 6,
           "title": "GÖKSU SARAY",
           "location": "Istanbul",
           "status": "Devam Ediyor",
@@ -184,7 +269,7 @@
           }
         },
         {
-          "id": 3,
+          "id": 7,
           "title": "ERDEMLI MANSIONS",
           "location": "Eyüp",
           "status": "Tamamlandı",

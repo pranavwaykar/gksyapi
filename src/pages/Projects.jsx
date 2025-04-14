@@ -355,6 +355,8 @@ const Projects = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const projectRef = useRef(null);
   const cardRef = useRef(null);
+  const filtersBarRef = useRef(null); // Add this new ref for the filters bar
+  
   const [isAnimating, setIsAnimating] = useState(false);
   const animationDirection = useRef("down");
 
@@ -473,8 +475,8 @@ const Projects = () => {
     setIsAnimating(true);
     animationDirection.current = "up";
 
-    // Animate out current card
-    gsap.to(cardRef.current, {
+    // Animate out current card and filters bar together
+    gsap.to([cardRef.current, filtersBarRef.current], {
       duration: 0.3,
       y: 50,
       opacity: 0,
@@ -494,8 +496,8 @@ const Projects = () => {
     setIsAnimating(true);
     animationDirection.current = "down";
 
-    // Animate out current card
-    gsap.to(cardRef.current, {
+    // Animate out current card and filters bar together
+    gsap.to([cardRef.current, filtersBarRef.current], {
       duration: 0.3,
       y: -50,
       opacity: 0,
@@ -509,17 +511,17 @@ const Projects = () => {
     });
   };
 
-  // Animate new card in when currentPropertyIndex changes
+  // Animate new card and filters bar in when currentPropertyIndex changes
   useEffect(() => {
-    if (cardRef.current && showAllProjects) {
+    if ((cardRef.current && filtersBarRef.current) && showAllProjects) {
       // Set initial position based on animation direction
-      gsap.set(cardRef.current, {
+      gsap.set([cardRef.current, filtersBarRef.current], {
         y: animationDirection.current === "down" ? 50 : -50,
         opacity: 0,
       });
 
       // Animate in
-      gsap.to(cardRef.current, {
+      gsap.to([cardRef.current, filtersBarRef.current], {
         duration: 0.3,
         y: 0,
         opacity: 1,
@@ -670,7 +672,7 @@ const Projects = () => {
         }}
         onWheel={handleScroll}
       >
-        <div className="filters-bar">
+        <div className="filters-bar" ref={filtersBarRef}>
           <div className="filter-group">
             <FilterDropdown
               label={t.projects.filterBy.propertyStatus || "Property Status"}

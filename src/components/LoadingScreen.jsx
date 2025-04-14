@@ -48,9 +48,10 @@ const LoadingScreen = ({ isLoading, setIsLoading }) => {
         // COOLER RELOAD ANIMATION
         // Reset logo
         gsap.set(logoRef.current, { 
-          rotation: 0, 
+          rotationY: 0, 
           scale: 0, 
           opacity: 0,
+          transformStyle: "preserve-3d",
           filter: 'drop-shadow(0 0 0 rgba(255, 255, 255, 0))'
         });
         
@@ -71,7 +72,7 @@ const LoadingScreen = ({ isLoading, setIsLoading }) => {
           });
         });
         
-        // Super cool logo animation for reload
+        // Coin flip animation for reload with fixed ending scale
         tl.to(logoRef.current, { 
           opacity: 1, 
           scale: 0.5, 
@@ -80,20 +81,20 @@ const LoadingScreen = ({ isLoading, setIsLoading }) => {
           delay: 0.5
         })
         .to(logoRef.current, { 
-          rotation: 720, 
-          scale: 1.2, 
-          duration: 1.5, 
-          ease: "power4.inOut" 
+          rotationY: 1080, // Multiple flips (3 complete flips)
+          scale: 1, // Setting final scale directly to 1
+          duration: 1.8, 
+          ease: "power2.inOut" 
         })
         .to(logoRef.current, { 
           filter: 'drop-shadow(0 0 15px rgba(255, 255, 255, 0.7))', 
           duration: 0.8,
           ease: "power2.inOut" 
-        }, "-=1")
+        }, "-=1.4")
         .to(logoRef.current, {
-          scale: 1,
+          rotationY: "+=20", // Small wobble at the end
           duration: 0.6,
-          ease: "back.out(1.7)"
+          ease: "power3.out" // Changed from back.out to avoid scale overshoot
         })
         .to(particlesRef.current, {
           opacity: 0,
@@ -103,14 +104,26 @@ const LoadingScreen = ({ isLoading, setIsLoading }) => {
         }, "-=0.3");
       } else {
         // REGULAR NAVIGATION ANIMATION
-        tl.fromTo(logoRef.current, 
-          { opacity: 0, scale: 0.8 },
+        gsap.set(logoRef.current, { 
+          transformStyle: "preserve-3d",
+          opacity: 0, 
+          scale: 0.8 
+        });
+        
+        tl.to(logoRef.current, 
           { opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }
         )
         .to(logoRef.current, { 
-          rotation: 360,
-          duration: 1.2,
-          ease: "power1.inOut"
+          rotationY: 360, // Full flip
+          duration: 1.4,
+          ease: "power2.inOut",
+          scale: 1 // Explicitly maintain scale
+        })
+        .to(logoRef.current, {
+          rotationY: "+=10", // Small wobble at the end
+          duration: 0.2,
+          ease: "power1.out",
+          scale: 1 // Reinforce final scale
         });
       }
       

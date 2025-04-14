@@ -411,33 +411,33 @@ const Home = () => {
         // Use the timeline as it was working before
         tl.to(leftCard, {
           left: '0%', // Move to center
-          duration: 0.7,
-          ease: 'power2.out'
+          duration: 1.2, // Increased from 0.7
+          ease: 'power2.out',
+          onStart: () => {
+            // Change video source
+            video.querySelector('source').src = newVideoSrc;
+            video.load();
+            video.play();
+            
+            // Keep the timing pattern from case 1
+            fadeInCurrentCard('bottom', 1.8, 0.8);
+          }
         }, 'moveIn')
         .to(rightCard, {
           left: '50%', // Move to center
-          duration: 0.7,
+          duration: 1.2, // Increased from 0.7
           ease: 'power2.out'
         }, 'moveIn') // Same label to animate simultaneously
         .set(video, { opacity: 0 })
-        .call(() => {
-          // Change video source
-          video.querySelector('source').src = newVideoSrc;
-          video.load();
-          video.play();
-          
-          // CARD CONTENT CHANGE TIMING
-          fadeInCurrentCard('bottom', 0.1, 0.5);
-        })
         // Split vertically
         .to(leftCard, {
           top: '-100%', // Left card moves UP
-          duration: 0.7,
+          duration: 1.2, // Increased from 0.7
           ease: 'power2.in'
         }, 'moveOut')
         .to(rightCard, {
           top: '100%', // Right card moves DOWN
-          duration: 0.7,
+          duration: 1.2, // Increased from 0.7
           ease: 'power2.in',
           onComplete: () => {
             if (cardsContainer.parentNode) {
@@ -506,18 +506,16 @@ const Home = () => {
               {
                 scale: 1,
                 z: 0,
-                duration: 1,
+                duration: 1.5, // Increased from 1.0
                 ease: 'sine.out',
                 onStart: () => {
-                  fadeInCurrentCard('bottom', 0.2, 0.5);
-        
                   // Change video source
                   video.querySelector('source').src = newVideoSrc;
                   video.load();
                   video.play();
                   
-                  // CARD CONTENT CHANGE TIMING
-                  fadeInCurrentCard('bottom', 0.2, 0.5);
+                  // Keep the successful timing
+                  fadeInCurrentCard('bottom', 0.4, 1);
                 }
               }
             )
@@ -525,12 +523,12 @@ const Home = () => {
             // Different exit animations for horizontal and vertical pieces
             .to(horizontalPiece, {
               x: '-100%', // Horizontal piece slides left
-              duration: 1,
+              duration: 1.5, // Increased from 1.0
               ease: 'back.in(1.2)'
             }, 'exitPieces')
             .to(verticalPiece, {
               y: '100%', // Vertical piece slides down
-              duration: 1,
+              duration: 1.5, // Increased from 1.0
               ease: 'back.in(1.2)',
               onComplete: () => {
                 if (rectangleContainer.parentNode) {
@@ -593,29 +591,29 @@ const Home = () => {
         // Animate lines to meet in the middle
         tl.to(line1, {
           left: '0%',
-          duration: 0.6,
-          ease: 'power2.out'
+          duration: 1.0, // Increased from 0.6
+          ease: 'power2.out',
+          onStart: () => {
+            // Change video source
+            video.querySelector('source').src = newVideoSrc;
+            video.load();
+            video.play();
+            
+            // Keep consistent timing
+            fadeInCurrentCard('bottom', 1.2, 1.4);
+          }
         }, 'linesIn')
         .to([line2, line3], {
           left: '0%',
-          duration: 0.6,
-          stagger: 0.1,
+          duration: 1.0, // Increased from 0.6
+          stagger: 0.15, // Increased from 0.1
           ease: 'power2.out'
         }, 'linesIn') // Use same label to animate together
         .set(video, { opacity: 0 })
-        .call(() => {
-          // Change video source
-          video.querySelector('source').src = newVideoSrc;
-          video.load();
-          video.play();
-          
-          // CARD CONTENT CHANGE TIMING
-          fadeInCurrentCard('top', 0.15, 0.4);
-        })
         // Animate the entire container up out of view
         .to(linesContainer, {
           y: '-100%',
-          duration: 0.7,
+          duration: 1.2, // Increased from 0.7
           ease: 'power2.in',
           onComplete: () => {
             // Clean up
@@ -668,30 +666,28 @@ const Home = () => {
           dominoTransitionActive = false;
         };
         
-        // Add domino fall animation - SLOWED DOWN
+        // Add domino fall animation - SLOWED DOWN FURTHER
         tl.to(dominos, {
           rotateX: 0,
-          stagger: 0.05, // Increased from 0.03 for slower domino fall
-          duration: 0.6, // Increased from 0.4 for slower animation
-          ease: 'power1.inOut'
+          stagger: 0.08, // Increased from 0.05
+          duration: 0.9, // Increased from 0.6
+          ease: 'power1.inOut',
+          onStart: () => {
+            // Change video source
+            video.querySelector('source').src = newVideoSrc;
+            video.load();
+            video.play();
+            
+            // Keep consistent timing
+            fadeInCurrentCard('bottom', 1.6, 1.4);
+          }
         })
         .set(video, { opacity: 0 })
-        .call(() => {
-          if (!dominoTransitionActive) return;
-          
-          // Change video source
-          video.querySelector('source').src = newVideoSrc;
-          video.load();
-          video.play();
-          
-          // CARD CONTENT CHANGE TIMING
-          fadeInCurrentCard('bottom', 0.1, 0.45);
-        })
         // Fall down the other way
         .to(dominos, {
           rotateX: -90,
-          stagger: 0.05, // Increased from 0.03 for slower domino fall
-          duration: 0.6, // Increased from 0.4 for slower animation
+          stagger: 0.08, // Increased from 0.05
+          duration: 0.9, // Increased from 0.6
           ease: 'power1.inOut',
           onComplete: cleanupDominos,
           // Add cleanup to each domino's animation for redundancy
@@ -706,7 +702,7 @@ const Home = () => {
         .set(video, { opacity: 1 });
         
         // Safety timeout to ensure cleanup happens even if animation is interrupted
-        setTimeout(cleanupDominos, 4000); // Increased from 3000 to match slower animation
+        setTimeout(cleanupDominos, 5000); // Increased from 4000 to match slower animation
         break;
         
         case 4:
@@ -768,48 +764,48 @@ const Home = () => {
           // First animate whole container from left to cover viewport - all white
           tl.to(sectionsContainer, {
             left: '0%',
-            duration: 0.7,
-            ease: 'power2.out'
+            duration: 1.2, // Increased from 0.7
+            ease: 'power2.out',
+            onStart: () => {
+              // Change video source
+              video.querySelector('source').src = newVideoSrc;
+              video.load();
+              video.play();
+              
+              // Keep consistent timing
+              fadeInCurrentCard('bottom', 1.6, 0.5);
+            }
           })
           .set(video, { opacity: 0 })
-          .call(() => {
-            // Change video source
-            video.querySelector('source').src = newVideoSrc;
-            video.load();
-            video.play();
-            
-            // CARD CONTENT CHANGE TIMING
-            fadeInCurrentCard('bottom', 0.25, 0.5);
-          })
           // Animate side sections up
           .to([leftSection, rightSection], {
             y: '-100%', // White sections slide up
-            duration: 0.7,
+            duration: 1.2, // Increased from 0.7
             ease: 'power2.in'
           }, 'sectionsOut')
           // First move blue section into view
           .to(middleBlueHidden, {
             top: '0%', // Bring blue part into view
-            duration: 0.7,
+            duration: 1.2, // Increased from 0.7
             ease: 'power2.in'
           }, 'sectionsOut')
           // Then move white section out of view
           .to(middleWhiteVisible, {
             top: '100%', // Move white part down out of view
-            duration: 0.7,
+            duration: 1.2, // Increased from 0.7
             ease: 'power2.in'
-          }, 'sectionsOut+=0.2') // Slightly delayed
+          }, 'sectionsOut+=0.3') // Slightly delayed (increased from 0.2)
           // Continue moving the whole middle section down
           .to(middleSectionContainer, {
             top: '100%', // Move entire container down out of view
-            duration: 0.7,
+            duration: 1.2, // Increased from 0.7
             ease: 'power2.in',
             onComplete: () => {
               if (sectionsContainer.parentNode) {
                 sectionsContainer.parentNode.removeChild(sectionsContainer);
               }
             }
-          }, 'sectionsOut+=0.7') // Start after white has moved out
+          }, 'sectionsOut+=1.0') // Start after white has moved out (increased from 0.7)
           .set(video, { opacity: 1 });
           break;
         
@@ -840,33 +836,33 @@ const Home = () => {
         // Animate left half from bottom to top, right half from top to bottom
         tl.to(leftHalf, {
           top: '0%',
-          duration: 0.7,
-          ease: 'power2.inOut'
+          duration: 1.2, // Increased from 0.7
+          ease: 'power2.inOut',
+          onStart: () => {
+            // Change video source
+            video.querySelector('source').src = newVideoSrc;
+            video.load();
+            video.play();
+            
+            // Keep consistent timing
+            fadeInCurrentCard('bottom', 1.4, 1);
+          }
         })
         .to(rightHalf, {
           bottom: '0%',
-          duration: 0.7,
+          duration: 1.2, // Increased from 0.7
           ease: 'power2.inOut'
         }, '<') // Start at the same time as left half
         .set(video, { opacity: 0 })
-        .call(() => {
-          // Change video source
-          video.querySelector('source').src = newVideoSrc;
-          video.load();
-          video.play();
-          
-          // CARD CONTENT CHANGE TIMING
-          fadeInCurrentCard('none', 0.1, 0.35);
-        })
         // Animate out: left half continues up, right half continues down
         .to(leftHalf, {
           top: '-100%',
-          duration: 0.7,
+          duration: 1.2, // Increased from 0.7
           ease: 'power2.inOut'
         })
         .to(rightHalf, {
           bottom: '-100%',
-          duration: 0.7,
+          duration: 1.2, // Increased from 0.7
           ease: 'power2.inOut',
           onComplete: () => {
             // Clean up
@@ -912,25 +908,25 @@ const Home = () => {
         tl.to(bars, {
           width: '120%', // Extra width to ensure it covers the screen
           left: '0%',
-          duration: 0.7,
-          stagger: 0.1,
-          ease: 'power2.inOut'
+          duration: 1.2, // Increased from 0.7
+          stagger: 0.15, // Increased from 0.1
+          ease: 'power2.inOut',
+          onStart: () => {
+            // Change video source
+            video.querySelector('source').src = newVideoSrc;
+            video.load();
+            video.play();
+            
+            // Keep consistent timing
+            fadeInCurrentCard('left', 2.6, 1.2);
+          }
         })
-        .set(video, { opacity: 0 }, 0.3)
-        .call(() => {
-          // Change video source
-          video.querySelector('source').src = newVideoSrc;
-          video.load();
-          video.play();
-          
-          // CARD CONTENT CHANGE TIMING
-          fadeInCurrentCard('right', 0, 0.4);
-        })
+        .set(video, { opacity: 0 }, 0.5) // Increased from 0.3
         // Then animate bars continuing off-screen to the right
         .to(bars, {
           left: '100%',
-          duration: 0.7,
-          stagger: 0.1,
+          duration: 1.2, // Increased from 0.7
+          stagger: 0.15, // Increased from 0.1
           ease: 'power2.inOut',
           onComplete: () => {
             // Clean up
@@ -968,23 +964,23 @@ const Home = () => {
         // Animate panel sliding up from bottom
         tl.to(slidingPanel, {
           y: '0%', // Move to cover screen
-          duration: 0.6,
-          ease: 'power2.out'
+          duration: 1.0, // Increased from 0.6
+          ease: 'power2.out',
+          onStart: () => {
+            // Change video source
+            video.querySelector('source').src = newVideoSrc;
+            video.load();
+            video.play();
+            
+            // Keep consistent timing
+            fadeInCurrentCard('bottom', 0.2, 0.5);
+          }
         })
         .set(video, { opacity: 0 })
-        .call(() => {
-          // Change video source
-          video.querySelector('source').src = newVideoSrc;
-          video.load();
-          video.play();
-          
-          // CARD CONTENT CHANGE TIMING
-          fadeInCurrentCard('top', 0.2, 0.6);
-        })
         // Continue sliding up to exit the screen
         .to(slidingPanel, {
           y: '-100%', // Move up off screen
-          duration: 0.6,
+          duration: 1.0, // Increased from 0.6
           ease: 'power2.in',
           onComplete: () => {
             if (slideContainer.parentNode) {
@@ -1102,23 +1098,23 @@ const Home = () => {
     // Set initial position based on specified direction
     switch (direction) {
       case 'top':
-        initialY = -30;
+        initialY = -100;
         break;
       case 'bottom':
-        initialY = 30;
+        initialY = 100;
         break;
       case 'left':
-        initialX = -30;
+        initialX = -100;
         break;
       case 'right':
-        initialX = 30;
+        initialX = 100;
         break;
       case 'none': // No slide, just fade
         initialX = 0;
         initialY = 0;
         break;
       default:
-        initialY = 30; // Default to bottom
+        initialY = 100; // Default to bottom
     }
     
     // Reset position and opacity first
@@ -1135,7 +1131,7 @@ const Home = () => {
       y: 0,
       duration: duration,
       delay: delay,
-      ease: 'sine.in'
+      ease: 'sine'
     });
   };
 

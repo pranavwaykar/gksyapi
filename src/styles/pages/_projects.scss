@@ -253,13 +253,17 @@
 
     .filter-group {
       display: flex;
-      gap: 1.5rem;
+      gap: 0rem !important;
       align-items: center;
+      margin-bottom: 0 !important;
 
       .filter-dropdown {
         cursor: pointer;
         position: relative;
-
+        background: rgba(255, 255, 255, 0.1);
+        margin-right: 0;
+        padding: 0.5rem;
+        
         .filter-label {
           color: white;
           font-size: 1.1rem;
@@ -531,7 +535,7 @@
         }
 
         .info-value {
-          font-size: 1.2rem;
+          font-size: 0.9rem;
           font-weight: 600;
           color: #1a3c72;
           text-align: center;
@@ -539,6 +543,7 @@
           &.flex {
             display: flex;
             gap: 8px;
+            align-items: center;
           }
 
           .currency-icon {
@@ -979,7 +984,7 @@
   }
 
   .project-list-page .property-card .info-boxes {
-    gap: 30px;
+    gap: 26px;
   }
 
   .project-list-page .vertical-text-left {
@@ -1009,7 +1014,8 @@
       }
   
       .icon {
-        top: 20rem !important;
+        top: 26rem !important;
+        right: 9.7rem;
       }
     }
   .project-list-page .project-viewer .card-container {

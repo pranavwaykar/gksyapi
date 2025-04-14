@@ -9,7 +9,9 @@ import {
   faPhone,
   faAngleRight,
   faAngleLeft,
-  faArrowUpLong
+  faLiraSign,
+  faUmbrellaBeach,
+  faBuilding
 } from "@fortawesome/free-solid-svg-icons";
 import gsap from "gsap";
 import { setupVerticalTextAnimations } from '../utils/animations';
@@ -743,10 +745,10 @@ const Projects = () => {
                         <div className="location-icon">
                           <FontAwesomeIcon
                             icon={faMapMarkerAlt}
-                            style={{ width: "20px", height: "20px" }}
+                            style={{ width: "15px", height: "15px" }}
                           />
                         </div>
-                        <span className="location-text">
+                        <span className="location-text" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           {filteredProperties[currentPropertyIndex]?.location}
                         </span>
                       </div>
@@ -766,7 +768,7 @@ const Projects = () => {
                           >
                             <FontAwesomeIcon 
                               icon={faPlay} 
-                              style={{ opacity: hasVideo ? 1 : 0.5 }}
+                              style={{ opacity: hasVideo ? 1 : 0.5, width: "15px", height: "15px" }}
                             />
                             {t.projects.buttons.watchVideo}
                           </button>
@@ -788,7 +790,7 @@ const Projects = () => {
                           >
                             <FontAwesomeIcon 
                               icon={faFileAlt} 
-                              style={{ opacity: hasBrochure ? 1 : 0.5 }}
+                              style={{ opacity: hasBrochure ? 1 : 0.5, width: "15px", height: "15px" }}
                             />
                             {t.projects.buttons.viewCatalog}
                           </button>
@@ -803,7 +805,7 @@ const Projects = () => {
                           setShowContactForm(true);
                         }}
                       >
-                        <FontAwesomeIcon icon={faPhone} />
+                        <FontAwesomeIcon icon={faPhone} style={{ width: "15px", height: "15px" }} />
                         {t.projects.buttons.enquireNow}
                       </button>
                     </div>
@@ -811,10 +813,10 @@ const Projects = () => {
                     {/* Information boxes at bottom */}
                     <div className="info-boxes" ref={infoBoxesRef}>
                       <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
-                        <div className="info-title">
+                        <div className="info-title" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           {t.projects.projectDetails.startDate}
                         </div>
-                        <div className="info-value">
+                        <div className="info-value" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           {filteredProperties[
                             currentPropertyIndex
                           ].startDate?.split(" ")[1] || "2020"}
@@ -822,10 +824,10 @@ const Projects = () => {
                       </div>
 
                       <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
-                        <div className="info-title">
+                        <div className="info-title" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           {t.projects.projectDetails.endDate}
                         </div>
-                        <div className="info-value">
+                        <div className="info-value" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           {filteredProperties[
                             currentPropertyIndex
                           ].endDate?.split(" ")[1] || "2025"}
@@ -833,69 +835,38 @@ const Projects = () => {
                       </div>
 
                       <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
-                        <div className="info-title">
+                        <div className="info-title" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           {t.projects.propertyCard.price}
                         </div>
-                        <div className="info-value flex">
+                        <div className="info-value flex" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           From
-                          <svg
-                            className="currency-icon"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <line x1="12" y1="1" x2="12" y2="23"></line>
-                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                          </svg>
+                          <FontAwesomeIcon icon={faLiraSign} style={{ width: "15px", height: "15px" }} />
                         </div>
                       </div>
 
                       <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
-                        <div className="info-title">
+                        <div className="info-title" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           {t.projects.propertyCard.amenities}
                         </div>
-                        <div className="info-value">
+                        <div className="info-value" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           <div className="amenity-icons">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                            </svg>
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <rect
-                                x="2"
-                                y="7"
-                                width="20"
-                                height="14"
-                                rx="2"
-                                ry="2"
-                              ></rect>
-                              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                            </svg>
+                            <FontAwesomeIcon
+                              icon={faUmbrellaBeach}
+                              style={{ width: "20px", height: "20px", color: "rgba(80, 125, 250, 0.9)" }}
+                            />
+                            <FontAwesomeIcon
+                              icon={faBuilding}
+                              style={{ width: "20px", height: "20px", color: "rgba(80, 125, 250, 0.9)"  }}
+                            />
                           </div>
                         </div>
                       </div>
 
                       <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
-                        <div className="info-title">
+                        <div className="info-title" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           {t.projects.propertyCard.details}
                         </div>
-                        <div className="info-value">More Info</div>
+                        <div className="info-value" style={{ color: "rgba(80, 125, 250, 0.9)" }}>More Info</div>
                       </div>
                     </div>
 

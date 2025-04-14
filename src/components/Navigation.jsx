@@ -5,11 +5,19 @@ import gsap from 'gsap';
 import { useLanguage, languages } from '../contexts/LanguageContext';
 import { translations } from '../translations';
 
-const Navigation = () => {
-  // Create refs for elements we want to animate
+const Navigation = ({ onHomePage }) => {
+  // Get location first
+  const location = useLocation();
+  
+  // Check if this component should render BEFORE using other hooks
+  // If we're on home page and this is not the home page instance, don't render
+  if (location.pathname === '/' && onHomePage === false) {
+    return null;
+  }
+
+  // Create refs for elements we want to animate - after conditional return
   const logoRef = useRef(null);
   const navItemsRef = useRef([]);
-  const location = useLocation();
   
   // Get language context
   const { language, setLanguage } = useLanguage();
@@ -22,21 +30,24 @@ const Navigation = () => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
     
     // Reset elements first
-    gsap.set([logoRef.current, ...navItemsRef.current], { opacity: 0, y: -20 });
+    gsap.set([logoRef.current, ...navItemsRef.current], { opacity: 0, y: -20, scale: 0.95 });
     
     // Animate logo first
     tl.to(logoRef.current, {
       opacity: 1,
       y: 0,
-      duration: 0.6
+      scale: 1,
+      duration: 0.8
     });
     
     // Then animate each nav item sequentially
     tl.to(navItemsRef.current, {
       opacity: 1,
       y: 0,
-      duration: 0.4,
-      stagger: 0.1 // Each item appears 0.1s after the previous one
+      scale: 1,
+      delay: 1.5,
+      duration: 0.5,
+      stagger: 0.15
     });
     
     return tl;
@@ -44,11 +55,34 @@ const Navigation = () => {
 
   // Initial animation on component mount
   useEffect(() => {
+    // Add hover animations for nav items
+    navItemsRef.current.forEach(item => {
+      if (item) {
+        gsap.set(item, { transformOrigin: 'center' });
+        
+        item.addEventListener('mouseenter', () => {
+          gsap.to(item, { y: -3, scale: 1.05, duration: 0.3 });
+        });
+        
+        item.addEventListener('mouseleave', () => {
+          gsap.to(item, { y: 0, scale: 1, duration: 0.3 });
+        });
+      }
+    });
+    
     const tl = runNavAnimation();
     
     return () => {
       // Clean up animation on unmount
       tl.kill();
+      
+      // Remove event listeners
+      navItemsRef.current.forEach(item => {
+        if (item) {
+          item.removeEventListener('mouseenter', () => {});
+          item.removeEventListener('mouseleave', () => {});
+        }
+      });
     };
   }, []);
   
@@ -118,6 +152,10 @@ const Navigation = () => {
       </ul>
     </nav>
   );
+};
+
+Navigation.defaultProps = {
+  onHomePage: false
 };
 
 export default Navigation; 

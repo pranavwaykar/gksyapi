@@ -31,9 +31,16 @@ const Home = () => {
   const [direction, setDirection] = useState(0);
   // Track if card is entering or exiting
   const [animationState, setAnimationState] = useState('idle'); // 'idle', 'entering', 'exiting'
+  // Add loading state
+  const [isLoading, setIsLoading] = useState(true);
   
   const { language } = useLanguage();
   const t = translations[language];
+
+  // Create refs for card 1 elements to animate
+  const statsRowRef = useRef(null);
+  const sloganRef = useRef(null);
+  const swipeDownRef = useRef(null);
 
   // Card content
   const cardContents = [
@@ -41,7 +48,7 @@ const Home = () => {
       // Card 1 with stats UI
       customRender: () => (
         <div className="stats-overview">
-          <div className="stats-row">
+          <div className="stats-row" ref={statsRowRef}>
             <div className="stat-item">
               <div className="stat-number">1994</div>
               <div className="stat-label">Established in</div>
@@ -63,12 +70,12 @@ const Home = () => {
             </div>
           </div>
           
-          <div className="company-slogan">
+          <div className="company-slogan" ref={sloganRef}>
             <h1>Dünya fikirler üzerine inşa edilir Dünyayı,</h1>
             <h1>her seferinde bir fikirle şekillendiriyoruz</h1>
           </div>
 
-          <div className="swipe-down-text">
+          <div className="swipe-down-text" ref={swipeDownRef}>
             Scroll
             <FontAwesomeIcon icon={faArrowDown} style={{height:"20px"}} />
           </div>
@@ -1048,14 +1055,55 @@ const Home = () => {
     const container = containerRef.current;
     container.addEventListener('wheel', handleWheel, { passive: false });
     
+    // Simulate loading complete
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // Adjust this time as needed
+    
     return () => {
       container.removeEventListener('wheel', handleWheel);
       if (audio) {
         audio.pause();
       }
+      clearTimeout(loadingTimer);
     };
   }, [currentCardIndex, animationState]); // Dependencies include animation state
 
+  // Add effect to animate card 1 elements with stagger when loading completes
+  useEffect(() => {
+    if (!isLoading && currentCardIndex === 0) {
+      // Only animate card 1 elements when loading is complete and on first card
+      
+      // Hide elements initially
+      if (statsRowRef.current && sloganRef.current && swipeDownRef.current) {
+        gsap.set([statsRowRef.current, sloganRef.current, swipeDownRef.current], { 
+          y: 30, 
+          opacity: 0 
+        });
+        
+        // Create stagger animation for card 1 elements
+        gsap.to([statsRowRef.current, sloganRef.current, swipeDownRef.current], {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.3,
+          ease: "power2.out",
+          delay: 2.5 // Delay after loading completes
+        });
+        
+        // Animate stat items with stagger
+        const statItems = statsRowRef.current.querySelectorAll('.stat-item');
+        gsap.from(statItems, {
+          y: 20,
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "back.out(1.2)",
+          delay: 0.7 // Start after the stats row begins to appear
+        });
+      }
+    }
+  }, [isLoading, currentCardIndex]);
 
   // Function to toggle music play/pause
   const toggleMusic = () => {
@@ -1137,6 +1185,14 @@ const Home = () => {
 
   return (
     <div className="home-container" ref={containerRef}>
+      {/* Loading screen */}
+      {isLoading && (
+        <div className="loading-screen">
+          <div className="loader"></div>
+          <div className="loading-text">Loading GKS YAPI...</div>
+        </div>
+      )}
+
       <video 
         className="background-video" 
         autoPlay 
@@ -1156,44 +1212,49 @@ const Home = () => {
 
       <audio ref={audioRef} src={backgroundMusic} loop autoPlay />
 
-      <div className="content-overlay">
-        <div className="cards-container">
-          <div className={getCardClasses()}>
-            <div className="card-inner">
-              {cardContents[currentCardIndex].customRender ? 
-                // Use custom rendering if available
-                cardContents[currentCardIndex].customRender() : 
-                // Otherwise use standard title/text rendering
-                <>
-                  <h2>{cardContents[currentCardIndex].title}</h2>
-                  <p>{cardContents[currentCardIndex].text}</p>
-                </>
-              }
+      {/* Only show content when loading is complete */}
+      {!isLoading && (
+        <>
+          <div className="content-overlay">
+            <div className="cards-container">
+              <div className={getCardClasses()}>
+                <div className="card-inner">
+                  {cardContents[currentCardIndex].customRender ? 
+                    // Use custom rendering if available
+                    cardContents[currentCardIndex].customRender() : 
+                    // Otherwise use standard title/text rendering
+                    <>
+                      <h2>{cardContents[currentCardIndex].title}</h2>
+                      <p>{cardContents[currentCardIndex].text}</p>
+                    </>
+                  }
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div className="vertical-text right">
-        <div className="vertical-line"></div>
-        <span className="left-text">{t.projects.bespokeInEverySense}</span>
-        <div className="project-title-container">
-          <span className="large-text-primary">{t.projects.the}</span>
-          <span className="large-text-secondary">{t.projects.projects}</span>
-        </div>
-      </div>
+          <div className="vertical-text right">
+            <div className="vertical-line"></div>
+            <span className="left-text">{t.projects.bespokeInEverySense}</span>
+            <div className="project-title-container">
+              <span className="large-text-primary">{t.projects.the}</span>
+              <span className="large-text-secondary">{t.projects.projects}</span>
+            </div>
+          </div>
 
-            {/* Add music control button */}
-            <div className="music-control">
-        <button onClick={toggleMusic} title={isMusicPlaying ? "Mute music" : "Play music"}>
-          <FontAwesomeIcon 
-            icon={isMusicPlaying ? faVolumeUp : faVolumeMute} 
-            size="sm" 
-          />
-        </button>
-      </div>
+          {/* Add music control button */}
+          <div className="music-control">
+            <button onClick={toggleMusic} title={isMusicPlaying ? "Mute music" : "Play music"}>
+              <FontAwesomeIcon 
+                icon={isMusicPlaying ? faVolumeUp : faVolumeMute} 
+                size="sm" 
+              />
+            </button>
+          </div>
 
-      <Navigation />
+          <Navigation onHomePage={true} />
+        </>
+      )}
     </div>
   );
 };

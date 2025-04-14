@@ -33,6 +33,9 @@ export const addEnergyParticlesStyles = () => {
 
 // Helper function to apply the animation to a specific element
 const applyVerticalTextAnimation = (element) => {
+  // Return early - animation disabled
+  return;
+
   // Get elements - account for different class naming between pages
   const line =
     element.querySelector(".line") || element.querySelector(".vertical-line");
@@ -197,6 +200,9 @@ const applyVerticalTextAnimation = (element) => {
 
 // Enhanced animation specifically for the Home page
 export const setupHomeVerticalTextAnimation = () => {
+  // Return early - animation disabled
+  return;
+
   // Find home page vertical text elements
   const verticalText = document.querySelector(".vertical-text.right");
 
@@ -385,6 +391,9 @@ export const setupHomeVerticalTextAnimation = () => {
 };
 
 export const setupProjectsVerticalTextAnimation = () => {
+  // Return early - animation disabled
+  return;
+
   const projectsVerticalText =
     document.querySelector(".projects-container .vertical-text") ||
     document.querySelector(".projects-page .vertical-text") ||
@@ -410,6 +419,9 @@ export const setupProjectsVerticalTextAnimation = () => {
 };
 
 export const setupVerticalTextAnimations = () => {
+  // Return early - animation disabled
+  return;
+
   const verticalTextElements = document.querySelectorAll(
     ".vertical-text:not(.right), .vertical-text-about, .vertical-text.left"
   );
@@ -424,7 +436,12 @@ export const setupVerticalTextAnimations = () => {
 
 // Add this new function to trigger animations after transitions
 export const triggerAnimationsAfterTransition = () => {
-  console.log("Triggering animations after transition");
+  console.log("Animations after transition disabled");
+  
+  // Only add styles but don't trigger animations
+  addEnergyParticlesStyles();
+  
+  return;
 
   // Create and dispatch a custom event
   const event = new CustomEvent("setupAnimations");

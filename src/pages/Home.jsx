@@ -69,8 +69,8 @@ const Home = () => {
           </div>
 
           <div className="swipe-down-text">
-            Swipe Down to Continue
-            <FontAwesomeIcon icon={faArrowDown} style={{height:"30px"}} />
+            Scroll Down to Continue
+            <FontAwesomeIcon icon={faArrowDown} style={{height:"20px"}} />
           </div>
         </div>
       )

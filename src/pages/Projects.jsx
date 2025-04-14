@@ -404,7 +404,6 @@ const Projects = () => {
   };
 
   useEffect(() => {
-    console.log("Property changed, resetting image index");
     setCurrentImageIndex(0);
   }, [currentPropertyIndex]);
 
@@ -540,8 +539,6 @@ const Projects = () => {
   
   // Simplified scroll handler
   const handleScroll = (e) => {
-    // For debugging
-    console.log("Scroll event detected, deltaY:", e.deltaY);
     
     const now = Date.now();
     
@@ -556,8 +553,7 @@ const Projects = () => {
     
     if (Math.abs(e.deltaY) < scrollThreshold) {
       console.log("Scroll below threshold, ignoring");
-      return; // Ignore small scroll movements
-    }
+      return;}
     
     // Update the last scroll time
     lastScrollTime.current = now;
@@ -606,7 +602,6 @@ const Projects = () => {
   // Update the animation-in effect
   useEffect(() => {
     if (cardRef.current && filtersBarRef.current && showAllProjects) {
-      console.log("Setting up card animation in");
       
       // Position based on animation direction
       gsap.set([cardRef.current, filtersBarRef.current], {

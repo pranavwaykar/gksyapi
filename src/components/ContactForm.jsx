@@ -44,8 +44,6 @@ const ContactForm = ({ jobTitle }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted for position:", jobTitle);
-    // Add your form submission logic here
   };
 
   return (

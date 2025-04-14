@@ -401,9 +401,7 @@ export const setupProjectsVerticalTextAnimation = () => {
     document.querySelector("#projects .vertical-text");
 
   if (!projectsVerticalText) {
-    console.log(
-      "Projects vertical text element not found, checking for any remaining vertical text elements"
-    );
+
     const allVerticalTexts = document.querySelectorAll(".vertical-text");
     allVerticalTexts.forEach((element) => {
       if (!element.classList.contains("animated")) {
@@ -436,7 +434,6 @@ export const setupVerticalTextAnimations = () => {
 
 // Add this new function to trigger animations after transitions
 export const triggerAnimationsAfterTransition = () => {
-  console.log("Animations after transition disabled");
   
   // Only add styles but don't trigger animations
   addEnergyParticlesStyles();

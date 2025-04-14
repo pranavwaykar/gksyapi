@@ -357,13 +357,9 @@ const Home = () => {
       onUpdate: function() {
         // You can use this to track progress if needed
         // const progress = this.progress();
-        // console.log("Animation progress:", progress);
       }
     });
     
-    // Add debugging
-    console.log("Direction:", newDirection);
-    console.log("Current Card Index:", currentCardIndex);
     
     // Define forward and reverse transition sequences
     const forwardSequence = [1, 5, 4, 6, 0, 2, 3];
@@ -375,12 +371,10 @@ const Home = () => {
       // Going down - use forward sequence
       const forwardIndex = currentCardIndex % forwardSequence.length;
       transitionType = forwardSequence[forwardIndex];
-      console.log("Using forward sequence, index:", forwardIndex, "transition type:", transitionType);
     } else {
       // Going up - use reverse sequence
       const reverseIndex = currentCardIndex % reverseSequence.length;
       transitionType = reverseSequence[reverseIndex];
-      console.log("Using reverse sequence, index:", reverseIndex, "transition type:", transitionType);
     }
     
     // Rest of transition code remains the same
@@ -1015,10 +1009,7 @@ const Home = () => {
       Math.max(0, currentCardIndex + scrollDirection),
       cardContents.length - 1
     );
-    
-    // Debug the actual index change
-    console.log("Current index:", currentCardIndex, "New index:", newIndex, "Direction:", scrollDirection);
-    
+        
     // Only update if the index actually changes
     if (newIndex !== currentCardIndex) {
       // Set to processing state to prevent multiple wheel events
@@ -1041,7 +1032,6 @@ const Home = () => {
     // Audio setup
     const audio = audioRef.current;
     audio.play().catch((err) => {
-      console.log("Audio autoplay was prevented by the browser:", err);
 
       const startAudioOnInteraction = () => {
         audio.play().catch((e) => console.log("Audio still couldn't play:", e));

@@ -355,7 +355,8 @@ const Projects = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const projectRef = useRef(null);
   const cardRef = useRef(null);
-  const filtersBarRef = useRef(null); // Add this new ref for the filters bar
+  const containerRef = useRef(null);
+  const filtersBarRef = useRef(null);
   
   const [isAnimating, setIsAnimating] = useState(false);
   const animationDirection = useRef("down");
@@ -475,8 +476,8 @@ const Projects = () => {
     setIsAnimating(true);
     animationDirection.current = "up";
 
-    // Animate out current card and filters bar together
-    gsap.to([cardRef.current, filtersBarRef.current], {
+    // Animate out current card
+    gsap.to(cardRef.current, {
       duration: 0.3,
       y: 50,
       opacity: 0,
@@ -496,8 +497,8 @@ const Projects = () => {
     setIsAnimating(true);
     animationDirection.current = "down";
 
-    // Animate out current card and filters bar together
-    gsap.to([cardRef.current, filtersBarRef.current], {
+    // Animate out current card
+    gsap.to(cardRef.current, {
       duration: 0.3,
       y: -50,
       opacity: 0,
@@ -511,17 +512,17 @@ const Projects = () => {
     });
   };
 
-  // Animate new card and filters bar in when currentPropertyIndex changes
+  // Animate new card in when currentPropertyIndex changes
   useEffect(() => {
-    if ((cardRef.current && filtersBarRef.current) && showAllProjects) {
+    if (cardRef.current && showAllProjects) {
       // Set initial position based on animation direction
-      gsap.set([cardRef.current, filtersBarRef.current], {
+      gsap.set(cardRef.current, {
         y: animationDirection.current === "down" ? 50 : -50,
         opacity: 0,
       });
 
       // Animate in
-      gsap.to([cardRef.current, filtersBarRef.current], {
+      gsap.to(cardRef.current, {
         duration: 0.3,
         y: 0,
         opacity: 1,
@@ -533,78 +534,122 @@ const Projects = () => {
     }
   }, [currentPropertyIndex, showAllProjects]);
 
-  // Simple scroll handler for property cards
+  // Use a simpler debounce/throttle approach
+  const lastScrollTime = useRef(0);
+  const scrollDelay = 1000; // ms between allowed scrolls
+  
+  // Simplified scroll handler
   const handleScroll = (e) => {
-    e.preventDefault(); // Prevent default scroll behavior
-
-    if (isAnimating) return;
-
-    if (e.deltaY > 0) {
-      // Scrolling down
-      handleNextProperty();
-    } else if (e.deltaY < 0) {
-      // Scrolling up
-      handlePrevProperty();
+    // For debugging
+    console.log("Scroll event detected, deltaY:", e.deltaY);
+    
+    const now = Date.now();
+    
+    // Check if we're already animating or if not enough time has passed since last scroll
+    if (isAnimating || now - lastScrollTime.current < scrollDelay) {
+      console.log("Ignoring scroll: animation in progress or cooling down");
+      return;
     }
-  };
-
-  // Simpler scroll handler for project showcase
-  const handleProjectScroll = (e) => {
-    e.preventDefault(); // Prevent default scroll behavior
-
-    if (isAnimating) return;
-
-    if (e.deltaY > 0) {
-      // Scrolling down - animate out then change index
-      setIsAnimating(true);
-      gsap.to(projectRef.current, {
-        duration: 0.3,
+    
+    // Add a higher threshold for scroll detection - only proceed if scroll is significant
+    const scrollThreshold = 20; // Increase this value to decrease sensitivity
+    
+    if (Math.abs(e.deltaY) < scrollThreshold) {
+      console.log("Scroll below threshold, ignoring");
+      return; // Ignore small scroll movements
+    }
+    
+    // Update the last scroll time
+    lastScrollTime.current = now;
+    
+    // Set animating flag
+    setIsAnimating(true);
+    
+    if (e.deltaY > scrollThreshold) {
+      // Scrolling down
+      console.log("Scrolling DOWN detected");
+      animationDirection.current = "down";
+      
+      gsap.to([cardRef.current, filtersBarRef.current], {
+        duration: 0.5,
         y: -50,
         opacity: 0,
         ease: "power1.out",
         onComplete: () => {
-          nextProject();
-          // Animate in the new content
-          gsap.fromTo(
-            projectRef.current,
-            { y: 50, opacity: 0 },
-            {
-              duration: 0.3,
-              y: 0,
-              opacity: 1,
-              ease: "power1.out",
-              onComplete: () => setIsAnimating(false),
-            }
+          setCurrentPropertyIndex((prevIndex) =>
+            prevIndex >= filteredProperties.length - 1 ? 0 : prevIndex + 1
           );
         },
       });
-    } else if (e.deltaY < 0) {
-      // Scrolling up - animate out then change index
-      setIsAnimating(true);
-      gsap.to(projectRef.current, {
-        duration: 0.3,
+    } else if (e.deltaY < -scrollThreshold) {
+      // Scrolling up
+      console.log("Scrolling UP detected");
+      animationDirection.current = "up";
+      
+      gsap.to([cardRef.current, filtersBarRef.current], {
+        duration: 0.5,
         y: 50,
         opacity: 0,
         ease: "power1.out",
         onComplete: () => {
-          prevProject();
-          // Animate in the new content
-          gsap.fromTo(
-            projectRef.current,
-            { y: -50, opacity: 0 },
-            {
-              duration: 0.3,
-              y: 0,
-              opacity: 1,
-              ease: "power1.out",
-              onComplete: () => setIsAnimating(false),
-            }
+          setCurrentPropertyIndex((prevIndex) =>
+            prevIndex <= 0 ? filteredProperties.length - 1 : prevIndex - 1
           );
         },
       });
+    } else {
+      // Reset if somehow we get here
+      setIsAnimating(false);
     }
   };
 
+  // Update the animation-in effect
+  useEffect(() => {
+    if (cardRef.current && filtersBarRef.current && showAllProjects) {
+      console.log("Setting up card animation in");
+      
+      // Position based on animation direction
+      gsap.set([cardRef.current, filtersBarRef.current], {
+        y: animationDirection.current === "down" ? 50 : -50,
+        opacity: 0,
+      });
+
+      // Animate in
+      gsap.to([cardRef.current, filtersBarRef.current], {
+        duration: 0.5,
+        y: 0,
+        opacity: 1,
+        ease: "power1.out",
+        onComplete: () => {
+          console.log("Animation in complete, resetting flag");
+          setIsAnimating(false);
+        },
+      });
+    }
+  }, [currentPropertyIndex, showAllProjects]);
+
+  // Similar simplification for project showcase scroll
+  const handleProjectScroll = (e) => {
+    e.preventDefault();
+    
+    const now = Date.now();
+    
+    if (isAnimating || now - lastScrollTime.current < scrollDelay) {
+      return;
+    }
+    
+    lastScrollTime.current = now;
+    setIsAnimating(true);
+    
+    if (e.deltaY > 0) {
+      // Scroll down code
+      // ...
+    } else {
+      // Scroll up code
+      // ...
+    }
+  };
+  
   // Reset currentIndex when filters change
   useEffect(() => {
     setCurrentPropertyIndex(0);

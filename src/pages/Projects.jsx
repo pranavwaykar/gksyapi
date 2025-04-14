@@ -355,6 +355,7 @@ const Projects = () => {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showContactForm, setShowContactForm] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
 
   const { language } = useLanguage();
   const t = translations[language];
@@ -392,13 +393,15 @@ const Projects = () => {
   }, [currentPropertyIndex]);
 
   const handleWatchVideo = (e) => {
+    e.preventDefault();
     e.stopPropagation();
     
     const currentProperty = filteredProperties[currentPropertyIndex];
     const originalProperty = propertyData.find(p => p.id === currentProperty.id);
     
     if (originalProperty?.videoUrl) {
-      window.open(originalProperty.videoUrl, '_blank');
+      console.log("Setting showVideo to true");
+      setShowVideo(true);
     } else {
       console.log("No video URL available for this property");
     }
@@ -675,6 +678,14 @@ const Projects = () => {
     // ... your existing code ...
   }, []);
 
+  // Extract YouTube video ID function
+  const extractYoutubeId = (url) => {
+    if (!url) return null;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+  };
+
   if (showAllProjects) {
     return (
       <div
@@ -733,7 +744,172 @@ const Projects = () => {
               ref={cardRef}
             >
               <div className="property-card">
-                {!showContactForm ? (
+                {showVideo ? (
+                  // Video player with inline styles
+                  <div 
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      backgroundColor: 'rgba(0, 0, 0, 0.95)',
+                      zIndex: 100,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      padding: '16px'
+                    }}
+                  >
+                    <button 
+                      onClick={() => setShowVideo(false)}
+                      style={{
+                        alignSelf: 'flex-start',
+                        marginBottom: '16px',
+                        padding: '8px 16px',
+                        backgroundColor: 'rgba(80, 125, 250, 0.9)',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: 'pointer',
+                        fontWeight: 'bold'
+                      }}
+                    >
+                      ← Back to property
+                    </button>
+                    
+                    <div 
+                      style={{
+                        flex: 1,
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      {(() => {
+                        const currentProperty = filteredProperties[currentPropertyIndex];
+                        const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+                        const videoId = extractYoutubeId(originalProperty?.videoUrl);
+                        
+                        console.log("Video ID:", videoId);
+                        
+                        return videoId ? (
+                          <iframe
+                            src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+                            title="YouTube video player"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              border: 'none'
+                            }}
+                          ></iframe>
+                        ) : (
+                          <div style={{ color: 'white', textAlign: 'center' }}>
+                            Video cannot be displayed
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  </div>
+                ) : showContactForm ? (
+                  // Contact form directly inside the property card
+                  <div className="contact-form-wrapper">
+                    <button 
+                      className="back-to-property-button"
+                      onClick={() => setShowContactForm(false)}
+                    >
+                      ← Back to property
+                    </button>
+                    
+                    <div className="contact-form-container">
+                      <div className="contact-form-columns">
+                        {/* Left Column */}
+                        <div className="contact-info-column">
+                          <div className="info-item">
+                            <div className="info-content">
+                              <p className="info-label">You can Email Me Here</p>
+                              <p className="info-value">jefferrycannon@gmail.com</p>
+                            </div>
+                            <a href="mailto:jefferrycannon@gmail.com" className="info-arrow">
+                              →
+                            </a>
+                          </div>
+                          
+                          <div className="info-item">
+                            <div className="info-content">
+                              <p className="info-label">Give Me a Call on</p>
+                              <p className="info-value">+91 91813 23 2309</p>
+                            </div>
+                            <a href="tel:+919181323209" className="info-arrow">
+                              →
+                            </a>
+                          </div>
+                          
+                          <div className="info-item">
+                            <div className="info-content">
+                              <p className="info-label">Location</p>
+                              <p className="info-value">Somewhere in the World</p>
+                            </div>
+                            <a href="#" className="info-arrow">
+                              →
+                            </a>
+                          </div>
+                          
+                        </div>
+                        
+                        {/* Right Column */}
+                        <div className="contact-form-column">
+                          <form>
+                            <div className="form-row">
+                              <input type="text" placeholder="First Name" className="form-input" />
+                              <input type="text" placeholder="Last Name" className="form-input" />
+                            </div>
+                            
+                            <div className="form-row">
+                              <input type="email" placeholder="Email" className="form-input" />
+                              <input type="tel" placeholder="Phone Number" className="form-input" />
+                            </div>
+                            
+                            <div className="form-group">
+                              <p className="form-label">Why are you contacting us?</p>
+                              <div className="checkbox-container">
+                                <div className="checkbox-row">
+                                  <label className="checkbox-item">
+                                    <input type="checkbox" />
+                                    <span>Web Design</span>
+                                  </label>
+                                  <label className="checkbox-item">
+                                    <input type="checkbox" />
+                                    <span>Collaboration</span>
+                                  </label>
+                                </div>
+                                <div className="checkbox-row">
+                                  <label className="checkbox-item">
+                                    <input type="checkbox" />
+                                    <span>Mobile App Design</span>
+                                  </label>
+                                  <label className="checkbox-item">
+                                    <input type="checkbox" />
+                                    <span>Others</span>
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div className="form-group">
+                              <textarea placeholder="Your Message here..." className="form-textarea"></textarea>
+                            </div>
+                            
+                            <button type="submit" className="send-button">Send</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
                   // Regular property card content
                   <div className="property-image">
                     <img
@@ -943,101 +1119,6 @@ const Projects = () => {
                           ></div>
                         ));
                       })()}
-                    </div>
-                  </div>
-                ) : (
-                  // Contact form directly inside the property card
-                  <div className="contact-form-wrapper">
-                    <button 
-                      className="back-to-property-button"
-                      onClick={() => setShowContactForm(false)}
-                    >
-                      ← Back to property
-                    </button>
-                    
-                    <div className="contact-form-container">
-                      <div className="contact-form-columns">
-                        {/* Left Column */}
-                        <div className="contact-info-column">
-                          <div className="info-item">
-                            <div className="info-content">
-                              <p className="info-label">You can Email Me Here</p>
-                              <p className="info-value">jefferrycannon@gmail.com</p>
-                            </div>
-                            <a href="mailto:jefferrycannon@gmail.com" className="info-arrow">
-                              →
-                            </a>
-                          </div>
-                          
-                          <div className="info-item">
-                            <div className="info-content">
-                              <p className="info-label">Give Me a Call on</p>
-                              <p className="info-value">+91 91813 23 2309</p>
-                            </div>
-                            <a href="tel:+919181323209" className="info-arrow">
-                              →
-                            </a>
-                          </div>
-                          
-                          <div className="info-item">
-                            <div className="info-content">
-                              <p className="info-label">Location</p>
-                              <p className="info-value">Somewhere in the World</p>
-                            </div>
-                            <a href="#" className="info-arrow">
-                              →
-                            </a>
-                          </div>
-                          
-                        </div>
-                        
-                        {/* Right Column */}
-                        <div className="contact-form-column">
-                          <form>
-                            <div className="form-row">
-                              <input type="text" placeholder="First Name" className="form-input" />
-                              <input type="text" placeholder="Last Name" className="form-input" />
-                            </div>
-                            
-                            <div className="form-row">
-                              <input type="email" placeholder="Email" className="form-input" />
-                              <input type="tel" placeholder="Phone Number" className="form-input" />
-                            </div>
-                            
-                            <div className="form-group">
-                              <p className="form-label">Why are you contacting us?</p>
-                              <div className="checkbox-container">
-                                <div className="checkbox-row">
-                                  <label className="checkbox-item">
-                                    <input type="checkbox" />
-                                    <span>Web Design</span>
-                                  </label>
-                                  <label className="checkbox-item">
-                                    <input type="checkbox" />
-                                    <span>Collaboration</span>
-                                  </label>
-                                </div>
-                                <div className="checkbox-row">
-                                  <label className="checkbox-item">
-                                    <input type="checkbox" />
-                                    <span>Mobile App Design</span>
-                                  </label>
-                                  <label className="checkbox-item">
-                                    <input type="checkbox" />
-                                    <span>Others</span>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                            
-                            <div className="form-group">
-                              <textarea placeholder="Your Message here..." className="form-textarea"></textarea>
-                            </div>
-                            
-                            <button type="submit" className="send-button">Send</button>
-                          </form>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 )}

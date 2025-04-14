@@ -7,6 +7,8 @@ import Footer from '../components/organisms/Footer';
 // Import ContactForm component - adjust the path as needed
 import ContactForm from '../components/ContactForm';
 import { setupVerticalTextAnimations } from '../utils/animations';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const Careers = () => {
   const { language } = useLanguage();
@@ -159,9 +161,10 @@ const Careers = () => {
             <div className="career-application-form">
               <div className="form-header">
                 <button className="back-button" onClick={handleBackToJobs}>
-                  ← Back to Jobs
+                  <FontAwesomeIcon icon={faArrowLeft} /> 
+                  Back to Jobs
                 </button>
-                <h3>Apply for: {selectedJob?.title}</h3>
+                {/* <h3>Apply for: {selectedJob?.title}</h3> */}
               </div>
               <ContactForm jobTitle={selectedJob?.title} />
             </div>

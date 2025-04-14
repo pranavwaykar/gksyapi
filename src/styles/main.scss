@@ -70,7 +70,7 @@ body {
 
   &-item {
     position: relative;
-    width: 120px;
+    width: 100px;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -113,7 +113,7 @@ body {
     &.lang-selector {
       display: flex;
       align-items: center;
-      gap: 8px;
+      // gap: 8px;
       width: 120px;
       justify-content: center;
       // width: 50px;

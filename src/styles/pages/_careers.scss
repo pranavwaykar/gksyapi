@@ -336,7 +336,7 @@
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 30px;
+  padding: 10px 20px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(10, 18, 38, 0.08);
@@ -344,7 +344,7 @@
   .form-header {
     display: flex;
     flex-direction: column;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
 
     .back-button {
       align-self: flex-start;
@@ -356,6 +356,7 @@
       cursor: pointer;
       padding: 8px 0;
       display: flex;
+      gap: 10px;
       align-items: center;
       transition: all 0.3s ease;
 

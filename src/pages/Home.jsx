@@ -69,7 +69,7 @@ const Home = () => {
           </div>
 
           <div className="swipe-down-text">
-            Scroll Down to Continue
+            Scroll
             <FontAwesomeIcon icon={faArrowDown} style={{height:"20px"}} />
           </div>
         </div>

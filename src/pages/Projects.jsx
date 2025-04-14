@@ -11,7 +11,8 @@ import {
   faAngleLeft,
   faLiraSign,
   faUmbrellaBeach,
-  faBuilding
+  faBuilding,
+  faChevronDown
 } from "@fortawesome/free-solid-svg-icons";
 import gsap from "gsap";
 import { setupVerticalTextAnimations } from '../utils/animations';
@@ -302,24 +303,7 @@ const FilterDropdown = ({ label, options, value, onChange }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         {label}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="white"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          style={{
-            marginLeft: "8px",
-            transform: isOpen ? "rotate(180deg)" : "none",
-            transition: "transform 0.2s ease",
-          }}
-        >
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
+        <FontAwesomeIcon icon={faChevronDown} style={{ width: "0.4rem", height: "1rem", background: "white", padding: "0rem 0.4rem", color: "black", borderRadius: "50%" }} />
       </div>
 
       {isOpen && (
@@ -908,7 +892,7 @@ const Projects = () => {
                         <div className="info-title" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           {t.projects.propertyCard.details}
                         </div>
-                        <div className="info-value" style={{ color: "rgba(80, 125, 250, 0.9)" }}>More Info</div>
+                        <div className="info-value" style={{ color: "rgba(80, 125, 250, 0.9)", background: "rgba(0, 56, 179, 0.1)", padding: "0rem 0.4rem" }}>More Info</div>
                       </div>
                     </div>
 

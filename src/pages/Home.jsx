@@ -1356,8 +1356,10 @@ const Home = () => {
             <div className="vertical-line"></div>
             <span className="left-text">{t.projects.bespokeInEverySense}</span>
             <div className="project-title-container">
-              <span className="large-text-primary">{t.projects.the}</span>
-              <span className="large-text-secondary">{t.projects.projects}</span>
+              <Link to="/projects">
+                <span className="large-text-primary">{t.projects.the}</span>
+                <span className="large-text-secondary">{t.projects.projects}</span>
+              </Link>
             </div>
           </div>
 

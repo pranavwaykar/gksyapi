@@ -73,6 +73,7 @@ body {
     width: 100px;
     text-align: center;
     display: flex;
+    
     justify-content: center;
 
     a {
@@ -86,7 +87,9 @@ body {
       align-items: center;
       width: auto;
       height: 100%;
-      font-size: 0.8rem;
+      // font-size: 0.8rem;
+      font-size: 12px;
+
 
       // &::after {
       //   content: "";
@@ -129,6 +132,7 @@ body {
         opacity: 0.6;
         font-weight: 500;
         min-width: 24px;
+        font-size: 12px;
         text-align: center;
         
         &.active {

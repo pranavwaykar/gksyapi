@@ -8,7 +8,7 @@ import Footer from '../components/organisms/Footer';
 import ContactForm from '../components/ContactForm';
 import { setupVerticalTextAnimations } from '../utils/animations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight, faArrowLeft, faArrowRight, faLink } from '@fortawesome/free-solid-svg-icons';
 
 const Careers = () => {
   const { language } = useLanguage();
@@ -121,23 +121,7 @@ const Careers = () => {
                           <h3>{job.title}</h3>
                           <p>{job.description}</p>
                           <div className="link-icon">
-                            <svg
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                            >
-                              <path
-                                d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                              />
-                              <path
-                                d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                              />
-                            </svg>
+                            <FontAwesomeIcon icon={faLink} style={{position: 'absolute', bottom: '5.8rem', right: '6.4rem'}} />
                           </div>
                           {/* Replace Link with button */}
                           <button 

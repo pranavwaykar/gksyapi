@@ -448,11 +448,12 @@
       .location-icon {
         color: white;
         // background-color: rgba(26, 60, 114, 0.8);
-        border-radius: 50%;
+        // border-radius: 50%;
         width: 36px;
         height: 36px;
         display: flex;
         align-items: center;
+        background: transparent;
         justify-content: center;
       }
 
@@ -460,6 +461,8 @@
         color: #1c3b8a;
         font-size: 0.9rem;
         font-weight: 600;
+        position: relative;
+        right: 0.3rem;
       }
     }
 

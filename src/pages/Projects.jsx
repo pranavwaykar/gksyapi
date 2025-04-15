@@ -944,12 +944,12 @@ const Projects = () => {
                     {/* Action buttons at top */}
                     <div className="action-buttons-top">
                       <div className="location-info">
-                        <div className="location-icon">
+                        <button className="location-icon">
                           <FontAwesomeIcon
                             icon={faMapMarkerAlt}
                             style={{ width: "15px", height: "15px" }}
                           />
-                        </div>
+                        </button>
                         <span className="location-text">
                           {filteredProperties[currentPropertyIndex]?.location}
                         </span>

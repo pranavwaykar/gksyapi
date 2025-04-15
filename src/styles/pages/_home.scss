@@ -675,6 +675,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    transform: none !important;
     
     .category-item {
       font-size: 1.2rem;
@@ -795,6 +796,7 @@
   .housing-description {
     max-width: 90%;
     margin-bottom: 1.5rem;
+    transform: none !important;
     
     p {
       font-size: 1.2rem;

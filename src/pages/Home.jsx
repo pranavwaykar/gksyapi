@@ -105,7 +105,7 @@ const Home = () => {
             in form while maintaining an effortless elegance.</p>
           </div>
           
-          {/* <div className="about-blue-placeholder" style={{height: '10rem', width: '5rem', backgroundColor: '#0038b3', position: 'absolute', left: '56rem', bottom: '16rem'}}>          </div> */}
+          <div className="about-blue-placeholder" style={{height: '4rem', width: '35rem', backgroundColor: '#0038b3', position: 'absolute', left: '41rem', bottom: '22rem'}}>          </div>
 
         </div>
       )
@@ -1051,7 +1051,7 @@ const Home = () => {
 
         document.addEventListener("click", startAudioOnInteraction);
       });
-    }, 4800); // 1 second delay
+    }, 4800);
     
     // Create fade-in effect
     const fadeInAudio = () => {

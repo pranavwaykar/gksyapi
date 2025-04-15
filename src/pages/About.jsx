@@ -5,6 +5,8 @@ import '../styles/pages/_about.scss';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { setupVerticalTextAnimations } from '../utils/animations';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -419,6 +421,11 @@ const About = () => {
             </React.Fragment>
           ))}
         </div>
+      </div>
+
+      <div className="swipe-container">
+        <span>Swip</span>
+        <FontAwesomeIcon icon={faArrowRight} />
       </div>
 
       <div className="vertical-text-about">

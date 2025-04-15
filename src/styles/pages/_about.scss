@@ -693,24 +693,79 @@
     }
     
     .apply-button {
-      padding: 10px 20px;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-      background-size: 200% auto;
-      color: white;
-      box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+      align-self: flex-start;
+      background-color: rgba(255, 255, 255, 0.7);
+      border: none;
+      border-radius: 30px;
+      padding: 0.5rem 1.5rem;
+      font-weight: 600;
+      font-size: 0.9rem;
       cursor: pointer;
-      font-weight: 500;
-      letter-spacing: 0.5px;
+      color: #0a1226;
+      transition: background-color 0.3s;
       
       &:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
-      }
-      
-      &:active {
-        transform: translateY(1px);
+        background-color: white;
       }
     }
+  }
+}
+
+.swipe-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 auto 2rem;
+  width: fit-content;
+  padding: 0.7rem 1.5rem;
+  border-radius: 24px;
+  // background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: float 2s infinite ease-in-out;
+  right: 7rem;
+  bottom: 53rem;
+
+  
+  &:hover {
+    transform: translateY(-5px) rotate(1deg);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 
+                0 0 15px rgba(80, 125, 250, 0.5);
+  }
+  
+  span {
+    position: relative;
+    z-index: 2;
+  }
+  
+  svg {
+    position: relative;
+    z-index: 2;
+    animation: moveRight 1.5s infinite ease-in-out;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes moveRight {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
   }
 }

@@ -264,6 +264,132 @@ const About = () => {
     // ... your existing code for other animations ...
   }, []);
   
+  // Add GSAP animations for service cards
+  useEffect(() => {
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    // Set all cards and their contents to be initially invisible
+    serviceCards.forEach((card, index) => {
+      // Hide cards initially - alternating directions
+      gsap.set(card, { 
+        autoAlpha: 0, 
+        x: index % 2 === 0 ? -50 : 50 
+      });
+      
+      // Hide all content elements initially
+      const title = card.querySelector('h2');
+      const paragraph = card.querySelector('p');
+      const button = card.querySelector('.apply-button');
+      
+      // Set initial gradient for buttons
+      if (button) {
+        gsap.set(button, {
+          backgroundImage: 'linear-gradient(to right, #2b5876 0%, #4e4376 51%, #2b5876 100%)',
+          backgroundSize: '200% auto',
+          backgroundPosition: '0% center',
+          color: '#ffffff',
+          border: 'none',
+          autoAlpha: 0,
+          y: 20
+        });
+      } else {
+        gsap.set([title, paragraph], { 
+          autoAlpha: 0, 
+          y: 20 
+        });
+      }
+      
+      // Create scroll trigger for each card
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top 85%", // Trigger when top of card reaches 85% of viewport height
+        onEnter: () => {
+          // Animate card when it enters the viewport
+          gsap.to(card, {
+            duration: 0.8,
+            autoAlpha: 1,
+            x: 0,
+            ease: "power3.out"
+          });
+          
+          // Animate inner elements with delay - sequential reveal
+          gsap.to(title, {
+            duration: 0.6,
+            autoAlpha: 1,
+            y: 0,
+            ease: "back.out(1.4)",
+            delay: 0.2
+          });
+          
+          gsap.to(paragraph, {
+            duration: 0.6,
+            autoAlpha: 1,
+            y: 0,
+            ease: "back.out(1.2)",
+            delay: 0.4
+          });
+          
+          gsap.to(button, {
+            duration: 0.6,
+            autoAlpha: 1,
+            y: 0,
+            ease: "back.out(1.7)",
+            delay: 0.6
+          });
+        },
+        once: true // Animation only plays once
+      });
+      
+      // Create hover animation for cards and buttons
+      card.addEventListener('mouseenter', () => {
+        // Card hover effect
+        gsap.to(card, {
+          y: -5,
+          boxShadow: '0 10px 20px rgba(0, 0, 0, 0.1)',
+          duration: 0.3
+        });
+        
+        // Button gradient animation
+        if (button) {
+          gsap.to(button, {
+            backgroundPosition: '100% center',
+            duration: 0.6,
+            ease: "power1.inOut"
+          });
+        }
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        // Reset card hover effect
+        gsap.to(card, {
+          y: 0,
+          boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)',
+          duration: 0.3
+        });
+        
+        // Reset button gradient
+        if (button) {
+          gsap.to(button, {
+            backgroundPosition: '0% center',
+            duration: 0.6,
+            ease: "power1.inOut"
+          });
+        }
+      });
+    });
+    
+    return () => {
+      // Clean up ScrollTrigger instances
+      ScrollTrigger.getAll().forEach(st => st.kill());
+      
+      // Remove event listeners
+      serviceCards.forEach(card => {
+        card.removeEventListener('mouseenter', () => {});
+        card.removeEventListener('mouseleave', () => {});
+      });
+    };
+  }, []);
+  
   return (
     <div className="about-page">
       

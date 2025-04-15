@@ -48,6 +48,7 @@ const Home = () => {
 
   // Make sure this exists
   const bluePlaceholderRef = useRef(null);
+  const secondBluePlaceholderRef = useRef(null);
 
   // Card content
   const cardContents = [
@@ -153,6 +154,18 @@ const Home = () => {
             <span className="category-item">Konut uretimi</span>
             <span className="category-divider">|</span>
             <span className="category-item">Satisi Diger Projeler & Sehir Estetigi</span>
+          </div>
+
+          <div className="about-blue-placeholder-seconds" 
+               ref={secondBluePlaceholderRef}
+               style={{
+                height: '8rem', 
+                width: '5rem', 
+                backgroundColor: '#0038b3', 
+                position: 'absolute', 
+                left: '52rem', 
+                bottom: '18rem',
+               }}>          
           </div>
         </div>
       )
@@ -1268,6 +1281,35 @@ const Home = () => {
     } else {
       console.log("Blue placeholder ref not found");
     }
+  }, [currentCardIndex]);
+
+  // Add animation for second blue placeholder
+  useEffect(() => {
+    // Create a timeline for this animation
+    const tl = gsap.timeline({paused: true});
+    
+    // Set up the animation sequence
+    tl.set(secondBluePlaceholderRef.current, {
+      y: 120,
+      opacity: 0,
+      immediateRender: true,
+      overwrite: "auto"
+    }).to(secondBluePlaceholderRef.current, {
+      y: 0,
+      opacity: 1,
+      delay: 1.8,
+      duration: 1.2,
+      ease: "power3.out"
+    });
+    
+    // Play or reset based on current card index
+    if (currentCardIndex === 2) {
+      tl.play();
+    } else {
+      tl.progress(0).pause();
+    }
+    
+    return () => tl.kill(); // Clean up timeline on unmount
   }, [currentCardIndex]);
 
   return (

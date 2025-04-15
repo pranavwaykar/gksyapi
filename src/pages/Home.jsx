@@ -660,52 +660,138 @@ const Home = () => {
         break;
         
       case 3:
-        // Domino Fall Effect
-        const dominoContainer = document.createElement('div');
-        dominoContainer.style.position = 'absolute';
-        dominoContainer.style.width = '100%';
-        dominoContainer.style.height = '100%';
-        dominoContainer.style.zIndex = '10';
-        dominoContainer.style.overflow = 'hidden';
-        containerRef.current.appendChild(dominoContainer);
+        // Vertical Sliding Rectangles
+        const slidingContainer = document.createElement('div');
+        slidingContainer.style.position = 'absolute';
+        slidingContainer.style.width = '100%';
+        slidingContainer.style.height = '100%';
+        slidingContainer.style.zIndex = '10';
+        slidingContainer.style.overflow = 'hidden';
+        containerRef.current.appendChild(slidingContainer);
         
-        // Create dominos - REDUCED COUNT FOR BIGGER DOMINOS
-        const dominoCount = 12; // Reduced from 20 to make dominos bigger
-        const dominoWidth = 100 / dominoCount;
-        const dominos = [];
+        // Create the larger rectangle (70% width)
+        const largeRectangle = document.createElement('div');
+        largeRectangle.style.position = 'absolute';
+        largeRectangle.style.left = '0';
+        largeRectangle.style.width = '70%';
+        largeRectangle.style.height = '100%';
+        largeRectangle.style.backgroundColor = 'white';
+        largeRectangle.style.top = '100%'; // Start below viewport
         
-        for (let i = 0; i < dominoCount; i++) {
-          const domino = document.createElement('div');
-          domino.style.position = 'absolute';
-          domino.style.top = '0';
-          domino.style.left = `${i * dominoWidth}%`;
-          domino.style.width = `${dominoWidth}%`;
-          domino.style.height = '100%';
-          domino.style.backgroundColor = 'white';
-          domino.style.transformOrigin = 'center top';
-          domino.style.transform = 'rotateX(90deg)';
-          
-          dominoContainer.appendChild(domino);
-          dominos.push(domino);
-        }
+        // Create the smaller rectangle (30% width)
+        const smallRectangle = document.createElement('div');
+        smallRectangle.style.position = 'absolute';
+        smallRectangle.style.right = '0';
+        smallRectangle.style.width = '30%';
+        smallRectangle.style.height = '100%';
+        smallRectangle.style.backgroundColor = 'white';
+        smallRectangle.style.bottom = '100%'; // Start above viewport
         
-        // Track if this transition is in progress
-        let dominoTransitionActive = true;
+        slidingContainer.appendChild(largeRectangle);
+        slidingContainer.appendChild(smallRectangle);
         
-        // Ensure cleanup happens if the component unmounts or transition is interrupted
-        const cleanupDominos = () => {
-          if (dominoContainer.parentNode) {
-            dominoContainer.parentNode.removeChild(dominoContainer);
+        // Animate the entrance of both rectangles
+        tl.to(largeRectangle, {
+          top: '0%', // Slide up to position
+          duration: 1.2,
+          ease: 'power2.out',
+          onStart: () => {
+            // Change video source
+            video.querySelector('source').src = newVideoSrc;
+            video.load();
+            video.play();
+            
+            // Fade in card content with consistent timing
+            fadeInCurrentCard('bottom', 1.6, 1.4);
           }
-          dominoTransitionActive = false;
-        };
+        }, 'slidingIn')
+        .to(smallRectangle, {
+          bottom: '0%', // Slide down to position
+          duration: 1.2,
+          ease: 'power2.out'
+        }, 'slidingIn') // Use same label to animate together
+        .set(video, { opacity: 0 })
+        // Animate the exit - back the way they came
+        .to(largeRectangle, {
+          top: '100%', // Slide back down
+          duration: 1.2,
+          ease: 'power2.in'
+        }, 'slidingOut')
+        .to(smallRectangle, {
+          bottom: '100%', // Slide back up
+          duration: 1.2,
+          ease: 'power2.in',
+          onComplete: () => {
+            // Clean up
+            if (slidingContainer.parentNode) {
+              slidingContainer.parentNode.removeChild(slidingContainer);
+            }
+          }
+        }, 'slidingOut') // Use same label to animate together
+        .set(video, { opacity: 1 });
+        break;
         
-        // Add domino fall animation - SLOWED DOWN FURTHER
-        tl.to(dominos, {
-          rotateX: 0,
-          stagger: 0.08, // Increased from 0.05
-          duration: 0.9, // Increased from 0.6
-          ease: 'power1.inOut',
+      case 4:
+        // Vertical Sections Slide with Special Middle Section
+        const sectionsContainer = document.createElement('div');
+        sectionsContainer.style.position = 'absolute';
+        sectionsContainer.style.width = '100%';
+        sectionsContainer.style.height = '100%';
+        sectionsContainer.style.zIndex = '10';
+        sectionsContainer.style.display = 'flex';
+        sectionsContainer.style.left = '-100%'; // Start off-screen left
+        sectionsContainer.style.overflow = 'hidden'; // Hide overflow
+        containerRef.current.appendChild(sectionsContainer);
+        
+        // Create three vertical sections - all white initially
+        // Left section (60% width)
+        const leftSection = document.createElement('div');
+        leftSection.style.width = '67.7%';
+        leftSection.style.height = '100%';
+        leftSection.style.backgroundColor = 'white';
+        
+        // Middle section container (10% width)
+        const middleSectionContainer = document.createElement('div');
+        middleSectionContainer.style.width = '3.8rem';
+        middleSectionContainer.style.height = '100%';
+        middleSectionContainer.style.position = 'relative';
+        middleSectionContainer.style.overflow = 'hidden'; // Hide overflow
+        
+        // For the middle section, create a white visible part and a blue hidden part
+        const middleWhiteVisible = document.createElement('div');
+        middleWhiteVisible.style.position = 'absolute';
+        middleWhiteVisible.style.width = '100%';
+        middleWhiteVisible.style.height = '100%';
+        middleWhiteVisible.style.backgroundColor = 'white';
+        middleWhiteVisible.style.top = '0';
+        
+        // Blue part that will slide in from the top - initially hidden
+        const middleBlueHidden = document.createElement('div');
+        middleBlueHidden.style.position = 'absolute';
+        middleBlueHidden.style.width = '100%';
+        middleBlueHidden.style.height = '100%';
+        middleBlueHidden.style.backgroundColor = '#0038b3';
+        middleBlueHidden.style.top = '-100%'; // Hidden above
+        
+        middleSectionContainer.appendChild(middleWhiteVisible);
+        middleSectionContainer.appendChild(middleBlueHidden);
+        
+        // Right section (30% width)
+        const rightSection = document.createElement('div');
+        rightSection.style.width = '25%';
+        rightSection.style.height = '100%';
+        rightSection.style.backgroundColor = 'white';
+        
+        // Add sections to container
+        sectionsContainer.appendChild(leftSection);
+        sectionsContainer.appendChild(middleSectionContainer);
+        sectionsContainer.appendChild(rightSection);
+        
+        // First animate whole container from left to cover viewport - all white
+        tl.to(sectionsContainer, {
+          left: '0%',
+          duration: 1.2, // Increased from 0.7
+          ease: 'power2.out',
           onStart: () => {
             // Change video source
             video.querySelector('source').src = newVideoSrc;
@@ -713,136 +799,42 @@ const Home = () => {
             video.play();
             
             // Keep consistent timing
-            fadeInCurrentCard('bottom', 1.6, 1.4);
+            fadeInCurrentCard('bottom', 1.6, 0.5);
           }
         })
         .set(video, { opacity: 0 })
-        // Fall down the other way
-        .to(dominos, {
-          rotateX: -90,
-          stagger: 0.08, // Increased from 0.05
-          duration: 0.9, // Increased from 0.6
-          ease: 'power1.inOut',
-          onComplete: cleanupDominos,
-          // Add cleanup to each domino's animation for redundancy
-          onInterrupt: cleanupDominos
-        })
-        // Add cleanup call earlier in the timeline as well
-        .call(() => {
-          if (dominoTransitionActive) {
-            cleanupDominos();
+        // Animate side sections up
+        .to([leftSection, rightSection], {
+          y: '-100%', // White sections slide up
+          duration: 1.2, // Increased from 0.7
+          ease: 'power2.in'
+        }, 'sectionsOut')
+        // First move blue section into view
+        .to(middleBlueHidden, {
+          top: '0%', // Bring blue part into view
+          duration: 1.2, // Increased from 0.7
+          ease: 'power2.in'
+        }, 'sectionsOut')
+        // Then move white section out of view
+        .to(middleWhiteVisible, {
+          top: '100%', // Move white part down out of view
+          duration: 1.2, // Increased from 0.7
+          ease: 'power2.in'
+        }, 'sectionsOut+=0.3') // Slightly delayed (increased from 0.2)
+        // Continue moving the whole middle section down
+        .to(middleSectionContainer, {
+          top: '100%', // Move entire container down out of view
+          duration: 1.2, // Increased from 0.7
+          ease: 'power2.in',
+          onComplete: () => {
+            if (sectionsContainer.parentNode) {
+              sectionsContainer.parentNode.removeChild(sectionsContainer);
+            }
           }
-        }, null, "-=0.5")
+        }, 'sectionsOut+=1.0') // Start after white has moved out (increased from 0.7)
         .set(video, { opacity: 1 });
-        
-        // Safety timeout to ensure cleanup happens even if animation is interrupted
-        setTimeout(cleanupDominos, 5000); // Increased from 4000 to match slower animation
         break;
-        
-        case 4:
-          // Vertical Sections Slide with Special Middle Section
-          const sectionsContainer = document.createElement('div');
-          sectionsContainer.style.position = 'absolute';
-          sectionsContainer.style.width = '100%';
-          sectionsContainer.style.height = '100%';
-          sectionsContainer.style.zIndex = '10';
-          sectionsContainer.style.display = 'flex';
-          sectionsContainer.style.left = '-100%'; // Start off-screen left
-          sectionsContainer.style.overflow = 'hidden'; // Hide overflow
-          containerRef.current.appendChild(sectionsContainer);
-          
-          // Create three vertical sections - all white initially
-          // Left section (60% width)
-          const leftSection = document.createElement('div');
-          leftSection.style.width = '67.7%';
-          leftSection.style.height = '100%';
-          leftSection.style.backgroundColor = 'white';
-          
-          // Middle section container (10% width)
-          const middleSectionContainer = document.createElement('div');
-          middleSectionContainer.style.width = '3.8rem';
-          middleSectionContainer.style.height = '100%';
-          middleSectionContainer.style.position = 'relative';
-          middleSectionContainer.style.overflow = 'hidden'; // Hide overflow
-          
-          // For the middle section, create a white visible part and a blue hidden part
-          const middleWhiteVisible = document.createElement('div');
-          middleWhiteVisible.style.position = 'absolute';
-          middleWhiteVisible.style.width = '100%';
-          middleWhiteVisible.style.height = '100%';
-          middleWhiteVisible.style.backgroundColor = 'white';
-          middleWhiteVisible.style.top = '0';
-          
-          // Blue part that will slide in from the top - initially hidden
-          const middleBlueHidden = document.createElement('div');
-          middleBlueHidden.style.position = 'absolute';
-          middleBlueHidden.style.width = '100%';
-          middleBlueHidden.style.height = '100%';
-          middleBlueHidden.style.backgroundColor = '#0038b3';
-          middleBlueHidden.style.top = '-100%'; // Hidden above
-          
-          middleSectionContainer.appendChild(middleWhiteVisible);
-          middleSectionContainer.appendChild(middleBlueHidden);
-          
-          // Right section (30% width)
-          const rightSection = document.createElement('div');
-          rightSection.style.width = '25%';
-          rightSection.style.height = '100%';
-          rightSection.style.backgroundColor = 'white';
-          
-          // Add sections to container
-          sectionsContainer.appendChild(leftSection);
-          sectionsContainer.appendChild(middleSectionContainer);
-          sectionsContainer.appendChild(rightSection);
-          
-          // First animate whole container from left to cover viewport - all white
-          tl.to(sectionsContainer, {
-            left: '0%',
-            duration: 1.2, // Increased from 0.7
-            ease: 'power2.out',
-            onStart: () => {
-              // Change video source
-              video.querySelector('source').src = newVideoSrc;
-              video.load();
-              video.play();
-              
-              // Keep consistent timing
-              fadeInCurrentCard('bottom', 1.6, 0.5);
-            }
-          })
-          .set(video, { opacity: 0 })
-          // Animate side sections up
-          .to([leftSection, rightSection], {
-            y: '-100%', // White sections slide up
-            duration: 1.2, // Increased from 0.7
-            ease: 'power2.in'
-          }, 'sectionsOut')
-          // First move blue section into view
-          .to(middleBlueHidden, {
-            top: '0%', // Bring blue part into view
-            duration: 1.2, // Increased from 0.7
-            ease: 'power2.in'
-          }, 'sectionsOut')
-          // Then move white section out of view
-          .to(middleWhiteVisible, {
-            top: '100%', // Move white part down out of view
-            duration: 1.2, // Increased from 0.7
-            ease: 'power2.in'
-          }, 'sectionsOut+=0.3') // Slightly delayed (increased from 0.2)
-          // Continue moving the whole middle section down
-          .to(middleSectionContainer, {
-            top: '100%', // Move entire container down out of view
-            duration: 1.2, // Increased from 0.7
-            ease: 'power2.in',
-            onComplete: () => {
-              if (sectionsContainer.parentNode) {
-                sectionsContainer.parentNode.removeChild(sectionsContainer);
-              }
-            }
-          }, 'sectionsOut+=1.0') // Start after white has moved out (increased from 0.7)
-          .set(video, { opacity: 1 });
-          break;
-        
+      
       case 5:
         // Split Vertical Swipe (Left up, Right down)
         const leftHalf = document.createElement('div');
@@ -1285,31 +1277,42 @@ const Home = () => {
 
   // Add animation for second blue placeholder
   useEffect(() => {
-    // Create a timeline for this animation
-    const tl = gsap.timeline({paused: true});
-    
-    // Set up the animation sequence
-    tl.set(secondBluePlaceholderRef.current, {
-      y: 120,
-      opacity: 0,
-      immediateRender: true,
-      overwrite: "auto"
-    }).to(secondBluePlaceholderRef.current, {
-      y: 0,
-      opacity: 1,
-      delay: 1.8,
-      duration: 1.2,
-      ease: "power3.out"
-    });
-    
-    // Play or reset based on current card index
-    if (currentCardIndex === 2) {
-      tl.play();
-    } else {
-      tl.progress(0).pause();
+    if (secondBluePlaceholderRef.current) {
+      if (currentCardIndex === 2) {
+        // First ensure it's visible before starting animation
+        console.log("Setting up second blue placeholder animation");
+        
+        // Set initial state with immediateRender to ensure it applies before animation
+        gsap.set(secondBluePlaceholderRef.current, {
+          y: -100,
+          rotation: -15,
+          opacity: 0,
+          immediateRender: true,
+          overwrite: "auto" // Add overwrite to prevent conflicts
+        });
+        
+        // Add a small delay before starting animation to ensure initial state is applied
+        setTimeout(() => {
+          // Animate with different parameters
+          gsap.to(secondBluePlaceholderRef.current, {
+            y: 0,
+            rotation: 0,
+            opacity: 1,
+            duration: 1.4,
+            ease: "elastic.out(1, 0.5)",
+            onStart: () => console.log("Second placeholder animation started"),
+            onComplete: () => console.log("Second placeholder animation completed")
+          });
+        }, 100);
+      } else {
+        // Reset when not on card 3
+        gsap.set(secondBluePlaceholderRef.current, {
+          y: -100,
+          rotation: -15,
+          opacity: 0
+        });
+      }
     }
-    
-    return () => tl.kill(); // Clean up timeline on unmount
   }, [currentCardIndex]);
 
   return (

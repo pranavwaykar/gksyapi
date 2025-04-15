@@ -494,6 +494,11 @@
         transition: all 0.2s ease;
         color: white;
 
+        &:focus {
+          border: transparent !important;
+          outline: none !important;
+        }
+
         svg {
           width: 20px;
           height: 20px;

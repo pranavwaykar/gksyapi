@@ -8,7 +8,7 @@ import Footer from '../components/organisms/Footer';
 import ContactForm from '../components/ContactForm';
 import { setupVerticalTextAnimations } from '../utils/animations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const Careers = () => {
   const { language } = useLanguage();

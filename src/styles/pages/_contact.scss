@@ -5,37 +5,25 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background-color: #0a1226; // Dark blue background instead of black
+  background-color: #0a1226;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-top: 64px; // Leave space for navbar
-  
-  // Blue gradient overlay for depth
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    // background: linear-gradient(135deg, rgba(26, 60, 114, 0.3) 0%, rgba(12, 45, 98, 0.1) 100%);
-    pointer-events: none;
-  }
+  padding-top: 64px;
+  // align-items: center;
   
   // Hero section with large headline
   .hero-section {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5rem 2rem;
+    padding: 5rem 20rem;
     flex: 1;
     position: relative;
     z-index: 1;
-    font-size: 3rem;
-    // font-weight: 600;
+    font-size: 1.8rem;
+    width: 100%;
     margin-bottom: 60px;
+    text-align: center;
     
     .hero-headline {
       font-size: 4rem;
@@ -55,6 +43,9 @@
     padding: 3rem 5rem;
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     
     .contact-label {
       text-transform: uppercase;
@@ -135,17 +126,17 @@
 
   .vertical-text {
     position: absolute;
-    height: 55%;
+    height: 31%;
     z-index: 5;
     top: -37rem;
-    right: 30px;
+    left: 14.6rem;
 
     .line {
       width: 1px;
       height: 100%;
       background: rgba(255, 255, 255, 0.2);
       position: absolute;
-      top: 0;
+      bottom: -38.4rem;
       right: 160px;
     }
 
@@ -193,16 +184,18 @@
 @media (max-width: 1900px) {
   .contact-page .vertical-text { 
     top: -34rem;
-    right: 4px;
+    left: 14.6rem;
 
-    .left-text{    bottom: 15rem;
+    .left-text{            
+      bottom: -20rem;
     }
     
     .large-text-primary{
-    bottom: 15rem;
+    bottom: -20rem;
     left: -166px;
-  } .large-text-secondary{
-    bottom: 22.6rem;
+  }
+   .large-text-secondary{
+    bottom: -11.6rem;
     left: -128px;
 
   }}

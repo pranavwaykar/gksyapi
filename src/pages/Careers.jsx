@@ -8,7 +8,7 @@ import Footer from '../components/organisms/Footer';
 import ContactForm from '../components/ContactForm';
 import { setupVerticalTextAnimations } from '../utils/animations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const Careers = () => {
   const { language } = useLanguage();
@@ -101,7 +101,7 @@ const Careers = () => {
           {!showForm ? (
             <>
               <button className="nav-button prev" onClick={handleScrollLeft}>
-                <span>&#8249;</span>
+                <FontAwesomeIcon icon={faChevronLeft} style={{color: 'white', width: '1.5rem', height: '1.5rem'}}/>
               </button>
 
               <div
@@ -154,7 +154,7 @@ const Careers = () => {
               </div>
 
               <button className="nav-button next" onClick={handleScrollRight}>
-                <span>&#8250;</span>
+                <FontAwesomeIcon icon={faChevronRight} style={{color: 'white', width: '1.5rem', height: '1.5rem'}}  />
               </button>
             </>
           ) : (

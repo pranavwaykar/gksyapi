@@ -213,7 +213,6 @@
 
 .nav-button {
   background: transparent;
-  border: none;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -226,18 +225,24 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
-  // box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  outline: none;
+
+  &:focus {
+    outline: none;
+    border: none;
+  }
+
+  &:hover {
+    outline: none;
+    border: none;
+    transform: translateY(-50%) scale(1.4);
+  }
 
   span {
     color: #ffffff;
     font-size: 24px;
     font-weight: bold;
   }
-
-  // &:hover {
-  //   background: white;
-  //   transform: translateY(-50%) scale(1.1);
-  // }
 
   &.prev {
     left: 20px;

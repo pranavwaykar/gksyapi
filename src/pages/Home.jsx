@@ -101,6 +101,8 @@ const Home = () => {
             in form while maintaining an effortless elegance.</p>
           </div>
           
+          {/* <div className="about-blue-placeholder" style={{height: '10rem', width: '5rem', backgroundColor: '#0038b3', position: 'absolute', left: '56rem', bottom: '16rem'}}>          </div> */}
+
         </div>
       )
     },
@@ -721,7 +723,7 @@ const Home = () => {
           // Create three vertical sections - all white initially
           // Left section (60% width)
           const leftSection = document.createElement('div');
-          leftSection.style.width = '67.5%';
+          leftSection.style.width = '67.7%';
           leftSection.style.height = '100%';
           leftSection.style.backgroundColor = 'white';
           

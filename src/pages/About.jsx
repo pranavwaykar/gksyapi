@@ -303,51 +303,39 @@ const About = () => {
       </div>
       
       <div className="about-content-sections">
-        <section className="about-section">
-          <h2>Building the Future of Türkiye, One Landmark at a Time</h2>
-          <p>
-            At GKS Yapı, we don't just build structures—we shape modern, sustainable, and high-quality living spaces that redefine city life. As a trusted leader in İstanbul's construction and real estate sector, we are committed to innovation, excellence, and long-term value for homeowners and investors alike.
-          </p>
-          <p className="cta">📞 Let's build your vision together—contact us now!</p>
-        </section>
+        <div className="service-grid">
+          <div className="service-card">
+            <h2>{t.aboutPage?.sections?.[0]?.title || "Building the Future of Türkiye, One Landmark at a Time"}</h2>
+            <p>
+              {t.aboutPage?.sections?.[0]?.description || "At GKS Yapı, we don't just build structures—we shape modern, sustainable, and high-quality living spaces that redefine city life. As a trusted leader in İstanbul's construction and real estate sector, we are committed to innovation, excellence, and long-term value for homeowners and investors alike."}
+            </p>
+            <button className="apply-button">Know More!</button>
+          </div>
 
-        <section className="about-section">
-          <h2>🌆 Urban Transformation: Rebuilding Cities, Restoring Confidence</h2>
-          <p>
-            With a focus on earthquake-resistant, energy-efficient, and sustainable urban renewal, we are reshaping İstanbul's skyline. Our expertise in fast project execution and strategic planning ensures that urban transformation is smooth, safe, and economically viable.
-          </p>
-          <p className="cta">🏗️ Be part of the new era of modern cities—partner with us!</p>
-        </section>
+          <div className="service-card">
+            <h2>{t.aboutPage?.sections?.[1]?.title || "Urban Transformation"}</h2>
+            <p>
+              {t.aboutPage?.sections?.[1]?.description || "With a focus on earthquake-resistant, energy-efficient, and sustainable urban renewal, we are reshaping İstanbul's skyline. Our expertise in fast project execution and strategic planning ensures that urban transformation is smooth, safe, and economically viable."}
+            </p>
+            <button className="apply-button">Know More!</button>
+          </div>
 
-        <section className="about-section">
-          <h2>🌱 Sustainable Living: Nature & Innovation in Harmony</h2>
-          <p>
-            We integrate green spaces, eco-friendly materials, and smart energy solutions into our projects, creating cities that thrive both today and in the future. Sustainability isn't an afterthought—it's at the core of our design philosophy.
-          </p>
-          <p className="cta">🌍 Sustainable cities, better living—join the movement!</p>
-        </section>
+          <div className="service-card">
+            <h2>{t.aboutPage?.sections?.[2]?.title || "Sustainable Living"}</h2>
+            <p>
+              {t.aboutPage?.sections?.[2]?.description || "We integrate green spaces, eco-friendly materials, and smart energy solutions into our projects, creating cities that thrive both today and in the future. Sustainability isn't an afterthought—it's at the core of our design philosophy."}
+            </p>
+            <button className="apply-button">Know More!</button>
+          </div>
 
-        <section className="about-section">
-          <h2>Confidence in Housing: Secure, Stylish & Smart Investments</h2>
-          <p>
-            We deliver modern, high-quality, and aesthetically refined homes that are more than just living spaces—they are future-proof investments. Our expertise in housing sales and production ensures that every residence meets the evolving needs of urban life while providing unmatched comfort and security.
-          </p>
-          <p className="cta">🚀 Your dream home is ready—invest in the future today!</p>
-        </section>
-
-        <section className="about-section">
-          <h2>🏢 Custom-Built Excellence: From Homes to Corporate Spaces</h2>
-          <p>
-            From residences and workspaces to large-scale corporate and private projects, we tailor every build with precision. GKS Yapı integrates cutting-edge construction technologies with a meticulous quality approach, ensuring that every project is a benchmark of excellence.
-          </p>
-        </section>
-
-        <section className="about-section service-categories">
-          <div className="service-item">Kentsel</div>
-          <div className="service-item">Özel Projeler</div>
-          <div className="service-item">Konut Üretimi ve Satışı</div>
-          <div className="service-item">Diğer Projeler & Şehir Estetiği</div>
-        </section>
+          <div className="service-card">
+            <h2>{t.aboutPage?.sections?.[3]?.title || "Confidence in Housing"}</h2>
+            <p>
+              {t.aboutPage?.sections?.[3]?.description || "We deliver modern, high-quality, and aesthetically refined homes that are more than just living spaces—they are future-proof investments. Our expertise in housing sales and production ensures that every residence meets the evolving needs of urban life while providing unmatched comfort and security."}
+            </p>
+            <button className="apply-button">Know More!</button>
+          </div>
+        </div>
       </div>
       
     </div>

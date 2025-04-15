@@ -119,13 +119,12 @@ const Careers = () => {
                         <img src={job.image} alt={job.title} className="job-image" />
                         <div className="job-overlay">
                           <h3>{job.title}</h3>
-                          <div className="job-designation">
-                            <span>{job.designation}</span>
-                          </div>
+                          
+                          {/* Link icon that shows on hover */}
                           <div className="link-icon">
-                            <FontAwesomeIcon icon={faLink} style={{position: 'absolute', bottom: '5.8rem', right: '6.4rem'}} />
+                            <FontAwesomeIcon icon={faLink} />
                           </div>
-                          {/* Replace Link with button */}
+                          
                           <button 
                             className="apply-btn" 
                             onClick={() => handleApplyClick(job)}

@@ -119,7 +119,9 @@ const Careers = () => {
                         <img src={job.image} alt={job.title} className="job-image" />
                         <div className="job-overlay">
                           <h3>{job.title}</h3>
-                          <p>{job.description}</p>
+                          <div className="job-designation">
+                            <span>{job.designation}</span>
+                          </div>
                           <div className="link-icon">
                             <FontAwesomeIcon icon={faLink} style={{position: 'absolute', bottom: '5.8rem', right: '6.4rem'}} />
                           </div>

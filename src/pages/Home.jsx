@@ -1041,15 +1041,17 @@ const Home = () => {
     // Initialize with volume at 0 for fade-in
     audio.volume = 0;
     
-    audio.play().catch((err) => {
-      const startAudioOnInteraction = () => {
-        audio.volume = 0;
-        audio.play().catch((e) => console.log("Audio still couldn't play:", e));
-        document.removeEventListener("click", startAudioOnInteraction);
-      };
+    setTimeout(() => {
+      audio.play().catch((err) => {
+        const startAudioOnInteraction = () => {
+          audio.volume = 0;
+          audio.play().catch((e) => console.log("Audio still couldn't play:", e));
+          document.removeEventListener("click", startAudioOnInteraction);
+        };
 
-      document.addEventListener("click", startAudioOnInteraction);
-    });
+        document.addEventListener("click", startAudioOnInteraction);
+      });
+    }, 4800); // 1 second delay
     
     // Create fade-in effect
     const fadeInAudio = () => {

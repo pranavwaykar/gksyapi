@@ -46,6 +46,9 @@ const Home = () => {
   const sloganRef = useRef(null);
   const swipeDownRef = useRef(null);
 
+  // Make sure this exists
+  const bluePlaceholderRef = useRef(null);
+
   // Card content
   const cardContents = [
     { 
@@ -105,8 +108,19 @@ const Home = () => {
             in form while maintaining an effortless elegance.</p>
           </div>
           
-          <div className="about-blue-placeholder" style={{height: '4rem', width: '35rem', backgroundColor: '#0038b3', position: 'absolute', left: '41rem', bottom: '22rem'}}>          </div>
-
+          {/* Ensure the div has no initial transformation that might conflict with GSAP */}
+          <div className="about-blue-placeholder" 
+               ref={bluePlaceholderRef}
+               style={{
+                 height: '4rem', 
+                 width: '35rem', 
+                 backgroundColor: '#0038b3', 
+                 position: 'absolute', 
+                 left: '41rem', 
+                 bottom: '22rem',
+                 // Don't set initial opacity or transform here
+               }}>          
+          </div>
         </div>
       )
     },
@@ -1215,6 +1229,46 @@ const Home = () => {
       ease: 'sine'
     });
   };
+
+  // Make this a separate useEffect that runs only when currentCardIndex changes
+  useEffect(() => {
+    console.log("Card changed to:", currentCardIndex);
+    
+    // Make sure we have a valid ref before animating
+    if (bluePlaceholderRef.current) {
+      console.log("Blue placeholder found:", bluePlaceholderRef.current);
+      
+      if (currentCardIndex === 1) {
+        // First IMMEDIATELY set initial position before any animation
+        gsap.set(bluePlaceholderRef.current, {
+          x: 300,
+          opacity: 0,
+          immediateRender: true
+        });
+        
+        console.log("Starting blue placeholder animation");
+        
+        // Then animate with a delay
+        gsap.to(bluePlaceholderRef.current, {
+          x: 0,
+          opacity: 1,
+          duration: 1.2,
+          delay: 0.8, // Shorter delay for better UX
+          ease: "back.out(1.7)",
+          onStart: () => console.log("Animation started"),
+          onComplete: () => console.log("Animation completed")
+        });
+      } else {
+        // When not on card 2, hide the element
+        gsap.set(bluePlaceholderRef.current, {
+          x: 300,
+          opacity: 0
+        });
+      }
+    } else {
+      console.log("Blue placeholder ref not found");
+    }
+  }, [currentCardIndex]);
 
   return (
     <div className="home-container" ref={containerRef}>

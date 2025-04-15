@@ -766,7 +766,7 @@ const Projects = () => {
                         alignSelf: 'flex-start',
                         marginBottom: '16px',
                         padding: '8px 16px',
-                        backgroundColor: 'rgba(80, 125, 250, 0.9)',
+                        backgroundColor: '#1c3b8a',
                         color: 'white',
                         border: 'none',
                         borderRadius: '4px',

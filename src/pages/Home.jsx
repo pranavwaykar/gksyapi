@@ -8,7 +8,7 @@ import backgroundVideo5 from "../assets/Background Videos/GKSYAPI Video 5.mp4";
 import backgroundVideo6 from "../assets/Background Videos/GKSYAPI Video 6.mp4";
 import backgroundVideo7 from "../assets/Background Videos/GKSYAPI Video 7.mp4";
 // import logo from "../assets/GKSYAPI Logo.png";
-import backgroundMusic from "../assets/Audio Files/relaxing-piano-310597.mp3";
+import backgroundMusic from "../assets/Audio Files/bg_music.mp3";
 import Navigation from "../components/Navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -24,6 +24,10 @@ const Home = () => {
   const audioRef = useRef(null);
   const videoRef = useRef(null);
   const [isMusicPlaying, setIsMusicPlaying] = useState(true);
+  // Add state for current volume to track during fade
+  const [currentVolume, setCurrentVolume] = useState(0);
+  // Define the target low volume (0.3 = 30% of full volume)
+  const targetVolume = 0.015;
   
   // Store the current card index
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -1033,15 +1037,47 @@ const Home = () => {
   useEffect(() => {
     // Audio setup
     const audio = audioRef.current;
+    
+    // Initialize with volume at 0 for fade-in
+    audio.volume = 0;
+    
     audio.play().catch((err) => {
-
       const startAudioOnInteraction = () => {
+        audio.volume = 0;
         audio.play().catch((e) => console.log("Audio still couldn't play:", e));
         document.removeEventListener("click", startAudioOnInteraction);
       };
 
       document.addEventListener("click", startAudioOnInteraction);
     });
+    
+    // Create fade-in effect
+    const fadeInAudio = () => {
+      // Start from 0 volume
+      let volume = 0;
+      const fadeInterval = setInterval(() => {
+        // Increase volume gradually
+        volume += 0.01;
+        
+        // Cap at target low volume
+        if (volume >= targetVolume) {
+          volume = targetVolume;
+          clearInterval(fadeInterval);
+        }
+        
+        // Apply new volume
+        if (audio) {
+          audio.volume = volume;
+          setCurrentVolume(volume);
+        }
+      }, 100); // Update every 100ms (adjust for faster/slower fade)
+      
+      // Safety cleanup for the interval
+      return () => clearInterval(fadeInterval);
+    };
+    
+    // Start the fade-in effect
+    const fadeInCleanup = fadeInAudio();
     
     // Add wheel event listener
     const container = containerRef.current;
@@ -1058,6 +1094,7 @@ const Home = () => {
         audio.pause();
       }
       clearTimeout(loadingTimer);
+      fadeInCleanup(); // Clean up fade interval if component unmounts
     };
   }, [currentCardIndex, animationState]); // Dependencies include animation state
 
@@ -1104,6 +1141,8 @@ const Home = () => {
       if (isMusicPlaying) {
         audio.pause();
       } else {
+        // When turning music back on, maintain the low volume
+        audio.volume = targetVolume;
         audio.play().catch(err => {
           console.log("Could not play audio:", err);
         });

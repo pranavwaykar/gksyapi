@@ -950,7 +950,7 @@ const Projects = () => {
                             style={{ width: "15px", height: "15px" }}
                           />
                         </div>
-                        <span className="location-text" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
+                        <span className="location-text">
                           {filteredProperties[currentPropertyIndex]?.location}
                         </span>
                       </div>
@@ -1018,7 +1018,7 @@ const Projects = () => {
                         <div className="info-title" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           {t.projects.projectDetails.startDate}
                         </div>
-                        <div className="info-value" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
+                        <div className="info-value" >
                           {filteredProperties[
                             currentPropertyIndex
                           ].startDate?.split(" ")[1] || "2020"}
@@ -1029,7 +1029,7 @@ const Projects = () => {
                         <div className="info-title" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           {t.projects.projectDetails.endDate}
                         </div>
-                        <div className="info-value" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
+                        <div className="info-value" >
                           {filteredProperties[
                             currentPropertyIndex
                           ].endDate?.split(" ")[1] || "2025"}
@@ -1040,7 +1040,7 @@ const Projects = () => {
                         <div className="info-title" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           {t.projects.propertyCard.price}
                         </div>
-                        <div className="info-value flex" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
+                        <div className="info-value flex" >
                           From
                           <FontAwesomeIcon icon={faLiraSign} style={{ width: "15px", height: "15px" }} />
                         </div>
@@ -1050,15 +1050,15 @@ const Projects = () => {
                         <div className="info-title" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           {t.projects.propertyCard.amenities}
                         </div>
-                        <div className="info-value" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
+                        <div className="info-value" >
                           <div className="amenity-icons">
                             <FontAwesomeIcon
                               icon={faUmbrellaBeach}
-                              style={{ width: "20px", height: "20px", color: "rgba(80, 125, 250, 0.9)" }}
+                              style={{ width: "20px", height: "20px" }}
                             />
                             <FontAwesomeIcon
                               icon={faBuilding}
-                              style={{ width: "20px", height: "20px", color: "rgba(80, 125, 250, 0.9)"  }}
+                              style={{ width: "20px", height: "20px"}}
                             />
                           </div>
                         </div>
@@ -1068,7 +1068,7 @@ const Projects = () => {
                         <div className="info-title" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           {t.projects.propertyCard.details}
                         </div>
-                        <div className="info-value" style={{ color: "rgba(80, 125, 250, 0.9)", background: "rgba(0, 56, 179, 0.1)", padding: "0rem 0.4rem" }}>More Info</div>
+                        <div className="info-value" style={{ background: "rgba(0, 56, 179, 0.1)", padding: "0rem 0.4rem" }}>More Info</div>
                       </div>
                     </div>
 

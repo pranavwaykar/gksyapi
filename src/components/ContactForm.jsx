@@ -52,7 +52,7 @@ const ContactForm = ({ jobTitle }) => {
         <div className="info-item">
           <div className="info-content">
             <p className="info-label">Email</p>
-            <p className="info-value">hello@company.com</p>
+            <p className="info-value">info@gksyapi.com</p>
           </div>
           <a href="mailto:hello@company.com" className="info-arrow">
             <FontAwesomeIcon icon={faArrowRight} />
@@ -62,7 +62,7 @@ const ContactForm = ({ jobTitle }) => {
         <div className="info-item">
           <div className="info-content">
             <p className="info-label">Phone</p>
-            <p className="info-value">+1 (555) 000-0000</p>
+            <p className="info-value">0532 343 18 18</p>
           </div>
           <a href="tel:+15550000000" className="info-arrow">
           <FontAwesomeIcon icon={faArrowRight} />
@@ -72,7 +72,7 @@ const ContactForm = ({ jobTitle }) => {
         <div className="info-item">
           <div className="info-content">
             <p className="info-label">Location</p>
-            <p className="info-value">123 Business Ave, City</p>
+            <p className="info-value">Yavuz Selim District 1000. Street Bagcilar, Istanbul</p>
           </div>
           <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="info-arrow">
           <FontAwesomeIcon icon={faArrowRight} />

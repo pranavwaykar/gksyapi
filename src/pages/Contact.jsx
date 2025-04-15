@@ -34,7 +34,7 @@ const Contact = () => {
         <div className="line"></div>
         <span className="left-text">{t.contact.verticalPunchline}</span>
         <span className="large-text-primary">{t.contact.contactsAndDetails}</span>
-        <span className="large-text-secondary">{t.contact.howToReachUs}</span>
+        {/* <span className="large-text-secondary">{t.contact.howToReachUs}</span> */}
       </div>
 
             {/* Contact section */}

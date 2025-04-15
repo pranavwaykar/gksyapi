@@ -52,6 +52,8 @@
       color: rgba(77, 136, 232, 0.7); // Blue tint to label
       font-size: 0.8rem;
       letter-spacing: 2px;
+      right: 22.8rem;
+      position: relative;
     }
     
     .contact-title {
@@ -60,7 +62,8 @@
       margin-bottom: 2rem;
       text-transform: uppercase;
       color: #ffffff;
-      // Add blue highlight to title
+      right: 14rem;
+      position: relative;
       text-shadow: 0 0 10px rgba(77, 136, 232, 0.3);
     }
     

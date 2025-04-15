@@ -1246,7 +1246,7 @@ const Home = () => {
       if (currentCardIndex === 1) {
         // First IMMEDIATELY set initial position before any animation
         gsap.set(bluePlaceholderRef.current, {
-          x: 300,
+          x: 700,
           opacity: 0,
           immediateRender: true
         });
@@ -1257,8 +1257,8 @@ const Home = () => {
         gsap.to(bluePlaceholderRef.current, {
           x: 0,
           opacity: 1,
-          duration: 1.2,
-          delay: 0.8, // Shorter delay for better UX
+          duration: 2.2,
+          delay: 1,
           ease: "back.out(1.7)",
           onStart: () => console.log("Animation started"),
           onComplete: () => console.log("Animation completed")
@@ -1275,41 +1275,28 @@ const Home = () => {
     }
   }, [currentCardIndex]);
 
-  // Add animation for second blue placeholder
+  // Replace the conditional animation for second blue placeholder with direct animation
   useEffect(() => {
     if (secondBluePlaceholderRef.current) {
+      // Reset initial state for animation to work properly
+      gsap.set(secondBluePlaceholderRef.current, {
+        y: -100,
+        // rotation: -15,
+        opacity: 0,
+        immediateRender: true,
+        overwrite: "auto"
+      });
+      
+      // Only apply animation when on card index 2
       if (currentCardIndex === 2) {
-        // First ensure it's visible before starting animation
-        console.log("Setting up second blue placeholder animation");
-        
-        // Set initial state with immediateRender to ensure it applies before animation
-        gsap.set(secondBluePlaceholderRef.current, {
-          y: -100,
-          rotation: -15,
-          opacity: 0,
-          immediateRender: true,
-          overwrite: "auto" // Add overwrite to prevent conflicts
-        });
-        
-        // Add a small delay before starting animation to ensure initial state is applied
-        setTimeout(() => {
-          // Animate with different parameters
-          gsap.to(secondBluePlaceholderRef.current, {
-            y: 0,
-            rotation: 0,
-            opacity: 1,
-            duration: 1.4,
-            ease: "elastic.out(1, 0.5)",
-            onStart: () => console.log("Second placeholder animation started"),
-            onComplete: () => console.log("Second placeholder animation completed")
-          });
-        }, 100);
-      } else {
-        // Reset when not on card 3
-        gsap.set(secondBluePlaceholderRef.current, {
-          y: -100,
-          rotation: -15,
-          opacity: 0
+        // Animate with a slight delay to ensure proper sequencing
+        gsap.to(secondBluePlaceholderRef.current, {
+          y: 0,
+          rotation: 0,
+          opacity: 1,
+          duration: 0.8,
+          delay: 2,
+          ease: "power2.out"
         });
       }
     }

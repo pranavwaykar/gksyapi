@@ -458,6 +458,15 @@
   bottom: -9rem;
   left: -14rem;
 
+  .about-blue-placeholder {
+    height: 4rem; 
+    width: 35rem; 
+    background-color: #0038b3; 
+    position: absolute; 
+    left: 41rem; 
+    bottom: 22rem;
+  }
+
   .about-header {
     margin-bottom: 2rem;
 
@@ -568,12 +577,18 @@
   }
 
   .swipe-down-text {
-    bottom: 20rem !important;
+    bottom: 17rem !important;
+    right: -35.3rem !important;
   }
 
   .about-us-container {
     left: -18rem;
     bottom: -12rem;
+
+    .about-blue-placeholder {
+      left: 62rem; 
+      bottom: 31rem;
+    }
   }
 }
 
@@ -646,6 +661,15 @@
   position: relative;
   bottom: -9rem;
   left: -14rem;
+
+  .solutions-blue-placeholder {
+    height: 8rem; 
+    width: 5rem; 
+    background-color: #0038b3; 
+    position: absolute; 
+    left: 52rem; 
+    bottom: 18rem;
+  }
   
   .solutions-header {
     margin-bottom: 1.5rem;
@@ -740,6 +764,11 @@
   .solutions-container {
     left: -18rem;
     bottom: -12rem;
+
+    .solutions-blue-placeholder {
+      left: 73rem !important; 
+      bottom: 27rem !important;
+    }
   }
 }
 

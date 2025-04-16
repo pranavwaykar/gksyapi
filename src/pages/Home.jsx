@@ -112,15 +112,7 @@ const Home = () => {
           {/* Ensure the div has no initial transformation that might conflict with GSAP */}
           <div className="about-blue-placeholder" 
                ref={bluePlaceholderRef}
-               style={{
-                 height: '4rem', 
-                 width: '35rem', 
-                 backgroundColor: '#0038b3', 
-                 position: 'absolute', 
-                 left: '41rem', 
-                 bottom: '22rem',
-                 // Don't set initial opacity or transform here
-               }}>          
+              >          
           </div>
         </div>
       )
@@ -156,16 +148,9 @@ const Home = () => {
             <span className="category-item">Satisi Diger Projeler & Sehir Estetigi</span>
           </div>
 
-          <div className="about-blue-placeholder-seconds" 
+          <div className="solutions-blue-placeholder" 
                ref={secondBluePlaceholderRef}
-               style={{
-                height: '8rem', 
-                width: '5rem', 
-                backgroundColor: '#0038b3', 
-                position: 'absolute', 
-                left: '52rem', 
-                bottom: '18rem',
-               }}>          
+>          
           </div>
         </div>
       )

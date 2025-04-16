@@ -391,11 +391,11 @@
     height: 45rem;
     z-index: 5;
     top: 0px;
-    right: 30px;
+    // right: 30px;
 
-    &.right {
-      right: 8rem;
-    }
+    // &.right {
+    //   right: 8rem;
+    // }
 
     .line {
       width: 1px;
@@ -446,7 +446,42 @@
   }
 }
 
-// Responsive adjustments
+// Responsive Screen Adjustments
+@media (min-width: 1910px) {
+
+  .vertical-text-about {
+    top: 4.5rem !important;
+    height: 50rem !important;
+    left: 15.1rem !important;
+
+    .line {
+      width: 1px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      position: absolute;
+      top: 5rem;
+      left: -10.5rem;
+    }
+
+    .left-text {
+      bottom: 14rem !important;
+      left: -12.4rem !important;
+    }
+
+    .large-text-primary {
+      bottom: 14rem !important;
+      left: -11rem !important;
+  }
+
+    .large-text-secondary {
+      bottom: 17rem !important;
+      left: -7rem !important;
+  }
+  }
+  .about-content-sections {
+    padding: 4rem 4.4% !important;
+  }
+}
 
 @media (max-width: 1900px) {
   .timeline-container {

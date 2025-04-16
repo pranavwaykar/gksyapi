@@ -206,7 +206,16 @@
             position: relative;
             bottom: 1rem;
             right: 1.2rem;
-        
+            transition: all 0.3s ease;        
+          }
+
+          cursor: pointer;
+          transition: color 0.3s ease-out, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), text-shadow 0.3s ease-out;
+          display: inline-block;
+    
+          &:hover {
+            color: #6366f1;
+            transform: translate(-5px);
           }
         }
       }

@@ -862,18 +862,18 @@ const Projects = () => {
                         
                         {/* Right Column */}
                         <div className="contact-form-column">
-                          <form>
-                            <div className="form-row">
+                          <form className="contact-form">
+                            <div className="form-row property-card-form-ele">
                               <input type="text" placeholder="First Name" className="form-input" />
                               <input type="text" placeholder="Last Name" className="form-input" />
                             </div>
                             
-                            <div className="form-row">
+                            <div className="form-row property-card-form-ele">
                               <input type="email" placeholder="Email" className="form-input" />
                               <input type="tel" placeholder="Phone Number" className="form-input" />
                             </div>
                             
-                            <div className="form-group">
+                            <div className="form-group property-card-form-ele">
                               <p className="form-label">Why are you contacting us?</p>
                               <div className="checkbox-container">
                                 <div className="checkbox-row">
@@ -899,7 +899,7 @@ const Projects = () => {
                               </div>
                             </div>
                             
-                            <div className="form-group">
+                            <div className="form-group property-card-form-ele">
                               <textarea placeholder="Your Message here..." className="form-textarea"></textarea>
                             </div>
                             

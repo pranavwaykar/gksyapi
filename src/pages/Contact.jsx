@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 // import { motion } from 'framer-motion';
 import "../styles/pages/_contact.scss";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -6,28 +6,104 @@ import { translations } from "../translations";
 import ContactForm from "../components/ContactForm";
 import Footer from "../components/organisms/Footer";
 import { setupVerticalTextAnimations } from "../utils/animations";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 const Contact = () => {
   const { language } = useLanguage();
   const t = translations[language];
+  
+  // Refs for animated elements
+  const heroHeadlineRef = useRef(null);
+  const contactSectionRef = useRef(null);
+  const contactLabelRef = useRef(null);
+  const contactTitleRef = useRef(null);
+  const contactItemsRef = useRef([]);
 
-  // Initialize vertical text animations
+  // Initialize animations
   useEffect(() => {
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
+    
     setupVerticalTextAnimations();
+    
+    const baseDelay = 4;
+    
+    // Hero section animation (fixed delay)
+    gsap.fromTo(
+      heroHeadlineRef.current,
+      { opacity: 0, y: 50 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 1.2, 
+        ease: "power3.out",
+        delay: baseDelay 
+      }
+    );
+    
+    // Contact section animations - triggered by scroll
+    gsap.fromTo(
+      contactLabelRef.current,
+      { opacity: 0, x: -30 },
+      { 
+        opacity: 1, 
+        x: 0, 
+        duration: 0.8, 
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: contactSectionRef.current,
+          start: "top 70%", // Trigger when top of section is 70% from top of viewport
+          toggleActions: "play none none none"
+        }
+      }
+    );
+    
+    gsap.fromTo(
+      contactTitleRef.current,
+      { opacity: 0, x: -30 },
+      { 
+        opacity: 1, 
+        x: 0, 
+        duration: 0.8, 
+        delay: 0.2, 
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: contactSectionRef.current,
+          start: "top 70%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
+    
+    // Contact items staggered animation - triggered by scroll
+    gsap.fromTo(
+      contactItemsRef.current,
+      { opacity: 0, y: 30, scale: 0.9 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        scale: 1, 
+        duration: 0.6, 
+        stagger: 0.15,
+        delay: 0.4,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: contactSectionRef.current,
+          start: "top 60%", // Trigger slightly later
+          toggleActions: "play none none none"
+        }
+      }
+    );
   }, []);
 
   return (
     <div className="contact-page">
       {/* Hero headline section */}
       <div className="hero-section">
-        {/* <motion.h1 
-          className="hero-headline"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.2 }}
-        > */}
-        {t.contact.heroHeadline}
-        {/* </motion.h1> */}
+        <h1 className="hero-headline" ref={heroHeadlineRef}>
+          {t.contact.heroHeadline}
+        </h1>
       </div>
 
       <div className="vertical-text">
@@ -59,13 +135,13 @@ const Contact = () => {
           <div className="left-text">{t.projects.backToTop}</div>
         </div>
 
-      {/* Contact section */}
-      <div className="contact-section">
-        <div className="contact-label">{t.contact.heroHeadlineSecond}</div>
-        <h2 className="contact-title">{t.contact.heroHeadlineThird}</h2>
+      {/* Contact section - add ref to the section */}
+      <div className="contact-section" ref={contactSectionRef}>
+        <div className="contact-label" ref={contactLabelRef}>{t.contact.heroHeadlineSecond}</div>
+        <h2 className="contact-title" ref={contactTitleRef}>{t.contact.heroHeadlineThird}</h2>
 
         <div className="contact-details">
-          <div className="contact-item">
+          <div className="contact-item" ref={el => contactItemsRef.current[0] = el}>
             <div className="contact-icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +165,7 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className="contact-item">
+          <div className="contact-item" ref={el => contactItemsRef.current[1] = el}>
             <div className="contact-icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +188,7 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className="contact-item">
+          <div className="contact-item" ref={el => contactItemsRef.current[2] = el}>
             <div className="contact-icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

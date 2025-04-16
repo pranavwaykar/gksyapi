@@ -478,7 +478,7 @@
     .action-buttons-top {
       position: absolute;
       top: 50px;
-      left: 89px;
+      left: 86px;
       display: flex;
       gap: 15px;
       z-index: 10;
@@ -540,10 +540,11 @@
           font-weight: 500;
           margin-bottom: 5px;
           text-align: center;
+          color: rgba(80, 125, 250, 0.9) !important;
         }
 
         .info-value {
-          font-size: 0.9rem;
+          font-size: 1.1rem;
           font-weight: 600;
           color: #1a3c72;
           text-align: center;

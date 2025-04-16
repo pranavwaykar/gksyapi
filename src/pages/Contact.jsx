@@ -20,6 +20,15 @@ const Contact = () => {
   const contactTitleRef = useRef(null);
   const contactItemsRef = useRef([]);
 
+  // Function to scroll to top of the page
+  const scrollToTop = () => {
+    console.log("Scroll to top clicked"); // Debug log
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   // Initialize animations
   useEffect(() => {
     // Register ScrollTrigger plugin
@@ -115,25 +124,29 @@ const Contact = () => {
         {/* <span className="large-text-secondary">{t.contact.howToReachUs}</span> */}
       </div>
 
-      <div className="vertical-text-right">
-          <div className="icon">
-            <svg
-              width="24"
-              height="100"
-              viewBox="0 0 24 100"
-              fill="none"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="12" y1="0" x2="12" y2="80" />
-              <polyline points="6 74 12 80 18 74" />
-            </svg>
-          </div>
-          <div className="large-text-primary">{t.projects.top}</div>
-          <div className="left-text">{t.projects.backToTop}</div>
+      <div className="vertical-text-right" onClick={scrollToTop}>
+        <div className="icon">
+          <svg
+            width="24"
+            height="100"
+            viewBox="0 0 24 100"
+            fill="none"
+            stroke="white"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="12" y1="0" x2="12" y2="80" />
+            <polyline points="6 74 12 80 18 74" />
+          </svg>
         </div>
+        <div className="large-text-primary">{t.projects.top}</div>
+        <div 
+          className="left-text" 
+        >
+          {t.projects.backToTop}
+        </div>
+      </div>
 
       {/* Contact section - add ref to the section */}
       <div className="contact-section" ref={contactSectionRef}>

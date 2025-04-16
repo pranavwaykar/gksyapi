@@ -27,7 +27,7 @@ const Home = () => {
   // Add state for current volume to track during fade
   const [currentVolume, setCurrentVolume] = useState(0);
   // Define the target low volume (0.3 = 30% of full volume)
-  const targetVolume = 0.015;
+  const targetVolume = 0.025;
   
   // Store the current card index
   const [currentCardIndex, setCurrentCardIndex] = useState(0);

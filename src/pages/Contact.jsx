@@ -83,7 +83,7 @@ const Contact = () => {
       </div>
       
       {/* Contact form section */}
-      <div className="container">
+      <div className="contact-container" style={{ display: 'flex', backgroundColor: '#f5f2ef', overflow: 'hidden', margin: '1rem 10rem', boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)' }}>
         <ContactForm />
       </div>
       

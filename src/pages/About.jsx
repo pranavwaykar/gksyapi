@@ -424,7 +424,7 @@ const About = () => {
       </div>
 
       <div className="swipe-container">
-        <span>Swip</span>
+        <span>Swipe</span>
         <FontAwesomeIcon icon={faArrowRight} />
       </div>
 

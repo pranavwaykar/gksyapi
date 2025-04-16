@@ -11,12 +11,10 @@
   flex-direction: column;
   justify-content: space-between;
   padding-top: 64px;
-  // align-items: center;
   
-  // Hero section with large headline
   .hero-section {
     display: flex;
-    padding: 5rem 20rem 0rem 20rem;
+    padding: 5rem 20rem 5rem 20rem;
     flex: 1;
     position: relative;
     z-index: 1;
@@ -25,6 +23,8 @@
     margin-bottom: 60px;
     text-align: center;
     font-weight: 700;
+    min-height: 600px;
+    align-items: center;
     
     .hero-headline {
       font-size: 4rem;
@@ -46,14 +46,14 @@
     z-index: 1;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     
     .contact-label {
       text-transform: uppercase;
       color: rgba(77, 136, 232, 0.7); // Blue tint to label
       font-size: 0.8rem;
       letter-spacing: 2px;
-      right: 22.8rem;
+      // right: 22.8rem;
       position: relative;
     }
     
@@ -63,7 +63,7 @@
       margin-bottom: 2rem;
       text-transform: uppercase;
       color: #ffffff;
-      right: 14rem;
+      // right: 14rem;
       position: relative;
       text-shadow: 0 0 10px rgba(77, 136, 232, 0.3);
     }
@@ -72,6 +72,8 @@
       display: flex;
       flex-direction: column;
       gap: 2rem;
+      flex-direction: row;
+
       
       .contact-item {
         display: flex;
@@ -108,14 +110,17 @@
   
   // Map section with blue styling
   .map-section {
-    width: 100%;
-    height: 450px;
-    position: relative;
-    overflow: hidden;
-    margin: 2rem 0;
-    z-index: 1;
-    padding: 0 5rem;
-    background: #0a1226;
+    // width: 100%;
+    // height: 450px;
+    // position: relative;
+    // overflow: hidden;
+    // margin: 2rem 0;
+    // z-index: 1;
+    // padding: 0 5rem;
+    // background: #0a1226;
+        margin: 5rem 10rem;
+        width: 77.7%;
+        height: 450px;
     
     iframe {
       position: relative;
@@ -130,7 +135,7 @@
 
   .vertical-text {
     position: absolute;
-    height: 31%;
+    height: 75%;
     z-index: 5;
     top: -37rem;
     left: 14.6rem;
@@ -182,6 +187,12 @@
       font-weight: 600;
     }
   }
+
+  .contact-container {
+    // max-width: 1200px;
+    // margin: 0 auto;
+    // padding: 0 20px;
+  }
 }
 
 // Responsive adjustments
@@ -191,12 +202,12 @@
     left: 14.6rem;
 
     .left-text{            
-      bottom: -20rem;
+      bottom: 58rem;
     }
     
     .large-text-primary{
-    bottom: -20rem;
-    left: -166px;
+      bottom: 58rem;
+      left: -166px;
   }
    .large-text-secondary{
     bottom: -11.6rem;
@@ -271,8 +282,3 @@
   }
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}

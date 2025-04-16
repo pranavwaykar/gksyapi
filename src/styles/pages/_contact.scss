@@ -1,5 +1,5 @@
 // @use '../../partials/variables' as *;
-@use '../../styles/partials/_variables' as *;
+@use "../../styles/partials/_variables" as *;
 
 .contact-page {
   position: relative;
@@ -11,7 +11,7 @@
   flex-direction: column;
   justify-content: space-between;
   padding-top: 64px;
-  
+
   .hero-section {
     display: flex;
     padding: 5rem 20rem 5rem 20rem;
@@ -25,7 +25,7 @@
     font-weight: 700;
     min-height: 600px;
     align-items: center;
-    
+
     .hero-headline {
       font-size: 4rem;
       font-weight: 700;
@@ -38,7 +38,7 @@
       text-shadow: 0 0 20px rgba(77, 136, 232, 0.2);
     }
   }
-  
+
   // Contact section at bottom
   .contact-section {
     padding: 3rem 5rem;
@@ -47,7 +47,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
     .contact-label {
       text-transform: uppercase;
       color: rgba(77, 136, 232, 0.7); // Blue tint to label
@@ -56,7 +56,7 @@
       // right: 22.8rem;
       position: relative;
     }
-    
+
     .contact-title {
       font-size: 2.5rem;
       font-weight: 700;
@@ -67,18 +67,17 @@
       position: relative;
       text-shadow: 0 0 10px rgba(77, 136, 232, 0.3);
     }
-    
+
     .contact-details {
       display: flex;
       flex-direction: column;
       gap: 2rem;
       flex-direction: row;
 
-      
       .contact-item {
         display: flex;
         align-items: flex-start;
-        
+
         .contact-icon {
           display: flex;
           align-items: center;
@@ -89,17 +88,17 @@
           border: 1px solid rgba(77, 136, 232, 0.5); // Blue border
           margin-right: 1.5rem;
           background: rgba(77, 136, 232, 0.1); // Slight blue background
-          
+
           svg {
             color: rgba(77, 136, 232, 0.9); // Blue icon color
           }
         }
-        
+
         .contact-text {
           font-size: 1.1rem;
           line-height: 1.5;
           color: rgba(255, 255, 255, 0.8);
-          
+
           .email {
             color: rgba(77, 136, 232, 0.8); // Blue email text
           }
@@ -107,7 +106,7 @@
       }
     }
   }
-  
+
   // Map section with blue styling
   .map-section {
     // width: 100%;
@@ -118,19 +117,19 @@
     // z-index: 1;
     // padding: 0 5rem;
     // background: #0a1226;
-        margin: 5rem 10rem;
-        width: 77.7%;
-        height: 450px;
-    
+    margin: 5rem 10rem;
+    width: 77.7%;
+    height: 450px;
+
     iframe {
       position: relative;
       width: 100%;
       height: 100%;
       // Add blue tint to map
-      filter: grayscale(30%) sepia(20%) hue-rotate(190deg) saturate(110%) brightness(90%);
+      filter: grayscale(30%) sepia(20%) hue-rotate(190deg) saturate(110%)
+        brightness(90%);
       z-index: 1;
     }
-    
   }
 
   .vertical-text {
@@ -197,23 +196,75 @@
 
 // Responsive adjustments
 @media (max-width: 1900px) {
-  .contact-page .vertical-text { 
-    top: -34rem;
-    left: 14.6rem;
+  .contact-page {
+    .vertical-text {
+      top: -34rem;
+      left: 14.6rem;
 
-    .left-text{            
-      bottom: 58rem;
+      .left-text {
+        bottom: 58rem;
+      }
+
+      .large-text-primary {
+        bottom: 58rem;
+        left: -166px;
+      }
+      .large-text-secondary {
+        bottom: -11.6rem;
+        left: -128px;
+      }
     }
-    
-    .large-text-primary{
-      bottom: 58rem;
-      left: -166px;
-  }
-   .large-text-secondary{
-    bottom: -11.6rem;
-    left: -128px;
 
-  }}
+    .vertical-text-right {
+      position: absolute;
+      right: 0rem;
+      top: 119rem;
+
+      .large-text-primary {
+        bottom: 10rem;
+        left: -10.8rem;
+        font-size: 2.25rem;
+        rotate: 90deg;
+        bottom: -3rem;
+        left: -3rem;
+        position: relative;
+        font-size: 2.25rem;
+        font-weight: 600;
+        letter-spacing: 0.2rem;
+        color: #507dfae6;
+      }
+
+      .left-text {
+        bottom: 10rem;
+        left: -10.8rem;
+        font-size: 2.25rem;
+        rotate: 90deg;
+        left: -0.8rem;
+        bottom: 5.2rem;
+        position: relative;
+        font-size: 1.2rem;
+        font-weight: 500;
+        letter-spacing: 0.1rem;
+        color: #fff;
+      }
+
+      .icon {
+        position: relative;
+        right: 1.2rem;
+        bottom: -1.9rem;
+        rotate: 180deg;
+      }
+
+      // cursor: pointer;
+      transition: color 0.3s ease-out, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), text-shadow 0.3s ease-out;
+      display: inline-block;
+
+      &:hover {
+        color: #6366f1;
+        transform: translate(-5px);
+      }
+    }
+  }
 }
 
 @media (max-width: 992px) {
@@ -223,11 +274,11 @@
         font-size: 3.5rem;
       }
     }
-    
+
     .contact-section {
       padding: 2rem;
     }
-    
+
     .map-section {
       height: 350px;
     }
@@ -238,20 +289,20 @@
   .contact-page {
     .hero-section {
       padding: 3rem 1rem;
-      
+
       .hero-headline {
         font-size: 2.5rem;
       }
     }
-    
+
     .contact-section {
       padding: 2rem 1rem;
-      
+
       .contact-title {
         font-size: 2rem;
       }
     }
-    
+
     .map-section {
       height: 300px;
     }
@@ -265,7 +316,7 @@
         font-size: 2rem;
       }
     }
-    
+
     .contact-section {
       .contact-details {
         .contact-item {
@@ -275,10 +326,9 @@
         }
       }
     }
-    
+
     .map-section {
       height: 250px;
     }
   }
 }
-

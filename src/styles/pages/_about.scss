@@ -550,7 +550,7 @@
 }
 
 .about-content-sections {
-  padding: 4rem 8%;
+  padding: 4rem 6%;
   margin-top: 2rem;
   background-color: rgb(38 62 128 / 90%);
   ;
@@ -659,7 +659,8 @@
   }
   
   .service-card {
-    background: linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 100%);
+    // background: linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 100%);
+    background: white;
     border-radius: 12px;
     padding: 2rem;
     display: flex;

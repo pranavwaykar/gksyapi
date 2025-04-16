@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { setupVerticalTextAnimations } from '../utils/animations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import Footer from '../components/organisms/Footer';
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -470,6 +471,9 @@ const About = () => {
           </div>
         </div>
       </div>
+
+      <Footer />
+
       
     </div>
   );

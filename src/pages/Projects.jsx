@@ -1155,8 +1155,8 @@ const Projects = () => {
               <polyline points="6 74 12 80 18 74" />
             </svg>
           </div>
-          <span className="large-text-primary">More</span>
-          <span className="left-text">Swipe Up to See</span>
+          <span className="large-text-primary">MORE</span>
+          <span className="left-text">SWIPE UP TO SEE</span>
         </div>
       </div>
     );

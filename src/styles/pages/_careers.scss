@@ -173,21 +173,21 @@
 
   &:hover {
     background: rgba(42, 57, 89, 0.9);
-    
+
     .link-icon {
       opacity: 1;
       transform: translateY(0);
     }
-    
+
     h3 {
       transform: translateY(-15px);
       color: #4169e1;
-      
+
       &::after {
         width: 100%;
       }
     }
-    
+
     .apply-btn {
       transform: translateY(15px);
     }
@@ -204,9 +204,9 @@
     transition: all 0.4s ease;
     width: 80%;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    
+
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0;
       left: 0;
@@ -223,14 +223,14 @@
     opacity: 0;
     transform: translateY(10px);
     transition: all 0.4s ease;
-    
+
     svg {
       color: white;
       font-size: 1.5rem;
       filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
     }
   }
-  
+
   .apply-btn {
     background: #4169e1;
     color: white;
@@ -244,13 +244,13 @@
     transition: all 0.4s ease;
     margin-top: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
+
     &:hover {
       background: #2a4fd6;
       transform: translateY(-2px);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
-    
+
     &:active {
       transform: translateY(0);
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -306,9 +306,51 @@
 }
 
 // Responsive styles
+@media (min-width: 1910px) {
+  .careers-content {
+    width: 62.5% !important;
+    height: calc(100vh - 245px) !important;
+    padding: 0 7rem !important;
+    top: 5.5rem !important;
+
+    .careers-slider {
+      .job-card {
+        .job-contenr {
+          .job-image-container {
+            .job-image-container {
+              height: 450px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .career-application-form .contact-form-container .contact-form .send-button {
+    position: relative !important;
+    left: 11.1rem !important;
+  }
+
+  .careers-container .vertical-text .left-text {
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.2rem !important;
+  }
+
+  .careers-container .vertical-text .large-text-primary {
+    font-size: 2.25rem !important;
+    font-weight: 600 !important;
+    left: -10.4rem !important;
+  }
+  .careers-container .vertical-text .large-text-secondary {
+    font-size: 2.25rem !important;
+    font-weight: 600 !important;
+    left: -8.2rem;
+}
+}
+
 @media (max-width: 1900px) {
   .careers-container {
-    
     .vertical-text {
       left: 15.5rem;
 
@@ -317,8 +359,8 @@
         height: 38.8rem;
         top: 11.64rem;
       }
-      
-      .left-text{
+
+      .left-text {
         bottom: 6.4rem !important;
         left: -9.8rem !important;
         letter-spacing: 0.2rem !important;
@@ -337,7 +379,7 @@
       }
     }
 
-    .careers-content{
+    .careers-content {
       width: 65%;
       border-radius: 4px;
     }

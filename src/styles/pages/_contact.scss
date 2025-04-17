@@ -188,6 +188,58 @@
     }
   }
 
+  .vertical-text-right {
+    position: absolute;
+    right: 0rem;
+    top: 119rem;
+
+    .large-text-primary {
+      bottom: 10rem;
+      left: -10.8rem;
+      font-size: 2.25rem;
+      rotate: 90deg;
+      bottom: -3rem;
+      left: -3rem;
+      position: relative;
+      font-size: 2.25rem;
+      font-weight: 600;
+      letter-spacing: 0.2rem;
+      color: #507dfae6;
+    }
+
+    .left-text {
+      bottom: 10rem;
+      left: -10.8rem;
+      font-size: 2.25rem;
+      rotate: 90deg;
+      left: -0.8rem;
+      bottom: 5.2rem;
+      position: relative;
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: 0.1rem;
+      color: #fff;
+    }
+
+    .icon {
+      position: relative;
+      right: 1.2rem;
+      bottom: -1.9rem;
+      rotate: 180deg;
+    }
+
+    // cursor: pointer;
+    transition: color 0.3s ease-out,
+      transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      text-shadow 0.3s ease-out;
+    display: inline-block;
+
+    &:hover {
+      color: #6366f1;
+      transform: translate(-5px);
+    }
+  }
+
   .contact-container {
     // max-width: 1200px;
     // margin: 0 auto;
@@ -196,6 +248,41 @@
 }
 
 // Responsive adjustments
+
+@media (min-width: 1910px) {
+  
+  .contact-page .hero-section {
+  min-height: 90vh;
+}
+
+  .contact-page .vertical-text .line {
+    bottom: -41.5rem;
+}
+
+  .contact-page .vertical-text .large-text-primary {
+    bottom: 63rem;
+    left: -10.3rem;
+    font-weight: 600;
+    font-size: 2.25rem;
+  }
+
+  .contact-page .vertical-text .left-text {
+    bottom: 63rem;
+    right: 10.1rem;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.2rem !important;
+  }
+
+  .contact-page .vertical-text-right .left-text {
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.2rem !important;
+    left: -1.2rem;
+    bottom: 4.9rem;
+}
+}
+
 @media (max-width: 1900px) {
   .contact-page {
     .vertical-text {
@@ -203,11 +290,11 @@
       left: 14.6rem;
 
       .left-text {
-        bottom: 58rem;
+        bottom: 67rem;
       }
 
       .large-text-primary {
-        bottom: 58rem;
+        bottom: 67rem;
         left: -166px;
       }
       .large-text-secondary {
@@ -215,57 +302,12 @@
         left: -128px;
       }
     }
-
-    .vertical-text-right {
-      position: absolute;
-      right: 0rem;
-      top: 119rem;
-
-      .large-text-primary {
-        bottom: 10rem;
-        left: -10.8rem;
-        font-size: 2.25rem;
-        rotate: 90deg;
-        bottom: -3rem;
-        left: -3rem;
-        position: relative;
-        font-size: 2.25rem;
-        font-weight: 600;
-        letter-spacing: 0.2rem;
-        color: #507dfae6;
-      }
-
-      .left-text {
-        bottom: 10rem;
-        left: -10.8rem;
-        font-size: 2.25rem;
-        rotate: 90deg;
-        left: -0.8rem;
-        bottom: 5.2rem;
-        position: relative;
-        font-size: 1.2rem;
-        font-weight: 500;
-        letter-spacing: 0.1rem;
-        color: #fff;
-      }
-
-      .icon {
-        position: relative;
-        right: 1.2rem;
-        bottom: -1.9rem;
-        rotate: 180deg;
-      }
-
-      // cursor: pointer;
-      transition: color 0.3s ease-out, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), text-shadow 0.3s ease-out;
-      display: inline-block;
-
-      &:hover {
-        color: #6366f1;
-        transform: translate(-5px);
-      }
-    }
   }
+
+  .contact-page .vertical-text-right .icon {
+    right: 0.8rem;
+    bottom: -1.5rem;
+}
 }
 
 @media (max-width: 992px) {

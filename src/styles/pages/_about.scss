@@ -451,7 +451,7 @@
 
   .vertical-text-about {
     top: 4.5rem !important;
-    height: 50rem !important;
+    height: 47rem !important;
     left: 15.1rem !important;
 
     .line {
@@ -488,6 +488,15 @@
   .about-content-sections {
     padding: 4rem 4.4% !important;
   }
+
+  .about-page .timeline-container .timeline-items .timeline-item.top .timeline-content {
+    top: 95px !important;
+}
+
+  .about-page .timeline-container .timeline-items .timeline-item.bottom .timeline-content {
+    bottom: 100px !important;
+}
+
 }
 
 @media (max-width: 1900px) {

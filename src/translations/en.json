@@ -295,7 +295,7 @@
     },
     "buildingExpertise": "BUILDING EXPERTISE",
     "explore": "EXPLORE ",
-    "backToTop": "Back To",
+    "backToTop": "BACK TO",
     "top": "TOP"
   },
   "aboutPage": {
@@ -406,7 +406,7 @@
   },
   "contact": {
     "heroHeadline": "FIND YOUR DREAM HOME\nWITH THE MOST\nEXCLUSIVE PROPERTIES IN\nISTANBUL",
-    "verticalPunchline": "Don’t Be a Stranger",
+    "verticalPunchline": "DON'T BE A STRANGER",
     "heroHeadlineSecond": "We're Here",
     "heroHeadlineThird": "For You At",
     "contactsAndDetails": "Contact Us",

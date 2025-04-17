@@ -397,7 +397,7 @@ const Projects = () => {
     e.stopPropagation();
     
     const currentProperty = filteredProperties[currentPropertyIndex];
-    const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+    const originalProperty = propertyData.find(p => p?.id === currentProperty?.id);
     
     if (originalProperty?.videoUrl) {
       console.log("Setting showVideo to true");
@@ -411,7 +411,7 @@ const Projects = () => {
     e.stopPropagation();
     
     const currentProperty = filteredProperties[currentPropertyIndex];
-    const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+    const originalProperty = propertyData.find(p => p?.id === currentProperty?.id);
     
     if (originalProperty?.brochureUrl) {
       window.open(originalProperty.brochureUrl, '_blank');
@@ -427,7 +427,7 @@ const Projects = () => {
     
     const currentProperty = filteredProperties[currentPropertyIndex];
     // Get original property that has the images
-    const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+    const originalProperty = propertyData.find(p => p?.id === currentProperty?.id);
     
     // Use images array from the original property data
     if (!originalProperty?.images || originalProperty.images.length <= 1) {
@@ -444,7 +444,7 @@ const Projects = () => {
     
     const currentProperty = filteredProperties[currentPropertyIndex];
     // Get original property that has the images
-    const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+    const originalProperty = propertyData.find(p => p?.id === currentProperty?.id);
     
     // Use images array from the original property data
     if (!originalProperty?.images || originalProperty.images.length <= 1) {
@@ -788,7 +788,7 @@ const Projects = () => {
                     >
                       {(() => {
                         const currentProperty = filteredProperties[currentPropertyIndex];
-                        const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+                        const originalProperty = propertyData.find(p => p?.id === currentProperty?.id);
                         const videoId = extractYoutubeId(originalProperty?.videoUrl);
                         
                         console.log("Video ID:", videoId);
@@ -958,7 +958,7 @@ const Projects = () => {
                       {/* Watch Video button - disabled if no videoUrl */}
                       {(() => {
                         const currentProperty = filteredProperties[currentPropertyIndex];
-                        const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+                        const originalProperty = propertyData.find(p => p?.id === currentProperty?.id);
                         const hasVideo = originalProperty?.videoUrl && originalProperty.videoUrl.trim() !== '';
                         
                         return (
@@ -980,7 +980,7 @@ const Projects = () => {
                       {/* View Catalog button - disabled if no brochureUrl */}
                       {(() => {
                         const currentProperty = filteredProperties[currentPropertyIndex];
-                        const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+                        const originalProperty = propertyData.find(p => p?.id === currentProperty?.id);
                         const hasBrochure = originalProperty?.brochureUrl && originalProperty.brochureUrl.trim() !== '';
                         
                         return (
@@ -1016,23 +1016,23 @@ const Projects = () => {
                     <div className="info-boxes" ref={infoBoxesRef}>
                       <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
                         <div className="info-title" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
-                          {t.projects.projectDetails.startDate}
+                          {t.projects.projectDetails?.startDate}
                         </div>
                         <div className="info-value" >
                           {filteredProperties[
                             currentPropertyIndex
-                          ].startDate?.split(" ")[1] || "2020"}
+                          ]?.startDate?.split(" ")[1] || "2020"}
                         </div>
                       </div>
 
                       <div className="info-box" ref={el => infoBoxesArray.current.push(el)}>
                         <div className="info-title" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
-                          {t.projects.projectDetails.endDate}
+                          {t.projects.projectDetails?.endDate}
                         </div>
                         <div className="info-value" >
                           {filteredProperties[
                             currentPropertyIndex
-                          ].endDate?.split(" ")[1] || "2025"}
+                          ]?.endDate?.split(" ")[1] || "2025"}
                         </div>
                       </div>
 
@@ -1097,7 +1097,7 @@ const Projects = () => {
                       {(() => {
                         const currentProperty = filteredProperties[currentPropertyIndex];
                         // Get original property that has the images
-                        const originalProperty = propertyData.find(p => p.id === currentProperty.id);
+                        const originalProperty = propertyData.find(p => p?.id === currentProperty?.id);
                         
                         // If no images array or only one image, don't show dots
                         if (!originalProperty?.images || originalProperty.images.length <= 1) {

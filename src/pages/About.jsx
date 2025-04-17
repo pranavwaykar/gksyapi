@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../components/organisms/Footer';
 
-// Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
@@ -126,7 +125,7 @@ const About = () => {
     };
     
     timelineItems.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
+    handleScroll();
     
     return () => {
       if (timelineItems) {
@@ -263,11 +262,9 @@ const About = () => {
   // Setup vertical text animations when component mounts
   useEffect(() => {
     setupVerticalTextAnimations();
-    
-    // ... your existing code for other animations ...
   }, []);
   
-  // Add GSAP animations for service cards
+  // GSAP animations for service cards
   useEffect(() => {
     const serviceCards = document.querySelectorAll('.service-card');
     

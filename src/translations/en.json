@@ -140,21 +140,14 @@
       "office": "Office",
       "commercial": "Commercial"
     },
-    "viewDetails": "View Details",
-    "noResults": "No projects match your filter criteria.",
-    "sortBy": "Sort by",
-    "search": "Search projects...",
-    "filters": {
-      "propertyStatus": "Property Status",
-      "location": "Location",
-      "propertyType": "Type"
-    },
     "propertyCard": {
       "status": "Status",
       "startEndDate": "Project Start Date/ End Date",
       "price": "Price",
       "amenities": "Amenities",
       "details": "Details",
+      "moreInfo": "More Info",
+      "from": "From",
       "floorsLabel": "No of Floors:",
       "twoBHKFlats": "No of 2BHK Flats",
       "threeBHKFlats": "No of 3 BHK Flats"
@@ -376,7 +369,9 @@
     "buildingExpertise": "BUILDING EXPERTISE",
     "explore": "EXPLORE ",
     "backToTop": "BACK TO",
-    "top": "TOP"
+    "top": "TOP",
+    "viewDetails": "View Details",
+    "noResults": "No projects match your filter criteria."
   },
   "aboutPage": {
     "timeline": [

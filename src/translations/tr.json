@@ -140,21 +140,17 @@
       "office": "Ofis",
       "commercial": "Ticari"
     },
-    "viewDetails": "Detayları Gör",
-    "noResults": "Filtre kriterlerinize uygun proje bulunamadı.",
     "sortBy": "Sırala",
     "search": "Projelerde ara...",
-    "filters": {
-      "propertyStatus": "Mülk Durumu",
-      "location": "Konum",
-      "propertyType": "Tür"
-    },
+    "noResults": "Filtre kriterlerinize uygun proje bulunamadı.",
     "propertyCard": {
       "status": "Durum",
       "startEndDate": "Proje Başlangıç Tarihi/ Bitiş Tarihi",
       "price": "Fiyat",
       "amenities": "Olanaklar",
       "details": "Detaylar",
+      "moreInfo": "Daha Fazla Bilgi",
+      "from": "Başlayan",
       "floorsLabel": "Kat Sayısı:",
       "twoBHKFlats": "2+1 Dairelerin Sayısı",
       "threeBHKFlats": "3+1 Dairelerin Sayısı"
@@ -371,9 +367,10 @@
       ]
     },
     "buildingExpertise": "BİNALAR UZMANI",
-    "explore": "EXPLORE ",
+    "explore": "KEŞFET",
     "backToTop": "Geri Dön",
-    "top": "Üst"
+    "top": "Üst",
+    "viewDetails": "Detayları Gör"
   },
   "aboutPage": {
     "timeline": [

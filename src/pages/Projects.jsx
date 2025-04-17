@@ -1041,7 +1041,7 @@ const Projects = () => {
                           {t.projects.propertyCard.price}
                         </div>
                         <div className="info-value flex" >
-                          From
+                          {t.projects?.propertyCard?.from || "From"}
                           <FontAwesomeIcon icon={faLiraSign} style={{ width: "15px", height: "15px" }} />
                         </div>
                       </div>
@@ -1068,7 +1068,7 @@ const Projects = () => {
                         <div className="info-title" style={{ color: "rgba(80, 125, 250, 0.9)" }}>
                           {t.projects.propertyCard.details}
                         </div>
-                        <div className="info-value" style={{ background: "rgba(0, 56, 179, 0.1)", padding: "0rem 0.4rem" }}>More Info</div>
+                        <div className="info-value" style={{ background: "rgba(0, 56, 179, 0.1)", padding: "0rem 0.4rem" }}>{t.projects?.propertyCard?.moreInfo || "More Info"}</div>
                       </div>
                     </div>
 

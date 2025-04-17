@@ -565,7 +565,6 @@ const Projects = () => {
         },
       });
     } else if (e.deltaY < -scrollThreshold) {
-      // Scrolling up
       console.log("Scrolling UP detected");
       animationDirection.current = "up";
       
@@ -910,7 +909,6 @@ const Projects = () => {
                     </div>
                   </div>
                 ) : (
-                  // Regular property card content
                   <div className="property-image">
                     <img
                       src={
@@ -928,19 +926,6 @@ const Projects = () => {
                       className="w-full h-full object-cover transition-all duration-500 ease-in-out transform rounded-sm"
                     />
 
-                    {/* Location information */}
-                    {/* <div className="location-info">
-                      <div className="location-icon">
-                        <FontAwesomeIcon
-                          icon={faMapMarkerAlt}
-                          style={{ width: "20px", height: "20px" }}
-                        />
-                      </div>
-                      <span className="location-text">
-                        {filteredProperties[currentPropertyIndex].location}
-                      </span>
-                    </div> */}
-
                     {/* Action buttons at top */}
                     <div className="action-buttons-top">
                       <div className="location-info">
@@ -955,7 +940,6 @@ const Projects = () => {
                         </span>
                       </div>
 
-                      {/* Watch Video button - disabled if no videoUrl */}
                       {(() => {
                         const currentProperty = filteredProperties[currentPropertyIndex];
                         const originalProperty = propertyData.find(p => p?.id === currentProperty?.id);
@@ -977,7 +961,6 @@ const Projects = () => {
                         );
                       })()}
 
-                      {/* View Catalog button - disabled if no brochureUrl */}
                       {(() => {
                         const currentProperty = filteredProperties[currentPropertyIndex];
                         const originalProperty = propertyData.find(p => p?.id === currentProperty?.id);
@@ -1092,19 +1075,15 @@ const Projects = () => {
                       </div>
                     )}
 
-                    {/* Pagination dots - Dynamic based on number of images */}
                     <div className="pagination-dots flex justify-center space-x-2 mt-4">
                       {(() => {
                         const currentProperty = filteredProperties[currentPropertyIndex];
-                        // Get original property that has the images
                         const originalProperty = propertyData.find(p => p?.id === currentProperty?.id);
                         
-                        // If no images array or only one image, don't show dots
                         if (!originalProperty?.images || originalProperty.images.length <= 1) {
                           return null;
                         }
                         
-                        // Create array of dots based on number of images
                         return originalProperty.images.map((_, index) => (
                           <div 
                             key={index}

@@ -14,14 +14,11 @@ const Careers = () => {
   const { language } = useLanguage();
   const t = translations[language];
   
-  // Add state for showing the form and selected job
   const [showForm, setShowForm] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
   
-  // Get job listings text content from translations
   const jobListingsData = t.careersPage.jobListings;
   
-  // Keep image URLs in the component
   const jobImages = {
     1: "https://plus.unsplash.com/premium_photo-1682126848758-ac1c68fa0059?q=80&w=2083&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     2: "https://plus.unsplash.com/premium_photo-1663047346199-9516fe33fce1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -41,13 +38,11 @@ const Careers = () => {
   const [startX, setStartX] = useState(0);
   const [sliderScrollLeft, setSliderScrollLeft] = useState(0);
 
-  // Handle Apply Now button click
   const handleApplyClick = (job) => {
     setSelectedJob(job);
     setShowForm(true);
   };
 
-  // Handle back to jobs listing
   const handleBackToJobs = () => {
     setShowForm(false);
     setSelectedJob(null);
@@ -89,7 +84,6 @@ const Careers = () => {
     }
   };
 
-  // Initialize vertical text animations
   useEffect(() => {
     setupVerticalTextAnimations();
   }, []);
@@ -120,7 +114,6 @@ const Careers = () => {
                         <div className="job-overlay">
                           <h3>{job.title}</h3>
                           
-                          {/* Link icon that shows on hover */}
                           <div className="link-icon">
                             <FontAwesomeIcon icon={faLink} />
                           </div>
@@ -149,7 +142,6 @@ const Careers = () => {
                   <FontAwesomeIcon icon={faArrowLeft} /> 
                   Back to Jobs
                 </button>
-                {/* <h3>Apply for: {selectedJob?.title}</h3> */}
               </div>
               <ContactForm jobTitle={selectedJob?.title} />
             </div>

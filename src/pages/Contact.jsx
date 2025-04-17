@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-// import { motion } from 'framer-motion';
 import "../styles/pages/_contact.scss";
 import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
@@ -13,32 +12,25 @@ const Contact = () => {
   const { language } = useLanguage();
   const t = translations[language];
   
-  // Refs for animated elements
   const heroHeadlineRef = useRef(null);
   const contactSectionRef = useRef(null);
   const contactLabelRef = useRef(null);
   const contactTitleRef = useRef(null);
   const contactItemsRef = useRef([]);
 
-  // Function to scroll to top of the page
   const scrollToTop = () => {
-    console.log("Scroll to top clicked"); // Debug log
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
   };
 
-  // Initialize animations
   useEffect(() => {
-    // Register ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger);
-    
     setupVerticalTextAnimations();
-    
+
     const baseDelay = 4;
-    
-    // Hero section animation (fixed delay)
+
     gsap.fromTo(
       heroHeadlineRef.current,
       { opacity: 0, y: 50 },
@@ -51,7 +43,6 @@ const Contact = () => {
       }
     );
     
-    // Contact section animations - triggered by scroll
     gsap.fromTo(
       contactLabelRef.current,
       { opacity: 0, x: -30 },
@@ -62,7 +53,7 @@ const Contact = () => {
         ease: "back.out(1.7)",
         scrollTrigger: {
           trigger: contactSectionRef.current,
-          start: "top 70%", // Trigger when top of section is 70% from top of viewport
+          start: "top 70%",
           toggleActions: "play none none none"
         }
       }
@@ -85,7 +76,6 @@ const Contact = () => {
       }
     );
     
-    // Contact items staggered animation - triggered by scroll
     gsap.fromTo(
       contactItemsRef.current,
       { opacity: 0, y: 30, scale: 0.9 },
@@ -99,7 +89,7 @@ const Contact = () => {
         ease: "power2.out",
         scrollTrigger: {
           trigger: contactSectionRef.current,
-          start: "top 60%", // Trigger slightly later
+          start: "top 60%",
           toggleActions: "play none none none"
         }
       }
@@ -108,7 +98,6 @@ const Contact = () => {
 
   return (
     <div className="contact-page">
-      {/* Hero headline section */}
       <div className="hero-section">
         <h1 className="hero-headline" ref={heroHeadlineRef}>
           {t.contact.heroHeadline}
@@ -121,7 +110,6 @@ const Contact = () => {
         <span className="large-text-primary">
           {t.contact.contactsAndDetails}
         </span>
-        {/* <span className="large-text-secondary">{t.contact.howToReachUs}</span> */}
       </div>
 
       <div className="vertical-text-right" onClick={scrollToTop}>
@@ -148,7 +136,6 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Contact section - add ref to the section */}
       <div className="contact-section" ref={contactSectionRef}>
         <div className="contact-label" ref={contactLabelRef}>{t.contact.heroHeadlineSecond}</div>
         <h2 className="contact-title" ref={contactTitleRef}>{t.contact.heroHeadlineThird}</h2>
@@ -226,7 +213,6 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Contact form section */}
       <div
         className="contact-container"
         style={{
@@ -240,7 +226,6 @@ const Contact = () => {
         <ContactForm />
       </div>
 
-      {/* Google Maps section - Central Istanbul with blue tint */}
       <div className="map-section">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48169.684212778025!2d28.932603960644526!3d41.03746977473201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab7650656bd63%3A0x8ca058b28c20b6c3!2sBeyo%C4%9Flu%2F%C4%B0stanbul%2C%20Turkey!5e0!3m2!1sen!2sus!4v1685373782761!5m2!1sen!2sus"
@@ -254,7 +239,6 @@ const Contact = () => {
         ></iframe>
       </div>
 
-      {/* Footer Component */}
       <Footer />
     </div>
   );

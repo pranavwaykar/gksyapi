@@ -250,29 +250,33 @@
 // Responsive adjustments
 
 @media (min-width: 1910px) {
-  
   .contact-page .hero-section {
-  min-height: 90vh;
-}
+    min-height: 90vh;
+  }
+
+  .contact-page .hero-section .hero-headline {
+    font-size: 3.5rem;
+  }
 
   .contact-page .vertical-text .line {
-    bottom: -41.5rem;
-}
+    bottom: -48.5rem;
+    height: 172rem;
+  }
 
   .contact-page .vertical-text .large-text-primary {
-    bottom: 63rem;
+    bottom: 81rem;
     left: -10.3rem;
     font-weight: 600;
     font-size: 2.25rem;
   }
 
   .contact-page .vertical-text .left-text {
-    bottom: 63rem;
+    bottom: 81rem;
     right: 10.1rem;
     font-size: 0.8rem !important;
     font-weight: 500 !important;
     letter-spacing: 0.2rem !important;
-  }
+}
 
   .contact-page .vertical-text-right .left-text {
     font-size: 0.8rem !important;
@@ -280,6 +284,24 @@
     letter-spacing: 0.2rem !important;
     left: -1.2rem;
     bottom: 4.9rem;
+  }
+
+  .contact-page .vertical-text-right {
+    top: 148rem;
+}
+
+  .contact-container {
+    margin: 1rem 15rem 10rem 15rem !important;
+}
+
+.contact-page .map-section {
+  margin: 5rem 15rem 10rem 15rem !important;
+  width: auto !important;
+  height: 450px !important;
+}
+
+  .contact-page .contact-section {
+    margin-bottom: 18rem;
 }
 }
 
@@ -307,7 +329,11 @@
   .contact-page .vertical-text-right .icon {
     right: 0.8rem;
     bottom: -1.5rem;
-}
+  }
+
+  .contact-page .hero-section .hero-headline {
+    font-size: 3.5rem;
+  }
 }
 
 @media (max-width: 992px) {

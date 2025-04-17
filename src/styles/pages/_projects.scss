@@ -1114,7 +1114,7 @@
     right: -1.5rem;
     
     .large-text-primary {
-      bottom: 10rem;
+      top: 29rem;
       left: -10.8rem;
       font-size: 2.25rem;
     }
@@ -1127,10 +1127,11 @@
     }
 
     .left-text {
-      bottom: 13.5rem;
+      top: 23.5rem;
       right: 8rem;
       letter-spacing: 0.2rem !important;
       font-size: 0.8rem !important;
+      height: max-content;
   }
   }
   .project-list-page .project-viewer .card-container {

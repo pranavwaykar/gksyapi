@@ -18,13 +18,14 @@ const Navigation = ({ onHomePage }) => {
   // Create refs for elements we want to animate - after conditional return
   const logoRef = useRef(null);
   const navItemsRef = useRef([]);
+  const navRef = useRef(null);
   
   // Get language context
   const { language, setLanguage } = useLanguage();
   
   // Track previous location to prevent animation on initial load
   const [prevLocation, setPrevLocation] = useState(null);
-
+  
   // Function to run the navigation animation
   const runNavAnimation = () => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
@@ -52,6 +53,44 @@ const Navigation = ({ onHomePage }) => {
     
     return tl;
   };
+
+  // Handle scroll effect directly with GSAP
+  useEffect(() => {
+    const updateNavbarOnScroll = () => {
+      const scrollY = window.scrollY;
+      const nav = navRef.current;
+      
+      if (!nav) return;
+      
+      if (scrollY > 100) {
+        // Apply blur effect when scrolled
+        gsap.to(nav, {
+          backgroundColor: 'rgba(0,0,0,0.3)',
+          backdropFilter: 'blur(10px)',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+          duration: 0.3
+        });
+      } else {
+        // Reset to transparent when at top
+        gsap.to(nav, {
+          backgroundColor: 'transparent',
+          backdropFilter: 'blur(0px)',
+          boxShadow: 'none',
+          duration: 0.3
+        });
+      }
+    };
+    
+    // Add scroll listener
+    window.addEventListener('scroll', updateNavbarOnScroll);
+    
+    // Initial check
+    updateNavbarOnScroll();
+    
+    return () => {
+      window.removeEventListener('scroll', updateNavbarOnScroll);
+    };
+  }, []);
 
   // Initial animation on component mount
   useEffect(() => {
@@ -103,7 +142,7 @@ const Navigation = ({ onHomePage }) => {
   };
 
   return (
-    <nav className="nav">
+    <nav className="nav" ref={navRef}>
       {/* Logo with ref */}
       <div className="nav-logo" ref={logoRef}>
         <NavLink to="/">

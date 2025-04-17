@@ -435,6 +435,24 @@
       "secondary": "HİKAYEMİZ"
     },
     "knowMoreButton": "Daha Fazla Bilgi!",
+    "services": [
+      {
+        "title": "Konut Üretimi & Satışı",
+        "description": "Şirket merkezimiz olan İstanbul'un hızla gelişen bölgelerinde konut satışında ve üretiminde lider bir marka olarak, yenilikçi projelerimizle..."
+      },
+      {
+        "title": "Özel Projeler & Kalite",
+        "description": "GKS Yapı, belirli bir hedefe ulaşmak için tasarlanmış, genellikle benzersiz ve sofistike çözümler gerektiren özel projeleri üretirken titiz bir çalışma..."
+      },
+      {
+        "title": "Kentsel Dönüşüm & Hızlı Teslim",
+        "description": "GKS Yap, kentsel dönüşümde yani şehirlerin eskiyen bölgelerini yenileyerek daha modern, sürdürülebilir ve yaşanabilir alanlar üretme sürecinde aktif rol..."
+      },
+      {
+        "title": "Diğer Projeler & Şehir Estetiği",
+        "description": "Şehirlerin dinamik yapısını şekillendiren ve estetik değerlerini arttıran çeşitli kentsel planlama ve inşaat girişimleri, kamusal alanlar, kültürel tesisler, ulaşım altyapıları,..."
+      }
+    ],
     "sections": [
       {
         "title": "Türkiye'nin Geleceğini, Bir Dönüm Noktasında İnşa Ediyoruz",

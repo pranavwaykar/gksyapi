@@ -435,37 +435,13 @@ const About = () => {
       
       <div className="about-content-sections">
         <div className="service-grid">
-          <div className="service-card">
-            <h2>{t.aboutPage?.sections?.[0]?.title || "Building the Future of Türkiye, One Landmark at a Time"}</h2>
-            <p>
-              {t.aboutPage?.sections?.[0]?.description || "At GKS Yapı, we don't just build structures—we shape modern, sustainable, and high-quality living spaces that redefine city life. As a trusted leader in İstanbul's construction and real estate sector, we are committed to innovation, excellence, and long-term value for homeowners and investors alike."}
-            </p>
-            <button className="apply-button">{t.aboutPage?.knowMoreButton || "Know More!"}</button>
-          </div>
-
-          <div className="service-card">
-            <h2>{t.aboutPage?.sections?.[1]?.title || "Urban Transformation"}</h2>
-            <p>
-              {t.aboutPage?.sections?.[1]?.description || "With a focus on earthquake-resistant, energy-efficient, and sustainable urban renewal, we are reshaping İstanbul's skyline. Our expertise in fast project execution and strategic planning ensures that urban transformation is smooth, safe, and economically viable."}
-            </p>
-            <button className="apply-button">{t.aboutPage?.knowMoreButton || "Know More!"}</button>
-          </div>
-
-          <div className="service-card">
-            <h2>{t.aboutPage?.sections?.[2]?.title || "Sustainable Living"}</h2>
-            <p>
-              {t.aboutPage?.sections?.[2]?.description || "We integrate green spaces, eco-friendly materials, and smart energy solutions into our projects, creating cities that thrive both today and in the future. Sustainability isn't an afterthought—it's at the core of our design philosophy."}
-            </p>
-            <button className="apply-button">{t.aboutPage?.knowMoreButton || "Know More!"}</button>
-          </div>
-
-          <div className="service-card">
-            <h2>{t.aboutPage?.sections?.[3]?.title || "Confidence in Housing"}</h2>
-            <p>
-              {t.aboutPage?.sections?.[3]?.description || "We deliver modern, high-quality, and aesthetically refined homes that are more than just living spaces—they are future-proof investments. Our expertise in housing sales and production ensures that every residence meets the evolving needs of urban life while providing unmatched comfort and security."}
-            </p>
-            <button className="apply-button">{t.aboutPage?.knowMoreButton || "Know More!"}</button>
-          </div>
+          {t.aboutPage.services.map((service, index) => (
+            <div className="service-card" key={index}>
+              <h2>{service.title}</h2>
+              <p>{service.description}</p>
+              <button className="apply-button">{t.aboutPage.knowMoreButton}</button>
+            </div>
+          ))}
         </div>
       </div>
 

@@ -412,6 +412,24 @@
       "secondary": "STORY"
     },
     "knowMoreButton": "Know More!",
+    "services": [
+      {
+        "title": "Housing Production & Sales",
+        "description": "As a leading brand in housing sales and production in the rapidly developing areas of Istanbul, where our company headquarters is located, with our innovative projects..."
+      },
+      {
+        "title": "Special Projects & Quality",
+        "description": "GKS Yapı meticulously works while producing special projects that are designed to achieve a specific goal and often require unique and sophisticated solutions..."
+      },
+      {
+        "title": "Urban Transformation & Fast Delivery",
+        "description": "GKS Yap plays an active role in urban transformation, that is, the process of renewing old parts of cities and producing more modern, sustainable and livable areas..."
+      },
+      {
+        "title": "Other Projects & Urban Aesthetics",
+        "description": "Various urban planning and construction initiatives, public spaces, cultural facilities, transportation infrastructures, which shape the dynamic structure of cities and increase their aesthetic values..."
+      }
+    ],
     "sections": [
       {
         "title": "Building the Future of Türkiye, One Landmark at a Time",

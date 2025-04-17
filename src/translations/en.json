@@ -115,30 +115,14 @@
       "bhkTypes": "BHK Types",
       "totalUnits": "Total Units"
     },
-    "filterBy": {
+    "filterBy": "Filter by",
+    "sortBy": "Sort by",
+    "search": "Search projects...",
+    "noResults": "No projects match your criteria",
+    "filters": {
       "propertyStatus": "Property Status",
       "location": "Location",
       "propertyType": "Type"
-    },
-    "statuses": {
-      "all": "All",
-      "forSale": "For Sale",
-      "sold": "Sold",
-      "underConstruction": "Under Construction"
-    },
-    "locations": {
-      "all": "All Locations",
-      "istanbul": "Istanbul",
-      "ankara": "Ankara",
-      "izmir": "Izmir",
-      "antalya": "Antalya"
-    },
-    "types": {
-      "all": "All Types",
-      "apartment": "Apartment",
-      "villa": "Villa",
-      "office": "Office",
-      "commercial": "Commercial"
     },
     "propertyCard": {
       "status": "Status",
@@ -148,9 +132,7 @@
       "details": "Details",
       "floorsLabel": "No of Floors:",
       "twoBHKFlats": "No of 2BHK Flats",
-      "threeBHKFlats": "No of 3 BHK Flats",
-      "moreInfo": "More Info",
-      "from": "From"
+      "threeBHKFlats": "No of 3 BHK Flats"
     },
     "buttons": {
       "watchVideo": "Watch Video",
@@ -369,13 +351,7 @@
     "buildingExpertise": "BUILDING EXPERTISE",
     "explore": "EXPLORE ",
     "backToTop": "BACK TO",
-    "top": "TOP",
-    "moreProjects": {
-      "more": "MORE",
-      "swipeUpToSee": "SWIPE UP TO SEE"
-    },
-    "viewDetails": "View Details",
-    "noResults": "No projects match your filter criteria."
+    "top": "TOP"
   },
   "aboutPage": {
     "timeline": [
@@ -497,5 +473,31 @@
       "text": "Email",
       "email": "info@gksyapi.com"
     }
+  },
+  "footer": {
+    "newsletter": {
+      "text": "Stay in the loop and sign up for the Wardiere newsletter:",
+      "placeholder": "Enter your email"
+    },
+    "navigation": {
+      "title": "NAVIGATION",
+      "home": "Home",
+      "about": "About",
+      "solutions": "Solutions",
+      "contactUs": "Contact Us",
+      "career": "Career"
+    },
+    "followUs": {
+      "title": "FOLLOW US",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "linkedin": "Linkedin"
+    },
+    "utilityPages": {
+      "title": "UTILITY PAGES",
+      "licenses": "Licenses"
+    },
+    "copyright": "@2025 All Rights Reserved"
   }
 } 

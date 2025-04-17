@@ -496,5 +496,31 @@
       "text": "e-posta",
       "email": "info@gksyapi.com"
     }
+  },
+  "footer": {
+    "newsletter": {
+      "text": "Güncel kalmak için Wardiere bültenine kaydolun:",
+      "placeholder": "E-posta adresinizi girin"
+    },
+    "navigation": {
+      "title": "NAVİGASYON",
+      "home": "Ana Sayfa",
+      "about": "Hakkımızda",
+      "solutions": "Çözümler",
+      "contactUs": "İletişim",
+      "career": "Kariyer"
+    },
+    "followUs": {
+      "title": "BİZİ TAKİP EDİN",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "linkedin": "Linkedin"
+    },
+    "utilityPages": {
+      "title": "FAYDALI SAYFALAR",
+      "licenses": "Lisanslar"
+    },
+    "copyright": "@2025 Tüm Hakları Saklıdır"
   }
 } 

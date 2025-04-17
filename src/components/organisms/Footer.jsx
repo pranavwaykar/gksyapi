@@ -20,42 +20,42 @@ const Footer = () => {
               <span className="logo-text">GKSYAPI</span>
             </div>
             <p className="newsletter-text">
-              Stay in the loop and sign up for the Wardiere newsletter:
+              {t.footer?.newsletter?.text || "Stay in the loop and sign up for the Wardiere newsletter:"}
             </p>
             <div className="newsletter-form">
               <input 
                 type="email" 
-                placeholder="Enter your email" 
+                placeholder={t.footer?.newsletter?.placeholder || "Enter your email"}
                 className="newsletter-input"
               />
             </div>
           </div>
           
           <div className="footer-nav-section">
-            <h3>NAVIGATION</h3>
+            <h3>{t.footer?.navigation?.title || "NAVIGATION"}</h3>
             <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/about">About</Link></li>
-              <li><Link to="/solutions">Solutions</Link></li>
-              <li><Link to="/contact">Contact Us</Link></li>
-              <li><Link to="/career">Career</Link></li>
+              <li><Link to="/">{t.footer?.navigation?.home || "Home"}</Link></li>
+              <li><Link to="/about">{t.footer?.navigation?.about || "About"}</Link></li>
+              <li><Link to="/solutions">{t.footer?.navigation?.solutions || "Solutions"}</Link></li>
+              <li><Link to="/contact">{t.footer?.navigation?.contactUs || "Contact Us"}</Link></li>
+              <li><Link to="/career">{t.footer?.navigation?.career || "Career"}</Link></li>
             </ul>
           </div>
           
           <div className="footer-social-section">
-            <h3>FOLLOW US</h3>
+            <h3>{t.footer?.followUs?.title || "FOLLOW US"}</h3>
             <ul>
-              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-              <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-              <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a></li>
-              <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">Linkedin</a></li>
+              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">{t.footer?.followUs?.instagram || "Instagram"}</a></li>
+              <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">{t.footer?.followUs?.facebook || "Facebook"}</a></li>
+              <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">{t.footer?.followUs?.twitter || "Twitter"}</a></li>
+              <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">{t.footer?.followUs?.linkedin || "Linkedin"}</a></li>
             </ul>
           </div>
           
           <div className="footer-utility-section">
-            <h3>UTILITY PAGES</h3>
+            <h3>{t.footer?.utilityPages?.title || "UTILITY PAGES"}</h3>
             <ul>
-              <li><Link to="/licenses">Licenses</Link></li>
+              <li><Link to="/licenses">{t.footer?.utilityPages?.licenses || "Licenses"}</Link></li>
             </ul>
           </div>
         </div>
@@ -64,7 +64,7 @@ const Footer = () => {
         
         <div className="footer-bottom">
           <div className="large-logo">GKSYAPI</div>
-          <div className="copyright">@2025 All Rights Reserved</div>
+          <div className="copyright">{t.footer?.copyright || "@2025 All Rights Reserved"}</div>
         </div>
       </div>
     </footer>

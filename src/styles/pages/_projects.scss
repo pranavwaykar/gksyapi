@@ -1111,6 +1111,8 @@
   }
 
   .project-list-page .vertical-text-right {
+    right: -1.5rem;
+    
     .large-text-primary {
       bottom: 10rem;
       left: -10.8rem;
@@ -1118,9 +1120,18 @@
     }
 
     .icon {
-      top: 23rem !important;
+      // top: 23rem !important;
+      // right: 9.7rem;
+      top: 27rem !important;
       right: 9.7rem;
     }
+
+    .left-text {
+      bottom: 13.5rem;
+      right: 8rem;
+      letter-spacing: 0.2rem !important;
+      font-size: 0.8rem !important;
+  }
   }
   .project-list-page .project-viewer .card-container {
     max-height: calc(100vh - 200px);

@@ -471,12 +471,11 @@ const Home = () => {
           // Thick Border Rectangle Zoom - Split L Shape
           const containerWidth = containerRef.current.offsetWidth;
           const containerHeight = containerRef.current.offsetHeight;
-          const borderWidthTop = `${containerHeight * 0.40}px`; // 40% border top
-          // const borderWidthRight = `${containerWidth * 0.297}px`; // 40% border right
+          const borderHeightRatio = containerHeight < 1900 ? 0.37 : 0.40;
+          const borderWidthTop = `${containerHeight * borderHeightRatio}px`;
 
-          const borderWidthRatio = containerWidth < 1900 ? 0.30 : 0.297;
+          const borderWidthRatio = containerWidth < 1900 ? 0.29 : 0.279;
           const borderWidthRight = `${containerWidth * borderWidthRatio}px`;
-          
           // Create container for both pieces
           const rectangleContainer = document.createElement('div');
           rectangleContainer.className = 'rectangle-zoom-container';

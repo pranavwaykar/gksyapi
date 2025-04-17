@@ -7,7 +7,6 @@ import backgroundVideo4 from "../assets/Background Videos/GKSYAPI Video 4.mp4";
 import backgroundVideo5 from "../assets/Background Videos/GKSYAPI Video 5.mp4";
 import backgroundVideo6 from "../assets/Background Videos/GKSYAPI Video 6.mp4";
 import backgroundVideo7 from "../assets/Background Videos/GKSYAPI Video 7.mp4";
-// import logo from "../assets/GKSYAPI Logo.png";
 import backgroundMusic from "../assets/Audio Files/bg_music.mp3";
 import Navigation from "../components/Navigation";
 import gsap from "gsap";
@@ -16,7 +15,6 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faVolumeUp, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
-// import { useTranslation } from 'react-i18next';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,35 +23,26 @@ const Home = () => {
   const audioRef = useRef(null);
   const videoRef = useRef(null);
   const [isMusicPlaying, setIsMusicPlaying] = useState(true);
-  // Add state for current volume to track during fade
+  
   const [currentVolume, setCurrentVolume] = useState(0);
-  // Define the target low volume (0.3 = 30% of full volume)
   const targetVolume = 0.025;
   
-  // Store the current card index
+  
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
-  // Track animation direction (1: down, -1: up)
   const [direction, setDirection] = useState(0);
-  // Track if card is entering or exiting
-  const [animationState, setAnimationState] = useState('idle'); // 'idle', 'entering', 'exiting'
-  // Add loading state
+  const [animationState, setAnimationState] = useState('idle');
   const [isLoading, setIsLoading] = useState(true);
   
   const { language } = useLanguage();
   const t = translations[language];
-  // Create refs for card 1 elements to animate
   const statsRowRef = useRef(null);
   const sloganRef = useRef(null);
   const swipeDownRef = useRef(null);
-
-  // Make sure this exists
   const bluePlaceholderRef = useRef(null);
   const secondBluePlaceholderRef = useRef(null);
 
-  // Card content
   const cardContents = [
     { 
-      // Card 1 with stats UI
       customRender: () => (
         <div className="stats-overview">
           <div className="stats-row" ref={statsRowRef}>
@@ -91,7 +80,6 @@ const Home = () => {
       )
     },
     { 
-      // Card 2 - About Us UI
       customRender: () => (
         <div className="about-us-container">
           <div className="about-header">
@@ -107,7 +95,6 @@ const Home = () => {
             <p>{t.homePage.aboutUs.paragraph2}</p>
           </div>
           
-          {/* Ensure the div has no initial transformation that might conflict with GSAP */}
           <div className="about-blue-placeholder" 
                ref={bluePlaceholderRef}
               >          
@@ -116,7 +103,6 @@ const Home = () => {
       )
     },
     { 
-      // Card 3 - Solutions UI
       customRender: () => (
         <div className="solutions-container">
           <div className="solutions-header">
@@ -151,10 +137,8 @@ const Home = () => {
       )
     },
     { 
-      // Card 4 - Housing UI (KENTSEL)
       customRender: () => (
         <div className="housing-container">
-          {/* Update the blue accent right div */}
           <div className="blue-accent-right">
             <div className="page-indicator">1/5</div>
           </div>
@@ -182,7 +166,6 @@ const Home = () => {
       )
     },
     { 
-      // Card 5 - Custom-Built Excellence
       customRender: () => (
         <div className="housing-container">
           <div className="blue-accent-right">
@@ -212,7 +195,6 @@ const Home = () => {
       )
     },
     { 
-      // Card 6 - Building the Future
       customRender: () => (
         <div className="housing-container">
           <div className="blue-accent-right">
@@ -242,7 +224,6 @@ const Home = () => {
       )
     },
     { 
-      // Card 7 - Urban Transformation
       customRender: () => (
         <div className="housing-container">
           <div className="blue-accent-right">
@@ -272,7 +253,6 @@ const Home = () => {
       )
     },
     { 
-      // Card 8 - Sustainable Living
       customRender: () => (
         <div className="housing-container">
           <div className="blue-accent-right">
@@ -303,7 +283,6 @@ const Home = () => {
     }
   ];
 
-  // Map cards to videos - one unique video per card
   const getVideoForCard = (cardIndex) => {
     switch (cardIndex) {
       case 0:
@@ -327,12 +306,10 @@ const Home = () => {
     }
   };
 
-  // Add refs for transition elements
   const transitionLineRef = useRef(null);
   const transitionCircleRef = useRef(null);
   const transitionBoxRef = useRef(null);
   
-  // Change the background video with a cool transition effect
   const changeBackgroundVideo = (newCardIndex, newDirection) => {
     if (!videoRef.current) return;
     
@@ -340,7 +317,6 @@ const Home = () => {
     const currentSrc = video.querySelector('source').getAttribute('src');
     const newVideoSrc = getVideoForCard(newCardIndex);
     
-    // Simple way to compare the video files - get just the filename
     const getCurrentVideoName = (path) => {
       return path.split('/').pop();
     };
@@ -352,35 +328,25 @@ const Home = () => {
       return;
     }
     
-    // Perform cool transition effects
     const tl = gsap.timeline({
       onUpdate: function() {
-        // You can use this to track progress if needed
-        // const progress = this.progress();
       }
     });
     
-    
-    // Define forward and reverse transition sequences
     const forwardSequence = [1, 5, 4, 6, 0, 2, 3];
-    const reverseSequence = [3, 2, 0, 6, 4, 5, 1]; // Reverse order of forward sequence
+    const reverseSequence = [3, 2, 0, 6, 4, 5, 1];
     
-    // Choose sequence based on direction
     let transitionType;
     if (newDirection >= 0) {
-      // Going down - use forward sequence
       const forwardIndex = currentCardIndex % forwardSequence.length;
       transitionType = forwardSequence[forwardIndex];
     } else {
-      // Going up - use reverse sequence
       const reverseIndex = currentCardIndex % reverseSequence.length;
       transitionType = reverseSequence[reverseIndex];
     }
     
-    // Rest of transition code remains the same
     switch(transitionType) {
       case 0:
-        // Horizontal Cards Split Vertically
         const cardsContainer = document.createElement('div');
         cardsContainer.style.position = 'absolute';
         cardsContainer.style.width = '100%';
@@ -389,38 +355,33 @@ const Home = () => {
         cardsContainer.style.overflow = 'hidden';
         containerRef.current.appendChild(cardsContainer);
         
-        // Create left and right cards
         const leftCard = document.createElement('div');
         leftCard.style.position = 'absolute';
         leftCard.style.top = '0';
-        leftCard.style.left = '-50%'; // Start off-screen left
-        leftCard.style.width = '50%'; // Half width
-        leftCard.style.height = '100%'; // Full height
+        leftCard.style.left = '-50%';
+        leftCard.style.width = '50%';
+        leftCard.style.height = '100%';
         leftCard.style.backgroundColor = 'white';
         
         const rightCard = document.createElement('div');
         rightCard.style.position = 'absolute';
         rightCard.style.top = '0';
-        rightCard.style.left = '100%'; // Start off-screen right
-        rightCard.style.width = '50%'; // Half width
-        rightCard.style.height = '100%'; // Full height
+        rightCard.style.left = '100%';
+        rightCard.style.width = '50%';
+        rightCard.style.height = '100%';
         rightCard.style.backgroundColor = 'white';
         
         cardsContainer.appendChild(leftCard);
         cardsContainer.appendChild(rightCard);
         
-        // Use the timeline as it was working before
         tl.to(leftCard, {
-          left: '0%', // Move to center
-          duration: 1.2, // Increased from 0.7
+          left: '0%',
+          duration: 1.2,
           ease: 'power2.out',
           onStart: () => {
-            // Change video source
             video.querySelector('source').src = newVideoSrc;
             video.load();
             video.play();
-            
-            // Keep the timing pattern from case 1
             fadeInCurrentCard('bottom', 1.8, 0.8);
           }
         }, 'moveIn')
@@ -450,7 +411,6 @@ const Home = () => {
         break;
         
         case 1:
-          // Thick Border Rectangle Zoom - Split L Shape
           const containerWidth = containerRef.current.offsetWidth;
           const containerHeight = containerRef.current.offsetHeight;
           const borderHeightRatio = containerHeight < 1900 ? 0.37 : 0.40;
@@ -458,7 +418,6 @@ const Home = () => {
 
           const borderWidthRatio = containerWidth < 1900 ? 0.29 : 0.279;
           const borderWidthRight = `${containerWidth * borderWidthRatio}px`;
-          // Create container for both pieces
           const rectangleContainer = document.createElement('div');
           rectangleContainer.className = 'rectangle-zoom-container';
           rectangleContainer.style.position = 'absolute';
@@ -469,7 +428,6 @@ const Home = () => {
           rectangleContainer.style.zIndex = '10';
           rectangleContainer.style.opacity = '0';
           
-          // Create horizontal piece (top of the L)
           const horizontalPiece = document.createElement('div');
           horizontalPiece.className = 'rectangle-zoom-horizontal';
           horizontalPiece.style.position = 'absolute';
@@ -480,7 +438,6 @@ const Home = () => {
           horizontalPiece.style.backgroundColor = 'white';
           horizontalPiece.style.zIndex = '11';
           
-          // Create vertical piece (right side of the L)
           const verticalPiece = document.createElement('div');
           verticalPiece.className = 'rectangle-zoom-vertical';
           verticalPiece.style.position = 'absolute';
@@ -491,15 +448,12 @@ const Home = () => {
           verticalPiece.style.backgroundColor = 'white';
           verticalPiece.style.zIndex = '11';
           
-          // Add pieces to container
           rectangleContainer.appendChild(horizontalPiece);
           rectangleContainer.appendChild(verticalPiece);
           
-          // Add perspective to container for 3D effect
           containerRef.current.style.perspective = '1000px';
           containerRef.current.appendChild(rectangleContainer);
           
-          // Animation: zoom from a large size outside view toward the viewer
           tl.set(rectangleContainer, { opacity: 1 })
             .fromTo([horizontalPiece, verticalPiece], 
               { 
@@ -545,7 +499,6 @@ const Home = () => {
           break;
 
       case 2:
-        // Horizontal Lines Meeting Effect
         const linesContainer = document.createElement('div');
         linesContainer.style.position = 'absolute';
         linesContainer.style.top = '0';
@@ -556,37 +509,32 @@ const Home = () => {
         linesContainer.style.overflow = 'hidden';
         containerRef.current.appendChild(linesContainer);
         
-        // Create 3 horizontal lines
         const lineHeight = containerRef.current.offsetHeight / 3;
         
-        // First line - comes from left
         const line1 = document.createElement('div');
         line1.style.position = 'absolute';
         line1.style.top = '0';
-        line1.style.left = '-100%';  // Start off-screen left
+        line1.style.left = '-100%';
         line1.style.width = '100%';
         line1.style.height = `${lineHeight}px`;
         line1.style.backgroundColor = 'white';
         
-        // Second line - comes from right
         const line2 = document.createElement('div');
         line2.style.position = 'absolute';
         line2.style.top = `${lineHeight}px`;
-        line2.style.left = '100%';  // Start off-screen right
+        line2.style.left = '100%';
         line2.style.width = '100%';
         line2.style.height = `${lineHeight}px`;
         line2.style.backgroundColor = 'white';
         
-        // Third line - comes from right
         const line3 = document.createElement('div');
         line3.style.position = 'absolute';
         line3.style.top = `${lineHeight * 2}px`;
-        line3.style.left = '100%';  // Start off-screen right
+        line3.style.left = '100%';
         line3.style.width = '100%';
         line3.style.height = `${lineHeight}px`;
         line3.style.backgroundColor = 'white';
         
-        // Add lines to container
         linesContainer.appendChild(line1);
         linesContainer.appendChild(line2);
         linesContainer.appendChild(line3);
@@ -629,7 +577,6 @@ const Home = () => {
         break;
         
       case 3:
-        // Vertical Sliding Rectangles
         const slidingContainer = document.createElement('div');
         slidingContainer.style.position = 'absolute';
         slidingContainer.style.width = '100%';
@@ -638,23 +585,21 @@ const Home = () => {
         slidingContainer.style.overflow = 'hidden';
         containerRef.current.appendChild(slidingContainer);
         
-        // Create the larger rectangle (70% width)
         const largeRectangle = document.createElement('div');
         largeRectangle.style.position = 'absolute';
         largeRectangle.style.left = '0';
         largeRectangle.style.width = '70%';
         largeRectangle.style.height = '100%';
         largeRectangle.style.backgroundColor = 'white';
-        largeRectangle.style.top = '100%'; // Start below viewport
+        largeRectangle.style.top = '100%';
         
-        // Create the smaller rectangle (30% width)
         const smallRectangle = document.createElement('div');
         smallRectangle.style.position = 'absolute';
         smallRectangle.style.right = '0';
         smallRectangle.style.width = '30%';
         smallRectangle.style.height = '100%';
         smallRectangle.style.backgroundColor = 'white';
-        smallRectangle.style.bottom = '100%'; // Start above viewport
+        smallRectangle.style.bottom = '100%';
         
         slidingContainer.appendChild(largeRectangle);
         slidingContainer.appendChild(smallRectangle);
@@ -701,32 +646,27 @@ const Home = () => {
         break;
         
       case 4:
-        // Vertical Sections Slide with Special Middle Section
         const sectionsContainer = document.createElement('div');
         sectionsContainer.style.position = 'absolute';
         sectionsContainer.style.width = '100%';
         sectionsContainer.style.height = '100%';
         sectionsContainer.style.zIndex = '10';
         sectionsContainer.style.display = 'flex';
-        sectionsContainer.style.left = '-100%'; // Start off-screen left
-        sectionsContainer.style.overflow = 'hidden'; // Hide overflow
+        sectionsContainer.style.left = '-100%';
+        sectionsContainer.style.overflow = 'hidden';
         containerRef.current.appendChild(sectionsContainer);
         
-        // Create three vertical sections - all white initially
-        // Left section with responsive width
         const leftSection = document.createElement('div');
         leftSection.style.width = containerRef.current.offsetWidth < 1900 ? '67.7%' : '68.5%';
         leftSection.style.height = '100%';
         leftSection.style.backgroundColor = 'white';
         
-        // Middle section container (10% width)
         const middleSectionContainer = document.createElement('div');
         middleSectionContainer.style.width = '3.8rem';
         middleSectionContainer.style.height = '100%';
         middleSectionContainer.style.position = 'relative';
-        middleSectionContainer.style.overflow = 'hidden'; // Hide overflow
+        middleSectionContainer.style.overflow = 'hidden';
         
-        // For the middle section, create a white visible part and a blue hidden part
         const middleWhiteVisible = document.createElement('div');
         middleWhiteVisible.style.position = 'absolute';
         middleWhiteVisible.style.width = '100%';
@@ -734,24 +674,21 @@ const Home = () => {
         middleWhiteVisible.style.backgroundColor = 'white';
         middleWhiteVisible.style.top = '0';
         
-        // Blue part that will slide in from the top - initially hidden
         const middleBlueHidden = document.createElement('div');
         middleBlueHidden.style.position = 'absolute';
         middleBlueHidden.style.width = '100%';
         middleBlueHidden.style.height = '100%';
         middleBlueHidden.style.backgroundColor = '#0038b3';
-        middleBlueHidden.style.top = '-100%'; // Hidden above
+        middleBlueHidden.style.top = '-100%';
         
         middleSectionContainer.appendChild(middleWhiteVisible);
         middleSectionContainer.appendChild(middleBlueHidden);
         
-        // Right section (30% width)
         const rightSection = document.createElement('div');
         rightSection.style.width = '25%';
         rightSection.style.height = '100%';
         rightSection.style.backgroundColor = 'white';
         
-        // Add sections to container
         sectionsContainer.appendChild(leftSection);
         sectionsContainer.appendChild(middleSectionContainer);
         sectionsContainer.appendChild(rightSection);
@@ -805,11 +742,9 @@ const Home = () => {
         break;
       
       case 5:
-        // Split Vertical Swipe (Left up, Right down)
         const leftHalf = document.createElement('div');
         const rightHalf = document.createElement('div');
         
-        // Common styles for both halves
         [leftHalf, rightHalf].forEach(half => {
           half.style.position = 'absolute';
           half.style.height = '100%';
@@ -818,12 +753,11 @@ const Home = () => {
           half.style.zIndex = '10';
         });
         
-        // Position the halves
         leftHalf.style.left = '0';
-        leftHalf.style.top = '100%'; // Start from bottom, will move up
+        leftHalf.style.top = '100%';
         
         rightHalf.style.right = '0';
-        rightHalf.style.bottom = '100%'; // Start from top, will move down
+        rightHalf.style.bottom = '100%';
         
         containerRef.current.appendChild(leftHalf);
         containerRef.current.appendChild(rightHalf);
@@ -872,25 +806,22 @@ const Home = () => {
         break;
       
       case 6:
-        // Staircase Wipe
         const bars = [];
         const barCount = 4;
         const containersssHeight = containerRef.current.offsetHeight;
         const barHeight = containersssHeight / barCount;
         
-        // Create staircase bars
         for (let i = 0; i < barCount; i++) {
           const bar = document.createElement('div');
           bar.className = 'staircase-bar';
           bar.style.position = 'absolute';
           bar.style.width = '0';
           bar.style.height = `${barHeight}px`;
-          bar.style.left = '-10%'; // Start off-screen
+          bar.style.left = '-10%';
           bar.style.top = `${i * barHeight}px`;
           bar.style.backgroundColor = 'white';
           bar.style.zIndex = '10';
           
-          // Make bars thicker in the middle
           if (i === 1 || i === 2) {
             bar.style.height = `${barHeight * 1.2}px`;
           }
@@ -936,7 +867,6 @@ const Home = () => {
         break;
 
       case 7:
-        // Slide Up Transition
         const slideContainer = document.createElement('div');
         slideContainer.style.position = 'absolute';
         slideContainer.style.width = '100%';
@@ -945,14 +875,13 @@ const Home = () => {
         slideContainer.style.overflow = 'hidden';
         containerRef.current.appendChild(slideContainer);
         
-        // Create sliding panel
         const slidingPanel = document.createElement('div');
         slidingPanel.style.position = 'absolute';
         slidingPanel.style.left = '0';
         slidingPanel.style.width = '100%';
         slidingPanel.style.height = '100%';
         slidingPanel.style.backgroundColor = 'white';
-        slidingPanel.style.transform = 'translateY(100%)'; // Start below the screen
+        slidingPanel.style.transform = 'translateY(100%)';
         
         slideContainer.appendChild(slidingPanel);
         
@@ -1023,10 +952,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // Audio setup
     const audio = audioRef.current;
-    
-    // Initialize with volume at 0 for fade-in
     audio.volume = 0;
     
     setTimeout(() => {
@@ -1041,15 +967,12 @@ const Home = () => {
       });
     }, 4800);
     
-    // Create fade-in effect
     const fadeInAudio = () => {
-      // Start from 0 volume
       let volume = 0;
       const fadeInterval = setInterval(() => {
         // Increase volume gradually
         volume += 0.01;
         
-        // Cap at target low volume
         if (volume >= targetVolume) {
           volume = targetVolume;
           clearInterval(fadeInterval);
@@ -1060,23 +983,18 @@ const Home = () => {
           audio.volume = volume;
           setCurrentVolume(volume);
         }
-      }, 100); // Update every 100ms (adjust for faster/slower fade)
+      }, 100);
       
-      // Safety cleanup for the interval
       return () => clearInterval(fadeInterval);
     };
     
-    // Start the fade-in effect
     const fadeInCleanup = fadeInAudio();
-    
-    // Add wheel event listener
     const container = containerRef.current;
     container.addEventListener('wheel', handleWheel, { passive: false });
     
-    // Simulate loading complete
     const loadingTimer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // Adjust this time as needed
+    }, 2000);
     
     return () => {
       container.removeEventListener('wheel', handleWheel);
@@ -1084,33 +1002,28 @@ const Home = () => {
         audio.pause();
       }
       clearTimeout(loadingTimer);
-      fadeInCleanup(); // Clean up fade interval if component unmounts
+      fadeInCleanup();
     };
-  }, [currentCardIndex, animationState]); // Dependencies include animation state
+  }, [currentCardIndex, animationState]);
 
-  // Add effect to animate card 1 elements with stagger when loading completes
   useEffect(() => {
     if (!isLoading && currentCardIndex === 0) {
-      // Only animate card 1 elements when loading is complete and on first card
       
-      // Hide elements initially
       if (statsRowRef.current && sloganRef.current && swipeDownRef.current) {
         gsap.set([statsRowRef.current, sloganRef.current, swipeDownRef.current], { 
           y: 30, 
           opacity: 0 
         });
         
-        // Create stagger animation for card 1 elements
         gsap.to([statsRowRef.current, sloganRef.current, swipeDownRef.current], {
           y: 0,
           opacity: 1,
           duration: 0.8,
           stagger: 0.3,
           ease: "power2.out",
-          delay: 2.5 // Delay after loading completes
+          delay: 2.5
         });
         
-        // Animate stat items with stagger
         const statItems = statsRowRef.current.querySelectorAll('.stat-item');
         gsap.from(statItems, {
           y: 20,
@@ -1118,20 +1031,18 @@ const Home = () => {
           duration: 0.6,
           stagger: 0.15,
           ease: "back.out(1.2)",
-          delay: 0.7 // Start after the stats row begins to appear
+          delay: 0.7 
         });
       }
     }
   }, [isLoading, currentCardIndex]);
 
-  // Function to toggle music play/pause
   const toggleMusic = () => {
     const audio = audioRef.current;
     if (audio) {
       if (isMusicPlaying) {
         audio.pause();
       } else {
-        // When turning music back on, maintain the low volume
         audio.volume = targetVolume;
         audio.play().catch(err => {
           console.log("Could not play audio:", err);
@@ -1142,7 +1053,6 @@ const Home = () => {
   };
   
   
-  // Determine animation classes
   const getCardClasses = () => {
     const baseClass = 'card';
     
@@ -1155,16 +1065,13 @@ const Home = () => {
 
   const fadeInCurrentCard = (direction = 'bottom', delay = 0, duration = 0.4) => {
     if (!containerRef.current) return;
-    
-    // Find the current card inner content
+  
     const cardInner = containerRef.current.querySelector('.card-inner');
     if (!cardInner) return;
     
-    // Define the initial position based on direction
     let initialX = 0;
     let initialY = 0;
     
-    // Set initial position based on specified direction
     switch (direction) {
       case 'top':
         initialY = -100;
@@ -1178,22 +1085,20 @@ const Home = () => {
       case 'right':
         initialX = 100;
         break;
-      case 'none': // No slide, just fade
+      case 'none':
         initialX = 0;
         initialY = 0;
         break;
       default:
-        initialY = 100; // Default to bottom
+        initialY = 100;
     }
     
-    // Reset position and opacity first
     gsap.set(cardInner, { 
       opacity: 0, 
       x: initialX, 
       y: initialY 
     });
     
-    // Animate fade in with slide from the determined direction
     gsap.to(cardInner, {
       opacity: 1,
       x: 0,
@@ -1204,16 +1109,13 @@ const Home = () => {
     });
   };
 
-  // Make this a separate useEffect that runs only when currentCardIndex changes
   useEffect(() => {
     console.log("Card changed to:", currentCardIndex);
     
-    // Make sure we have a valid ref before animating
     if (bluePlaceholderRef.current) {
       console.log("Blue placeholder found:", bluePlaceholderRef.current);
       
       if (currentCardIndex === 1) {
-        // First IMMEDIATELY set initial position before any animation
         gsap.set(bluePlaceholderRef.current, {
           x: 700,
           opacity: 0,
@@ -1222,7 +1124,6 @@ const Home = () => {
         
         console.log("Starting blue placeholder animation");
         
-        // Then animate with a delay
         gsap.to(bluePlaceholderRef.current, {
           x: 0,
           opacity: 1,
@@ -1233,7 +1134,6 @@ const Home = () => {
           onComplete: () => console.log("Animation completed")
         });
       } else {
-        // When not on card 2, hide the element
         gsap.set(bluePlaceholderRef.current, {
           x: 300,
           opacity: 0
@@ -1244,21 +1144,16 @@ const Home = () => {
     }
   }, [currentCardIndex]);
 
-  // Replace the conditional animation for second blue placeholder with direct animation
   useEffect(() => {
     if (secondBluePlaceholderRef.current) {
-      // Reset initial state for animation to work properly
       gsap.set(secondBluePlaceholderRef.current, {
         y: -100,
-        // rotation: -15,
         opacity: 0,
         immediateRender: true,
         overwrite: "auto"
       });
       
-      // Only apply animation when on card index 2
       if (currentCardIndex === 2) {
-        // Animate with a slight delay to ensure proper sequencing
         gsap.to(secondBluePlaceholderRef.current, {
           y: 0,
           rotation: 0,
@@ -1273,7 +1168,6 @@ const Home = () => {
 
   return (
     <div className="home-container" ref={containerRef}>
-      {/* Loading screen */}
       {isLoading && (
         <div className="loading-screen">
           <div className="loader"></div>
@@ -1293,14 +1187,12 @@ const Home = () => {
         Your browser does not support the video tag.
       </video>
 
-      {/* Add transition elements */}
       <div className="transition-line" ref={transitionLineRef}></div>
       <div className="transition-circle" ref={transitionCircleRef}></div>
       <div className="transition-box" ref={transitionBoxRef}></div>
 
       <audio ref={audioRef} src={backgroundMusic} loop autoPlay />
 
-      {/* Only show content when loading is complete */}
       {!isLoading && (
         <>
           <div className="content-overlay">
@@ -1308,9 +1200,7 @@ const Home = () => {
               <div className={getCardClasses()}>
                 <div className="card-inner">
                   {cardContents[currentCardIndex].customRender ? 
-                    // Use custom rendering if available
                     cardContents[currentCardIndex].customRender() : 
-                    // Otherwise use standard title/text rendering
                     <>
                       <h2>{cardContents[currentCardIndex].title}</h2>
                       <p>{cardContents[currentCardIndex].text}</p>
@@ -1332,7 +1222,6 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Add music control button */}
           <div className="music-control">
             <button onClick={toggleMusic} title={isMusicPlaying ? "Mute music" : "Play music"}>
               <FontAwesomeIcon 

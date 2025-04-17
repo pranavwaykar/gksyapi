@@ -12,12 +12,67 @@
     "completedProjects": "Tamamlanan Projeler",
     "ongoingProjects": "Devam Eden Projeler",
     "tagline1": "Dünya fikirler üzerine inşa edilir",
-    "tagline2": "Dünyayı, her seferinde bir fikirle şekillendiriyoruz"
-  },
-  "solutions": {
-    "title": "ÇÖZÜMLER",
-    "solutionsTitle": "Türkiye'nin Geleceğini, Bir Landmark'ta İnşa Ediyoruz",
-    "solutionsDescription": "GKS Yapı olarak, sadece yapılar inşa etmiyoruz - şehir hayatını yeniden tanımlayan modern, sürdürülebilir ve yüksek kaliteli yaşam alanları şekillendiriyoruz. İstanbul'un inşaat ve gayrimenkul sektöründe güvenilir bir lider olarak, ev sahipleri ve yatırımcılar için yenilikçilik, mükemmellik ve uzun vadeli değer yaratmaya önem veriyoruz."
+    "tagline2": "Dünyayı, her seferinde bir fikirle şekillendiriyoruz",
+    "scroll": "Kaydır",
+    
+    "aboutUs": {
+      "sectionLabel": "HAKKIMIZDA",
+      "title1": "Dünya Fikirler Üzerine İnşa Edilir,",
+      "title2": "GKSYAPI Fikirlerinizi Gerçeğe Dönüştürür",
+      "paragraph1": "Farklı geçmişler ve uzmanlıklarla, fikirleri gerçeğe dönüştürmek için sorunsuz bir şekilde işbirliği yapıyor, ilham veren ve kalıcı mimari başyapıtlar yaratıyoruz.",
+      "paragraph2": "İnsan deneyimini geliştiren, formda netlik sağlarken zahmetsiz bir zarafeti koruyan inşaata inanıyoruz."
+    },
+    
+    "solutions": {
+      "sectionLabel": "ÇÖZÜMLER",
+      "title1": "Türkiye'nin Geleceğini İnşa Ediyoruz,",
+      "title2": "Bir Seferde Bir Simge Yapı",
+      "description": "GKS Yapı'da sadece yapılar inşa etmiyoruz—şehir hayatını yeniden tanımlayan modern, sürdürülebilir ve yüksek kaliteli yaşam alanları şekillendiriyoruz. İstanbul'un inşaat ve gayrimenkul sektöründe güvenilir bir lider olarak, ev sahipleri ve yatırımcılar için yenilikçilik, mükemmellik ve uzun vadeli değere bağlıyız.",
+      "category1": "Kentsel",
+      "category2": "Özel Projeler",
+      "category3": "Konut Üretimi",
+      "category4": "Satışı Diğer Projeler & Şehir Estetiği"
+    },
+    
+    "housing": {
+      "sectionLabel": "KENTSEL",
+      "title1": "Konutta Güven:",
+      "title2": "Güvenli, Şık ve Akıllı Yatırımlar",
+      "description": "Sadece yaşam alanı olmaktan öte, geleceğe dönük yatırımlar olan modern, yüksek kaliteli ve estetik açıdan rafine evler sunuyoruz. Konut satışları ve üretimindeki uzmanlığımız, her konutun şehir yaşamının gelişen ihtiyaçlarını karşılarken eşsiz konfor ve güvenlik sağlamasını garanti eder.",
+      "ctaButton": "Hayalinizdeki ev hazır—geleceğe bugün yatırım yapın!"
+    },
+    
+    "services": {
+      "sectionLabel": "Hizmetler"
+    },
+    
+    "customBuilt": {
+      "title1": "Özel Yapım Mükemmellik:",
+      "title2": "Evlerden Kurumsal Alanlara",
+      "description": "Konutlardan çalışma alanlarına, büyük ölçekli kurumsal ve özel projelere kadar her yapıyı hassasiyetle uyarlıyoruz. GKS Yapı, en son inşaat teknolojilerini titiz bir kalite yaklaşımıyla bütünleştirerek, her projenin bir mükemmellik ölçütü olmasını sağlar.",
+      "ctaButton": "Hassasiyetle işlenmiş, miras için inşa edilmiş."
+    },
+    
+    "buildingFuture": {
+      "title1": "Türkiye'nin Geleceğini İnşa Ediyoruz,",
+      "title2": "Bir Seferde Bir Simge Yapı",
+      "description": "GKS Yapı'da sadece yapılar inşa etmiyoruz—şehir hayatını yeniden tanımlayan modern, sürdürülebilir ve yüksek kaliteli yaşam alanları şekillendiriyoruz. İstanbul'un inşaat ve gayrimenkul sektöründe güvenilir bir lider olarak, ev sahipleri ve yatırımcılar için yenilikçilik, mükemmellik ve uzun vadeli değere bağlıyız.",
+      "ctaButton": "Vizyonunuzu birlikte inşa edelim—şimdi bize ulaşın!"
+    },
+    
+    "urbanTransformation": {
+      "title1": "Kentsel Dönüşüm:",
+      "title2": "Şehirleri Yeniden İnşa Etmek, Güveni Yeniden Sağlamak",
+      "description": "Depreme dayanıklı, enerji verimli ve sürdürülebilir kentsel yenilemeye odaklanarak İstanbul'un siluetini yeniden şekillendiriyoruz. Hızlı proje yürütme ve stratejik planlamadaki uzmanlığımız, kentsel dönüşümün sorunsuz, güvenli ve ekonomik olarak uygulanabilir olmasını sağlar.",
+      "ctaButton": "Modern şehirlerin yeni çağının bir parçası olun—bizimle ortak olun!"
+    },
+    
+    "sustainableLiving": {
+      "title1": "Sürdürülebilir Yaşam:",
+      "title2": "Doğa ve Yenilikçilik Uyum İçinde",
+      "description": "Projelerimize yeşil alanları, çevre dostu malzemeleri ve akıllı enerji çözümlerini entegre ederek, hem bugün hem de gelecekte gelişen şehirler yaratıyoruz. Sürdürülebilirlik bir sonradan düşünce değil—tasarım felsefemizin özünde yer alır.",
+      "ctaButton": "Sürdürülebilir şehirler, daha iyi yaşam—harekete katılın!"
+    }
   },
   "projects": {
     "kentsel": "Kentsel",

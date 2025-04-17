@@ -16,6 +16,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faVolumeUp, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
+// import { useTranslation } from 'react-i18next';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,7 +41,6 @@ const Home = () => {
   
   const { language } = useLanguage();
   const t = translations[language];
-
   // Create refs for card 1 elements to animate
   const statsRowRef = useRef(null);
   const sloganRef = useRef(null);
@@ -59,32 +59,32 @@ const Home = () => {
           <div className="stats-row" ref={statsRowRef}>
             <div className="stat-item">
               <div className="stat-number">1994</div>
-              <div className="stat-label">Established in</div>
+              <div className="stat-label">{t.homePage.establishedIn}</div>
             </div>
             
             <div className="stat-item">
               <div className="stat-number">25+</div>
-              <div className="stat-label">Years in construction</div>
+              <div className="stat-label">{t.homePage.yearsInConstruction}</div>
             </div>
             
             <div className="stat-item">
               <div className="stat-number">100+</div>
-              <div className="stat-label">Completed Projects</div>
+              <div className="stat-label">{t.homePage.completedProjects}</div>
             </div>
             
             <div className="stat-item">
               <div className="stat-number">20+</div>
-              <div className="stat-label">On going Projects</div>
+              <div className="stat-label">{t.homePage.ongoingProjects}</div>
             </div>
           </div>
           
           <div className="company-slogan" ref={sloganRef}>
-            <h1>Dünya fikirler üzerine inşa edilir Dünyayı,</h1>
-            <h1>her seferinde bir fikirle şekillendiriyoruz</h1>
+            <h1>{t.homePage.tagline1}</h1>
+            <h1>{t.homePage.tagline2}</h1>
           </div>
 
           <div className="swipe-down-text" ref={swipeDownRef}>
-            Scroll
+            {t.homePage.scroll}
             <FontAwesomeIcon icon={faArrowDown} style={{height:"20px"}} />
           </div>
         </div>
@@ -95,18 +95,16 @@ const Home = () => {
       customRender: () => (
         <div className="about-us-container">
           <div className="about-header">
-            <span className="section-label">ABOUT US</span>
+            <span className="section-label">{t.homePage.aboutUs.sectionLabel}</span>
             <h1 className="about-title">
-              The World is Built on IDEAS, <br />
-              GKSYAPI Brings Your Ideas into Reality
+              {t.homePage.aboutUs.title1} <br />
+              {t.homePage.aboutUs.title2}
             </h1>
           </div>
           
           <div className="about-description">
-            <p>With diverse backgrounds and expertise, we collaborate seamlessly to turn ideas 
-            into reality, crafting architectural masterpieces that inspire and endure.</p>
-            <p>We believe in construction that enhances the human experience, providing clarity 
-            in form while maintaining an effortless elegance.</p>
+            <p>{t.homePage.aboutUs.paragraph1}</p>
+            <p>{t.homePage.aboutUs.paragraph2}</p>
           </div>
           
           {/* Ensure the div has no initial transformation that might conflict with GSAP */}
@@ -122,30 +120,27 @@ const Home = () => {
       customRender: () => (
         <div className="solutions-container">
           <div className="solutions-header">
-            <span className="section-label">SOLUTIONS</span>
+            <span className="section-label">{t.homePage.solutions.sectionLabel}</span>
             <h1 className="solutions-title">
-              Building the Future of Türkiye, <br />
-              One Landmark at a Time
+              {t.homePage.solutions.title1} <br />
+              {t.homePage.solutions.title2}
             </h1>
           </div>
           
           <div className="solutions-description">
             <p>
-              At <strong>GKS Yapı</strong>, we don't just build structures—we shape modern, sustainable, and 
-              high-quality living spaces that redefine city life. As a trusted leader in 
-              Istanbul's construction and real estate sector, we are committed to innovation, 
-              excellence, and long-term value for homeowners and investors alike.
+              {t.homePage.solutions.description}
             </p>
           </div>
           
           <div className="solutions-categories">
-            <span className="category-item">Kentsel</span>
+            <span className="category-item">{t.homePage.solutions.category1}</span>
             <span className="category-divider">|</span>
-            <span className="category-item">Özel Projeler</span>
+            <span className="category-item">{t.homePage.solutions.category2}</span>
             <span className="category-divider">|</span>
-            <span className="category-item">Konut uretimi</span>
+            <span className="category-item">{t.homePage.solutions.category3}</span>
             <span className="category-divider">|</span>
-            <span className="category-item">Satisi Diger Projeler & Sehir Estetigi</span>
+            <span className="category-item">{t.homePage.solutions.category4}</span>
           </div>
 
           <div className="solutions-blue-placeholder" 
@@ -165,25 +160,22 @@ const Home = () => {
           </div>
           
           <div className="housing-header">
-            <span className="section-label">KENTSEL</span>
+            <span className="section-label">{t.homePage.housing.sectionLabel}</span>
             <h1 className="housing-title">
-              Confidence in Housing: <br />
-              Secure, Stylish, & Smart Investments
+              {t.homePage.housing.title1} <br />
+              {t.homePage.housing.title2}
             </h1>
           </div>
           
           <div className="housing-description">
             <p>
-              We deliver modern, high-quality, and aesthetically refined homes that are 
-              more than just living spaces—they are future-proof investments. Our expertise 
-              in housing sales and production ensures that every residence meets the 
-              evolving needs of urban life while providing unmatched comfort and security.
+              {t.homePage.housing.description}
             </p>
           </div>
           
           <div className="housing-cta">
             <button className="cta-button">
-              Your dream home is ready—invest in the future today!
+              {t.homePage.housing.ctaButton}
             </button>
           </div>
         </div>
@@ -198,24 +190,22 @@ const Home = () => {
           </div>
           
           <div className="housing-header">
-            <span className="section-label">Services</span>
+            <span className="section-label">{t.homePage.services.sectionLabel}</span>
             <h1 className="housing-title">
-              Custom-Built Excellence: <br />
-              From Homes to Corporate Spaces
+              {t.homePage.customBuilt.title1} <br />
+              {t.homePage.customBuilt.title2}
             </h1>
           </div>
           
           <div className="housing-description">
             <p>
-              From residences and workspaces to large-scale corporate and private projects, we tailor 
-              every build with precision. GKS Yapı integrates cutting-edge construction technologies 
-              with a meticulous quality approach, ensuring that every project is a benchmark of excellence.
+              {t.homePage.customBuilt.description}
             </p>
           </div>
           
           <div className="housing-cta">
             <button className="cta-button">
-              Crafted with precision, built for legacy.
+              {t.homePage.customBuilt.ctaButton}
             </button>
           </div>
         </div>
@@ -230,25 +220,22 @@ const Home = () => {
           </div>
           
           <div className="housing-header">
-            <span className="section-label">Services</span>
+            <span className="section-label">{t.homePage.services.sectionLabel}</span>
             <h1 className="housing-title">
-              Building the Future of Türkiye, <br />
-              One Landmark at a Time
+              {t.homePage.buildingFuture.title1} <br />
+              {t.homePage.buildingFuture.title2}
             </h1>
           </div>
           
           <div className="housing-description">
             <p>
-              At GKS Yapı, we don't just build structures—we shape modern, sustainable, and 
-              high-quality living spaces that redefine city life. As a trusted leader in 
-              İstanbul's construction and real estate sector, we are committed to innovation, 
-              excellence, and long-term value for homeowners and investors alike.
+              {t.homePage.buildingFuture.description}
             </p>
           </div>
           
           <div className="housing-cta">
             <button className="cta-button">
-              Let's build your vision together—contact us now!
+              {t.homePage.buildingFuture.ctaButton}
             </button>
           </div>
         </div>
@@ -263,25 +250,22 @@ const Home = () => {
           </div>
           
           <div className="housing-header">
-            <span className="section-label">Services</span>
+            <span className="section-label">{t.homePage.services.sectionLabel}</span>
             <h1 className="housing-title">
-              Urban Transformation: <br />
-              Rebuilding Cities, Restoring Confidence
+              {t.homePage.urbanTransformation.title1} <br />
+              {t.homePage.urbanTransformation.title2}
             </h1>
           </div>
           
           <div className="housing-description">
             <p>
-              With a focus on earthquake-resistant, energy-efficient, and sustainable urban 
-              renewal, we are reshaping İstanbul's skyline. Our expertise in fast project 
-              execution and strategic planning ensures that urban transformation is smooth, 
-              safe, and economically viable.
+              {t.homePage.urbanTransformation.description}
             </p>
           </div>
           
           <div className="housing-cta">
             <button className="cta-button">
-              Be part of the new era of modern cities—partner with us!
+              {t.homePage.urbanTransformation.ctaButton}
             </button>
           </div>
         </div>
@@ -296,24 +280,22 @@ const Home = () => {
           </div>
           
           <div className="housing-header">
-            <span className="section-label">Services</span>
+            <span className="section-label">{t.homePage.services.sectionLabel}</span>
             <h1 className="housing-title">
-              Sustainable Living: <br />
-              Nature & Innovation in Harmony
+              {t.homePage.sustainableLiving.title1} <br />
+              {t.homePage.sustainableLiving.title2}
             </h1>
           </div>
           
           <div className="housing-description">
             <p>
-              We integrate green spaces, eco-friendly materials, and smart energy solutions 
-              into our projects, creating cities that thrive both today and in the future. 
-              Sustainability isn't an afterthought—it's at the core of our design philosophy.
+              {t.homePage.sustainableLiving.description}
             </p>
           </div>
           
           <div className="housing-cta">
             <button className="cta-button">
-              Sustainable cities, better living—join the movement!
+              {t.homePage.sustainableLiving.ctaButton}
             </button>
           </div>
         </div>

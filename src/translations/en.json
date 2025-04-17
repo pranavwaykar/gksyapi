@@ -12,12 +12,67 @@
     "completedProjects": "Completed Projects",
     "ongoingProjects": "On-going Projects",
     "tagline1": "The world is built on ideas.",
-    "tagline2": "We're shaping the world, one idea at a time."
-  },
-  "solutions": {
-    "title": "SOLUTIONS",
-    "solutionsTitle": "Building the Future of Türkiye, One Landmark at a Time",
-    "solutionsDescription": "At GKS Yapı, we don't just build structures—we shape modern, sustainable, and high-quality living spaces that redefine city life. As a trusted leader in İstanbul's construction and real estate sector, we are committed to innovation, excellence, and long-term value for homeowners and investors alike."
+    "tagline2": "We're shaping the world, one idea at a time.",
+    "scroll": "Scroll",
+    
+    "aboutUs": {
+      "sectionLabel": "ABOUT US",
+      "title1": "The World is Built on IDEAS,",
+      "title2": "GKSYAPI Brings Your Ideas into Reality",
+      "paragraph1": "With diverse backgrounds and expertise, we collaborate seamlessly to turn ideas into reality, crafting architectural masterpieces that inspire and endure.",
+      "paragraph2": "We believe in construction that enhances the human experience, providing clarity in form while maintaining an effortless elegance."
+    },
+    
+    "solutions": {
+      "sectionLabel": "SOLUTIONS",
+      "title1": "Building the Future of Türkiye,",
+      "title2": "One Landmark at a Time",
+      "description": "At GKS Yapı, we don't just build structures—we shape modern, sustainable, and high-quality living spaces that redefine city life. As a trusted leader in Istanbul's construction and real estate sector, we are committed to innovation, excellence, and long-term value for homeowners and investors alike.",
+      "category1": "Kentsel",
+      "category2": "Özel Projeler",
+      "category3": "Konut uretimi",
+      "category4": "Satisi Diger Projeler & Sehir Estetigi"
+    },
+    
+    "housing": {
+      "sectionLabel": "KENTSEL",
+      "title1": "Confidence in Housing:",
+      "title2": "Secure, Stylish, & Smart Investments",
+      "description": "We deliver modern, high-quality, and aesthetically refined homes that are more than just living spaces—they are future-proof investments. Our expertise in housing sales and production ensures that every residence meets the evolving needs of urban life while providing unmatched comfort and security.",
+      "ctaButton": "Your dream home is ready—invest in the future today!"
+    },
+    
+    "services": {
+      "sectionLabel": "Services"
+    },
+    
+    "customBuilt": {
+      "title1": "Custom-Built Excellence:",
+      "title2": "From Homes to Corporate Spaces",
+      "description": "From residences and workspaces to large-scale corporate and private projects, we tailor every build with precision. GKS Yapı integrates cutting-edge construction technologies with a meticulous quality approach, ensuring that every project is a benchmark of excellence.",
+      "ctaButton": "Crafted with precision, built for legacy."
+    },
+    
+    "buildingFuture": {
+      "title1": "Building the Future of Türkiye,",
+      "title2": "One Landmark at a Time",
+      "description": "At GKS Yapı, we don't just build structures—we shape modern, sustainable, and high-quality living spaces that redefine city life. As a trusted leader in İstanbul's construction and real estate sector, we are committed to innovation, excellence, and long-term value for homeowners and investors alike.",
+      "ctaButton": "Let's build your vision together—contact us now!"
+    },
+    
+    "urbanTransformation": {
+      "title1": "Urban Transformation:",
+      "title2": "Rebuilding Cities, Restoring Confidence",
+      "description": "With a focus on earthquake-resistant, energy-efficient, and sustainable urban renewal, we are reshaping İstanbul's skyline. Our expertise in fast project execution and strategic planning ensures that urban transformation is smooth, safe, and economically viable.",
+      "ctaButton": "Be part of the new era of modern cities—partner with us!"
+    },
+    
+    "sustainableLiving": {
+      "title1": "Sustainable Living:",
+      "title2": "Nature & Innovation in Harmony",
+      "description": "We integrate green spaces, eco-friendly materials, and smart energy solutions into our projects, creating cities that thrive both today and in the future. Sustainability isn't an afterthought—it's at the core of our design philosophy.",
+      "ctaButton": "Sustainable cities, better living—join the movement!"
+    }
   },
   "projects": {
     "kentsel": "Kentsel",

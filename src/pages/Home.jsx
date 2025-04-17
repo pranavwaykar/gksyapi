@@ -472,8 +472,8 @@ const Home = () => {
           const containerWidth = containerRef.current.offsetWidth;
           const containerHeight = containerRef.current.offsetHeight;
           const borderWidthTop = `${containerHeight * 0.40}px`; // 40% border top
-          
-          // Make border width responsive based on screen size
+          // const borderWidthRight = `${containerWidth * 0.297}px`; // 40% border right
+
           const borderWidthRatio = containerWidth < 1900 ? 0.30 : 0.297;
           const borderWidthRight = `${containerWidth * borderWidthRatio}px`;
           
@@ -732,9 +732,9 @@ const Home = () => {
         containerRef.current.appendChild(sectionsContainer);
         
         // Create three vertical sections - all white initially
-        // Left section (60% width)
+        // Left section with responsive width
         const leftSection = document.createElement('div');
-        leftSection.style.width = '67.7%';
+        leftSection.style.width = containerRef.current.offsetWidth < 1900 ? '67.7%' : '68.5%';
         leftSection.style.height = '100%';
         leftSection.style.backgroundColor = 'white';
         

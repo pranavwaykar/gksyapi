@@ -472,7 +472,10 @@ const Home = () => {
           const containerWidth = containerRef.current.offsetWidth;
           const containerHeight = containerRef.current.offsetHeight;
           const borderWidthTop = `${containerHeight * 0.40}px`; // 40% border top
-          const borderWidthRight = `${containerWidth * 0.30}px`; // 40% border right
+          
+          // Make border width responsive based on screen size
+          const borderWidthRatio = containerWidth < 1900 ? 0.30 : 0.297;
+          const borderWidthRight = `${containerWidth * borderWidthRatio}px`;
           
           // Create container for both pieces
           const rectangleContainer = document.createElement('div');
@@ -483,7 +486,7 @@ const Home = () => {
           rectangleContainer.style.width = '100%';
           rectangleContainer.style.height = '100%';
           rectangleContainer.style.zIndex = '10';
-          rectangleContainer.style.opacity = '0'; // Start invisible
+          rectangleContainer.style.opacity = '0';
           
           // Create horizontal piece (top of the L)
           const horizontalPiece = document.createElement('div');

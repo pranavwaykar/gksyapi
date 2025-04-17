@@ -456,11 +456,11 @@
 
     .line {
       width: 1px;
-      height: 100%;
       background: rgba(255, 255, 255, 0.2);
       position: absolute;
-      top: 5rem;
-      left: -10.5rem;
+      top: 0rem !important;
+      right: 10.4rem !important;
+      height: 50rem !important;
     }
 
     .left-text {

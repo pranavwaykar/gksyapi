@@ -370,7 +370,11 @@
     "explore": "KEŞFET",
     "backToTop": "Geri Dön",
     "top": "Üst",
-    "viewDetails": "Detayları Gör"
+    "viewDetails": "Detayları Gör",
+    "moreProjects": {
+      "more": "KAYDIR",
+      "swipeUpToSee": "YUKARI "
+    }
   },
   "aboutPage": {
     "timeline": [

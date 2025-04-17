@@ -146,11 +146,11 @@
       "price": "Price",
       "amenities": "Amenities",
       "details": "Details",
-      "moreInfo": "More Info",
-      "from": "From",
       "floorsLabel": "No of Floors:",
       "twoBHKFlats": "No of 2BHK Flats",
-      "threeBHKFlats": "No of 3 BHK Flats"
+      "threeBHKFlats": "No of 3 BHK Flats",
+      "moreInfo": "More Info",
+      "from": "From"
     },
     "buttons": {
       "watchVideo": "Watch Video",
@@ -370,6 +370,10 @@
     "explore": "EXPLORE ",
     "backToTop": "BACK TO",
     "top": "TOP",
+    "moreProjects": {
+      "more": "MORE",
+      "swipeUpToSee": "SWIPE UP TO SEE"
+    },
     "viewDetails": "View Details",
     "noResults": "No projects match your filter criteria."
   },

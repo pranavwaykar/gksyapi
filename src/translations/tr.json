@@ -351,11 +351,30 @@
     "top": "Üst"
   },
   "aboutPage": {
+    "sections": [
+      {
+        "title": "Türkiye'nin Geleceğini İnşa Ediyoruz, Bir Seferde Bir Simge Yapı",
+        "description": "GKS Yapı'da sadece yapılar inşa etmiyoruz—şehir hayatını yeniden tanımlayan modern, sürdürülebilir ve yüksek kaliteli yaşam alanları şekillendiriyoruz. İstanbul'un inşaat ve gayrimenkul sektöründe güvenilir bir lider olarak, ev sahipleri ve yatırımcılar için yenilikçilik, mükemmellik ve uzun vadeli değere bağlıyız."
+      },
+      {
+        "title": "Kentsel Dönüşüm",
+        "description": "Depreme dayanıklı, enerji verimli ve sürdürülebilir kentsel yenilemeye odaklanarak İstanbul'un siluetini yeniden şekillendiriyoruz. Hızlı proje yürütme ve stratejik planlamadaki uzmanlığımız, kentsel dönüşümün sorunsuz, güvenli ve ekonomik olarak uygulanabilir olmasını sağlar."
+      },
+      {
+        "title": "Sürdürülebilir Yaşam",
+        "description": "Projelerimize yeşil alanları, çevre dostu malzemeleri ve akıllı enerji çözümlerini entegre ederek, hem bugün hem de gelecekte gelişen şehirler yaratıyoruz. Sürdürülebilirlik bir sonradan düşünce değil—tasarım felsefemizin özünde yer alır."
+      },
+      {
+        "title": "Konutta Güven",
+        "description": "Sadece yaşam alanı olmaktan öte, geleceğe dönük yatırımlar olan modern, yüksek kaliteli ve estetik açıdan rafine evler sunuyoruz. Konut satışları ve üretimindeki uzmanlığımız, her konutun şehir yaşamının gelişen ihtiyaçlarını karşılarken eşsiz konfor ve güvenlik sağlamasını garanti eder."
+      }
+    ],
+    "knowMoreButton": "Daha Fazla Bilgi!",
     "timeline": [
       {
         "date": "1994",
         "title": "GKS YAPI'nın Kuruluşu",
-        "description": "GKS YAPI kuruldu, gayrimenkul yenilikleri için temel atıldı."
+        "description": "GKS YAPI kuruldu ve gelecekteki gayrimenkul yenilikleri için temel oluşturuldu."
       },
       {
         "date": "1998",

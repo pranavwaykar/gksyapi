@@ -150,7 +150,7 @@
     }
 
     .left-text {
-      font-size: 1.2rem;
+      font-size: 0.8rem;
       writing-mode: vertical-rl;
       transform: rotate(180deg);
       letter-spacing: 0.1rem;
@@ -215,7 +215,8 @@
       left: -0.8rem;
       bottom: 5.2rem;
       position: relative;
-      font-size: 1.2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.2rem !important;
       font-weight: 500;
       letter-spacing: 0.1rem;
       color: #fff;

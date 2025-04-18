@@ -435,7 +435,7 @@ const About = () => {
       
       <div className="about-content-sections">
         <div className="service-grid">
-          {t.aboutPage.services.map((service, index) => (
+          {t.aboutPage.services?.map((service, index) => (
             <div className="service-card" key={index}>
               <h2>{service.title}</h2>
               <p>{service.description}</p>

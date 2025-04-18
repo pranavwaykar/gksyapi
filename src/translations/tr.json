@@ -374,6 +374,36 @@
     "moreProjects": {
       "more": "KAYDIR",
       "swipeUpToSee": "YUKARI "
+    },
+    "contactForm": {
+      "backButton": "← Mülk sayfasına dön",
+      "emailSection": {
+        "label": "Bize E-posta Gönderebilirsiniz",
+        "value": "info@gksyapi.com"
+      },
+      "phoneSection": {
+        "label": "Bizi Arayabilirsiniz",
+        "value": "+91 91813 23 2309"
+      },
+      "locationSection": {
+        "label": "Konum",
+        "value": "Yavuz Selim Mahallesi 1000. Sokak Bağcılar, İstanbul"
+      },
+      "form": {
+        "firstName": "Ad",
+        "lastName": "Soyad",
+        "email": "E-posta",
+        "phone": "Telefon Numarası",
+        "reasonTitle": "Bize neden ulaşıyorsunuz?",
+        "reasons": {
+          "webDesign": "Web Tasarımı",
+          "collaboration": "İşbirliği",
+          "mobileApp": "Mobil Uygulama Tasarımı",
+          "others": "Diğer"
+        },
+        "message": "Mesajınızı buraya yazın...",
+        "sendButton": "Gönder"
+      }
     }
   },
   "aboutPage": {
@@ -435,24 +465,6 @@
       "secondary": "HİKAYEMİZ"
     },
     "knowMoreButton": "Daha Fazla Bilgi!",
-    "services": [
-      {
-        "title": "Konut Üretimi & Satışı",
-        "description": "Şirket merkezimiz olan İstanbul'un hızla gelişen bölgelerinde konut satışında ve üretiminde lider bir marka olarak, yenilikçi projelerimizle..."
-      },
-      {
-        "title": "Özel Projeler & Kalite",
-        "description": "GKS Yapı, belirli bir hedefe ulaşmak için tasarlanmış, genellikle benzersiz ve sofistike çözümler gerektiren özel projeleri üretirken titiz bir çalışma..."
-      },
-      {
-        "title": "Kentsel Dönüşüm & Hızlı Teslim",
-        "description": "GKS Yap, kentsel dönüşümde yani şehirlerin eskiyen bölgelerini yenileyerek daha modern, sürdürülebilir ve yaşanabilir alanlar üretme sürecinde aktif rol..."
-      },
-      {
-        "title": "Diğer Projeler & Şehir Estetiği",
-        "description": "Şehirlerin dinamik yapısını şekillendiren ve estetik değerlerini arttıran çeşitli kentsel planlama ve inşaat girişimleri, kamusal alanlar, kültürel tesisler, ulaşım altyapıları,..."
-      }
-    ],
     "sections": [
       {
         "title": "Türkiye'nin Geleceğini, Bir Dönüm Noktasında İnşa Ediyoruz",

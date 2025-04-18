@@ -674,7 +674,43 @@ const Projects = () => {
   useEffect(() => {
     setupVerticalTextAnimations();
     
-    // ... your existing code ...
+    // Add hover effect with stronger shadow for info boxes
+    const infoBoxes = document.querySelectorAll('.info-box');
+    infoBoxes.forEach(box => {
+      // Set initial transition properties for smoothness
+      box.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+      
+      // Define the hover effects using functions to ensure proper event removal
+      const addHoverEffect = () => {
+        // More pronounced shadow and upward movement
+        box.style.boxShadow = '0 10px 15px rgba(0, 0, 0, 0.9)';
+        // box.style.transform = 'translateY(-3px)';
+        // console.log('Shadow applied:', box.style.boxShadow); // Debug log
+      };
+      
+      const removeHoverEffect = () => {
+        box.style.boxShadow = 'none';
+        // box.style.transform = 'translateY(0)';
+        // console.log('Shadow removed'); // Debug log
+      };
+      
+      // Add event listeners with the defined functions
+      box.addEventListener('mouseenter', addHoverEffect);
+      box.addEventListener('mouseleave', removeHoverEffect);
+      
+      // Store the functions for cleanup
+      box._addHoverEffect = addHoverEffect;
+      box._removeHoverEffect = removeHoverEffect;
+    });
+    
+    // Return proper cleanup function
+    return () => {
+      const infoBoxes = document.querySelectorAll('.info-box');
+      infoBoxes.forEach(box => {
+        if (box._addHoverEffect) box.removeEventListener('mouseenter', box._addHoverEffect);
+        if (box._removeHoverEffect) box.removeEventListener('mouseleave', box._removeHoverEffect);
+      });
+    };
   }, []);
 
   // Extract YouTube video ID function
@@ -820,7 +856,7 @@ const Projects = () => {
                       className="back-to-property-button"
                       onClick={() => setShowContactForm(false)}
                     >
-                      ← Back to property
+                      {t.projects.contactForm.backButton}
                     </button>
                     
                     <div className="contact-form-container">
@@ -829,28 +865,28 @@ const Projects = () => {
                         <div className="contact-info-column">
                           <div className="info-item">
                             <div className="info-content">
-                              <p className="info-label">You can Email Me Here</p>
-                              <p className="info-value">jefferrycannon@gmail.com</p>
+                              <p className="info-label">{t.projects.contactForm.emailSection.label}</p>
+                              <p className="info-value">{t.projects.contactForm.emailSection.value}</p>
                             </div>
-                            <a href="mailto:jefferrycannon@gmail.com" className="info-arrow">
+                            <a href={`mailto:${t.projects.contactForm.emailSection.value}`} className="info-arrow">
                               →
                             </a>
                           </div>
                           
                           <div className="info-item">
                             <div className="info-content">
-                              <p className="info-label">Give Me a Call on</p>
-                              <p className="info-value">+91 91813 23 2309</p>
+                              <p className="info-label">{t.projects.contactForm.phoneSection.label}</p>
+                              <p className="info-value">{t.projects.contactForm.phoneSection.value}</p>
                             </div>
-                            <a href="tel:+919181323209" className="info-arrow">
+                            <a href={`tel:${t.projects.contactForm.phoneSection.value.replace(/\s+/g, '')}`} className="info-arrow">
                               →
                             </a>
                           </div>
                           
                           <div className="info-item">
                             <div className="info-content">
-                              <p className="info-label">Location</p>
-                              <p className="info-value">Somewhere in the World</p>
+                              <p className="info-label">{t.projects.contactForm.locationSection.label}</p>
+                              <p className="info-value">{t.projects.contactForm.locationSection.value}</p>
                             </div>
                             <a href="#" className="info-arrow">
                               →
@@ -863,46 +899,46 @@ const Projects = () => {
                         <div className="contact-form-column">
                           <form className="contact-form">
                             <div className="form-row property-card-form-ele">
-                              <input type="text" placeholder="First Name" className="form-input" />
-                              <input type="text" placeholder="Last Name" className="form-input" />
+                              <input type="text" placeholder={t.projects.contactForm.form.firstName} className="form-input" />
+                              <input type="text" placeholder={t.projects.contactForm.form.lastName} className="form-input" />
                             </div>
                             
                             <div className="form-row property-card-form-ele">
-                              <input type="email" placeholder="Email" className="form-input" />
-                              <input type="tel" placeholder="Phone Number" className="form-input" />
+                              <input type="email" placeholder={t.projects.contactForm.form.email} className="form-input" />
+                              <input type="tel" placeholder={t.projects.contactForm.form.phone} className="form-input" />
                             </div>
                             
                             <div className="form-group property-card-form-ele">
-                              <p className="form-label">Why are you contacting us?</p>
+                              <p className="form-label">{t.projects.contactForm.form.reasonTitle}</p>
                               <div className="checkbox-container">
                                 <div className="checkbox-row">
                                   <label className="checkbox-item">
                                     <input type="checkbox" />
-                                    <span>Web Design</span>
+                                    <span>{t.projects.contactForm.form.reasons.webDesign}</span>
                                   </label>
                                   <label className="checkbox-item">
                                     <input type="checkbox" />
-                                    <span>Collaboration</span>
+                                    <span>{t.projects.contactForm.form.reasons.collaboration}</span>
                                   </label>
                                 </div>
                                 <div className="checkbox-row">
                                   <label className="checkbox-item">
                                     <input type="checkbox" />
-                                    <span>Mobile App Design</span>
+                                    <span>{t.projects.contactForm.form.reasons.mobileApp}</span>
                                   </label>
                                   <label className="checkbox-item">
                                     <input type="checkbox" />
-                                    <span>Others</span>
+                                    <span>{t.projects.contactForm.form.reasons.others}</span>
                                   </label>
                                 </div>
                               </div>
                             </div>
                             
                             <div className="form-group property-card-form-ele">
-                              <textarea placeholder="Your Message here..." className="form-textarea"></textarea>
+                              <textarea placeholder={t.projects.contactForm.form.message} className="form-textarea"></textarea>
                             </div>
                             
-                            <button type="submit" className="send-button">Send</button>
+                            <button type="submit" className="send-button">{t.projects.contactForm.form.sendButton}</button>
                           </form>
                         </div>
                       </div>

@@ -1213,7 +1213,14 @@ const Home = () => {
 
           <div className="vertical-text right">
             <div className="vertical-line"></div>
-            <span className="left-text">{t.projects.bespokeInEverySense}</span>
+            <span 
+              className="left-text" 
+              style={{ 
+                bottom: language === 'tr' ? '-1.4rem' : '-2.4rem' 
+              }}
+            >
+              {t.projects.bespokeInEverySense}
+            </span>
             <div className="project-title-container">
               <Link to="/projects">
                 <span className="large-text-primary">{t.projects.the}</span>

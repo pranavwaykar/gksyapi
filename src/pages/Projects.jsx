@@ -521,22 +521,24 @@ const Projects = () => {
     }
   }, [currentPropertyIndex, showAllProjects]);
 
-  // Use a simpler debounce/throttle approach
   const lastScrollTime = useRef(0);
-  const scrollDelay = 1000; // ms between allowed scrolls
+  const scrollDelay = 1000;
   
   // Simplified scroll handler
   const handleScroll = (e) => {
     
     const now = Date.now();
     
-    // Check if we're already animating or if not enough time has passed since last scroll
+    if (showVideo || showContactForm) {
+      console.log("Ignoring scroll: video or contact form is open");
+      return;
+    }
+    
     if (isAnimating || now - lastScrollTime.current < scrollDelay) {
       console.log("Ignoring scroll: animation in progress or cooling down");
       return;
     }
     
-    // Add a higher threshold for scroll detection - only proceed if scroll is significant
     const scrollThreshold = 20; // Increase this value to decrease sensitivity
     
     if (Math.abs(e.deltaY) < scrollThreshold) {

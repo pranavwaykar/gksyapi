@@ -25,7 +25,7 @@ const Home = () => {
   const [isMusicPlaying, setIsMusicPlaying] = useState(true);
   
   const [currentVolume, setCurrentVolume] = useState(0);
-  const targetVolume = 0.025;
+  const targetVolume = 0.045;
   
   
   const [currentCardIndex, setCurrentCardIndex] = useState(0);

@@ -715,6 +715,9 @@
 
       .contact-form-column {
         flex: 1;
+        height: 600px;
+        overflow-y: scroll;
+        overflow-x: hidden;
       }
 
       // Left column styles
@@ -729,6 +732,8 @@
           align-items: center;
 
           .info-content {
+            flex: 1;
+
             .info-label {
               color: #888;
               font-size: 14px;
@@ -846,14 +851,14 @@
           }
 
           .send-button {
-            background-color: #6366f1;
+            background-color: rgba(80, 125, 250, 0.9);
             color: white;
             border: none;
             border-radius: 8px;
             padding: 12px 30px;
             font-size: 16px;
             cursor: pointer;
-            float: right;
+            // float: right;
             transition: all 0.2s ease;
 
             &:hover {

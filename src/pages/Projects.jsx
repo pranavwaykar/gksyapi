@@ -16,6 +16,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import gsap from "gsap";
 import { setupVerticalTextAnimations } from '../utils/animations';
+import { Select, Radio, Slider, TextInput, Button, Checkbox } from '@mantine/core';
 
 // Demo projects data - keeping as a fallback
 const projects = [
@@ -721,6 +722,288 @@ const Projects = () => {
     return (match && match[2].length === 11) ? match[2] : null;
   };
 
+  // Add state to track selected user type
+  const [userType, setUserType] = useState(null);
+  // Add state for file names
+  const [portfolioFile, setPortfolioFile] = useState(null);
+  const [certificationFile, setCertificationFile] = useState(null);
+  const [catalogueFile, setCatalogueFile] = useState(null);
+  const [registrationFile, setRegistrationFile] = useState(null);
+  
+  // Add rendering function for conditional fields
+  const renderConditionalFields = () => {
+    switch(userType) {
+      case 'individual':
+        return (
+          <>
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Property Type</p>
+              <Radio.Group name="propertyType">
+                <div className="radio-container">
+                  <Radio value="villa" label="Villa" />
+                  <Radio value="apartment" label="Apartment" />
+                  <Radio value="rowhouse" label="Rowhouse" />
+                  <Radio value="farmhouse" label="Farmhouse" />
+                  <Radio value="custom" label="Custom Build" />
+                </div>
+              </Radio.Group>
+            </div>
+            
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Budget Range</p>
+              <Slider
+                min={100000}
+                max={10000000}
+                step={100000}
+                label={(value) => `$${value.toLocaleString()}`}
+                defaultValue={1000000}
+                marks={[
+                  { value: 1000000, label: '$1M' },
+                  { value: 5000000, label: '$5M' },
+                  { value: 10000000, label: '$10M' },
+                ]}
+              />
+            </div>
+            
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Location Preference</p>
+              <TextInput placeholder="Enter your preferred location" />
+            </div>
+          </>
+        );
+        
+      case 'investor':
+        return (
+          <>
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Investment Type</p>
+              <Radio.Group name="investmentType">
+                <div className="radio-container">
+                  <Radio value="residential" label="Residential" />
+                  <Radio value="commercial" label="Commercial" />
+                  <Radio value="mixed" label="Mixed-Use" />
+                </div>
+              </Radio.Group>
+            </div>
+            
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Investment Range</p>
+              <Slider
+                min={500000}
+                max={50000000}
+                step={500000}
+                label={(value) => `$${value.toLocaleString()}`}
+                defaultValue={5000000}
+                marks={[
+                  { value: 5000000, label: '$5M' },
+                  { value: 25000000, label: '$25M' },
+                  { value: 50000000, label: '$50M' },
+                ]}
+              />
+            </div>
+            
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Partnership Opportunity</p>
+              <Radio.Group name="partnership">
+                <div className="radio-container">
+                  <Radio value="yes" label="Yes" />
+                  <Radio value="no" label="No" />
+                </div>
+              </Radio.Group>
+            </div>
+          </>
+        );
+        
+      case 'architect':
+        return (
+          <>
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Area of Expertise</p>
+              <TextInput placeholder="Enter your area of expertise" />
+            </div>
+            
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Portfolio Upload</p>
+              <div className="file-upload-container">
+                <input
+                  type="file"
+                  id="portfolio-upload"
+                  accept="application/pdf,image/*"
+                  style={{ display: 'none' }}
+                  onChange={(e) => setPortfolioFile(e.target.files[0]?.name)}
+                />
+                <Button 
+                  component="label" 
+                  htmlFor="portfolio-upload"
+                  variant="outline"
+                  style={{ marginRight: '10px' }}
+                >
+                  Upload File
+                </Button>
+                {portfolioFile && <span className="file-name">{portfolioFile}</span>}
+              </div>
+            </div>
+            
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Interested in</p>
+              <Radio.Group name="interest">
+                <div className="radio-container">
+                  <Radio value="partnership" label="Partnership" />
+                  <Radio value="tender" label="Tender" />
+                  <Radio value="collaboration" label="Collaboration" />
+                </div>
+              </Radio.Group>
+            </div>
+            
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Availability for Meeting</p>
+              <input 
+                type="date" 
+                className="form-control" 
+                min={new Date().toISOString().split('T')[0]}
+                style={{
+                  width: '100%',
+                  padding: '10px 14px',
+                  borderRadius: '4px',
+                  border: '1px solid rgba(0, 0, 0, 0.1)',
+                  fontSize: '14px'
+                }}
+              />
+            </div>
+          </>
+        );
+        
+      case 'contractor':
+        return (
+          <>
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Type of Work</p>
+              <Checkbox.Group>
+                <div className="checkbox-container">
+                  <Checkbox value="civil" label="Civil" />
+                  <Checkbox value="electrical" label="Electrical" />
+                  <Checkbox value="plumbing" label="Plumbing" />
+                  <Checkbox value="interior" label="Interior" />
+                </div>
+              </Checkbox.Group>
+            </div>
+            
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Past Project References</p>
+              <TextInput placeholder="Enter references or descriptions" />
+            </div>
+            
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">License/Certification Upload</p>
+              <div className="file-upload-container">
+                <input
+                  type="file"
+                  id="certification-upload"
+                  accept="application/pdf,image/*"
+                  style={{ display: 'none' }}
+                  onChange={(e) => setCertificationFile(e.target.files[0]?.name)}
+                />
+                <Button 
+                  component="label" 
+                  htmlFor="certification-upload"
+                  variant="outline"
+                  style={{ marginRight: '10px' }}
+                >
+                  Upload File
+                </Button>
+                {certificationFile && <span className="file-name">{certificationFile}</span>}
+              </div>
+            </div>
+            
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Team Strength</p>
+              <input 
+                type="number" 
+                min="1" 
+                placeholder="Enter number of team members"
+                className="form-control"
+                style={{
+                  width: '100%',
+                  padding: '10px 14px',
+                  borderRadius: '4px',
+                  border: '1px solid rgba(0, 0, 0, 0.1)',
+                  fontSize: '14px'
+                }}
+              />
+            </div>
+          </>
+        );
+        
+      case 'vendor':
+        return (
+          <>
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Type of Supply</p>
+              <Radio.Group name="supplyType">
+                <div className="radio-container">
+                  <Radio value="materials" label="Materials" />
+                  <Radio value="equipment" label="Equipment" />
+                  <Radio value="services" label="Services" />
+                </div>
+              </Radio.Group>
+            </div>
+            
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Product Catalogue Upload</p>
+              <div className="file-upload-container">
+                <input
+                  type="file"
+                  id="catalogue-upload"
+                  accept="application/pdf,image/*"
+                  style={{ display: 'none' }}
+                  onChange={(e) => setCatalogueFile(e.target.files[0]?.name)}
+                />
+                <Button 
+                  component="label" 
+                  htmlFor="catalogue-upload"
+                  variant="outline"
+                  style={{ marginRight: '10px' }}
+                >
+                  Upload File
+                </Button>
+                {catalogueFile && <span className="file-name">{catalogueFile}</span>}
+              </div>
+            </div>
+            
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Company Registration Upload</p>
+              <div className="file-upload-container">
+                <input
+                  type="file"
+                  id="registration-upload"
+                  accept="application/pdf,image/*"
+                  style={{ display: 'none' }}
+                  onChange={(e) => setRegistrationFile(e.target.files[0]?.name)}
+                />
+                <Button 
+                  component="label" 
+                  htmlFor="registration-upload"
+                  variant="outline"
+                  style={{ marginRight: '10px' }}
+                >
+                  Upload File
+                </Button>
+                {registrationFile && <span className="file-name">{registrationFile}</span>}
+              </div>
+            </div>
+            
+            <div className="form-group property-card-form-ele">
+              <p className="form-label">Delivery Capabilities</p>
+              <TextInput placeholder="Describe your delivery capabilities" />
+            </div>
+          </>
+        );
+        
+      default:
+        return null;
+    }
+  };
+
   if (showAllProjects) {
     return (
       <div
@@ -897,7 +1180,7 @@ const Projects = () => {
                         
                         {/* Right Column */}
                         <div className="contact-form-column">
-                          <form className="contact-form">
+                          <form className="contact-form" style={{ marginBottom: userType === null ? '0rem' : '5.5rem' }}>
                             <div className="form-row property-card-form-ele">
                               <input type="text" placeholder={t.projects.contactForm.form.firstName} className="form-input" />
                               <input type="text" placeholder={t.projects.contactForm.form.lastName} className="form-input" />
@@ -910,29 +1193,37 @@ const Projects = () => {
                             
                             <div className="form-group property-card-form-ele">
                               <p className="form-label">{t.projects.contactForm.form.reasonTitle}</p>
-                              <div className="checkbox-container">
-                                <div className="checkbox-row">
-                                  <label className="checkbox-item">
-                                    <input type="checkbox" />
-                                    <span>{t.projects.contactForm.form.reasons.webDesign}</span>
-                                  </label>
-                                  <label className="checkbox-item">
-                                    <input type="checkbox" />
-                                    <span>{t.projects.contactForm.form.reasons.collaboration}</span>
-                                  </label>
-                                </div>
-                                <div className="checkbox-row">
-                                  <label className="checkbox-item">
-                                    <input type="checkbox" />
-                                    <span>{t.projects.contactForm.form.reasons.mobileApp}</span>
-                                  </label>
-                                  <label className="checkbox-item">
-                                    <input type="checkbox" />
-                                    <span>{t.projects.contactForm.form.reasons.others}</span>
-                                  </label>
-                                </div>
-                              </div>
+                              <Select
+                                placeholder={t.projects.contactForm.form.selectOption || "Select an option"}
+                                data={[
+                                  { value: 'individual', label: 'Individual Buyer/Owner' },
+                                  { value: 'investor', label: 'Real Estate Investor' },
+                                  { value: 'architect', label: 'Architect/Consultant' },
+                                  // { value: 'corporate', label: 'Corporate Client/Business' },
+                                  { value: 'contractor', label: 'Contractor/Subcontractor' },
+                                  { value: 'vendor', label: 'Vendor/Supplier' }
+                                ]}
+                                searchable
+                                clearable
+                                value={userType}
+                                onChange={setUserType}
+                                styles={{
+                                  root: { width: '100%' },
+                                  input: { 
+                                    padding: '10px 14px',
+                                    borderColor: 'rgba(0, 0, 0, 0.1)',
+                                    fontSize: '14px',
+                                    color: '#333'
+                                  },
+                                  dropdown: {
+                                    borderRadius: '4px',
+                                    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
+                                  }
+                                }}
+                              />
                             </div>
+                            
+                            {renderConditionalFields()}
                             
                             <div className="form-group property-card-form-ele">
                               <textarea placeholder={t.projects.contactForm.form.message} className="form-textarea"></textarea>

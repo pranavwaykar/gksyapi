@@ -534,7 +534,7 @@
     .line {
       left: 0.5rem;
       top: 4.5rem !important;
-      height: 41.2rem !important;
+      height: 44.8rem !important;
     }
 
     .left-text {
@@ -604,7 +604,7 @@
 .about-content-sections {
   padding: 4rem 6%;
   margin-top: 2rem;
-  background-color: rgb(38 62 128 / 90%);
+  background-color: inherit;
   ;
   
   .about-section {
@@ -720,6 +720,8 @@
     height: 100%;
     color: #0a1226;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    // box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 19px rgba(223, 221, 221, 0.500) !important;
     
     &:hover {
       transform: translateY(-5px);
@@ -784,9 +786,9 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   animation: float 2s infinite ease-in-out;
   right: 7rem;
-  bottom: 53rem;
+  top: 40rem;
+  height: max-content;
 
-  
   // &:hover {
   //   transform: translateY(-5px) rotate(1deg);
   //   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 

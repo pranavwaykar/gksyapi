@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import "../styles/pages/_contact.scss";
 import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
-import ContactForm from "../components/ContactForm";
+import Contaxxx from "../components/Contaxxx";
 import Footer from "../components/organisms/Footer";
 import { setupVerticalTextAnimations } from "../utils/animations";
 import gsap from "gsap";
@@ -223,7 +223,7 @@ const Contact = () => {
           boxShadow: "0 5px 15px rgba(0, 0, 0, 0.05)",
         }}
       >
-        <ContactForm />
+        <Contaxxx />
       </div>
 
       <div className="map-section">

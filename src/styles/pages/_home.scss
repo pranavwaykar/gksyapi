@@ -714,6 +714,14 @@
     flex-wrap: wrap;
     align-items: center;
     transform: none !important;
+    background-color: rgba(0, 56, 179, 0.1);
+    color: #0038b3;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0.8rem 1.1rem;
+    border: none;
+    border-radius: 5px;
+    width: max-content;
     
     .category-item {
       font-size: 1.2rem;

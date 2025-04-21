@@ -304,7 +304,7 @@ const FilterDropdown = ({ label, options, value, onChange }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         {label}
-        <FontAwesomeIcon icon={faChevronDown} style={{ width: "0.3rem", height: "1rem", background: "white", padding: "0rem 0.4rem", color: "black", borderRadius: "50%" }} />
+        <FontAwesomeIcon icon={faChevronDown} style={{ width: '0.7rem', background: 'white', padding: '0rem 0.2rem', color: 'black', borderRadius: '50%' }} />
       </div>
 
       {isOpen && (

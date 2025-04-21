@@ -206,8 +206,12 @@
           padding: 12px 30px;
           font-size: 16px;
           cursor: pointer;
-          // float: right;
           transition: all 0.2s ease;
+          width: 7.3rem;
+          height: 2.7rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
 
           &:hover {
             background-color: #4f46e5;
@@ -242,4 +246,18 @@
           }
         }
       }
+  }
+
+  //library classes
+  .m_8ee546b8 {
+    color: black !important;
+  }
+
+  .mantine-UnstyledButton-root {
+   color: rgba(80, 125, 250, 0.9) !important;
+   border-color: rgba(80, 125, 250, 0.9) !important;
+  }
+
+  .mantine-Checkbox-root {
+    margin-bottom: 0.1rem !important;
   }

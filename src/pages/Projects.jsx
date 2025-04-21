@@ -17,6 +17,7 @@ import {
 import gsap from "gsap";
 import { setupVerticalTextAnimations } from '../utils/animations';
 import { Select, Radio, Slider, TextInput, Button, Checkbox } from '@mantine/core';
+import Contaxxx from '../components/Contaxxx';
 
 // Demo projects data - keeping as a fallback
 const projects = [
@@ -1135,108 +1136,7 @@ const Projects = () => {
                     </div>
                   </div>
                 ) : showContactForm ? (
-                  // Contact form directly inside the property card
-                  <div className="contact-form-wrapper">
-                    <button 
-                      className="back-to-property-button"
-                      onClick={() => setShowContactForm(false)}
-                    >
-                      {t.projects.contactForm.backButton}
-                    </button>
-                    
-                    <div className="contact-form-container">
-                      <div className="contact-form-columns">
-                        {/* Left Column */}
-                        <div className="contact-info-column">
-                          <div className="info-item">
-                            <div className="info-content">
-                              <p className="info-label">{t.projects.contactForm.emailSection.label}</p>
-                              <p className="info-value">{t.projects.contactForm.emailSection.value}</p>
-                            </div>
-                            <a href={`mailto:${t.projects.contactForm.emailSection.value}`} className="info-arrow">
-                              →
-                            </a>
-                          </div>
-                          
-                          <div className="info-item">
-                            <div className="info-content">
-                              <p className="info-label">{t.projects.contactForm.phoneSection.label}</p>
-                              <p className="info-value">{t.projects.contactForm.phoneSection.value}</p>
-                            </div>
-                            <a href={`tel:${t.projects.contactForm.phoneSection.value.replace(/\s+/g, '')}`} className="info-arrow">
-                              →
-                            </a>
-                          </div>
-                          
-                          <div className="info-item">
-                            <div className="info-content">
-                              <p className="info-label">{t.projects.contactForm.locationSection.label}</p>
-                              <p className="info-value">{t.projects.contactForm.locationSection.value}</p>
-                            </div>
-                            <a href="#" className="info-arrow">
-                              →
-                            </a>
-                          </div>
-                          
-                        </div>
-                        
-                        {/* Right Column */}
-                        <div className="contact-form-column">
-                          <form className="contact-form" style={{ marginBottom: userType === null ? '0rem' : '5.5rem' }}>
-                            <div className="form-row property-card-form-ele">
-                              <input type="text" placeholder={t.projects.contactForm.form.firstName} className="form-input" />
-                              <input type="text" placeholder={t.projects.contactForm.form.lastName} className="form-input" />
-                            </div>
-                            
-                            <div className="form-row property-card-form-ele">
-                              <input type="email" placeholder={t.projects.contactForm.form.email} className="form-input" />
-                              <input type="tel" placeholder={t.projects.contactForm.form.phone} className="form-input" />
-                            </div>
-                            
-                            <div className="form-group property-card-form-ele">
-                              <p className="form-label">{t.projects.contactForm.form.reasonTitle}</p>
-                              <Select
-                                placeholder={t.projects.contactForm.form.selectOption || "Select an option"}
-                                data={[
-                                  { value: 'individual', label: 'Individual Buyer/Owner' },
-                                  { value: 'investor', label: 'Real Estate Investor' },
-                                  { value: 'architect', label: 'Architect/Consultant' },
-                                  // { value: 'corporate', label: 'Corporate Client/Business' },
-                                  { value: 'contractor', label: 'Contractor/Subcontractor' },
-                                  { value: 'vendor', label: 'Vendor/Supplier' }
-                                ]}
-                                searchable
-                                clearable
-                                value={userType}
-                                onChange={setUserType}
-                                styles={{
-                                  root: { width: '100%' },
-                                  input: { 
-                                    padding: '10px 14px',
-                                    borderColor: 'rgba(0, 0, 0, 0.1)',
-                                    fontSize: '14px',
-                                    color: '#333'
-                                  },
-                                  dropdown: {
-                                    borderRadius: '4px',
-                                    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
-                                  }
-                                }}
-                              />
-                            </div>
-                            
-                            {renderConditionalFields()}
-                            
-                            <div className="form-group property-card-form-ele">
-                              <textarea placeholder={t.projects.contactForm.form.message} className="form-textarea"></textarea>
-                            </div>
-                            
-                            <button type="submit" className="send-button">{t.projects.contactForm.form.sendButton}</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <Contaxxx onClose={() => setShowContactForm(false)} />
                 ) : (
                   <div className="property-image">
                     <img

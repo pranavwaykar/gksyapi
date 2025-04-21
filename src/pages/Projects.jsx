@@ -17,7 +17,7 @@ import {
 import gsap from "gsap";
 import { setupVerticalTextAnimations } from '../utils/animations';
 import { Select, Radio, Slider, TextInput, Button, Checkbox } from '@mantine/core';
-import Contaxxx from '../components/Contaxxx';
+import Contaxxx from '../components/ContactForm';
 
 // Demo projects data - keeping as a fallback
 const projects = [

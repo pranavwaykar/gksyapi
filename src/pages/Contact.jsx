@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import "../styles/pages/_contact.scss";
 import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
-import Contaxxx from "../components/Contaxxx";
+import Contaxxx from "../components/ContactForm";
 import Footer from "../components/organisms/Footer";
 import { setupVerticalTextAnimations } from "../utils/animations";
 import gsap from "gsap";

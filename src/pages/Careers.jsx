@@ -5,7 +5,7 @@ import { translations } from '../translations';
 import Footer from '../components/organisms/Footer';
 
 // Import ContactForm component - adjust the path as needed
-import Contaxxx from '../components/Contaxxx';
+import Contaxxx from '../components/ContactForm';
 import { setupVerticalTextAnimations } from '../utils/animations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faArrowLeft, faArrowRight, faLink } from '@fortawesome/free-solid-svg-icons';

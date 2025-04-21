@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
 import { Select, Radio, Slider, TextInput, Button, Checkbox } from '@mantine/core';
-import "../styles/pages/_contaxxx.scss";
+import "../styles/components/_contaxxx.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 

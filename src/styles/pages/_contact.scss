@@ -242,9 +242,11 @@
   }
 
   .contact-container {
-    // max-width: 1200px;
-    // margin: 0 auto;
-    // padding: 0 20px;
+    .contact-form-wrapper{
+      .contact-form-container {
+        margin-top: 0rem !important;
+      }
+    }
   }
 }
 

@@ -5,6 +5,7 @@
     position: relative;
     overflow-y: hidden;
     border-radius: 8px;
+    width: 100%;
 
     .back-to-property-button {
       position: absolute;
@@ -34,15 +35,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 30px;
-    //   width: 100%;
     }
-
-    // .contact-info-column,
-    // .contact-form-column {
-    //   flex: 1;
-    //   min-width: 250px;
-    // }
-
     .contact-info-column {
       width: 30%;
     }
@@ -55,6 +48,7 @@
         padding: 0.8rem 1rem;
         background: white;
         position: relative;
+        border-radius: 10px;
         
         &::-webkit-scrollbar {
             width: 8px;
@@ -230,6 +224,9 @@
         .contact-form-container {
           .contact-form-columns {
             .contact-form-column {
+
+                max-height: 38rem;
+
               .contact-form {
                 .property-card-form-ele {
                   height: 90% !important;

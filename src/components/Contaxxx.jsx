@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { translations } from "../translations";
 import { Select, Radio, Slider, TextInput, Button, Checkbox } from '@mantine/core';
+import "../styles/pages/_contaxxx.scss";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const Contaxxx = ({ onClose }) => {
   // Get translations
@@ -334,7 +337,8 @@ const Contaxxx = ({ onClose }) => {
           className="back-to-property-button"
           onClick={onClose}
         >
-          {t.projects?.contactForm?.backButton || "Back"}
+          <FontAwesomeIcon icon={faArrowLeft} />
+          Back
         </button>
       )}
       
@@ -375,7 +379,7 @@ const Contaxxx = ({ onClose }) => {
           
           {/* Right Column */}
           <div className="contact-form-column" >
-            <form className="contact-form" onSubmit={handleSubmit} style={{ marginBottom: userType === null ? '0rem' : '5.5rem' }}>
+            <form className="contact-form" onSubmit={handleSubmit} style={{ paddingBottom: userType === null ? '0.5rem' : '3rem' }}>
               <div className="form-row property-card-form-ele">
                 <input 
                   type="text" 

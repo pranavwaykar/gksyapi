@@ -5,7 +5,7 @@ import { translations } from '../translations';
 import Footer from '../components/organisms/Footer';
 
 // Import ContactForm component - adjust the path as needed
-import ContactForm from '../components/ContactForm';
+import Contaxxx from '../components/Contaxxx';
 import { setupVerticalTextAnimations } from '../utils/animations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faArrowLeft, faArrowRight, faLink } from '@fortawesome/free-solid-svg-icons';
@@ -137,13 +137,13 @@ const Careers = () => {
             </>
           ) : (
             <div className="career-application-form">
-              <div className="form-header">
+              {/* <div className="form-header">
                 <button className="back-button" onClick={handleBackToJobs}>
                   <FontAwesomeIcon icon={faArrowLeft} /> 
                   Back to Jobs
                 </button>
-              </div>
-              <ContactForm jobTitle={selectedJob?.title} />
+              </div> */}
+              <Contaxxx onClose={handleBackToJobs} />
             </div>
           )}
         </div>

@@ -5,6 +5,8 @@ import { Select, Radio, Slider, TextInput, Button, Checkbox } from '@mantine/cor
 import "../styles/components/contactForm.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import emailjs from '@emailjs/browser';
+import { notifications } from '@mantine/notifications';
 
 const Contaxxx = ({ onClose }) => {
   // Get translations
@@ -25,6 +27,9 @@ const Contaxxx = ({ onClose }) => {
     message: ''
   });
 
+  // Add loading and success state
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,19 +38,143 @@ const Contaxxx = ({ onClose }) => {
       [name]: value
     }));
   };
+      // Helper functions to get form values
+      function getUserTypeLabel(type) {
+        const types = {
+          'individual': 'Individual Buyer/Owner',
+          'investor': 'Real Estate Investor',
+          'architect': 'Architect/Consultant',
+          'contractor': 'Contractor/Subcontractor',
+          'vendor': 'Vendor/Supplier'
+        };
+        return types[type] || "Website Visitor";
+      }
+
+  const getEmailSubject = () => {
+    return `GKSYAPI's Contact Request - ${formData.firstName} ${formData.lastName}`;
+  };
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', { ...formData, userType });
-    // Add your form submission logic here
+    setIsSubmitting(true);
     
-    // Optional: Close form after submission
-    if (onClose) onClose();
+    // Prepare the email template parameters
+    const templateParams = {
+      firstName: formData.firstName || "",
+      lastName: formData.lastName || "",
+      email: formData.email || "",
+      phone: formData.phone || "",
+      userType: userType || "",
+      userTypeDetails: getUserTypeLabel(userType) || "",
+      message: formData.message || "",
+      subject: getEmailSubject(),
+      
+      // For individual
+      propertyType: getRadioValue("propertyType") || "Not specified",
+      budgetRange: getBudgetValue() || "Not specified",
+      locationPreference: getInputValue("locationPreference") || "Not specified",
+      
+      // For investor
+      investmentType: getRadioValue("investmentType") || "Not specified",
+      investmentRange: getInvestmentValue() || "Not specified",
+      partnership: getRadioValue("partnership") || "Not specified",
+      
+      // For architect
+      expertise: getInputValue("expertise") || "Not specified",
+      portfolioFile: portfolioFile || "Not uploaded",
+      interest: getRadioValue("interest") || "Not specified",
+      meetingDate: getInputValue("meetingDate") || "Not specified",
+      
+      // For contractor
+      typeOfWork: getCheckboxValues("typeOfWork") || "Not specified",
+      projectReferences: getInputValue("projectReferences") || "Not specified",
+      certificationFile: certificationFile || "Not uploaded",
+      teamStrength: getInputValue("teamStrength") || "Not specified",
+      
+      // For vendor
+      supplyType: getRadioValue("supplyType") || "Not specified",
+      catalogueFile: catalogueFile || "Not uploaded",
+      registrationFile: registrationFile || "Not uploaded",
+      deliveryCapabilities: getInputValue("deliveryCapabilities") || "Not specified",
+    };
+    
+
+    
+    function getRadioValue(name) {
+      const radioGroup = document.querySelector(`input[name="${name}"]:checked`);
+      return radioGroup ? radioGroup.value : "";
+    }
+    
+    function getInputValue(name) {
+      const input = document.querySelector(`input[name="${name}"], textarea[name="${name}"]`);
+      return input ? input.value : "";
+    }
+    
+    function getCheckboxValues(name) {
+      const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
+      return Array.from(checkboxes).map(cb => cb.value).join(", ") || "";
+    }
+    
+    function getBudgetValue() {
+      // Get the budget slider value - this might need adjustment based on your implementation
+      const slider = document.querySelector('.form-group .mantine-Slider-root[name="budget"]');
+      return slider ? slider.getAttribute('aria-valuenow') : "";
+    }
+    
+    function getInvestmentValue() {
+      // Get the investment slider value
+      const slider = document.querySelector('.form-group .mantine-Slider-root[name="investment"]');
+      return slider ? slider.getAttribute('aria-valuenow') : "";
+    }
+    
+    // Send email using EmailJS
+    emailjs.send(
+      'service_2dcwkza', // Replace with your EmailJS service ID
+      'template_k2oezb5', // Replace with your EmailJS template ID
+      templateParams,
+      '4aVnqQVYsNT5JEV8V' // Replace with your EmailJS public key
+    )
+    .then((response) => {
+      console.log('Email sent successfully:', response);
+      notifications.show({
+        title: 'Success!',
+        message: 'Your message has been sent. We will contact you shortly.',
+        color: 'green',
+      });
+      
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        message: ''
+      });
+      setUserType(null);
+      setPortfolioFile(null);
+      setCertificationFile(null);
+      setCatalogueFile(null);
+      setRegistrationFile(null);
+      
+      // Close form if needed
+      if (onClose) onClose();
+    })
+    .catch((error) => {
+      console.error('Failed to send email:', error);
+      notifications.show({
+        title: 'Error',
+        message: 'Failed to send your message. Please try again later.',
+        color: 'red',
+      });
+    })
+    .finally(() => {
+      setIsSubmitting(false);
+    });
   };
 
-  // Add rendering function for conditional fields
-  const renderConditionalFields = () => {
+  // Helper function to get conditional fields based on userType
+  const getConditionalFields = () => {
     switch(userType) {
       case 'individual':
         return (
@@ -66,6 +195,7 @@ const Contaxxx = ({ onClose }) => {
             <div className="form-group property-card-form-ele">
               <p className="form-label">Budget Range</p>
               <Slider
+                name="budget"
                 min={100000}
                 max={10000000}
                 step={100000}
@@ -81,7 +211,7 @@ const Contaxxx = ({ onClose }) => {
             
             <div className="form-group property-card-form-ele">
               <p className="form-label">Location Preference</p>
-              <TextInput placeholder="Enter your preferred location" />
+              <TextInput name="locationPreference" placeholder="Enter your preferred location" />
             </div>
           </>
         );
@@ -449,7 +579,7 @@ const Contaxxx = ({ onClose }) => {
                 />
               </div>
               
-              {renderConditionalFields()}
+              {getConditionalFields()}
               
               <div className="form-group property-card-form-ele">
                 <textarea 
@@ -461,8 +591,15 @@ const Contaxxx = ({ onClose }) => {
                 ></textarea>
               </div>
               
-              <button type="submit" className="send-button">
-                {t.projects?.contactForm?.form?.sendButton || "Send Message"}
+              <button 
+                type="submit" 
+                className="send-button" 
+                disabled={isSubmitting}
+              >
+                {isSubmitting 
+                  ? "Sending..." 
+                  : (t.projects?.contactForm?.form?.sendButton || "Send Message")
+                }
               </button>
             </form>
           </div>

@@ -549,9 +549,9 @@ const Contaxxx = ({ onClose }) => {
               </div>
               
               <div className="form-group property-card-form-ele">
-                <p className="form-label">{t.projects?.contactForm?.form?.reasonTitle || "I am a"}</p>
+                {/* <p className="form-label">{t.projects?.contactForm?.form?.reasonTitle || "I am a"}</p> */}
                 <Select
-                  placeholder={t.projects?.contactForm?.form?.selectOption || "Select an option"}
+                  placeholder={t.projects?.contactForm?.form?.reasonTitle || "What are you contacting us for?"}
                   data={[
                     { value: 'individual', label: 'Individual Buyer/Owner' },
                     { value: 'investor', label: 'Real Estate Investor' },

@@ -258,6 +258,26 @@
    border-color: rgba(80, 125, 250, 0.9) !important;
   }
 
-  .mantine-Checkbox-root {
-    margin-bottom: 0.1rem !important;
+  .mantine-Radio-body {
+    margin-bottom: 0.3rem !important;
+  }
+
+  .mantine-Slider-root {
+    margin-bottom: 2rem !important;
+  }
+
+  .mantine-Select-input, .mantine-Input-input, .form-control, .contact-form-wrapper .contact-form-column form .form-textarea {
+    border: none !important;
+    background-color: #fff !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    font-size: 15px !important;
+    min-height: 3rem !important;
+  }
+
+  .mantine-InputClearButton-root {
+    color: black !important;
+  }
+
+  .mantine-UnstyledButton-root {
+    border-radius: 8px !important;
   }

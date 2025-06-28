@@ -7,6 +7,9 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
+## Deployed Link:
+https://gksyapi.netlify.app/
+
 ## Screenshots:
 
 <img width="1440" alt="image" src="https://github.com/user-attachments/assets/bce8d3e7-5e20-4513-8ae2-1e93cd00e696" />
